@@ -11,6 +11,7 @@ public class Administrador {
 	private List<Comentario> lista_Comentario_admin;
 	private String email;
 	
+	
 	// Constructor
 	public Administrador(){
 		this.lista_Comentario_admin = new ArrayList<>();
