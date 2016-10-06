@@ -1,8 +1,5 @@
-/ClassesBasicas/
 /classesBasicas/
-/config/
-/controllers/
-/controller/
 /dao/
-/gui_testes/
 /facade/
+/controller/
+/gui_testes/

@@ -5,10 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name="tb_administrador")
 public class Administrador {
 	// Attributes
 	@Id
@@ -21,7 +25,7 @@ public class Administrador {
 	@Column(nullable=false,length=100)
 	private String senha_admin;
 	
-	
+	@OneToMany
 	private List<Comentario> lista_Comentario_admin;
 	
 	@Column(nullable=false,length=100)

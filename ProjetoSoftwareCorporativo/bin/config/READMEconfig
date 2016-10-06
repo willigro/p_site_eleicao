@@ -1,0 +1,5 @@
+Padronizando o persistence.xml
+<persistence-unit name="hp_eleicao_br" transaction-type="RESOURCE_LOCAL">
+<property name = "javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/prj_eleicao_br" />
+#
