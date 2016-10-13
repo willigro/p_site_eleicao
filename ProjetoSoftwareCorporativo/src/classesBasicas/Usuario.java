@@ -25,8 +25,10 @@ public class Usuario {
 	@Column(nullable=false,length=100)
 	private String email_user;
 	
+	@OneToMany(mappedBy = "usuario_coment")
 	private List<Comentario> lista_Comentario_user;
 	
+	@OneToMany(mappedBy = "usuario_aval")
 	private List<Avaliacao> lista_Avaliacao_user;
 	
 	@Column(nullable=false)

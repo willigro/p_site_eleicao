@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/jaime/jnfox/workspace/librarys/antlr-2.7.7.jar"/>
-	<classpathentry kind="lib" path="C:/jaime/jnfox/workspace/librarys/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/jaime/jnfox/workspace/librarys/hibernate-commons-annotations-4.0.1.Final.jar"/>
-	<classpathentry kind="lib" path="C:/jaime/jnfox/workspace/librarys/hibernate-core-4.1.2.Final.jar"/>
-	<classpathentry kind="lib" path="C:/jaime/jnfox/workspace/librarys/hibernate-entitymanager-4.1.2.Final.jar"/>
-	<classpathentry kind="lib" path="C:/jaime/jnfox/workspace/librarys/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
-	<classpathentry kind="lib" path="C:/jaime/jnfox/workspace/librarys/javassist-3.15.0-GA.jar"/>
-	<classpathentry kind="lib" path="C:/jaime/jnfox/workspace/librarys/javax.faces-2.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/jaime/jnfox/workspace/librarys/jboss-logging-3.1.0.GA.jar"/>
-	<classpathentry kind="lib" path="C:/jaime/jnfox/workspace/librarys/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
-	<classpathentry kind="lib" path="C:/jaime/jnfox/workspace/librarys/mysql-connector-java-5.1.21-bin.jar"/>
-	<classpathentry kind="lib" path="C:/jaime/jnfox/workspace/librarys/primefaces-4.0.jar"/>
-	<classpathentry kind="lib" path="C:/jaime/jnfox/workspace/librarys/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Glauber/Desktop/Arquivos do hibernate (exercicio, slide-aula, e .jav/Hibernate/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Glauber/Desktop/Arquivos do hibernate (exercicio, slide-aula, e .jav/Hibernate/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Glauber/Desktop/Arquivos do hibernate (exercicio, slide-aula, e .jav/Hibernate/hibernate-commons-annotations-4.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Glauber/Desktop/Arquivos do hibernate (exercicio, slide-aula, e .jav/Hibernate/hibernate-core-4.1.2.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Glauber/Desktop/Arquivos do hibernate (exercicio, slide-aula, e .jav/Hibernate/hibernate-entitymanager-4.1.2.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Glauber/Desktop/Arquivos do hibernate (exercicio, slide-aula, e .jav/Hibernate/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Glauber/Desktop/Arquivos do hibernate (exercicio, slide-aula, e .jav/Hibernate/javassist-3.15.0-GA.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Glauber/Desktop/Arquivos do hibernate (exercicio, slide-aula, e .jav/Hibernate/jboss-logging-3.1.0.GA.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Glauber/Desktop/Arquivos do hibernate (exercicio, slide-aula, e .jav/Hibernate/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Glauber/Desktop/Arquivos do hibernate (exercicio, slide-aula, e .jav/Hibernate/mysql-connector-java-5.1.21-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

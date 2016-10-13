@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.CascadeType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class Administrador {
 	@Column(nullable=false,length=100)
 	private String senha_admin;
 	
-	@OneToMany
+	@OneToMany(mappedBy="administrador_coment")
 	private List<Comentario> lista_Comentario_admin;
 	
 	@Column(nullable=false,length=100)

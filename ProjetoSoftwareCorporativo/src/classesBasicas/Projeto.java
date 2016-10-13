@@ -3,6 +3,7 @@ package classesBasicas;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,10 +25,14 @@ public class Projeto {
 	@Column(nullable=false,length=500)
 	private String descricao_proj;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_cand")
 	private Candidato canditado_proj;
 	
+	@OneToMany(mappedBy = "projeto_coment")
 	private List<Comentario> lista_Comentario_proj;
 	
+	@OneToMany(mappedBy = "projeto_aval")
 	private List<Avaliacao> lista_Avaliacao_proj;
 	
 	// Constructor

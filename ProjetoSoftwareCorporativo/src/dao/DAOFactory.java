@@ -6,6 +6,7 @@ import javax.persistence.Persistence;
 
 import org.hibernate.sql.ordering.antlr.Factory;
 
+import dao.classes.CandidatoDAO;
 import dao.classes.ExempleDAO;
 
 public class DAOFactory {
@@ -25,5 +26,12 @@ public class DAOFactory {
 		ExempleDAO exempleDAO = new ExempleDAO();
 		exempleDAO.setManager(manager);
 		return exempleDAO;
+	}
+	
+	public static CandidatoDAO getCandidatoDAO(){
+		CandidatoDAO candidatoDAO = new CandidatoDAO();
+		candidatoDAO.setManager(manager);
+		return candidatoDAO;
+	
 	}
 }

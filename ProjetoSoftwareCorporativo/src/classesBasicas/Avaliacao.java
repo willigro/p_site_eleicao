@@ -1,5 +1,6 @@
 package classesBasicas;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,10 +15,16 @@ public class Avaliacao {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id_aval;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="id_cand")
 	private Candidato candidato_aval;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="id_proj")
 	private Projeto projeto_aval;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="id_user")
 	private Usuario usuario_aval;
 	
 	// Constructor

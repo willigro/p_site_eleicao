@@ -25,6 +25,7 @@ public abstract class DAOGenerico <Classe>{
 	setManager(null);
 	if(getManager() == null)
 		throw new ExceptionDAO_TransationNull();*/
+	
 	public void insert(Classe classe){
 
 		EntityTransaction tx = getManager().getTransaction();
