@@ -53,5 +53,99 @@ public class Candidato{
 		this.data_Nasc_cand = Calendar.getInstance();
 	}
 	
+	//Gets and Sets
+	public String getNome_cand() {
+		return nome_cand;
+	}
+
+	public void setNome_cand(String nome_cand) {
+		this.nome_cand = nome_cand;
+	}
+
+	public Partido getPartido_cand() {
+		return partido_cand;
+	}
+
+	public void setPartido_cand(Partido partido_cand) {
+		this.partido_cand = partido_cand;
+	}
+
+	public Calendar getData_Nasc_cand() {
+		return data_Nasc_cand;
+	}
+
+	public void setData_Nasc_cand(Calendar data_Nasc_cand) {
+		this.data_Nasc_cand = data_Nasc_cand;
+	}
+
+	public int getNumero_cand() {
+		return numero_cand;
+	}
+
+	public void setNumero_cand(int numero_cand) {
+		this.numero_cand = numero_cand;
+	}
+
+	public String getTipo_Elegivel_cand() {
+		return tipo_Elegivel_cand;
+	}
+
+	public void setTipo_Elegivel_cand(String tipo_Elegivel_cand) {
+		this.tipo_Elegivel_cand = tipo_Elegivel_cand;
+	}
+
+	public Cidade getCidade_cand() {
+		return cidade_cand;
+	}
+
+	public void setCidade_cand(Cidade cidade_cand) {
+		this.cidade_cand = cidade_cand;
+	}
+
+	public Estado getEstado_cand() {
+		return estado_cand;
+	}
+
+	public void setEstado_cand(Estado estado_cand) {
+		this.estado_cand = estado_cand;
+	}
+
+	public String getFoto_cand() {
+		return foto_cand;
+	}
+
+	public void setFoto_cand(String foto_cand) {
+		this.foto_cand = foto_cand;
+	}
+
+	public List<Avaliacao> getLista_Avaliacao_cand() {
+		return lista_Avaliacao_cand;
+	}
+
+	public void setLista_Avaliacao_cand(List<Avaliacao> lista_Avaliacao_cand) {
+		this.lista_Avaliacao_cand = lista_Avaliacao_cand;
+	}
+
+	public List<Comentario> getLista_Comentario_cand() {
+		return lista_Comentario_cand;
+	}
+
+	public void setLista_Comentario_cand(List<Comentario> lista_Comentario_cand) {
+		this.lista_Comentario_cand = lista_Comentario_cand;
+	}
+
+	public List<Projeto> getLista_Projeto_cand() {
+		return lista_Projeto_cand;
+	}
+
+	public void setLista_Projeto_cand(List<Projeto> lista_Projeto_cand) {
+		this.lista_Projeto_cand = lista_Projeto_cand;
+	}
+
+	public int getId_cand() {
+		return id_cand;
+	}
+	
+	
 	// Methods
 }
