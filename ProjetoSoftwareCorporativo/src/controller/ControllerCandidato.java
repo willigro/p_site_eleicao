@@ -32,7 +32,7 @@ public class ControllerCandidato implements ICandidatoDAO {
 			throw new Exception("O campo Numero não deve ter menos que 5 dígitos");
 		}
 		
-		if(candidato.getEstado_cand().equals("")){
+		if(candidato.getEstado_cand().get.equals("")){
 			
 		}
 	}

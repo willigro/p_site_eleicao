@@ -22,7 +22,7 @@ public class Partido {
 	@Column(nullable=false,length=40)
 	private String nome_part;
 	
-	
+	@OneToMany(mappedBy="partido_cand")
 	private List<Candidato> lista_Candidato_part;
 	
 	@Column(nullable=false,length=8)

@@ -1,5 +1,6 @@
 package classesBasicas;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,40 +11,52 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 @Entity
-@Table(name="tb_candidato")
-public class Candidato{
+@Table(name = "tb_candidato")
+public class Candidato {
 	// Attributes
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id_cand;
-	
-	@Column(nullable=false,length=50)
+
+	@Column(nullable = false, length = 50)
 	private String nome_cand;
-	
-	private Partido partido_cand;
-	
+
 	private Calendar data_Nasc_cand;
 	
+	@Column(nullable=false)
 	private int numero_cand;
-	
-	@Column(nullable=false,length=50)
-	private String tipo_Elegivel_cand;
-	
-	private Cidade cidade_cand;
-	
-	private Estado estado_cand;
-	
+
+	@Column(nullable = false, length = 50)
+	private String tipo_Cargo_cand;
+
+	// Ignorar até decidir a estrategia
 	private String foto_cand;
-	
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_part")
+	private Partido partido_cand;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_cid")
+	private Cidade cidade_cand;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_est")
+	private Estado estado_cand;
+
+	@OneToMany(mappedBy = "candidato_aval")
 	private List<Avaliacao> lista_Avaliacao_cand;
-	
+
+	@OneToMany(mappedBy = "candidato_coment")
 	private List<Comentario> lista_Comentario_cand;
-	
+
+	@OneToMany(mappedBy = "canditado_proj")
 	private List<Projeto> lista_Projeto_cand;
-	
+
 	// Constructor
-	public Candidato(){
+	public Candidato() {
 		this.partido_cand = new Partido();
 		this.lista_Avaliacao_cand = new ArrayList<Avaliacao>();
 		this.lista_Comentario_cand = new ArrayList<Comentario>();
@@ -52,8 +65,8 @@ public class Candidato{
 		this.estado_cand = new Estado();
 		this.data_Nasc_cand = Calendar.getInstance();
 	}
-	
-	//Gets and Sets
+
+	// Gets and Sets
 	public String getNome_cand() {
 		return nome_cand;
 	}
@@ -145,7 +158,6 @@ public class Candidato{
 	public int getId_cand() {
 		return id_cand;
 	}
-	
-	
+
 	// Methods
 }

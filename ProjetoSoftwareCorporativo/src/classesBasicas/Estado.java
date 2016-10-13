@@ -31,7 +31,7 @@ public class Estado {
 	@OneToMany(mappedBy= "estado_cid", fetch = FetchType.LAZY, cascade = { CascadeType.ALL})
 	private List<Cidade> lista_Cidade_est;
 	
-	
+	@OneToMany(mappedBy= "estado_cand", fetch = FetchType.LAZY, cascade = { CascadeType.ALL})
 	private List<Candidato> lista_Candidato_est;
 	
 	// Constructor
