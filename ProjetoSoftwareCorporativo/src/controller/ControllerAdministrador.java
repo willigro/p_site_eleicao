@@ -11,19 +11,21 @@ import classesBasicas.Candidato;
 import classesBasicas.Comentario;
 import classesBasicas.Partido;
 import classesBasicas.Usuario;
+import dao.classes.AdministradorDAO;
 import dao.interfaces.IAdministradorDAO;
 
 public class ControllerAdministrador implements IAdministradorDAO{
 
 	@Override
 	public Administrador loginAdministrador(String email, String senha) throws Exception{
-		if(!email.isEmpty()){
+		if(!email.trim().isEmpty()){
 			if(email.length() <= 100){
 				if(isValidEmailAddress(email)){
-					if(!senha.isEmpty()){
+					if(!senha.trim().isEmpty()){
 						if(senha.length() <= 100){
 							//return resposta do outro metodo
-
+							AdministradorDAO admDAO = new AdministradorDAO();
+							return admDAO.loginAdministrador(email, senha);
 						}else{
 							throw new Exception("");
 						}
@@ -39,8 +41,6 @@ public class ControllerAdministrador implements IAdministradorDAO{
 		}else{
 			throw new Exception("e-mail vazio");
 		}
-
-		return null;
 	}
 
 	@Override
@@ -172,6 +172,12 @@ public class ControllerAdministrador implements IAdministradorDAO{
 
 	@Override
 	public boolean verificarIdExistenteAdministrador(int id) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateComentario(Comentario comentario) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}

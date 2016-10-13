@@ -17,15 +17,15 @@ public interface IAdministradorDAO {
 		
 		
 		
-		public Administrador loginAdministrador(String email,String senha) throws Exception;
-		public boolean logoutAdministrador(Administrador administrador) throws Exception;
-		public boolean verificarIdExistenteAdministrador(int id) throws Exception;
+		public Administrador loginAdministrador(String email,String senha) throws Exception; //ok
+		public boolean logoutAdministrador(Administrador administrador) throws Exception; //ok
+		public boolean verificarIdExistenteAdministrador(int id) throws Exception; //ok
 		
 		
 		//Permissões do adm
 		
 		public boolean deleteUsuario(int id) throws Exception;
-		public boolean punirUsuario(Usuario usuario) throws Exception;
+		public boolean punirUsuario(Usuario usuario) throws Exception; //ok
 		public Usuario selectUsuario(int id) throws Exception;
 		public List listTodosUsuarios(ArrayList<Usuario> usuarios) throws Exception;
 		
@@ -33,6 +33,7 @@ public interface IAdministradorDAO {
 		public List listComentariosUsuario(ArrayList<Comentario> comentarios) throws Exception;
 		public boolean deleteTodosComentarios(ArrayList<Comentario> comentarios) throws Exception;
 		public boolean deleteComentario(Comentario comentario) throws Exception;
+		public boolean updateComentario(Comentario comentario) throws Exception; //ok
 		
 		public boolean insert(Candidato candidato) throws Exception;
 		public boolean delete(Candidato candidato) throws Exception;
