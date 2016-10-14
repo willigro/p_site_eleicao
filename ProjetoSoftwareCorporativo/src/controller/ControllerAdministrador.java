@@ -15,152 +15,150 @@ import classesBasicas.Usuario;
 import dao.classes.AdministradorDAO;
 import dao.interfaces.IAdministradorDAO;
 
-public class ControllerAdministrador implements IAdministradorDAO{
+public class ControllerAdministrador implements IAdministradorDAO {
 
 	@Override
-	public Administrador loginAdministrador(String email, String senha) throws Exception{
-		if(!email.trim().isEmpty()){
-			if(email.length() <= 100){
-				if(isValidEmailAddress(email)){
-					if(!senha.trim().isEmpty()){
-						if(senha.length() <= 100){
-							//return resposta do outro metodo
+	public Administrador loginAdministrador(String email, String senha) throws Exception {
+		if (!email.trim().isEmpty()) {
+			if (email.length() <= 100) {
+				if (isValidEmailAddress(email)) {
+					if (!senha.trim().isEmpty()) {
+						if (senha.length() <= 100) {
+							// return resposta do outro metodo
 							AdministradorDAO admDAO = new AdministradorDAO();
 							return admDAO.loginAdministrador(email, senha);
-						}else{
+						} else {
 							throw new Exception("");
 						}
-					}else{
+					} else {
 						throw new Exception("senha vazia");
-					}	
-				}else{
+					}
+				} else {
 					throw new Exception("e-mail inválido");
 				}
-			}else{
+			} else {
 				throw new Exception("e-mail acima do limite de caracteres");
 			}
-		}else{
+		} else {
 			throw new Exception("e-mail vazio");
 		}
 	}
 
 	@Override
-	public boolean logoutAdministrador(Administrador administrador) throws Exception{
-		if(administrador != null){
-			if(verificarIdExistenteAdministrador(administrador.getId_admin())){
-				if(administrador.getId_admin() >0){
-					if(!administrador.getEmail().isEmpty()){
-						if(isValidEmailAddress(administrador.getEmail())){
-							
+	public boolean logoutAdministrador(Administrador administrador) throws Exception {
+		if (administrador != null) {
+			if (verificarIdExistenteAdministrador(administrador.getId_admin())) {
+				if (administrador.getId_admin() > 0) {
+					if (!administrador.getEmail().isEmpty()) {
+						if (isValidEmailAddress(administrador.getEmail())) {
 
-						}else{
-							throw new Exception("e-mail inválido");	
+						} else {
+							throw new Exception("e-mail inválido");
 						}
 
-					}else{
-						throw new Exception("e-mail vazio");	
+					} else {
+						throw new Exception("e-mail vazio");
 					}
-				}else{
+				} else {
 					throw new Exception("id menor ou igual a zero");
 				}
-			}else{
+			} else {
 				throw new Exception("administrador inexistente na base de dados");
 			}
 
-		}else{
+		} else {
 			throw new Exception("objeto administrador null");
 		}
 		return false;
 	}
 
 	@Override
-	public boolean deleteUsuario(int id) throws Exception{
-		if(id > 0){
+	public boolean deleteUsuario(int id) throws Exception {
+		if (id > 0) {
 
 		}
 		return false;
 	}
 
 	@Override
-	public boolean punirUsuario(Usuario usuario) throws Exception{
+	public boolean punirUsuario(Usuario usuario) throws Exception {
 		return false;
 	}
 
 	@Override
-	public Usuario selectUsuario(int id) throws Exception{
+	public Usuario selectUsuario(int id) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List listTodosUsuarios(ArrayList<Usuario> usuarios) throws Exception{
+	public List listTodosUsuarios(ArrayList<Usuario> usuarios) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List listComentariosUsuario(ArrayList<Comentario> comentarios) throws Exception{
+	public List listComentariosUsuario(ArrayList<Comentario> comentarios) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean deleteTodosComentarios(ArrayList<Comentario> comentarios) throws Exception{
+	public boolean deleteTodosComentarios(ArrayList<Comentario> comentarios) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean deleteComentario(Comentario comentario) throws Exception{
+	public boolean deleteComentario(Comentario comentario) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean insert(Candidato candidato) throws Exception{
+	public boolean insert(Candidato candidato) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean delete(Candidato candidato) throws Exception{
+	public boolean delete(Candidato candidato) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Candidato update(Candidato candidato) throws Exception{
+	public Candidato update(Candidato candidato) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List listCandidato(ArrayList<Candidato> candidatos) throws Exception{
+	public List listCandidato(ArrayList<Candidato> candidatos) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean insertPartido(Partido partido) throws Exception{
+	public boolean insertPartido(Partido partido) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean deletePartido(Partido partido) throws Exception{
+	public boolean deletePartido(Partido partido) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List listPartidos(ArrayList<Partido> partidos) throws Exception{
+	public List listPartidos(ArrayList<Partido> partidos) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
-	//Método para validar e-mail
-	public static boolean isValidEmailAddress(String email) throws Exception{
+	// Método para validar e-mail
+	public static boolean isValidEmailAddress(String email) throws Exception {
 		boolean result = true;
 		try {
 			InternetAddress emailAddr = new InternetAddress(email);
