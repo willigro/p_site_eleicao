@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import classesBasicas.Candidato;
 import dao.DAOFactory;
 import dao.classes.CandidatoDAO;
@@ -35,6 +37,12 @@ public class ControllerCandidato implements ICandidatoDAO {
 		if(candidato.getEstado_cand().equals("")){
 			
 		}
+	}
+
+	@Override
+	public List<Candidato> consultarCandidatos() {
+		
+		return null;
 	}
 	
 
