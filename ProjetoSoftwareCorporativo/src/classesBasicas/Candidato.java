@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import java.util.ArrayList;
@@ -99,12 +102,12 @@ public class Candidato {
 		this.numero_cand = numero_cand;
 	}
 
-	public String getTipo_Elegivel_cand() {
-		return tipo_Elegivel_cand;
+	public String getTipo_Cargo_cand() {
+		return tipo_Cargo_cand;
 	}
 
-	public void setTipo_Elegivel_cand(String tipo_Elegivel_cand) {
-		this.tipo_Elegivel_cand = tipo_Elegivel_cand;
+	public void setTipo_Cargo_cand(String tipo_Cargo_cand) {
+		this.tipo_Cargo_cand = tipo_Cargo_cand;
 	}
 
 	public Cidade getCidade_cand() {

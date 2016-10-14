@@ -7,6 +7,7 @@ import classesBasicas.Administrador;
 import classesBasicas.Candidato;
 import classesBasicas.Comentario;
 import classesBasicas.Partido;
+import classesBasicas.Projeto;
 import classesBasicas.Usuario;
 
 public interface IAdministradorDAO {
@@ -43,5 +44,7 @@ public interface IAdministradorDAO {
 		public boolean insertPartido(Partido partido) throws Exception;
 		public boolean deletePartido(Partido partido) throws Exception;
 		public List listPartidos(ArrayList<Partido> partidos) throws Exception;
+		
+		public boolean insertProjeto(Projeto projeto);
 
 }

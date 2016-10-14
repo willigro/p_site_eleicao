@@ -3,3 +3,16 @@ Padronizando o persistence.xml
 <property name = "javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/prj_eleicao_br" />
 #
+#
+#
+IMPORTANTE!!
+Caso os pacotes não sejam identificados pelo eclipse, ou seja, fique tudo com 
+simbolo de pastas, e que o projeto não compile, segue uma possivel solução:
+Build Path ->
+Configure Build Path ->
+Source ->
+Add Folder ->
+Selecionar o "src" ->
+Apply
+#
+#
