@@ -14,6 +14,7 @@ import classesBasicas.Administrador;
 import classesBasicas.Candidato;
 import classesBasicas.Comentario;
 import classesBasicas.Partido;
+import classesBasicas.Projeto;
 import classesBasicas.Usuario;
 
 public class AdministradorDAO extends DAOGenerico<Administrador> implements IAdministradorDAO{
@@ -135,6 +136,12 @@ private EntityManager em;
 
 	@Override
 	public boolean updateComentario(Comentario comentario) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean insertProjeto(Projeto projeto) {
 		// TODO Auto-generated method stub
 		return false;
 	}
