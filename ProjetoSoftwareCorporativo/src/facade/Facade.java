@@ -1,7 +1,7 @@
 package facade;
 
 import controller.*;
-import dao.classes.*;
+import classesBasicas.Candidato;
 
 public class Facade implements IFachada{
 
@@ -12,14 +12,9 @@ public class Facade implements IFachada{
 		 controlExp = new ControllerExemple();
 		 controlCand = new ControllerCandidato();	 
 	}
-	
-	@Override
-	public void insert(ExempleDAO exempleDAO) {
-		controlExp.insert(exempleDAO);
-	}
 
 	@Override
-	public void insert(CandidatoDAO candidatoDAO) {
-		controlCand.insert(candidatoDAO);
+	public void insert(Candidato candidato) throws Exception {
+		controlCand.insert(candidato);
 	}
 }

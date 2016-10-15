@@ -45,5 +45,18 @@ public class Cidade {
 		this.lista_Candidato_cid = new ArrayList<Candidato>();
 	}
 
+	// Gets e Sets
+	public String getNome_cid() {
+		return nome_cid;
+	}
+
+	public void setNome_cid(String nome_cid) {
+		this.nome_cid = nome_cid;
+	}
+
+	public int getId_cid() {
+		return id_cid;
+	}	
+
 	// Methods
 }

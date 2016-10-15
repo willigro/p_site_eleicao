@@ -1,4 +1,3 @@
-
 package controller;
 
 import java.util.ArrayList;
@@ -11,13 +10,13 @@ import classesBasicas.Administrador;
 import classesBasicas.Candidato;
 import classesBasicas.Comentario;
 import classesBasicas.Partido;
+import classesBasicas.Projeto;
 import classesBasicas.Usuario;
 import dao.classes.AdministradorDAO;
 import dao.interfaces.IAdministradorDAO;
 
-public class ControllerAdministrador implements IAdministradorDAO{
+public class ControllerAdministrador{
 
-	@Override
 	public Administrador loginAdministrador(String email, String senha) throws Exception{
 		if(!email.trim().isEmpty()){
 			if(email.length() <= 100){
@@ -44,7 +43,6 @@ public class ControllerAdministrador implements IAdministradorDAO{
 		}
 	}
 
-	@Override
 	public boolean logoutAdministrador(Administrador administrador) throws Exception{
 		if(administrador != null){
 			if(verificarIdExistenteAdministrador(administrador.getId_admin())){
@@ -72,92 +70,6 @@ public class ControllerAdministrador implements IAdministradorDAO{
 		}
 		return false;
 	}
-
-	@Override
-	public boolean deleteUsuario(int id) throws Exception{
-		if(id > 0){
-
-		}
-		return false;
-	}
-
-	@Override
-	public boolean punirUsuario(Usuario usuario) throws Exception{
-		return false;
-	}
-
-	@Override
-	public Usuario selectUsuario(int id) throws Exception{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List listTodosUsuarios(ArrayList<Usuario> usuarios) throws Exception{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List listComentariosUsuario(ArrayList<Comentario> comentarios) throws Exception{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean deleteTodosComentarios(ArrayList<Comentario> comentarios) throws Exception{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteComentario(Comentario comentario) throws Exception{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean insert(Candidato candidato) throws Exception{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean delete(Candidato candidato) throws Exception{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Candidato update(Candidato candidato) throws Exception{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List listCandidato(ArrayList<Candidato> candidatos) throws Exception{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean insertPartido(Partido partido) throws Exception{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deletePartido(Partido partido) throws Exception{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public List listPartidos(ArrayList<Partido> partidos) throws Exception{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
 	//Método para validar e-mail
 	public static boolean isValidEmailAddress(String email) throws Exception{
@@ -171,14 +83,7 @@ public class ControllerAdministrador implements IAdministradorDAO{
 		return result;
 	}
 
-	@Override
 	public boolean verificarIdExistenteAdministrador(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean updateComentario(Comentario comentario) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
