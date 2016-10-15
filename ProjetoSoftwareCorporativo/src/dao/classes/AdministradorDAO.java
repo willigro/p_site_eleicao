@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import antlr.collections.List;
+import java.util.List;
 import dao.DAOGenerico;
 import dao.interfaces.IAdministradorDAO;
 import classesBasicas.Administrador;
@@ -109,11 +109,11 @@ private EntityManager em;
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
-	public List listCandidato(ArrayList<Candidato> candidatos) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Candidato> listCandidato() throws Exception {
+		List<Candidato> list_Candidatos = new ArrayList<Candidato>();
+		return list_Candidatos;
 	}
 
 	@Override
@@ -140,10 +140,29 @@ private EntityManager em;
 		return false;
 	}
 
+	//Projetos
 	@Override
 	public boolean insertProjeto(Projeto projeto) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public boolean updateProjeto(Projeto projeto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteProjeto(Projeto projeto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List listProjetos() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

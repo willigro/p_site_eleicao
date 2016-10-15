@@ -2,7 +2,7 @@ package dao.interfaces;
 
 import java.util.ArrayList;
 
-import antlr.collections.List;
+import java.util.List;
 import classesBasicas.Administrador;
 import classesBasicas.Candidato;
 import classesBasicas.Comentario;
@@ -29,22 +29,26 @@ public interface IAdministradorDAO {
 		public boolean punirUsuario(Usuario usuario) throws Exception; //ok
 		public Usuario selectUsuario(int id) throws Exception;
 		public List listTodosUsuarios(ArrayList<Usuario> usuarios) throws Exception;
-		
-		
+				
 		public List listComentariosUsuario(ArrayList<Comentario> comentarios) throws Exception;
 		public boolean deleteTodosComentarios(ArrayList<Comentario> comentarios) throws Exception;
 		public boolean deleteComentario(Comentario comentario) throws Exception;
 		public boolean updateComentario(Comentario comentario) throws Exception; //ok
 		
+		//Candidato
 		public boolean insert(Candidato candidato) throws Exception;
 		public boolean delete(Candidato candidato) throws Exception;
 		public Candidato update(Candidato candidato) throws Exception;
-		public List listCandidato(ArrayList<Candidato> candidatos) throws Exception;
+		public List<Candidato> listCandidato() throws Exception;
 		
 		public boolean insertPartido(Partido partido) throws Exception;
 		public boolean deletePartido(Partido partido) throws Exception;
 		public List listPartidos(ArrayList<Partido> partidos) throws Exception;
 		
+		// Bases Projeto
 		public boolean insertProjeto(Projeto projeto);
+		public boolean updateProjeto(Projeto projeto);
+		public boolean deleteProjeto(Projeto projeto);
+		public List listProjetos();
 
 }
