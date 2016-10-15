@@ -1,10 +1,7 @@
 package facade;
 
-import dao.classes.CandidatoDAO;
-import dao.classes.ExempleDAO;
+import classesBasicas.Candidato;
 
 public interface IFachada {
-	public void insert(ExempleDAO exempleDAO);
-
-	public void insert(CandidatoDAO candidatoDAO);
+	public void insert(Candidato candidato) throws Exception;
 }
