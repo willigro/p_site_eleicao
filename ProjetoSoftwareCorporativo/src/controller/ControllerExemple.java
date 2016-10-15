@@ -12,6 +12,11 @@ public class ControllerExemple {
 	}
 
 	public void insert(ExempleDAO exempleDAO) {
-		exempleDAO.insert(exempleDAO);
+		try {
+			exempleDAO.insert(exempleDAO);
+		} catch (Exception e) {
+
+		}
+
 	}
 }
