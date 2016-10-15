@@ -12,20 +12,21 @@ import classesBasicas.Comentario;
 import classesBasicas.Partido;
 import classesBasicas.Projeto;
 import classesBasicas.Usuario;
-import dao.classes.AdministradorDAO;
-import dao.interfaces.IAdministradorDAO;
 
 public class ControllerAdministrador{
-
-	public Administrador loginAdministrador(String email, String senha) throws Exception{
+/**
+ * Quem Estiver modificando este classe LEMBRE-SE da arquitetura
+ * Olhem o controllerExemple como guia
+ * */
+	public /*Administrador*/ void loginAdministrador(String email, String senha) throws Exception{
 		if(!email.trim().isEmpty()){
 			if(email.length() <= 100){
 				if(isValidEmailAddress(email)){
 					if(!senha.trim().isEmpty()){
 						if(senha.length() <= 100){
 							//return resposta do outro metodo
-							AdministradorDAO admDAO = new AdministradorDAO();
-							return admDAO.loginAdministrador(email, senha);
+							//AdministradorDAO admDAO = new AdministradorDAO();
+							//admDAO.loginAdministrador(email, senha);
 						}else{
 							throw new Exception("");
 						}
@@ -84,6 +85,11 @@ public class ControllerAdministrador{
 	}
 
 	public boolean verificarIdExistenteAdministrador(int id) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean insertProjeto(Projeto projeto) {
 		// TODO Auto-generated method stub
 		return false;
 	}
