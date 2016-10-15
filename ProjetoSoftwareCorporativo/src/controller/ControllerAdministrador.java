@@ -55,7 +55,6 @@ public class ControllerAdministrador{
 						}else{
 							throw new Exception("e-mail inválido");	
 						}
-
 					}else{
 						throw new Exception("e-mail vazio");	
 					}
