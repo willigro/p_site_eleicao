@@ -42,7 +42,6 @@ public class Usuario {
 	public Usuario() {
 		this.lista_Avaliacao_user = new ArrayList<Avaliacao>();
 		this.lista_Comentario_user = new ArrayList<Comentario>();
-		this.ativo_user = true;
 	}
 	
 	//Get and Set

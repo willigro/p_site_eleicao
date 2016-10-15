@@ -31,7 +31,7 @@ public class ControllerUsuario {
 		if (usuario.getNome_user().length() < 8) {
 			throw new Exception("A senha deve conter no mínimo oito caracteres");
 		}
-		usuarioDAO.insert(usuario);
+		usuarioDAO.cadastrarUsuario(usuario);
 	}
 
 }

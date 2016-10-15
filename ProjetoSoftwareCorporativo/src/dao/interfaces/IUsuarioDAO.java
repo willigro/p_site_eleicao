@@ -1,5 +1,7 @@
 package dao.interfaces;
 
-public interface IUsuarioDAO {
+import classesBasicas.Usuario;
 
+public interface IUsuarioDAO {
+	public void cadastrarUsuario(Usuario usuario) throws Exception;
 }
