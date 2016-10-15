@@ -4,9 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.hibernate.sql.ordering.antlr.Factory;
-import dao.classes.CandidatoDAO;
-import dao.classes.ExempleDAO;
-import dao.classes.UsuarioDAO;
+import dao.classes.*;
 
 public abstract class DAOFactory {
 	private static EntityManager manager;
@@ -37,5 +35,17 @@ public abstract class DAOFactory {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		usuarioDAO.setManager(manager);
 		return usuarioDAO;
+	}
+	
+	public static ComentarioDAO getComentarioDAO(){
+		ComentarioDAO comentarioDAO = new ComentarioDAO();
+		comentarioDAO.setManager(manager);
+		return comentarioDAO;
+	}
+	
+	public static AvaliacaoDAO getAvaliacaoDAO(){
+		AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
+		avaliacaoDAO.setManager(manager);
+		return avaliacaoDAO;
 	}
 }
