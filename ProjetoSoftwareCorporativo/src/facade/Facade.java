@@ -20,8 +20,8 @@ public class Facade implements IFachada {
 	}
 
 	@Override
-	public void insert(Candidato candidato) throws Exception {
-		controlCand.insert(candidato);
+	public void cadastrarCandidato(Candidato candidato) throws Exception {
+		controlCand.cadastrarCandidato(candidato);
 	}
 
 	@Override

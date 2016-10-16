@@ -6,7 +6,6 @@ import classesBasicas.Comentario;
 import classesBasicas.Usuario;
 
 public interface IFachada {
-	public void insert(Candidato candidato) throws Exception;
 
 	public void cadastrarUsuario(Usuario usuario) throws Exception;
 
@@ -15,5 +14,7 @@ public interface IFachada {
 	public Comentario atualizarComentario(Comentario comentario) throws Exception;
 	
 	public void inserirAvaliacaoCandidato(Avaliacao avaliacao) throws Exception;
+
+	void cadastrarCandidato(Candidato candidato) throws Exception;
 
 }

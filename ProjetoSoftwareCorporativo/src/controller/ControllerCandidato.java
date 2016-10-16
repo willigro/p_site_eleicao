@@ -9,15 +9,16 @@ import dao.classes.ExempleDAO;
 import dao.interfaces.ICandidatoDAO;
 
 public class ControllerCandidato implements ICandidatoDAO {
-	private ICandidatoDAO iCandidatoDAO;
+	
+	private CandidatoDAO candidatoDAO;
 
 	public void ControllerCanditato() {
-		this.iCandidatoDAO = DAOFactory.getCandidatoDAO();
+		this.candidatoDAO = DAOFactory.getCandidatoDAO();
 	}
 
 	// validação do cadastro básico candidato
 	@Override
-	public void insert(Candidato candidato) throws Exception{
+	public void cadastrarCandidato(Candidato candidato) throws Exception{
 
 		// Falta: DataNascimeto, FotoCandidato.
 
@@ -56,6 +57,8 @@ public class ControllerCandidato implements ICandidatoDAO {
 		} else if (candidato.getPartido_cand().getNome_part().length() > 40) {
 			throw new Exception("O campo Partido não pode conter mais de 40 caraceteres");
 		}
+		
+		candidatoDAO.cadastrarCandidato(candidato);
 
 	}
 
