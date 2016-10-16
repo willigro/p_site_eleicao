@@ -19,4 +19,14 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 	public void cadastrarCandidato(Candidato candidato) throws Exception {
 		super.insert(candidato);
 	}
+
+	@Override
+	public void removerCandidato(Candidato candidato) throws Exception {
+		super.delete(candidato);		
+	}
+
+	@Override
+	public void alterarCandidato(Candidato candidato) throws Exception {
+		super.update(candidato);		
+	}
 }

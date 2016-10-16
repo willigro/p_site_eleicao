@@ -16,7 +16,6 @@ public class ControllerCandidato implements ICandidatoDAO {
 		this.candidatoDAO = DAOFactory.getCandidatoDAO();
 	}
 
-	// validação do cadastro básico candidato
 	@Override
 	public void cadastrarCandidato(Candidato candidato) throws Exception{
 
@@ -62,6 +61,16 @@ public class ControllerCandidato implements ICandidatoDAO {
 
 	}
 
+	@Override
+	public void removerCandidato(Candidato candidato) throws Exception{
+		candidatoDAO.removerCandidato(candidato);
+	}
+	
+	@Override
+	public void alterarCandidato(Candidato candidato) throws Exception{
+		candidatoDAO.alterarCandidato(candidato);
+	}
+	
 	@Override
 	public List<Candidato> consultarCandidatos() {
 
