@@ -9,7 +9,7 @@ import dao.classes.ExempleDAO;
 import dao.interfaces.ICandidatoDAO;
 
 public class ControllerCandidato implements ICandidatoDAO {
-	
+
 	private CandidatoDAO candidatoDAO;
 
 	public void ControllerCanditato() {
@@ -17,7 +17,7 @@ public class ControllerCandidato implements ICandidatoDAO {
 	}
 
 	@Override
-	public void cadastrarCandidato(Candidato candidato) throws Exception{
+	public void validarCandidato(Candidato candidato) throws Exception {
 
 		// Falta: DataNascimeto, FotoCandidato.
 
@@ -56,21 +56,29 @@ public class ControllerCandidato implements ICandidatoDAO {
 		} else if (candidato.getPartido_cand().getNome_part().length() > 40) {
 			throw new Exception("O campo Partido não pode conter mais de 40 caraceteres");
 		}
-		
-		candidatoDAO.cadastrarCandidato(candidato);
+
+		this.validarCandidato(candidato);
 
 	}
 
 	@Override
-	public void removerCandidato(Candidato candidato) throws Exception{
-		candidatoDAO.removerCandidato(candidato);
+	public void cadastrarCandidato(Candidato candidato) throws Exception {
+		this.validarCandidato(candidato);
+		this.cadastrarCandidato(candidato);
 	}
-	
+
 	@Override
-	public void alterarCandidato(Candidato candidato) throws Exception{
-		candidatoDAO.alterarCandidato(candidato);
+	public void removerCandidato(Candidato candidato) throws Exception {
+		this.removerCandidato(candidato);
 	}
-	
+
+	@Override
+	public Candidato alterarCandidato(Candidato candidato) throws Exception {
+		this.validarCandidato(candidato);
+		this.alterarCandidato(candidato);
+		return candidato;
+	}
+
 	@Override
 	public List<Candidato> consultarCandidatos() {
 

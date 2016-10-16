@@ -16,17 +16,24 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 	}
 
 	@Override
-	public void cadastrarCandidato(Candidato candidato) throws Exception {
-		super.insert(candidato);
-	}
-
-	@Override
 	public void removerCandidato(Candidato candidato) throws Exception {
 		super.delete(candidato);		
 	}
 
 	@Override
-	public void alterarCandidato(Candidato candidato) throws Exception {
-		super.update(candidato);		
+	public Candidato alterarCandidato(Candidato candidato) throws Exception {
+		return super.update(candidato);		
 	}
+
+	@Override
+	public void cadastrarCandidato(Candidato candidato) throws Exception {
+		super.insert(candidato);	
+	}
+
+	@Override
+	public void validarCandidato(Candidato candidato) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

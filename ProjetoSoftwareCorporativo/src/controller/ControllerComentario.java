@@ -7,12 +7,12 @@ import dao.DAOFactory;
 public class ControllerComentario {
 
 	private ComentarioDAO comentarioDAO;
-	
-	public ControllerComentario(){
+
+	public ControllerComentario() {
 		this.comentarioDAO = DAOFactory.getComentarioDAO();
 	}
-	
-	private void validarComentario(Comentario comentario) throws Exception{
+
+	private void validarComentario(Comentario comentario) throws Exception {
 		if (comentario.getTexto_coment().trim().isEmpty()) {
 			throw new Exception("Informe um texto no comentário");
 		}
@@ -25,11 +25,15 @@ public class ControllerComentario {
 		this.validarComentario(comentario);
 		this.comentarioDAO.insert(comentario);
 	}
-	
-	public Comentario atualizarComentario(Comentario comentario) throws Exception{
+
+	public Comentario atualizarComentario(Comentario comentario) throws Exception {
 		this.validarComentario(comentario);
 		comentario = this.comentarioDAO.update(comentario);
 		return comentario;
+	}
+
+	public void removerComentario(Comentario comentario) throws Exception {
+		this.removerComentario(comentario);
 	}
 
 }
