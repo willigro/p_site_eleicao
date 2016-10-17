@@ -58,8 +58,6 @@ public class ControllerCandidato  {
 			throw new Exception("O campo Partido não pode conter mais de 40 caraceteres");
 		}
 
-		this.validarCandidato(candidato);
-
 	}
 
 	public void cadastrarCandidato(Candidato candidato) throws Exception {
