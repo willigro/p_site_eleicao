@@ -19,6 +19,12 @@ public class ControllerComentario {
 		if (comentario.getTexto_coment().length() > 500) {
 			throw new Exception("Limite de 500 caracteres excedido");
 		}
+		if(comentario.getProjeto_coment().getId_proj() == 0 && comentario.getCandidato_coment().getId_cand() == 0){
+			throw new Exception("Candidato ou proposta não encontrados");
+		}
+		if(comentario.getUsuario_coment().getId_user() == 0){
+			throw new Exception("Usuário não encontrado");
+		}
 	}
 
 	public void inserirComentarioCandidato(Comentario comentario) throws Exception {
