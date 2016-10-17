@@ -13,7 +13,7 @@ import javassist.bytecode.stackmap.BasicBlock.Catch;
 public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDAO {
 
 	@Override
-	public List<Candidato> consultarCandidatos() throws Exception {
+	public List<Candidato> consultarTodosCandidatos() throws Exception {
 		List<Candidato> lista_candidatos = new ArrayList<>();
 		try {
 
@@ -27,9 +27,9 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 		return lista_candidatos;
 	}
 
-	public List<Candidato> consultarCandidatosEspecificos(Candidato candidato) throws Exception {
+	public List<Candidato> consultarCandidatosFiltrados(Candidato candidato) throws Exception {
 		String montagemQuery = "SELECT cand FROM Candidato cand WHERE id_cand = id_cand";
-		Query query = null;		
+		Query query = null;
 		try {
 			if (candidato.getNome_cand() != null) {
 				montagemQuery += " AND cand.nome_cand = :nome_cand";

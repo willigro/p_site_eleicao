@@ -9,7 +9,7 @@ import dao.classes.CandidatoDAO;
 import dao.classes.ExempleDAO;
 import dao.interfaces.ICandidatoDAO;
 
-public class ControllerCandidato implements ICandidatoDAO {
+public class ControllerCandidato  {
 
 	private CandidatoDAO candidatoDAO;
 
@@ -17,7 +17,7 @@ public class ControllerCandidato implements ICandidatoDAO {
 		this.candidatoDAO = DAOFactory.getCandidatoDAO();
 	}
 
-	@Override
+
 	public void validarCandidato(Candidato candidato) throws Exception {
 
 		// Falta: DataNascimeto, FotoCandidato.
@@ -62,32 +62,27 @@ public class ControllerCandidato implements ICandidatoDAO {
 
 	}
 
-	@Override
 	public void cadastrarCandidato(Candidato candidato) throws Exception {
 		this.validarCandidato(candidato);
 		this.cadastrarCandidato(candidato);
 	}
 
-	@Override
 	public void removerCandidato(Candidato candidato) throws Exception {
 		this.removerCandidato(candidato);
 	}
 
-	@Override
 	public Candidato alterarCandidato(Candidato candidato) throws Exception {
 		this.validarCandidato(candidato);
 		this.alterarCandidato(candidato);
 		return candidato;
 	}
 
-	@Override
 	public List<Candidato> consultarCandidatos() throws Exception{		
 		List<Candidato> listCandidato = new ArrayList();
-		listCandidato = this.candidatoDAO.consultarCandidatos();
+		listCandidato = this.candidatoDAO.consultarTodosCandidatos();
 		return null;
 	}
 
-	@Override
 	public void insert(Candidato candidato) throws Exception {
 		// TODO Auto-generated method stub
 		
