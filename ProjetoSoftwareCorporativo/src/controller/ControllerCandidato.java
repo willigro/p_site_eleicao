@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import classesBasicas.Candidato;
@@ -80,8 +81,9 @@ public class ControllerCandidato implements ICandidatoDAO {
 	}
 
 	@Override
-	public List<Candidato> consultarCandidatos() {
-
+	public List<Candidato> consultarCandidatos() throws Exception{		
+		List<Candidato> listCandidato = new ArrayList();
+		listCandidato = this.candidatoDAO.consultarCandidatos();
 		return null;
 	}
 
