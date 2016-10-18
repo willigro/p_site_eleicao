@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import classesBasicas.Usuario;
 import dao.DAOGenerico;
 import dao.interfaces.IUsuarioDAO;
+import javax.persistence.Query;
 
 public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 
@@ -21,7 +22,13 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 		}
 		return senhaCriptografada.toString();
 	}
-	
+
+	public boolean retornaEmail(Usuario usuario) {
+		Query query = super.getManager().createQuery("SELECT u FROM Usuario u WHERE email_user = :Email", Usuario.class);
+		query.setParameter("Email", usuario.getEmail_user());
+		return query.getResultList().isEmpty();
+	}
+
 	@Override
 	public void cadastrarUsuario(Usuario usuario) throws Exception {
 		usuario.setSenha(criptografarSenha(usuario));
