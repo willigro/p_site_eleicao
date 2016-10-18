@@ -31,25 +31,25 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 		String montagemQuery = "SELECT cand FROM Candidato cand WHERE id_cand = id_cand";
 		Query query = null;
 		try {
-			if (candidato.getNome_cand() != null) {
+			if (candidato.getNome_cand() != null || !candidato.getNome_cand().trim().equals("")) {
 				montagemQuery += " AND cand.nome_cand = :nome_cand";
 			}
 			if (candidato.getId_cand() != 0) {
 				montagemQuery += " AND cand.id_cand = :id_cand";
 			}
-			if (candidato.getCidade_cand() != null) {
+			if (candidato.getCidade_cand() != null || !candidato.getCidade_cand().getNome_cid().trim().equals("")) {
 				montagemQuery += " AND cand.cidade_cand = :cidade_cand";
 			}
-			if (candidato.getEstado_cand() != null) {
+			if (candidato.getEstado_cand() != null || !candidato.getEstado_cand().getNome_est().trim().equals("")) {
 				montagemQuery += " AND cand.estado_cand = :estado_cand";
 			}
-			if (candidato.getPartido_cand() != null) {
+			if (candidato.getPartido_cand() != null || !candidato.getPartido_cand().getNome_part().trim().equals("")) {
 				montagemQuery += " AND cand.partido_cand = :partido_cand";
 			}
 			if (candidato.getNumero_cand() != 0) {
 				montagemQuery += " AND cand.numero_cand = :numero_cand";
 			}
-			if (candidato.getTipo_Cargo_cand() != null) {
+			if (candidato.getTipo_Cargo_cand() != null || !candidato.getTipo_Cargo_cand().trim().equals("")) {
 				montagemQuery += " AND cand.tipo_Cargo_cand = :tipo_Cargo_cand";
 			}
 			query = getManager().createQuery(montagemQuery);
