@@ -9,14 +9,13 @@ import dao.classes.CandidatoDAO;
 import dao.classes.ExempleDAO;
 import dao.interfaces.ICandidatoDAO;
 
-public class ControllerCandidato  {
+public class ControllerCandidato {
 
 	private CandidatoDAO candidatoDAO;
 
 	public void ControllerCanditato() {
 		this.candidatoDAO = DAOFactory.getCandidatoDAO();
 	}
-
 
 	public void validarCandidato(Candidato candidato) throws Exception {
 
@@ -58,8 +57,6 @@ public class ControllerCandidato  {
 			throw new Exception("O campo Partido não pode conter mais de 40 caraceteres");
 		}
 
-		this.validarCandidato(candidato);
-
 	}
 
 	public void cadastrarCandidato(Candidato candidato) throws Exception {
@@ -77,15 +74,46 @@ public class ControllerCandidato  {
 		return candidato;
 	}
 
-	public List<Candidato> consultarCandidatos() throws Exception{		
+	public List<Candidato> consultarTodosCandidatos() throws Exception {
 		List<Candidato> listCandidato = new ArrayList();
-		listCandidato = this.candidatoDAO.consultarTodosCandidatos();
-		return null;
+		return listCandidato = this.candidatoDAO.consultarTodosCandidatos();
+	}
+
+	public List<Candidato> consultarCandidatosFiltrados(Candidato candidato) throws Exception {
+		List<Candidato> listCandidato = new ArrayList();
+		if (candidato.getNome_cand().trim().length() > 50) {
+			throw new Exception("O nome do candidato não pode conter mais de 50 caracteres");
+		}
+		
+		if (candidato.getNumero_cand() > 99999) {
+			throw new Exception("O campo Numero não deve ter mais que 5 dígitos");
+		} else if (candidato.getNumero_cand() < 10000) {
+			throw new Exception("O campo Numero não deve ter menos que 5 dígitos");
+		}
+		
+		if (candidato.getTipo_Cargo_cand().length() > 50) {
+			throw new Exception("O Campo Cargo Elegível não pode conter mais de 50 caracteres");
+		}
+		
+		if (candidato.getEstado_cand().getNome_est().length() > 100) {
+			throw new Exception("O campo Estado não pode conter mais de 100 caracteres");
+		}
+		
+		if (candidato.getCidade_cand().getNome_cid().length() > 100) {
+			throw new Exception("O campo Cidade não pode conter mais de 100 caracteres");
+		}
+		
+		if (candidato.getPartido_cand().getNome_part().length() > 40) {
+			throw new Exception("O campo Partido não pode conter mais de 40 caraceteres");
+		}
+		
+		return listCandidato = this.candidatoDAO.consultarCandidatosFiltrados(candidato);
+
 	}
 
 	public void insert(Candidato candidato) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
