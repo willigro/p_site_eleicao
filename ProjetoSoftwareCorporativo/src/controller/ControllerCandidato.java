@@ -81,6 +81,11 @@ public class ControllerCandidato {
 
 	public List<Candidato> consultarCandidatosFiltrados(Candidato candidato) throws Exception {
 		List<Candidato> listCandidato = new ArrayList();
+		
+		if(candidato.getId_cand() < 0){
+			throw new Exception("Id do candidato está inválido");
+		}
+		
 		if (candidato.getNome_cand().trim().length() > 50) {
 			throw new Exception("O nome do candidato não pode conter mais de 50 caracteres");
 		}

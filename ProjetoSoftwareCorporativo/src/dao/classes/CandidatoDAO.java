@@ -17,12 +17,12 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 		List<Candidato> lista_candidatos = new ArrayList<>();
 		try {
 
-			lista_candidatos = getManager().createQuery("SELECT" + "cand FROM " + "Candidato cand").getResultList();
+			lista_candidatos = getManager().createQuery("SELECT cand FROM Candidato cand").getResultList();
 			if (lista_candidatos.isEmpty()) {
 				throw new Exception("Não há registros armazenados");
 			}
 		} catch (Exception e) {
-			throw new Exception();
+			throw new Exception(e.getMessage());
 		}
 		return lista_candidatos;
 	}
@@ -34,7 +34,7 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 			if (candidato.getNome_cand() != null || !candidato.getNome_cand().trim().equals("")) {
 				montagemQuery += " AND cand.nome_cand = :nome_cand";
 			}
-			if (candidato.getId_cand() != 0) {
+			if (candidato.getId_cand() > 0) {
 				montagemQuery += " AND cand.id_cand = :id_cand";
 			}
 			if (candidato.getCidade_cand() != null || !candidato.getCidade_cand().getNome_cid().trim().equals("")) {
@@ -46,13 +46,19 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 			if (candidato.getPartido_cand() != null || !candidato.getPartido_cand().getNome_part().trim().equals("")) {
 				montagemQuery += " AND cand.partido_cand = :partido_cand";
 			}
-			if (candidato.getNumero_cand() != 0) {
+			if (candidato.getNumero_cand() > 0) {
 				montagemQuery += " AND cand.numero_cand = :numero_cand";
 			}
 			if (candidato.getTipo_Cargo_cand() != null || !candidato.getTipo_Cargo_cand().trim().equals("")) {
 				montagemQuery += " AND cand.tipo_Cargo_cand = :tipo_Cargo_cand";
 			}
+			
 			query = getManager().createQuery(montagemQuery);
+			
+			if (query.getResultList().isEmpty()) {
+				throw new Exception("Não há registros armazenados");
+			}
+			
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
