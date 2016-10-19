@@ -28,11 +28,11 @@ private EntityManager em;
 	}
 	
 	@Override
-	public Administrador loginAdministrador(String email, String senha) throws Exception {
+	public Administrador loginAdministrador(Administrador administrador) throws Exception {
 			
 			Query query = em.createQuery("SELECT a FROM administrador a WHERE email =:email AND senha=:senha");
-			query.setParameter(email, email);
-			query.setParameter(senha, senha);
+			query.setParameter("email", administrador.getEmail());
+			query.setParameter("senha", administrador.getId_admin());
 			
 			
 			return (Administrador)query.getSingleResult();

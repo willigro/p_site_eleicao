@@ -1,5 +1,6 @@
 package facade;
 
+import classesBasicas.Administrador;
 import classesBasicas.Avaliacao;
 import classesBasicas.Candidato;
 import classesBasicas.Comentario;
@@ -16,5 +17,8 @@ public interface IFachada {
 	public void inserirAvaliacaoCandidato(Avaliacao avaliacao) throws Exception;
 
 	void cadastrarCandidato(Candidato candidato) throws Exception;
+	
+	public Administrador loginAdministrador(Administrador administrador) throws Exception;
+	
 
 }

@@ -18,7 +18,7 @@ public interface IAdministradorDAO {
 		
 		
 		
-		public Administrador loginAdministrador(String email,String senha) throws Exception; //ok
+		public Administrador loginAdministrador(Administrador administrador) throws Exception; //ok
 		public boolean logoutAdministrador(Administrador administrador) throws Exception; //ok
 		public boolean verificarIdExistenteAdministrador(int id) throws Exception; //ok
 		

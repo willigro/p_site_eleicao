@@ -9,12 +9,14 @@ public class Facade implements IFachada {
 	private ControllerUsuario controllerUsuario;
 	private ControllerComentario controllerComentario;
 	private ControllerAvaliacao controllerAvaliacao;
+	private ControllerAdministrador controllerAdministrador;
 
 	public Facade() {
 		controlCand = new ControllerCandidato();
 		this.controllerUsuario = new ControllerUsuario();
 		this.controllerComentario = new ControllerComentario();
 		this.controllerAvaliacao = new ControllerAvaliacao();
+		this.controllerAdministrador = new ControllerAdministrador();
 	}
 
 	@Override
@@ -30,6 +32,8 @@ public class Facade implements IFachada {
 			throw new Exception(e.getMessage());
 		}
 	}
+	
+	
 
 	@Override
 	public void inserirComentarioCandidato(Comentario comentario) throws Exception {
@@ -44,5 +48,10 @@ public class Facade implements IFachada {
 	@Override
 	public void inserirAvaliacaoCandidato(Avaliacao avaliacao) throws Exception {
 		this.controllerAvaliacao.inserirAvaliacaoCandidato(avaliacao);
+	}
+
+	@Override
+	public Administrador loginAdministrador(Administrador adminsitrador) throws Exception {
+		return this.controllerAdministrador.loginAdministrador(adminsitrador);
 	}
 }

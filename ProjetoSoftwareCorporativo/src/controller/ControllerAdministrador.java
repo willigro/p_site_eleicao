@@ -12,40 +12,28 @@ import classesBasicas.Comentario;
 import classesBasicas.Partido;
 import classesBasicas.Projeto;
 import classesBasicas.Usuario;
+import dao.DAOFactory;
+import dao.classes.AdministradorDAO;
+import dao.classes.CandidatoDAO;
 
 public class ControllerAdministrador{
-/**
- * Quem Estiver modificando este classe LEMBRE-SE da arquitetura
- * Olhem o controllerExemple como guia
- * */
-	public /*Administrador*/ void loginAdministrador(String email, String senha) throws Exception{
-		if(!email.trim().isEmpty()){
-			if(email.length() <= 100){
-				if(isValidEmailAddress(email)){
-					if(!senha.trim().isEmpty()){
-						if(senha.length() <= 100){
-							//return resposta do outro metodo
-							//AdministradorDAO admDAO = new AdministradorDAO();
-							//admDAO.loginAdministrador(email, senha);
-						}else{
-							throw new Exception("");
-						}
-					}else{
-						throw new Exception("senha vazia");
-					}	
-				}else{
-					throw new Exception("e-mail inválido");
-				}
-			}else{
-				throw new Exception("e-mail acima do limite de caracteres");
-			}
-		}else{
-			throw new Exception("e-mail vazio");
-		}
+	
+	private AdministradorDAO administradorDAO;
+
+	public ControllerAdministrador(){
+		this.administradorDAO = DAOFactory.getAdministradorDAO();
+	}
+	
+	
+
+	public Administrador loginAdministrador(Administrador administrador) throws Exception{
+		validateLoginAdministrador(administrador);
+		return this.administradorDAO.loginAdministrador(administrador);
+
 	}
 
 	public boolean logoutAdministrador(Administrador administrador) throws Exception{
-		if(administrador != null){
+		
 			if(verificarIdExistenteAdministrador(administrador.getId_admin())){
 				if(administrador.getId_admin() >0){
 					if(!administrador.getEmail().isEmpty()){
@@ -65,10 +53,30 @@ public class ControllerAdministrador{
 				throw new Exception("administrador inexistente na base de dados");
 			}
 
+		return false;
+	}
+	
+	public void validateLoginAdministrador(Administrador administrador) throws Exception{
+		if(administrador != null){
+			if(!administrador.getEmail().trim().isEmpty()){
+				throw new Exception("e-mail vazio");
+			}
+			if(administrador.getEmail().length() <= 100){
+				throw new Exception("e-mail acima do limite de caracteres");
+			}
+			if(isValidEmailAddress(administrador.getEmail())){
+				throw new Exception("e-mail inválido");
+			}
+			if(!administrador.getSenha_admin().trim().isEmpty()){
+				throw new Exception("senha vazia");
+			}
+			if(administrador.getSenha_admin().length() <= 100){
+				throw new Exception("");
+			}
 		}else{
 			throw new Exception("objeto administrador null");
 		}
-		return false;
+		
 	}
 	
 	//Método para validar e-mail
