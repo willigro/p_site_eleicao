@@ -44,6 +44,7 @@ public class ControllerComentario {
 	
 	public void inserirComentarioProjeto(Comentario comentario) throws Exception{
 		this.validarComentario(comentario);
+		this.comentarioDAO.insert(comentario);
 	}
 
 }
