@@ -75,15 +75,15 @@ public class ControllerCandidato {
 	}
 
 	public List<Candidato> consultarTodosCandidatos() throws Exception {
-		List<Candidato> listCandidato = new ArrayList();
+		List<Candidato> listCandidato;
 		return listCandidato = this.candidatoDAO.consultarTodosCandidatos();
 	}
 
 	public List<Candidato> consultarCandidatosFiltrados(Candidato candidato) throws Exception {
-		List<Candidato> listCandidato = new ArrayList();
+		List<Candidato> listCandidato;
 		
 		if(candidato.getId_cand() < 0){
-			throw new Exception("Id do candidato está inválido");
+			throw new Exception("ID do candidato inválido");
 		}
 		
 		if (candidato.getNome_cand().trim().length() > 50) {
