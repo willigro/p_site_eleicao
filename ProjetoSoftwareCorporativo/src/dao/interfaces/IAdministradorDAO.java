@@ -26,7 +26,7 @@ public interface IAdministradorDAO {
 		//Permissões do adm
 		
 		public boolean deleteUsuario(int id) throws Exception;
-		public boolean punirUsuario(Usuario usuario) throws Exception; //ok
+		public boolean punirUsuario(Administrador administrador) throws Exception; //ok
 		public Usuario selectUsuario(int id) throws Exception;
 		public List listTodosUsuarios(ArrayList<Usuario> usuarios) throws Exception;
 				

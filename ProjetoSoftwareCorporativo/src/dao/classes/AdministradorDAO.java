@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -46,7 +47,12 @@ private EntityManager em;
 
 	@Override
 	public boolean verificarIdExistenteAdministrador(int id) throws Exception {
-		// TODO Auto-generated method stub
+		Query query = em.createQuery("SELECT a FROM administrador a WHERE id_admin =:id");
+		query.setParameter("id", id);
+		
+		if((int)query.getSingleResult() == 1){
+			return true; 	
+		}
 		return false;
 	}
 
@@ -57,10 +63,31 @@ private EntityManager em;
 	}
 
 	@Override
-	public boolean punirUsuario(Usuario usuario) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean punirUsuario(Administrador administrador) throws Exception {
+		
+		EntityTransaction tx = getManager().getTransaction();
+		tx.begin();
+		getManager().merge(administrador.getLista_Comentario_admin().get(0).getUsuario_coment());
+		tx.commit();
+		
+		
+		
+		return true; 
+
 	}
+	
+	public boolean verificarPunicaoUsuario(Usuario usuario){
+		Query query = em.createQuery("SELECT a FROM usuario a WHERE id_user =:id");
+		query.setParameter("id", usuario.getId_user());
+
+		Usuario userQuery = (Usuario)query;
+		if(userQuery.isAtivo_user()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 
 	@Override
 	public Usuario selectUsuario(int id) throws Exception {

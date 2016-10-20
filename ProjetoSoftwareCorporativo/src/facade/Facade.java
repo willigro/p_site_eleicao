@@ -50,8 +50,16 @@ public class Facade implements IFachada {
 		this.controllerAvaliacao.inserirAvaliacaoCandidato(avaliacao);
 	}
 
+	//OK
 	@Override
 	public Administrador loginAdministrador(Administrador adminsitrador) throws Exception {
 		return this.controllerAdministrador.loginAdministrador(adminsitrador);
+	}
+
+	//OK
+	@Override
+	public boolean punirUsuario(Administrador administrador) throws Exception {
+			
+		return this.controllerAdministrador.punirUsuario(administrador);
 	}
 }

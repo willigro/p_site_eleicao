@@ -20,5 +20,6 @@ public interface IFachada {
 	
 	public Administrador loginAdministrador(Administrador administrador) throws Exception;
 	
+	public boolean punirUsuario(Administrador administrador) throws Exception;
 
 }

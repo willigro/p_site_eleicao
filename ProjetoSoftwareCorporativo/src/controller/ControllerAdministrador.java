@@ -15,13 +15,16 @@ import classesBasicas.Usuario;
 import dao.DAOFactory;
 import dao.classes.AdministradorDAO;
 import dao.classes.CandidatoDAO;
+import dao.classes.UsuarioDAO;
 
 public class ControllerAdministrador{
 	
 	private AdministradorDAO administradorDAO;
 
+
 	public ControllerAdministrador(){
 		this.administradorDAO = DAOFactory.getAdministradorDAO();
+
 	}
 	
 	
@@ -99,6 +102,47 @@ public class ControllerAdministrador{
 	public boolean insertProjeto(Projeto projeto) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	
+	public boolean punirUsuario(Administrador administrador) throws Exception {
+		validatePunirUsuario(administrador);	
+		return administradorDAO.punirUsuario(administrador);
+	}
+	
+	private void validatePunirUsuario(Administrador administrador) throws Exception{
+		if(administrador != null){
+			if(administrador.getLista_Comentario_admin() != null){
+				for(int i = 0; i < administrador.getLista_Comentario_admin().size(); i++){
+					Comentario comentario = administrador.getLista_Comentario_admin().get(i);
+					if (comentario != null){
+						if(comentario.getUsuario_coment() != null){
+							if(comentario.getUsuario_coment().isAtivo_user() == false){
+								if(!verificarPunicaoUsuario(comentario.getUsuario_coment())){
+									throw new Exception("Este usuário encontra-se punido");
+								}
+							}else{
+								throw new Exception("");
+							}
+						}else{
+//							throw new Exception("usuário null");
+						}
+					}else{
+//						throw new Exception("comentario null");						
+					}
+				}
+			}else{
+				throw new Exception("Nenhum comentário existente");	
+			}
+
+		}else{
+//			throw new Exception("administrador null");
+		}
+		
+	}
+	
+	private boolean verificarPunicaoUsuario(Usuario usuario){
+		return administradorDAO.verificarPunicaoUsuario(usuario);
 	}
 
 
