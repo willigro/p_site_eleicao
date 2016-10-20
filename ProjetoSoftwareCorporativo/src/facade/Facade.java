@@ -45,4 +45,14 @@ public class Facade implements IFachada {
 	public void inserirAvaliacaoCandidato(Avaliacao avaliacao) throws Exception {
 		this.controllerAvaliacao.inserirAvaliacaoCandidato(avaliacao);
 	}
+
+	@Override
+	public void removerCandidato(Candidato candidato) throws Exception {
+		this.controlCand.removerCandidato(candidato);
+	}
+
+	@Override
+	public Candidato alterarCandidato(Candidato candidato) throws Exception {
+		return this.controlCand.alterarCandidato(candidato);
+	}
 }

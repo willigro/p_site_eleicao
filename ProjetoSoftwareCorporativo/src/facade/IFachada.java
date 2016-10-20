@@ -15,6 +15,10 @@ public interface IFachada {
 	
 	public void inserirAvaliacaoCandidato(Avaliacao avaliacao) throws Exception;
 
-	void cadastrarCandidato(Candidato candidato) throws Exception;
+	public void cadastrarCandidato(Candidato candidato) throws Exception;
+	
+	public void removerCandidato(Candidato candidato) throws Exception;
+	
+	public Candidato alterarCandidato(Candidato candidato) throws Exception;
 
 }
