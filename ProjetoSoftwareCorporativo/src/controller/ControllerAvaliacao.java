@@ -1,15 +1,15 @@
 package controller;
 
-import dao.classes.AvaliacaoDAO;
+import dao.interfaces.IAvaliacaoDAO;
 import classesBasicas.Avaliacao;
 import dao.DAOFactory;
 
 public class ControllerAvaliacao {
 
-	private AvaliacaoDAO avaliacaoDAO;
+	private IAvaliacaoDAO iavaliacaoDAO;
 
 	public ControllerAvaliacao() {
-		this.avaliacaoDAO = DAOFactory.getAvaliacaoDAO();
+		this.iavaliacaoDAO = DAOFactory.getAvaliacaoDAO();
 	}
 	
 	private void validarAvaliacao(Avaliacao avaliacao) throws Exception {
@@ -30,7 +30,7 @@ public class ControllerAvaliacao {
 		} else
 			this.validarAvaliacao(avaliacao);
 
-		this.avaliacaoDAO.insert(avaliacao);
+		this.iavaliacaoDAO.insert(avaliacao);
 	}
 
 	public void inserirAvaliacaoProjeto(Avaliacao avaliacao) throws Exception {
@@ -39,7 +39,7 @@ public class ControllerAvaliacao {
 		} else
 			this.validarAvaliacao(avaliacao);
 
-		this.avaliacaoDAO.insert(avaliacao);
+		this.iavaliacaoDAO.insert(avaliacao);
 	}
 
 }
