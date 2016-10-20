@@ -70,8 +70,6 @@ private EntityManager em;
 		getManager().merge(administrador.getLista_Comentario_admin().get(0).getUsuario_coment());
 		tx.commit();
 		
-		
-		
 		return true; 
 
 	}

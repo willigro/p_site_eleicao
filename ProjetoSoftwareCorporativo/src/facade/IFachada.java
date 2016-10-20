@@ -1,11 +1,11 @@
 package facade;
 
-<<<<<<< HEAD
+
 import classesBasicas.Administrador;
-=======
+
 import java.util.List;
 
->>>>>>> 296a9d86c2a03b95807370684ce1f2a2ae245854
+
 import classesBasicas.Avaliacao;
 import classesBasicas.Candidato;
 import classesBasicas.Comentario;
@@ -20,9 +20,6 @@ public interface IFachada {
 	public Comentario atualizarComentario(Comentario comentario) throws Exception;
 	
 	public void inserirAvaliacaoCandidato(Avaliacao avaliacao) throws Exception;
-
-
-	void cadastrarCandidato(Candidato candidato) throws Exception;
 	
 	public Administrador loginAdministrador(Administrador administrador) throws Exception;
 	
