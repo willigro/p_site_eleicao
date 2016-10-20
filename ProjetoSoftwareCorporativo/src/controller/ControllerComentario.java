@@ -6,6 +6,7 @@ import java.util.List;
 import classesBasicas.Candidato;
 import classesBasicas.Comentario;
 import classesBasicas.Usuario;
+import controller.exceptions.IdAbimguoAvaliacaoException;
 import dao.classes.ComentarioDAO;
 import dao.DAOFactory;
 
@@ -24,11 +25,11 @@ public class ControllerComentario {
 		if (comentario.getTexto_coment().length() > 500) {
 			throw new Exception("Limite de 500 caracteres excedido");
 		}
-		if(comentario.getProjeto_coment().getId_proj() == 0 || comentario.getCandidato_coment().getId_cand() == 0){
+		if(comentario.getProjeto_coment().getId_proj() >= 0 || comentario.getCandidato_coment().getId_cand() >= 0){
 			throw new Exception("Candidato ou proposta não encontrados");
 		}
 		if(comentario.getUsuario_coment().getId_user() == 0){
-			throw new Exception("Usuário não encontrado");
+			throw new IdAbimguoAvaliacaoException();
 		}
 	}
 
