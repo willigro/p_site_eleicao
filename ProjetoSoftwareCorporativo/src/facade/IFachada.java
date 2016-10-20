@@ -1,11 +1,9 @@
 package facade;
 
-
 import classesBasicas.Administrador;
-
 import java.util.List;
-
-
+import classesBasicas.Administrador;
+import java.util.List;
 import classesBasicas.Avaliacao;
 import classesBasicas.Candidato;
 import classesBasicas.Comentario;

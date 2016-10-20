@@ -10,15 +10,9 @@ import classesBasicas.Avaliacao;
 
 public class AvaliacaoDAO extends DAOGenerico<Avaliacao> implements IAvaliacaoDAO{
 
-	private void validarAvaliacaoProjeto(Avaliacao avaliacao){
-		
-	}
-	
 	@Override
 	public void insertAvaliacaoProjeto(Avaliacao avaliacao) throws Exception {
-		
-		this.validarAvaliacaoProjeto(avaliacao);
-		
+	
 		EntityTransaction tx = getManager().getTransaction();		
 		try {
 			tx.begin();

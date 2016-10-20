@@ -3,6 +3,7 @@ package controller;
 import dao.interfaces.IAvaliacaoDAO;
 import classesBasicas.Avaliacao;
 import dao.DAOFactory;
+import controller.exceptions.IdAbimguoAvaliacaoException;
 
 public class ControllerAvaliacao {
 
@@ -21,6 +22,8 @@ public class ControllerAvaliacao {
 			throw new Exception("Informe uma nota");
 		} else if (avaliacao.getNotaAvaliacao() > 5 || avaliacao.getNotaAvaliacao() < 0) {
 			throw new Exception("Informe uma nota entre 0 e 5");
+		} else if(avaliacao.getCandidato_aval().getId_cand() >= 0 && avaliacao.getProjeto_aval().getId_proj() >= 0){
+			throw new IdAbimguoAvaliacaoException();
 		}
 	}
 

@@ -1,6 +1,7 @@
 package facade;
 
 import controller.*;
+import controller.exceptions.IdAbimguoAvaliacaoException;
 
 import java.util.List;
 
