@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.persistence.EntityTransaction;
 
 import antlr.collections.List;
 import classesBasicas.Administrador;
@@ -145,10 +146,18 @@ public class ControllerAdministrador{
 		return administradorDAO.verificarPunicaoUsuario(usuario);
 	}
 	
+	
+	
 	public void denunciarComentario(Comentario comentario) {
-		// TODO Auto-generated method stub
+		if(verificarComentarioPorID(comentario) != null){
+			int total = comentario.getQtd_denuncia();
+			comentario.setQtd_denuncia(total++);
+			
+			administradorDAO.denunciarComentario(comentario);
+		}
 		
 	}
+	
 	
 	public Comentario verificarComentarioPorID(Comentario comentario){
 		return administradorDAO.verificarComentarioPorID(comentario);

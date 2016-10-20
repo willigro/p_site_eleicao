@@ -200,10 +200,11 @@ private EntityManager em;
 
 	@Override
 	public void denunciarComentario(Comentario comentario) {
-		if(verificarComentarioPorID(comentario) != null){
-			int total = comentario.getQtd_denuncia();
-			comentario.setQtd_denuncia(total++);
-		}
+		
+			EntityTransaction tx = getManager().getTransaction();
+			tx.begin();
+			getManager().merge(comentario);
+			tx.commit();			
 		
 	}
 	
