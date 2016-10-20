@@ -80,10 +80,4 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 		super.insert(candidato);
 	}
 
-	@Override
-	public void validarCandidato(Candidato candidato) throws Exception {
-		// TODO Auto-generated method stub
-
-	}
-
 }

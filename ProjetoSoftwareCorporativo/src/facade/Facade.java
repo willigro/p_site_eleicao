@@ -1,6 +1,9 @@
 package facade;
 
 import controller.*;
+
+import java.util.List;
+
 import classesBasicas.*;
 
 public class Facade implements IFachada {
@@ -50,6 +53,7 @@ public class Facade implements IFachada {
 		this.controllerAvaliacao.inserirAvaliacaoCandidato(avaliacao);
 	}
 
+
 	//OK
 	@Override
 	public Administrador loginAdministrador(Administrador adminsitrador) throws Exception {
@@ -61,5 +65,19 @@ public class Facade implements IFachada {
 	public boolean punirUsuario(Administrador administrador) throws Exception {
 			
 		return this.controllerAdministrador.punirUsuario(administrador);
+
+	@Override
+	public void removerCandidato(Candidato candidato) throws Exception {
+		this.controlCand.removerCandidato(candidato);
+	}
+
+	@Override
+	public Candidato alterarCandidato(Candidato candidato) throws Exception {
+		return this.controlCand.alterarCandidato(candidato);
+	}
+
+	@Override
+	public List<Comentario> visualizarComentsDenuncia(Usuario usuario) throws Exception {
+		return this.controllerComentario.visualizarComentsDenuncia(usuario);
 	}
 }

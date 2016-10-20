@@ -49,10 +49,17 @@ public abstract class DAOFactory {
 		return avaliacaoDAO;
 	}
 	
+
 	
 	public static AdministradorDAO getAdministradorDAO(){
 		AdministradorDAO administradorDAO = new AdministradorDAO();
 		administradorDAO.setManager(manager);
 		return administradorDAO;
+
+	public static ProjetoDAO getProjetoDAO(){
+		ProjetoDAO projetoDAO = new ProjetoDAO();
+		projetoDAO.setManager(manager);
+		return projetoDAO;
+
 	}
 }

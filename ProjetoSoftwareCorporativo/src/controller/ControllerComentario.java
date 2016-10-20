@@ -1,6 +1,11 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import classesBasicas.Candidato;
 import classesBasicas.Comentario;
+import classesBasicas.Usuario;
 import dao.classes.ComentarioDAO;
 import dao.DAOFactory;
 
@@ -19,7 +24,7 @@ public class ControllerComentario {
 		if (comentario.getTexto_coment().length() > 500) {
 			throw new Exception("Limite de 500 caracteres excedido");
 		}
-		if(comentario.getProjeto_coment().getId_proj() == 0 && comentario.getCandidato_coment().getId_cand() == 0){
+		if(comentario.getProjeto_coment().getId_proj() == 0 || comentario.getCandidato_coment().getId_cand() == 0){
 			throw new Exception("Candidato ou proposta não encontrados");
 		}
 		if(comentario.getUsuario_coment().getId_user() == 0){
@@ -41,5 +46,15 @@ public class ControllerComentario {
 	public void removerComentario(Comentario comentario) throws Exception {
 		this.removerComentario(comentario);
 	}
+	
+	public void inserirComentarioProjeto(Comentario comentario) throws Exception{
+		this.validarComentario(comentario);
+		this.comentarioDAO.insert(comentario);
+	}
 
+	public List<Comentario> visualizarComentsDenuncia(Usuario usuario) throws Exception{
+		List<Comentario> listComentario = new ArrayList();
+		return listComentario = this.comentarioDAO.visualizarComentsDenuncia(usuario);
+	}
+	
 }
