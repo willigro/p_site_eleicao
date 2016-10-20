@@ -1,5 +1,7 @@
 package dao.interfaces;
 
-public interface IComentarioDAO {
+import classesBasicas.Comentario;
 
+public interface IComentarioDAO {
+	public void insert(Comentario comentario) throws Exception;
 }
