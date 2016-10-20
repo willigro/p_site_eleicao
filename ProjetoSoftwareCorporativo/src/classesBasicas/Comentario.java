@@ -37,7 +37,7 @@ public class Comentario {
 	@JoinColumn(name = "id_cand")
 	private Candidato candidato_coment;
 	
-	
+	@Column(name = "qtd_denuncia")
 	private int qtd_denuncia;
 
 
@@ -48,8 +48,6 @@ public class Comentario {
 		this.candidato_coment = new Candidato();
 		this.administrador_coment = new Administrador();
 	}
-	
-
 
 	//Get and Set
 	public int getId_coment() {

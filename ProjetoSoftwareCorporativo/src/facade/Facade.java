@@ -77,7 +77,7 @@ public class Facade implements IFachada {
 	}
 
 	@Override
-	public List<Comentario> visualizarComentsDenuncia(Usuario usuario) throws Exception {
-		return this.controllerComentario.visualizarComentsDenuncia(usuario);
+	public List<Comentario> visualizarComentsDenuncia() throws Exception {
+		return this.controllerComentario.visualizarComentsDenuncia();
 	}
 }
