@@ -29,7 +29,7 @@ public interface IFachada {
 	
 	public Candidato alterarCandidato(Candidato candidato) throws Exception;
 	
-	public List<Comentario> visualizarComentsDenuncia(Usuario usuario) throws Exception;
+	public List<Comentario> visualizarComentsDenuncia() throws Exception;
 
 
 }

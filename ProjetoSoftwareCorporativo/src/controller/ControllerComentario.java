@@ -53,9 +53,9 @@ public class ControllerComentario {
 		this.comentarioDAO.insert(comentario);
 	}
 
-	public List<Comentario> visualizarComentsDenuncia(Usuario usuario) throws Exception{
+	public List<Comentario> visualizarComentsDenuncia() throws Exception{
 		List<Comentario> listComentario = new ArrayList();
-		return listComentario = this.comentarioDAO.visualizarComentsDenuncia(usuario);
+		return listComentario = this.comentarioDAO.visualizarComentsDenuncia();
 	}
 	
 }

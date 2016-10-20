@@ -10,15 +10,15 @@ import classesBasicas.Usuario;
 public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentarioDAO {
 
 	@Override
-	public List<Comentario> visualizarComentsDenuncia(Usuario usuario) throws Exception {
+	public List<Comentario> visualizarComentsDenuncia() throws Exception {
 		
 		List<Comentario> lista_comentarios = new ArrayList<>();
 		
+		//if(usuario.getLista_Comentario_user()lista_comentarios.)
+		
 		try {
-			lista_comentarios = getManager().createQuery("SELECT comentario FROM Usuario comentario").getResultList();
-			if (lista_comentarios.isEmpty()) {
-				throw new Exception("Esse usuário não comentou nada");
-			}
+			lista_comentarios = getManager().createQuery("SELECT comentario FROM Comentario comentario"
+					+ "WHERE QTDGLAUBERALTERAR > 9").getResultList();
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
