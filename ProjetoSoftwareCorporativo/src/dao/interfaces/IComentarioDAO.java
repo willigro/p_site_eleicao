@@ -5,7 +5,6 @@ import classesBasicas.Comentario;
 import classesBasicas.Usuario;
 
 public interface IComentarioDAO {
-
-	List<Comentario> visualizarComentsDenuncia(Usuario usuario) throws Exception;
-
+	public List<Comentario> visualizarComentsDenuncia(Usuario usuario) throws Exception;
+	public void insert(Comentario comentario) throws Exception;
 }
