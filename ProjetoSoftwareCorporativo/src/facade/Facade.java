@@ -64,7 +64,6 @@ public class Facade implements IFachada {
 	//OK
 	@Override
 	public boolean punirUsuario(Administrador administrador) throws Exception {
-			
 		return this.controllerAdministrador.punirUsuario(administrador);
 	}
 	@Override
