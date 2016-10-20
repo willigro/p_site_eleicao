@@ -36,6 +36,10 @@ public class Comentario {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_cand")
 	private Candidato candidato_coment;
+	
+	
+	private int qtd_denuncia;
+
 
 	// Constructor
 	public Comentario() {
@@ -44,6 +48,8 @@ public class Comentario {
 		this.candidato_coment = new Candidato();
 		this.administrador_coment = new Administrador();
 	}
+	
+
 
 	//Get and Set
 	public int getId_coment() {
@@ -95,4 +101,15 @@ public class Comentario {
 	}
 
 	// Methods
+	
+	public int getQtd_denuncia() {
+		return qtd_denuncia;
+	}
+
+
+	public void setQtd_denuncia(int qtd_denuncia) {
+		this.qtd_denuncia = qtd_denuncia;
+	}
+
+	
 }

@@ -144,6 +144,15 @@ public class ControllerAdministrador{
 	private boolean verificarPunicaoUsuario(Usuario usuario){
 		return administradorDAO.verificarPunicaoUsuario(usuario);
 	}
+	
+	public void denunciarComentario(Comentario comentario) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public Comentario verificarComentarioPorID(Comentario comentario){
+		return administradorDAO.verificarComentarioPorID(comentario);
+	}
 
 
 }

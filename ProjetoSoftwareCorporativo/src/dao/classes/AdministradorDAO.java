@@ -86,6 +86,14 @@ private EntityManager em;
 		}
 	}
 	
+	@Override
+	public Comentario verificarComentarioPorID(Comentario comentario){
+		Query query = em.createQuery("SELECT c FROM comentario c WHERE id_coment =:id");
+		query.setParameter("id", comentario.getId_coment());
+		
+		return (Comentario)query;
+	}
+	
 
 	@Override
 	public Usuario selectUsuario(int id) throws Exception {
@@ -188,6 +196,15 @@ private EntityManager em;
 	public List listProjetos() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void denunciarComentario(Comentario comentario) {
+		if(verificarComentarioPorID(comentario) != null){
+			int total = comentario.getQtd_denuncia();
+			comentario.setQtd_denuncia(total++);
+		}
+		
 	}
 	
 }

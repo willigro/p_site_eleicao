@@ -50,5 +50,8 @@ public interface IAdministradorDAO {
 		public boolean updateProjeto(Projeto projeto);
 		public boolean deleteProjeto(Projeto projeto);
 		public List listProjetos();
+		
+		public void denunciarComentario(Comentario comentario);
+		public Comentario verificarComentarioPorID(Comentario comentario);
 
 }
