@@ -1,5 +1,7 @@
 package facade;
 
+import java.util.List;
+
 import classesBasicas.Avaliacao;
 import classesBasicas.Candidato;
 import classesBasicas.Comentario;
@@ -20,5 +22,7 @@ public interface IFachada {
 	public void removerCandidato(Candidato candidato) throws Exception;
 	
 	public Candidato alterarCandidato(Candidato candidato) throws Exception;
+	
+	public List<Comentario> visualizarComentsDenuncia(Usuario usuario) throws Exception;
 
 }

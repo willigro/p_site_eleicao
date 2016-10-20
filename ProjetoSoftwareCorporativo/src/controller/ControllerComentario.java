@@ -1,6 +1,11 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import classesBasicas.Candidato;
 import classesBasicas.Comentario;
+import classesBasicas.Usuario;
 import dao.classes.ComentarioDAO;
 import dao.DAOFactory;
 
@@ -42,4 +47,9 @@ public class ControllerComentario {
 		this.removerComentario(comentario);
 	}
 
+	public List<Comentario> visualizarComentsDenuncia(Usuario usuario) throws Exception{
+		List<Comentario> listComentario = new ArrayList();
+		return listComentario = this.comentarioDAO.visualizarComentsDenuncia(usuario);
+	}
+	
 }

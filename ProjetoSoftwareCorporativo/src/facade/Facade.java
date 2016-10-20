@@ -1,6 +1,9 @@
 package facade;
 
 import controller.*;
+
+import java.util.List;
+
 import classesBasicas.*;
 
 public class Facade implements IFachada {
@@ -54,5 +57,10 @@ public class Facade implements IFachada {
 	@Override
 	public Candidato alterarCandidato(Candidato candidato) throws Exception {
 		return this.controlCand.alterarCandidato(candidato);
+	}
+
+	@Override
+	public List<Comentario> visualizarComentsDenuncia(Usuario usuario) throws Exception {
+		return this.controllerComentario.visualizarComentsDenuncia(usuario);
 	}
 }
