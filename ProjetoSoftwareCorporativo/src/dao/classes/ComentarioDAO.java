@@ -14,11 +14,9 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 		
 		List<Comentario> lista_comentarios = new ArrayList<>();
 		
-		//if(usuario.getLista_Comentario_user()lista_comentarios.)
-		
 		try {
 			lista_comentarios = getManager().createQuery("SELECT comentario FROM Comentario comentario"
-					+ "WHERE QTDGLAUBERALTERAR > 9").getResultList();
+					+ "WHERE qtd_denuncia > 9").getResultList();
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
