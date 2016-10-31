@@ -23,10 +23,10 @@ public class AdministradorDAO extends DAOGenerico<Administrador> implements IAdm
 	
 private EntityManager em;
 	
-	public AdministradorDAO(){
+	/*public AdministradorDAO(){
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("testePSC");
 		em = emf.createEntityManager();
-	}
+	}*/
 	
 	@Override
 	public Administrador loginAdministrador(Administrador administrador) throws Exception {
