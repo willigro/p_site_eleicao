@@ -27,7 +27,7 @@ public class Candidato {
 	private String nome_cand;
 
 	private Calendar data_Nasc_cand;
-	
+
 	@Column(nullable=false)
 	private int numero_cand;
 
@@ -70,6 +70,10 @@ public class Candidato {
 	}
 
 	// Gets and Sets
+	public void setId_cand(int id_cand) {
+		this.id_cand = id_cand;
+	}
+	
 	public String getNome_cand() {
 		return nome_cand;
 	}

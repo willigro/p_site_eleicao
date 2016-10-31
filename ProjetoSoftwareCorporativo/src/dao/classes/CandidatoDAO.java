@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import classesBasicas.Candidato;
+import classesBasicas.Usuario;
 import dao.DAOGenerico;
 import dao.interfaces.ICandidatoDAO;
 import javassist.bytecode.stackmap.BasicBlock.Catch;
@@ -78,6 +79,12 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 	@Override
 	public void cadastrarCandidato(Candidato candidato) throws Exception {
 		super.insert(candidato);
+	}
+	
+	public boolean retornaNumero(Candidato candidato) {
+		Query query = super.getManager().createQuery("SELECT u FROM Candidato u WHERE Numero_cand = :Numero", Candidato.class);
+		query.setParameter("Numero", candidato.getNumero_cand());
+		return query.getResultList().isEmpty();
 	}
 
 }

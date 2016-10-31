@@ -61,7 +61,12 @@ public class ControllerCandidato {
 
 	public void cadastrarCandidato(Candidato candidato) throws Exception {
 		this.validarCandidato(candidato);
-		this.cadastrarCandidato(candidato);
+		
+		if(candidatoDAO.retornaNumero(candidato) == false){
+			throw new Exception("O numero informado já consta cadastrado.");
+		}else{
+			this.cadastrarCandidato(candidato);
+		}
 	}
 
 	public void removerCandidato(Candidato candidato) throws Exception {

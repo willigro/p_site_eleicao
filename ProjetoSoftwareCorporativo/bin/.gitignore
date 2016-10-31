@@ -1,6 +1,4 @@
-/classesBasicas/
-/config/
-/controller/
+/daoTest/
 /dao/
-/facade/
-/gui_testes/
+/classesBasicas/
+/controller/
