@@ -47,5 +47,21 @@ public class Partido {
 		return id_part;
 	}
 
+	public List<Candidato> getLista_Candidato_part() {
+		return lista_Candidato_part;
+	}
+
+	public void setLista_Candidato_part(List<Candidato> lista_Candidato_part) {
+		this.lista_Candidato_part = lista_Candidato_part;
+	}
+
+	public String getSigla_part() {
+		return sigla_part;
+	}
+
+	public void setSigla_part(String sigla_part) {
+		this.sigla_part = sigla_part;
+	}
+
 	// Methods
 }

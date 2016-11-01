@@ -54,5 +54,29 @@ public class Estado {
 		return id_est;
 	}
 
+	public String getSigla_est() {
+		return sigla_est;
+	}
+
+	public void setSigla_est(String sigla_est) {
+		this.sigla_est = sigla_est;
+	}
+
+	public List<Cidade> getLista_Cidade_est() {
+		return lista_Cidade_est;
+	}
+
+	public void setLista_Cidade_est(List<Cidade> lista_Cidade_est) {
+		this.lista_Cidade_est = lista_Cidade_est;
+	}
+
+	public List<Candidato> getLista_Candidato_est() {
+		return lista_Candidato_est;
+	}
+
+	public void setLista_Candidato_est(List<Candidato> lista_Candidato_est) {
+		this.lista_Candidato_est = lista_Candidato_est;
+	}
+
 	// Methods
 }

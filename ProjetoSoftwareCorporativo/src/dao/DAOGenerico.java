@@ -25,19 +25,19 @@ public class DAOGenerico<Classe> {
 	 * null) throw new ExceptionDAO_TransationNull();
 	 */
 
-	public void insert(Classe classe) throws Exception{		
-		EntityTransaction tx = getManager().getTransaction();		
+	public void insert(Classe classe) throws Exception {
+		EntityTransaction tx = getManager().getTransaction();
 		try {
 			tx.begin();
 			getManager().persist(classe);
 			tx.commit();
 		} catch (PersistenceException e) {
 			tx.rollback();
-			throw new Exception(e.getMessage());			
+			throw new Exception(e.getMessage());
 		} catch (Exception e) {
 			tx.rollback();
 			throw new Exception(e.getMessage());
-		} 
+		}
 	}
 
 	public final Classe update(Classe classe) throws Exception {
@@ -72,6 +72,7 @@ public class DAOGenerico<Classe> {
 		try {
 			instance = (Classe) getManager().getReference(getClassePersistente(), chave);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new Exception(e.getMessage());
 		}
 		return instance;

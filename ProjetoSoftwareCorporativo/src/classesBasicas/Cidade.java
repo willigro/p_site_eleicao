@@ -36,7 +36,7 @@ public class Cidade {
 	@Fetch(FetchMode.JOIN)
 	private Estado estado_cid;
 	
-	@OneToMany(mappedBy="cidade_cand")
+	@OneToMany(mappedBy="cidade_cand", cascade = {CascadeType.ALL})
 	private List<Candidato> lista_Candidato_cid;
 
 	// Constructor
@@ -56,6 +56,22 @@ public class Cidade {
 
 	public int getId_cid() {
 		return id_cid;
+	}
+
+	public Estado getEstado_cid() {
+		return estado_cid;
+	}
+
+	public void setEstado_cid(Estado estado_cid) {
+		this.estado_cid = estado_cid;
+	}
+
+	public List<Candidato> getLista_Candidato_cid() {
+		return lista_Candidato_cid;
+	}
+
+	public void setLista_Candidato_cid(List<Candidato> lista_Candidato_cid) {
+		this.lista_Candidato_cid = lista_Candidato_cid;
 	}	
 
 	// Methods

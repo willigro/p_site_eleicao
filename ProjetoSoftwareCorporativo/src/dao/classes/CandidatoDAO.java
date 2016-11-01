@@ -84,9 +84,10 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 		super.insert(candidato);
 	}
 	
-	public boolean retornaNumero(Candidato candidato) {
-		Query query = super.getManager().createQuery("SELECT u FROM Candidato u WHERE Numero_cand = :Numero", Candidato.class);
+	public boolean retornaNumero(Candidato candidato) throws Exception {
+		Query query = super.getManager().createQuery("SELECT u FROM Candidato u WHERE Numero_cand = :Numero AND id_cid = :Cidade", Candidato.class);
 		query.setParameter("Numero", candidato.getNumero_cand());
+		query.setParameter("Cidade", candidato.getCidade_cand().getId_cid());
 		return query.getResultList().isEmpty();
 	}
 
