@@ -46,6 +46,7 @@ public class CandidatoDAOTest {
 		estado.setLista_Candidato_est(lista);
 		estado.setNome_est("Pernambuco");
 		estado.setSigla_est("PE");
+		
 		lista_Cidadde = new ArrayList<>();
 		lista_Cidadde.add(cidade);
 		estado.setLista_Cidade_est(lista_Cidadde);

@@ -29,8 +29,21 @@
 				<h:outputLabel for="tipoCargo" value="TIPO DO CARGO"></h:outputLabel>
 				<p:inputText id="tipoCargo" value="#{candidatoBean.candidato.tipo_Cargo_cand}"></p:inputText>
 
-				<h:outputLabel for="nomePartido" value="NOME DO POARTIDO"></h:outputLabel>
-				<p:inputMask id="nomePartido" value="#{carroBean.carro.ano}"></p:inputMask>
+				<h:outputLabel for="nomePartido" value="NOME DO PARTIDO"></h:outputLabel>
+				<p:inputText id="nomePartido" value="#{candidatoBean.candidato.partido_cand.nome_part}"></p:inputText>
+				
+				<h:outputLabel for="siglaPartido" value="SIGLA DO PARTIDO"></h:outputLabel>
+				<p:inputText id="siglaPartido" value="#{candidatoBean.candidato.partido_cand.sigla_part}"></p:inputText>
+				
+				<h:outputLabel for="estado" value="ESTADO"></h:outputLabel>
+				<p:inputText id="estado" value="#{candidatoBean.candidato.estado_cand.nome_est}"></p:inputText>
+				
+				<h:outputLabel for="siglaEstado" value="SIGLA DO ESTADO"></h:outputLabel>
+				<p:inputText id="siglaEstado" value="#{candidatoBean.candidato.estado_cand.sigla_est}"></p:inputText>
+				
+				<h:outputLabel for="cidade" value="CIDADE"></h:outputLabel>
+				<p:inputText id="cidade" value="#{candidatoBean.candidato.cidade_cand.nome_cid}"></p:inputText>
+
 			</p:panelGrid>
 		</p:fieldset>
 	</h:form>
