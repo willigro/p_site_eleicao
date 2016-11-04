@@ -1,9 +1,15 @@
 package filters;
+/*
+ * Created by Jaime Nejaim 
+ * 
+ * 
+ */
 
 import java.io.IOException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -22,11 +28,11 @@ public class LoginFilter implements Filter{
 		HttpSession sessao = req.getSession();
 		
 		
-		
-		
+				
 		if(sessao == null || sessao.getAttribute("loginBean") == null 
 		   || (((LoginBean) sessao.getAttribute("loginBean")).getUsuarioLogado()== null)){
-				//	
+			RequestDispatcher dis = request.getRequestDispatcher("/login.html");
+			dis.forward(request, response);
 		} 
 		
 	}

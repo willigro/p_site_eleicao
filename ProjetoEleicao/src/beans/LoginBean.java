@@ -33,13 +33,13 @@ public class LoginBean {
 		return "/login.xhtml/";
 	}
 	
-	public Usuario getUsuarioLogado(){
-		
-		return this.usuario;
-	}
-	
-	public Administrador getAdministradorLogado(){
-		return this.administrador;
+	public Object getUsuarioLogado(){
+		if(usuario != null){
+			return this.usuario;
+		}else if (administrador != null){
+			return this.administrador;
+		}
+		return null;
 	}
 
 
