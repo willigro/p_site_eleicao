@@ -1,5 +1,6 @@
 package controller;
 
+import classesBasicas.Administrador;
 import classesBasicas.Usuario;
 import dao.DAOFactory;
 import dao.classes.UsuarioDAO;
@@ -16,22 +17,30 @@ public class ControllerUsuario {
 		if (usuario.getNome_user().trim().isEmpty()) {
 			throw new Exception("Informe o nome.");
 		} else if (usuario.getNome_user().length() > 50) {
-			throw new Exception("O nome deve conter no máximo 50 caracteres.");
+			throw new Exception("O nome deve conter no mï¿½ximo 50 caracteres.");
 		}
 		if (usuario.getEmail_user().trim().isEmpty()) {
 			throw new Exception("Informe o email.");
 		} else if (usuario.getEmail_user().length() > 30) {
-			throw new Exception("O email deve conter no máximo 30 caracteres.");
+			throw new Exception("O email deve conter no mï¿½ximo 30 caracteres.");
 		}
 		if (usuario.getSenha().trim().isEmpty()) {
 			throw new Exception("Informe uma senha.");
 		} else if (usuario.getSenha().length() < 8) {
-			throw new Exception("A senha deve conter no mínimo oito caracteres.");
+			throw new Exception("A senha deve conter no mï¿½nimo oito caracteres.");
 		}
 		if(usuarioDAO.retornaEmail(usuario) == false){
-			throw new Exception("O email informado já consta cadastrado, faça login.");
+			throw new Exception("O email informado jï¿½ consta cadastrado, faï¿½a login.");
 		}
 		usuarioDAO.cadastrarUsuario(usuario);
 	}
+	
+	
+	public Usuario loginUsuario(Usuario usuario) throws Exception{
+//		validateLoginAdministrador(usuario);
+		return this.usuarioDAO.loginUsuario(usuario);
+
+	}
+
 
 }
