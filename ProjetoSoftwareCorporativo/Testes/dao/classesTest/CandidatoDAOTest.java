@@ -25,19 +25,23 @@ public class CandidatoDAOTest {
 	Cidade cidade;
 	List<Cidade> lista_Cidadde;
 	Partido partido;
+	
 	@Before
 	public void setUp() throws Exception {
 		this.candidato = new Candidato();
 		candidato.setNome_cand("CandidatoTester");
 		candidato.setNumero_cand(13);
 		candidato.setTipo_Cargo_cand("DeputadorTester");
+		
 		partido = new Partido();
 		partido.setNome_part("Analistas Desenvolvedores de Surubas");
 		partido.setSigla_part("ADS");
 		candidato.setPartido_cand(partido);
+		
 		lista = new ArrayList<Candidato>();
 		lista.add(candidato);
 		partido.setLista_Candidato_part(lista);
+		
 		this.estado = new Estado();
 		estado.setLista_Candidato_est(lista);
 		estado.setNome_est("Pernambuco");
@@ -46,6 +50,7 @@ public class CandidatoDAOTest {
 		lista_Cidadde.add(cidade);
 		estado.setLista_Cidade_est(lista_Cidadde);
 		candidato.setEstado_cand(estado);
+		
 		this.cidade = new Cidade();
 		candidato.setCidade_cand(cidade);
 		cidade.setNome_cid("Recife");
