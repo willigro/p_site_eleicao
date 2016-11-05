@@ -12,7 +12,7 @@ import classesBasicas.Usuario;
 import facade.Facade;
 
 
-@ManagedBean(name = "loginBean")
+@ManagedBean(name="loginBean")
 @SessionScoped
 public class LoginBean {
 
