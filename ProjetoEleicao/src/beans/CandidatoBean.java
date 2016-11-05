@@ -22,9 +22,9 @@ public class CandidatoBean {
 	private Partido partido;
 	private List<Cidade> cidades;
 	private List<Candidato> candidatos;
-
-	public void CandiatoBean() {
-		candidato = new Candidato();
+	
+	public CandidatoBean() {
+		this.candidato = new Candidato();
 		fachada = new Facade();
 		estado = new Estado();
 		cidade = new Cidade();
@@ -43,19 +43,28 @@ public class CandidatoBean {
 
 	//Methods
 	public String cadastrar() throws Exception {
-		candidato = new Candidato();
+		try{
+		this.cidade.setId_cid(5);
+		this.estado.setId_est(5);
+		this.partido.setId_part(5);
+//		candidato.getCidade_cand().setId_cid(5);
+//		candidato.getEstado_cand().setId_est(5);
+//		candidato.getPartido_cand().setId_part(5);
 		candidato.setPartido_cand(partido);
-		candidatos.add(candidato);
-		partido.setLista_Candidato_part(candidatos);
-		estado.setLista_Candidato_est(candidatos);
-		cidades.add(cidade);
+//		candidatos.add(candidato);
+//		partido.setLista_Candidato_part(candidatos);
+//		estado.setLista_Candidato_est(candidatos);
+//		cidades.add(cidade);
 		candidato.setEstado_cand(estado);
-		estado.setLista_Cidade_est(cidades);
+//		estado.setLista_Cidade_est(cidades);
 		candidato.setCidade_cand(cidade);
-		cidade.setEstado_cid(estado);
-		
+//		cidade.setEstado_cid(estado);
+//		
 		fachada.cadastrarCandidato(candidato);
-		return "index";
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "Teste";
 	}
 
 	// Getters and Setters

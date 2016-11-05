@@ -27,15 +27,12 @@ public class LoginFilter implements Filter{
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession sessao = req.getSession();
-		
-		
 				
 		if(sessao == null || sessao.getAttribute("loginBean") == null 
 		   || (((LoginBean) sessao.getAttribute("loginBean")).getUsuarioLogado()== null)){
 			RequestDispatcher dis = request.getRequestDispatcher("/login.xhtml");
 			dis.forward(request, response);
-		} 
-		
+		} 	
 	}
 
 	@Override
@@ -49,6 +46,7 @@ public class LoginFilter implements Filter{
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 
 }

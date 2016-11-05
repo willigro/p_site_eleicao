@@ -13,11 +13,13 @@ import classesBasicas.Candidato;
 import classesBasicas.Cidade;
 import classesBasicas.Estado;
 import classesBasicas.Partido;
+import controller.ControllerCandidato;
 import dao.DAOFactory;
 import dao.classes.CandidatoDAO;
 
 public class CandidatoDAOTest {
 
+	ControllerCandidato cc = new ControllerCandidato();
 	CandidatoDAO candiDAO = DAOFactory.getCandidatoDAO();;
 	Candidato candidato;
 	List<Candidato> lista;
@@ -30,7 +32,7 @@ public class CandidatoDAOTest {
 	public void setUp() throws Exception {
 		this.candidato = new Candidato();
 		candidato.setNome_cand("CandidatoTester");
-		candidato.setNumero_cand(13);
+		candidato.setNumero_cand(77777);
 		candidato.setTipo_Cargo_cand("DeputadorTester");
 		
 		partido = new Partido();
@@ -61,7 +63,7 @@ public class CandidatoDAOTest {
 	@Test
 	public void cadastrarCandidatoTest() throws Exception {
 		try {
-			candiDAO.cadastrarCandidato(candidato);
+			this.cc.cadastrarCandidato(candidato);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

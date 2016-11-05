@@ -78,5 +78,9 @@ public class Estado {
 		this.lista_Candidato_est = lista_Candidato_est;
 	}
 
+	public void setId_est(int id_est) {
+		this.id_est = id_est;
+	}
+
 	// Methods
 }

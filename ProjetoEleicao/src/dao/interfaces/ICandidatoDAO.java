@@ -11,5 +11,6 @@ public interface ICandidatoDAO {
 	public void cadastrarCandidato(Candidato candidato) throws Exception;
 	public void removerCandidato(Candidato candidato) throws Exception;
 	public Candidato alterarCandidato(Candidato candidato) throws Exception;
+	public boolean retornaNumero(Candidato candidato) throws Exception;
 	
 }
