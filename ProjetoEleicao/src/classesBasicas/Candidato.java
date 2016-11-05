@@ -27,7 +27,6 @@ public class Candidato {
 	private String nome_cand;
 
 	private Calendar data_Nasc_cand;
-
 	@Column(nullable=false, unique=true)
 	private int numero_cand;
 
@@ -37,15 +36,15 @@ public class Candidato {
 	// Ignorar até decidir a estrategia
 	private String foto_cand;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "id_part")
 	private Partido partido_cand;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "id_cid")
 	private Cidade cidade_cand;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "id_est")
 	private Estado estado_cand;
 

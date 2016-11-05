@@ -31,5 +31,6 @@ public interface IFachada {
 	
 	public List<Comentario> visualizarComentsDenuncia() throws Exception;
 
+	public Usuario loginUsuario(Usuario usuario) throws Exception;
 
 }

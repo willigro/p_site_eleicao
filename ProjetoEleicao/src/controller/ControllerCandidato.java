@@ -13,14 +13,13 @@ public class ControllerCandidato {
 
 	private CandidatoDAO candidatoDAO;
 
-	public void ControllerCanditato() {
+	public ControllerCandidato() {
 		this.candidatoDAO = DAOFactory.getCandidatoDAO();
 	}
 
 	private void validarCandidato(Candidato candidato) throws Exception {
 
 		// Falta: DataNascimeto, FotoCandidato.
-
 		if (candidato.getNome_cand().trim().equals("")) {
 			throw new Exception("O campo Nome está vazio");
 		} else if (candidato.getNome_cand().length() > 50) {
@@ -38,34 +37,16 @@ public class ControllerCandidato {
 		} else if (candidato.getTipo_Cargo_cand().length() > 50) {
 			throw new Exception("O Campo Cargo Elegível não pode conter mais de 50 caracteres");
 		}
-
-		if (candidato.getEstado_cand().getNome_est().trim().equals("")) {
-			throw new Exception("O campo Estado está vazio");
-		} else if (candidato.getEstado_cand().getNome_est().length() > 100) {
-			throw new Exception("O campo Estado não pode conter mais de 100 caracteres");
-		}
-
-		if (candidato.getCidade_cand().getNome_cid().trim().equals("")) {
-			throw new Exception("O campo Cidade está vazio");
-		} else if (candidato.getCidade_cand().getNome_cid().length() > 100) {
-			throw new Exception("O campo Cidade não pode conter mais de 100 caracteres");
-		}
-
-		if (candidato.getPartido_cand().getNome_part().trim().equals("")) {
-			throw new Exception("O campo Partido está vazio");
-		} else if (candidato.getPartido_cand().getNome_part().length() > 40) {
-			throw new Exception("O campo Partido não pode conter mais de 40 caraceteres");
-		}
-
+		//Validar os ID nulos e etc
 	}
 
 	public void cadastrarCandidato(Candidato candidato) throws Exception {
 		this.validarCandidato(candidato);
 		
-		if(candidatoDAO.retornaNumero(candidato) == false){
+		if (candidatoDAO.retornaNumero(candidato) == false) {
 			throw new Exception("O numero informado já consta cadastrado.");
-		}else{
-			this.cadastrarCandidato(candidato);
+		} else {
+		candidatoDAO.cadastrarCandidato(candidato);
 		}
 	}
 

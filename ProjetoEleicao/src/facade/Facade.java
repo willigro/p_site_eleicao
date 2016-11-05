@@ -16,7 +16,7 @@ public class Facade implements IFachada {
 	private ControllerAdministrador controllerAdministrador;
 
 	public Facade() {
-		controlCand = new ControllerCandidato();
+		this.controlCand = new ControllerCandidato();
 		this.controllerUsuario = new ControllerUsuario();
 		this.controllerComentario = new ControllerComentario();
 		this.controllerAvaliacao = new ControllerAvaliacao();
@@ -25,7 +25,7 @@ public class Facade implements IFachada {
 
 	@Override
 	public void cadastrarCandidato(Candidato candidato) throws Exception {
-		controlCand.cadastrarCandidato(candidato);
+		this.controlCand.cadastrarCandidato(candidato);
 	}
 
 	@Override
@@ -60,6 +60,11 @@ public class Facade implements IFachada {
 	public Administrador loginAdministrador(Administrador adminsitrador) throws Exception {
 		return this.controllerAdministrador.loginAdministrador(adminsitrador);
 	}
+	
+	public Usuario loginUsuario(Usuario usuario) throws Exception{
+		return this.controllerUsuario.loginUsuario(usuario);
+	}
+	
 
 	//OK
 	@Override

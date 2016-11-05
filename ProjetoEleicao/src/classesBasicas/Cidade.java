@@ -72,6 +72,10 @@ public class Cidade {
 
 	public void setLista_Candidato_cid(List<Candidato> lista_Candidato_cid) {
 		this.lista_Candidato_cid = lista_Candidato_cid;
+	}
+
+	public void setId_cid(int id_cid) {
+		this.id_cid = id_cid;
 	}	
 
 	// Methods

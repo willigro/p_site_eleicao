@@ -63,5 +63,9 @@ public class Partido {
 		this.sigla_part = sigla_part;
 	}
 
+	public void setId_part(int id_part) {
+		this.id_part = id_part;
+	}
+
 	// Methods
 }
