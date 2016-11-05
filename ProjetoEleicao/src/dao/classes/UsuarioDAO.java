@@ -2,6 +2,7 @@ package dao.classes;
 
 import java.security.MessageDigest;
 
+import classesBasicas.Administrador;
 import classesBasicas.Usuario;
 import dao.DAOGenerico;
 import dao.interfaces.IUsuarioDAO;
@@ -33,6 +34,16 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 	public void cadastrarUsuario(Usuario usuario) throws Exception {
 		usuario.setSenha(criptografarSenha(usuario));
 		super.insert(usuario);
+	}
+	
+	@Override
+	public Usuario loginUsuario(Usuario usuario) throws Exception {
+			
+			Query query = super.getManager().createQuery("SELECT a FROM usuario a WHERE email =:email AND senha=:senha");
+			query.setParameter("email", usuario.getEmail_user());
+			query.setParameter("senha", usuario.getSenha());
+	
+			return (Usuario)query.getSingleResult();
 	}
 
 }
