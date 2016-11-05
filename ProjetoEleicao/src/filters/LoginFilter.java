@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -26,14 +27,23 @@ public class LoginFilter implements Filter{
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession sessao = req.getSession();
-		
-		
 				
 		if(sessao == null || sessao.getAttribute("loginBean") == null 
 		   || (((LoginBean) sessao.getAttribute("loginBean")).getUsuarioLogado()== null)){
 			RequestDispatcher dis = request.getRequestDispatcher("/login.html");
 			dis.forward(request, response);
-		} 
+		} 	
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void init(FilterConfig arg0) throws ServletException {
+		// TODO Auto-generated method stub
 		
 	}
 	

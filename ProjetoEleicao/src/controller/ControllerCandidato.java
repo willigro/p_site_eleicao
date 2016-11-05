@@ -5,16 +5,15 @@ import java.util.List;
 
 import classesBasicas.Candidato;
 import dao.DAOFactory;
-import dao.classes.CandidatoDAO;
 import dao.classes.ExempleDAO;
 import dao.interfaces.ICandidatoDAO;
 
 public class ControllerCandidato {
 
-	private CandidatoDAO candidatoDAO;
+	private ICandidatoDAO iCandidatoDAO;
 
 	public ControllerCandidato() {
-		this.candidatoDAO = DAOFactory.getCandidatoDAO();
+		this.iCandidatoDAO = DAOFactory.getCandidatoDAO();
 	}
 
 	private void validarCandidato(Candidato candidato) throws Exception {
@@ -43,10 +42,10 @@ public class ControllerCandidato {
 	public void cadastrarCandidato(Candidato candidato) throws Exception {
 		this.validarCandidato(candidato);
 		
-		if (candidatoDAO.retornaNumero(candidato) == false) {
+		if (iCandidatoDAO.retornaNumero(candidato) == false) {
 			throw new Exception("O numero informado já consta cadastrado.");
 		} else {
-		candidatoDAO.cadastrarCandidato(candidato);
+			iCandidatoDAO.cadastrarCandidato(candidato);
 		}
 	}
 
@@ -62,7 +61,7 @@ public class ControllerCandidato {
 
 	public List<Candidato> consultarTodosCandidatos() throws Exception {
 		List<Candidato> listCandidato;
-		return listCandidato = this.candidatoDAO.consultarTodosCandidatos();
+		return listCandidato = this.iCandidatoDAO.consultarTodosCandidatos();
 	}
 
 	public List<Candidato> consultarCandidatosFiltrados(Candidato candidato) throws Exception {
@@ -98,7 +97,7 @@ public class ControllerCandidato {
 			throw new Exception("O campo Partido não pode conter mais de 40 caraceteres");
 		}
 
-		return listCandidato = this.candidatoDAO.consultarCandidatosFiltrados(candidato);
+		return listCandidato = this.iCandidatoDAO.consultarCandidatosFiltrados(candidato);
 
 	}
 

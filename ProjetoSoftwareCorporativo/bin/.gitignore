@@ -1,8 +1,6 @@
-/META-INF/
-/classesBasicas/
-/config/
-/controller/
 /dao/
 /daoTest/
 /facade/
 /gui_testes/
+/classesBasicas/
+/controller/
