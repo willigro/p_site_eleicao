@@ -64,7 +64,7 @@ public class CandidatoBean {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "Teste";
+		return "index";
 	}
 
 	// Getters and Setters
