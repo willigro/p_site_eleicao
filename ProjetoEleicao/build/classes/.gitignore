@@ -1,3 +1,5 @@
-/filters/
-/controller/
 /dao/
+/daoTest/
+/facade/
+/filters/
+/gui_testes/
