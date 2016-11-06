@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+    <style type="text/css">
+        form {
+            position: absolute;
+			top: 50%;
+			left: 50%;
+            margin-left: -200px;
+			margin-top: -150px;
+        }
+        button {
+            position: absolute;
+            top: 10px;
+            right: -125px;
+        }
+    </style>
+
+</h:head>
+
+<h:body>
+    <h:form id="loginForm">
+        <p:messages autoUpdate="true" showDetail="true" showSummary="true" />
+        <p:panel header="Login">
+            <h:panelGrid columns="2">
+            	<h:outputLabel value="Administrador"/>
+            	<h:selectBooleanCheckbox id="checkbox" value="#{loginBean.type}"/>
+
+                <h:outputLabel value="E-mail :" />
+                <p:inputText id="input_mail"/>
+
+                <h:outputLabel value="Senha :" />
+                <p:password id="input_password"/>
+
+                <p:commandButton value="Login " action="#{loginBean.efetuarLogin}" />
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+</h:body>
+
+<script type="text/javascript">
+      function switch(id) {
+        var element = document.getElementById("checkbox");
+        var input_user_mail = document.getElementById("input_mail");
+    	var input_user_pass = document.getElementById("input_pass");
+    	var input_admin_mail= document.getElementById("input_mail");
+    	var input_admin_pass = document.getElementById("input_pass");
+    	
+        if(element == 'false') {
+			input_user_mail.value = "#{loginBean.usuario.email_user}";
+			input_user_pass.value = "#{loginBean.usuario.senha}";
+        } else {
+        	input_admin_mail.value = "#{loginBean.administrador.email}";
+			input_admin_pass.value = "#{loginBean.administrador.senha_admin}";
+        }
+      }
+    </script>
+
+</html>

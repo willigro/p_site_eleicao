@@ -61,6 +61,7 @@ public class Facade implements IFachada {
 		return this.controllerAdministrador.loginAdministrador(adminsitrador);
 	}
 	
+	@Override
 	public Usuario loginUsuario(Usuario usuario) throws Exception{
 		return this.controllerUsuario.loginUsuario(usuario);
 	}
