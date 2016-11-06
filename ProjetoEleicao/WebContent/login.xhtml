@@ -29,11 +29,11 @@
             	<h:outputLabel value="Administrador"/>
             	<h:selectBooleanCheckbox id="checkbox" value="#{loginBean.type}"/>
 
-                <h:outputLabel value="E-mail :" />
-                <p:inputText id="input_mail"/>
+                
+                <p:inputText id="input_mail" placeholder="Seu e-mail"/>
 
-                <h:outputLabel value="Senha :" />
-                <p:password id="input_password"/>
+                
+                <p:password id="input_password" placeholder="Senha"/>
 
                 <p:commandButton value="Login " action="#{loginBean.efetuarLogin}" />
             </h:panelGrid>
@@ -52,9 +52,11 @@
         if(element == 'false') {
 			input_user_mail.value = "#{loginBean.usuario.email_user}";
 			input_user_pass.value = "#{loginBean.usuario.senha}";
+		
         } else {
         	input_admin_mail.value = "#{loginBean.administrador.email}";
 			input_admin_pass.value = "#{loginBean.administrador.senha_admin}";
+			
         }
       }
     </script>

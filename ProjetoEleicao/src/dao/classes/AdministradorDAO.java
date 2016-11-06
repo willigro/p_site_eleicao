@@ -20,21 +20,15 @@ import classesBasicas.Usuario;
 
 public class AdministradorDAO extends DAOGenerico<Administrador> implements IAdministradorDAO{
 
-	
-private EntityManager em;
-	
-	/*public AdministradorDAO(){
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("testePSC");
-		em = emf.createEntityManager();
-	}*/
+
 	
 	@Override
 	public Administrador loginAdministrador(Administrador administrador) throws Exception {
 			
-			Query query = em.createQuery("SELECT a FROM administrador a WHERE email =:email AND senha=:senha");
-			query.setParameter("email", administrador.getEmail());
-			query.setParameter("senha", administrador.getId_admin());
-			
+			Query query = super.getManager().createQuery("SELECT a FROM tb_administrador a WHERE email =:Email AND senha_admin=:Senha_admin", Administrador.class);
+			query.setParameter("Email", administrador.getEmail());
+			query.setParameter("Senha_admin", administrador.getSenha_admin());
+			System.out.println(query);
 			
 			return (Administrador)query.getSingleResult();
 	}
@@ -47,7 +41,7 @@ private EntityManager em;
 
 	@Override
 	public boolean verificarIdExistenteAdministrador(int id) throws Exception {
-		Query query = em.createQuery("SELECT a FROM administrador a WHERE id_admin =:id");
+		Query query = super.getManager().createQuery("SELECT a FROM tb_administrador a WHERE id_admin =:id");
 		query.setParameter("id", id);
 		
 		if((int)query.getSingleResult() == 1){
@@ -75,7 +69,7 @@ private EntityManager em;
 	}
 	
 	public boolean verificarPunicaoUsuario(Usuario usuario){
-		Query query = em.createQuery("SELECT a FROM usuario a WHERE id_user =:id");
+		Query query = super.getManager().createQuery("SELECT a FROM usuario a WHERE id_user =:id");
 		query.setParameter("id", usuario.getId_user());
 
 		Usuario userQuery = (Usuario)query;
@@ -88,7 +82,7 @@ private EntityManager em;
 	
 	@Override
 	public Comentario verificarComentarioPorID(Comentario comentario){
-		Query query = em.createQuery("SELECT c FROM comentario c WHERE id_coment =:id");
+		Query query = super.getManager().createQuery("SELECT c FROM comentario c WHERE id_coment =:id");
 		query.setParameter("id", comentario.getId_coment());
 		
 		return (Comentario)query;
