@@ -31,7 +31,7 @@ public class ControllerAdministrador{
 	
 
 	public Administrador loginAdministrador(Administrador administrador) throws Exception{
-		validateLoginAdministrador(administrador);
+		//validateLoginAdministrador(administrador);
 		return this.administradorDAO.loginAdministrador(administrador);
 
 	}
@@ -45,7 +45,7 @@ public class ControllerAdministrador{
 							
 
 						}else{
-							throw new Exception("e-mail inválido");	
+							throw new Exception("e-mail invï¿½lido");	
 						}
 					}else{
 						throw new Exception("e-mail vazio");	
@@ -69,7 +69,7 @@ public class ControllerAdministrador{
 				throw new Exception("e-mail acima do limite de caracteres");
 			}
 			if(isValidEmailAddress(administrador.getEmail())){
-				throw new Exception("e-mail inválido");
+				throw new Exception("e-mail invï¿½lido");
 			}
 			if(!administrador.getSenha_admin().trim().isEmpty()){
 				throw new Exception("senha vazia");
@@ -83,7 +83,7 @@ public class ControllerAdministrador{
 		
 	}
 	
-	//Método para validar e-mail
+	//Mï¿½todo para validar e-mail
 	public static boolean isValidEmailAddress(String email) throws Exception{
 		boolean result = true;
 		try {
@@ -120,20 +120,20 @@ public class ControllerAdministrador{
 						if(comentario.getUsuario_coment() != null){
 							if(comentario.getUsuario_coment().isAtivo_user() == false){
 								if(!verificarPunicaoUsuario(comentario.getUsuario_coment())){
-									throw new Exception("Este usuário encontra-se punido");
+									throw new Exception("Este usuï¿½rio encontra-se punido");
 								}
 							}else{
 								throw new Exception("");
 							}
 						}else{
-//							throw new Exception("usuário null");
+//							throw new Exception("usuï¿½rio null");
 						}
 					}else{
 //						throw new Exception("comentario null");						
 					}
 				}
 			}else{
-				throw new Exception("Nenhum comentário existente");	
+				throw new Exception("Nenhum comentï¿½rio existente");	
 			}
 
 		}else{
