@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import beans.LoginBean;
 
-@WebFilter({"/admin/*.xhtml", "/usr/*.xhtml"})
+@WebFilter("/admin/*")
 public class LoginFilter implements Filter{
 
 	@Override
@@ -30,7 +30,7 @@ public class LoginFilter implements Filter{
 				
 		if(sessao == null || sessao.getAttribute("loginBean") == null 
 		   || (((LoginBean) sessao.getAttribute("loginBean")).getUsuarioLogado()== null)){
-			RequestDispatcher dis = request.getRequestDispatcher("/login.html");
+			RequestDispatcher dis = request.getRequestDispatcher("/login.xhtml");
 			dis.forward(request, response);
 		} 	
 	}
@@ -46,6 +46,7 @@ public class LoginFilter implements Filter{
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 
 }
