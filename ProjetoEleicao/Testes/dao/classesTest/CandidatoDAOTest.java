@@ -32,7 +32,7 @@ public class CandidatoDAOTest {
 	public void setUp() throws Exception {
 		this.candidato = new Candidato();
 		candidato.setNome_cand("CandidatoTester");
-		candidato.setNumero_cand(77777);
+		candidato.setNumero_cand(98989);
 		candidato.setTipo_Cargo_cand("DeputadorTester");
 		
 		partido = new Partido();
@@ -70,8 +70,20 @@ public class CandidatoDAOTest {
 		}
 	}
 	
+	@Test
+	@Ignore
+	public void removerCandidatoTest() throws Exception {
+		try{
+			this.cc.removerCandidato(candidato);
+		}catch(Exception e){
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
 	// O método retorna verdadeiro se o número passado não existir no banco.
 	@Test
+	@Ignore
 	public void retornaNumeroTest() throws Exception {
 		try {
 			assertEquals(true, this.candiDAO.retornaNumero(candidato));
@@ -82,6 +94,7 @@ public class CandidatoDAOTest {
 	}
 	
 	@Test
+	@Ignore
 	public void consultarCandidatoTodosTeste(){
 		try{
 		lista = new ArrayList<>();
@@ -93,6 +106,7 @@ public class CandidatoDAOTest {
 	}
 	
 	@Test
+	@Ignore
 	public void consultarCandidatoTodosQuantidadeTeste(){
 		try{			
 			lista = new ArrayList<>();

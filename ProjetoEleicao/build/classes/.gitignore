@@ -1,8 +1,19 @@
+<<<<<<< HEAD
+=======
+/META-INF/
+/beans/
+/classesBasicas/
+/config/
+/controller/
+>>>>>>> b33bc01ee79a319f2c0df92f25d343f934d3a771
 /dao/
 /daoTest/
 /facade/
 /filters/
 /gui_testes/
+<<<<<<< HEAD
 /beans/
 /META-INF/
 /controller/
+=======
+>>>>>>> b33bc01ee79a319f2c0df92f25d343f934d3a771
