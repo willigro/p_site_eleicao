@@ -81,7 +81,7 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 
 	@Override
 	public void cadastrarCandidato(Candidato candidato) throws Exception {
-		super.insert(candidato);
+		super.insert(candidato);		
 	}
 
 	public boolean retornaNumero(Candidato candidato) throws Exception {

@@ -26,14 +26,20 @@ public class DAOGenerico<Classe> {
 	 */
 
 	public void insert(Classe classe) throws Exception {
-		EntityTransaction tx = getManager().getTransaction();
+		EntityTransaction tx = null;
+		if (getManager() != null) {
+			tx = getManager().getTransaction();
+		} else {
+			throw new Exception("manager null");
+		}
 		try {
 			tx.begin();
 			getManager().persist(classe);
 			tx.commit();
 		} catch (PersistenceException e) {
+			e.printStackTrace();
 			tx.rollback();
-			throw new Exception(e.getMessage());
+			throw new Exception(e.getMessage());			
 		} catch (Exception e) {
 			tx.rollback();
 			throw new Exception(e.getMessage());

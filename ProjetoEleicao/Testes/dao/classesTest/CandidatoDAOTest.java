@@ -13,21 +13,30 @@ import classesBasicas.Candidato;
 import classesBasicas.Cidade;
 import classesBasicas.Estado;
 import classesBasicas.Partido;
+import classesBasicas.Projeto;
 import controller.ControllerCandidato;
+import controller.ControllerProjeto;
 import dao.DAOFactory;
 import dao.classes.CandidatoDAO;
+import dao.classes.ProjetoDAO;
+import facade.Facade;
 
 public class CandidatoDAOTest {
 
 	ControllerCandidato cc = new ControllerCandidato();
-	CandidatoDAO candiDAO = DAOFactory.getCandidatoDAO();;
+	CandidatoDAO candiDAO = DAOFactory.getCandidatoDAO();
+	Facade facade = new Facade();
 	Candidato candidato;
 	List<Candidato> lista;
 	Estado estado;
 	Cidade cidade;
 	List<Cidade> lista_Cidadde;
 	Partido partido;
-	
+	Projeto projeto = new Projeto();
+	ProjetoDAO projetoDAO = DAOFactory.getProjetoDAO();
+	List<Projeto> lista_projeto = new ArrayList<>();
+	ControllerProjeto controllerProjeto = new ControllerProjeto();
+		
 	@Before
 	public void setUp() throws Exception {
 		this.candidato = new Candidato();
@@ -61,6 +70,7 @@ public class CandidatoDAOTest {
 	}
 	
 	@Test
+	@Ignore
 	public void cadastrarCandidatoTest() throws Exception {
 		try {
 			this.cc.cadastrarCandidato(candidato);
@@ -95,19 +105,46 @@ public class CandidatoDAOTest {
 	
 	@Test
 	@Ignore
-	public void consultarCandidatoTodosTeste(){
+	public void consultarCandidatoTodos(){
 		try{
 		lista = new ArrayList<>();
 		lista = candiDAO.consultarTodosCandidatos();
-		Assert.assertEquals("CandidatoTester", lista.get(0).getNome_cand());
+		Assert.assertEquals("CandidatoTester", lista.get(2).getNome_cand());
 		}catch (Exception e) {
 			e.printStackTrace();
+			fail();
 		}
 	}
 	
 	@Test
 	@Ignore
-	public void consultarCandidatoTodosQuantidadeTeste(){
+	public void consultarCandidatoTodosController(){
+		try{
+			lista = new ArrayList<>();
+			lista = cc.consultarTodosCandidatos();
+			assertEquals("CandidatoTester", lista.get(2).getNome_cand());
+		}catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+	@Test
+	@Ignore
+	public void selectAllCandidateFacade(){
+		try{
+			lista = new ArrayList<>();
+			lista = facade.consultarTodosCandidatos();
+			assertEquals("CandidatoTester", lista.get(2).getNome_cand());
+		}catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+	@Test
+	@Ignore
+	public void consultarCandidatoTodosQuantidade(){
 		try{			
 			lista = new ArrayList<>();
 			lista = candiDAO.consultarTodosCandidatos();
@@ -130,5 +167,39 @@ public class CandidatoDAOTest {
 		}
 	}
 
+	@Test
+	@Ignore
+	public void consultarTodosProjetos(){
+		try{
+			lista_projeto = projetoDAO.consultarTodosProjetos();
+			assertEquals("ProjetoTeste", lista_projeto.get(0).getTitulo_proj());
+		}catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+	@Test
+	@Ignore
+	public void consultarTodosProjetosController(){
+		try{
+			lista_projeto = controllerProjeto.consultarTodosProjetos();
+			assertEquals("ProjetoTeste", lista_projeto.get(0).getTitulo_proj());
+		}catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
+	@Test
+	public void consultarTodosProjetosFachada(){
+		try{
+			lista_projeto = facade.consultarTodosProjetos();
+			assertEquals("ProjetoTeste", lista_projeto.get(0).getTitulo_proj());
+		}catch (Exception e) {
+			System.out.println(e.getMessage());		
+			e.printStackTrace();
+			fail();
+		}
+	}
 }

@@ -66,6 +66,8 @@ public class CandidatoBean {
 		}
 		return "index";
 	}
+	
+	
 
 	// Getters and Setters
 	public Candidato getCandidato() {
