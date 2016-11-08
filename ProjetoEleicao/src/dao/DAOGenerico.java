@@ -60,14 +60,15 @@ public class DAOGenerico<Classe> {
 	}
 
 	public final void delete(Classe classe) throws Exception {
+		EntityTransaction tx = null;
 		try {
-			EntityTransaction tx = getManager().getTransaction();
+			tx = getManager().getTransaction();
 			tx.begin();
 			classe = getManager().merge(classe);
 			getManager().remove(classe);
 			tx.commit();
-
 		} catch (Exception e) {
+			tx.rollback();
 			throw new Exception(e.getMessage());
 		}
 
