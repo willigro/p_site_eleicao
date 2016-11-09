@@ -42,11 +42,23 @@ public class CandidatoBean {
 	}
 
 	//Methods
+	public String pagRemover() throws Exception{
+		return "removerCandidato";
+	}
+	
+	public String pagCadastrar() throws Exception{
+		return "cadastrarCandidato";
+	}
+	
+	public String remover() throws Exception {
+		return "removerCandidato";
+	}
+	
 	public String cadastrar() throws Exception {
 		try{
-		this.cidade.setId_cid(5);
-		this.estado.setId_est(5);
-		this.partido.setId_part(5);
+		this.cidade.setId_cid(1);
+		this.estado.setId_est(1);
+		this.partido.setId_part(13);
 //		candidato.getCidade_cand().setId_cid(5);
 //		candidato.getEstado_cand().setId_est(5);
 //		candidato.getPartido_cand().setId_part(5);
@@ -64,7 +76,7 @@ public class CandidatoBean {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "index";
+		return "removerCandidato";
 	}
 	
 	

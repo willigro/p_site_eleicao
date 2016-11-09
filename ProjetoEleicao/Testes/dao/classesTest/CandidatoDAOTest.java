@@ -59,6 +59,7 @@ public class CandidatoDAOTest {
 		candidato.setEstado_cand(estado);
 		candidato.setCidade_cand(cidade);
 
+		//candidato.setId_cand(16); //pra remover
 		candidato.setNome_cand("GlauberTest");
 		candidato.setNumero_cand(12345);
 		candidato.setTipo_Cargo_cand("DeputadorTester");
@@ -92,6 +93,16 @@ public class CandidatoDAOTest {
 	@After
 	public void limparObjeto() throws Exception {
 		candidato = null;
+	}
+
+	@Test
+	public void removerCandidatoTest() throws Exception {
+		try {
+			this.cc.removerCandidato(candidato);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
 	}
 
 	@Test
@@ -146,6 +157,7 @@ public class CandidatoDAOTest {
 	}
 
 	@Test
+	@Ignore
 	public void selectAllCandidateFacade() {
 		try {
 			lista = new ArrayList<>();
