@@ -12,20 +12,17 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 
 	private String criptografarSenha(Usuario usuario) throws Exception {
 		StringBuilder senhaCriptografada = new StringBuilder();
-		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			byte[] vetorBytes = md.digest(usuario.getSenha().getBytes("UTF8"));
-			for (byte b : vetorBytes) {
-				senhaCriptografada.append(String.format("%02X", 0xFF & b));
-			}
-		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		byte[] vetorBytes = md.digest(usuario.getSenha().getBytes("UTF8"));
+		for (byte b : vetorBytes) {
+			senhaCriptografada.append(String.format("%02X", 0xFF & b));
 		}
 		return senhaCriptografada.toString();
 	}
 
 	public boolean retornaEmail(Usuario usuario) {
-		Query query = super.getManager().createQuery("SELECT u FROM Usuario u WHERE email_user = :Email", Usuario.class);
+		Query query = super.getManager().createQuery("SELECT u FROM Usuario u WHERE email_user = :Email",
+				Usuario.class);
 		query.setParameter("Email", usuario.getEmail_user());
 		return query.getResultList().isEmpty();
 	}
@@ -35,15 +32,15 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 		usuario.setSenha(criptografarSenha(usuario));
 		super.insert(usuario);
 	}
-	
+
 	@Override
 	public Usuario loginUsuario(Usuario usuario) throws Exception {
-			
-			Query query = super.getManager().createQuery("SELECT a FROM usuario a WHERE email =:email AND senha=:senha");
-			query.setParameter("email", usuario.getEmail_user());
-			query.setParameter("senha", usuario.getSenha());
-	
-			return (Usuario)query.getSingleResult();
+
+		Query query = super.getManager().createQuery("SELECT a FROM usuario a WHERE email =:email AND senha=:senha");
+		query.setParameter("email", usuario.getEmail_user());
+		query.setParameter("senha", usuario.getSenha());
+
+		return (Usuario) query.getSingleResult();
 	}
 
 }
