@@ -3,6 +3,7 @@ package dao.classes;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import classesBasicas.Candidato;
@@ -71,7 +72,18 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 
 	@Override
 	public void removerCandidato(Candidato candidato) throws Exception {
-		super.delete(candidato);
+		EntityTransaction tx = null;
+		try{
+		tx = getManager().getTransaction();
+		tx.begin();
+		Query query = getManager().createQuery("delete Candidato where id_cand = :id");
+		query.setParameter("id", candidato.getId_cand());
+		query.executeUpdate();
+		tx.commit();
+		}catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -85,11 +97,10 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 	}
 
 	public boolean retornaNumero(Candidato candidato) throws Exception {
-			Query query = super.getManager().createQuery(
-					"SELECT u FROM Candidato u WHERE Numero_cand = :Numero AND id_cid = :Cidade", Candidato.class);
-			query.setParameter("Numero", candidato.getNumero_cand());
-			query.setParameter("Cidade", candidato.getCidade_cand().getId_cid());
-			return query.getResultList().isEmpty();	
-		}
+		Query query = super.getManager().createQuery(
+				"SELECT u FROM Candidato u WHERE Numero_cand = :Numero AND id_cid = :Cidade", Candidato.class);
+		query.setParameter("Numero", candidato.getNumero_cand());
+		query.setParameter("Cidade", candidato.getCidade_cand().getId_cid());
+		return query.getResultList().isEmpty();
+	}
 }
-

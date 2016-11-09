@@ -40,6 +40,7 @@ public class DAOGenerico<Classe> {
 			getManager().persist(classe);
 			tx.commit();
 		} catch (PersistenceException e) {
+			e.printStackTrace();
 			tx.rollback();
 			throw new Exception();
 		} catch (Exception e) {
@@ -50,12 +51,12 @@ public class DAOGenerico<Classe> {
 
 	public final Classe update(Classe classe) throws Exception {
 		EntityTransaction tx = null;
-		try{
+		try {
 			tx = getManager().getTransaction();
 			tx.begin();
 			classe = getManager().merge(classe);
-			tx.commit();	
-		}catch(Exception e){
+			tx.commit();
+		} catch (Exception e) {
 			tx.rollback();
 			throw new Exception();
 		}
@@ -63,11 +64,17 @@ public class DAOGenerico<Classe> {
 	}
 
 	public final void delete(Classe classe) throws Exception {
-		EntityTransaction tx = getManager().getTransaction();
-		tx.begin();
-		classe = getManager().merge(classe);
-		getManager().remove(classe);
-		tx.commit();
+		EntityTransaction tx = null;
+		try {
+			tx = getManager().getTransaction();
+			tx.begin();
+			classe = getManager().merge(classe);
+			getManager().remove(classe);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			throw new Exception();
+		}
 	}
 
 	public final Classe select(Serializable chave) throws Exception {

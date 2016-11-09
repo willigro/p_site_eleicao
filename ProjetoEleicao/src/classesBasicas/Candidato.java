@@ -27,7 +27,8 @@ public class Candidato {
 	private String nome_cand;
 
 	private Calendar data_Nasc_cand;
-	@Column(nullable=false, unique=true)
+	
+	@Column(nullable=false)
 	private int numero_cand;
 
 	@Column(nullable = false, length = 50)

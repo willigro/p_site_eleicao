@@ -16,9 +16,17 @@ public class ControllerCandidato {
 		this.iCandidatoDAO = DAOFactory.getCandidatoDAO();
 	}
 
+	public boolean validarController() throws Exception {
+		if (iCandidatoDAO != null)
+			return true;
+		else
+			throw new Exception("iCandidatoDAO null");
+	}
+
 	private void validarCandidato(Candidato candidato) throws Exception {
 
-		// Falta: DataNascimeto, FotoCandidato.
+		// Falta: DataNascimeto, FotoCandidato, Validar os ID nulos e etc.
+
 		if (candidato.getNome_cand().trim().equals("")) {
 			throw new Exception("O campo Nome está vazio");
 		} else if (candidato.getNome_cand().length() > 50) {
@@ -36,12 +44,12 @@ public class ControllerCandidato {
 		} else if (candidato.getTipo_Cargo_cand().length() > 50) {
 			throw new Exception("O Campo Cargo Elegível não pode conter mais de 50 caracteres");
 		}
-		//Validar os ID nulos e etc
+
 	}
 
 	public void cadastrarCandidato(Candidato candidato) throws Exception {
 		this.validarCandidato(candidato);
-		
+
 		if (iCandidatoDAO.retornaNumero(candidato) == false) {
 			throw new Exception("O numero informado já consta cadastrado.");
 		} else {
@@ -50,27 +58,30 @@ public class ControllerCandidato {
 	}
 
 	public void removerCandidato(Candidato candidato) throws Exception {
-		this.removerCandidato(candidato);
+		this.iCandidatoDAO.removerCandidato(candidato);
 	}
 
 	public Candidato alterarCandidato(Candidato candidato) throws Exception {
 		this.validarCandidato(candidato);
-		this.alterarCandidato(candidato);
+		this.iCandidatoDAO.alterarCandidato(candidato);
 		return candidato;
 	}
 
 	public List<Candidato> consultarTodosCandidatos() throws Exception {
 		List<Candidato> listCandidato;
-		return listCandidato = this.iCandidatoDAO.consultarTodosCandidatos();
+		if (validarController())
+			return listCandidato = this.iCandidatoDAO.consultarTodosCandidatos();
+		else
+			return null;
 	}
 
 	public List<Candidato> consultarCandidatosFiltrados(Candidato candidato) throws Exception {
 		List<Candidato> listCandidato;
-		
-		if(candidato.getId_cand() < 0){
+
+		if (candidato.getId_cand() < 0) {
 			throw new Exception("ID do candidato inválido");
 		}
-		
+
 		if (candidato.getNome_cand().trim().length() > 50) {
 			throw new Exception("O nome do candidato não pode conter mais de 50 caracteres");
 		}

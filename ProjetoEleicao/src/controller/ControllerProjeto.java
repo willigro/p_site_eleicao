@@ -16,6 +16,13 @@ public class ControllerProjeto {
 		iProjetoDAO = DAOFactory.getProjetoDAO();
 	}
 	
+	public boolean validarController() throws Exception {
+		if (iProjetoDAO != null)
+			return true;
+		else
+			throw new Exception("iProjetoDAO null");
+	}
+	
 	public List<Projeto> consultarTodosProjetos() throws Exception{
 		return iProjetoDAO.consultarTodosProjetos();
 	}

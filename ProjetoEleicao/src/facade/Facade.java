@@ -14,6 +14,7 @@ public class Facade implements IFachada {
 	private ControllerComentario controllerComentario;
 	private ControllerAvaliacao controllerAvaliacao;
 	private ControllerAdministrador controllerAdministrador;
+	private ControllerProjeto controllerProjeto;
 
 	public Facade() {
 		this.controlCand = new ControllerCandidato();
@@ -21,6 +22,14 @@ public class Facade implements IFachada {
 		this.controllerComentario = new ControllerComentario();
 		this.controllerAvaliacao = new ControllerAvaliacao();
 		this.controllerAdministrador = new ControllerAdministrador();
+		this.controllerProjeto = new ControllerProjeto();
+	}
+
+	public boolean validaControl(Object controlador) throws Exception {		
+		if (controlador != null)
+			return true;
+		else
+			throw new Exception("Controller null");
 	}
 
 	@Override
@@ -32,8 +41,6 @@ public class Facade implements IFachada {
 	public void cadastrarUsuario(Usuario usuario) throws Exception {
 			this.controllerUsuario.cadastrarUsuario(usuario);
 	}
-	
-	
 
 	@Override
 	public void inserirComentarioCandidato(Comentario comentario) throws Exception {
@@ -50,24 +57,23 @@ public class Facade implements IFachada {
 		this.controllerAvaliacao.inserirAvaliacaoCandidato(avaliacao);
 	}
 
-
-	//OK
+	// OK
 	@Override
 	public Administrador loginAdministrador(Administrador adminsitrador) throws Exception {
 		return this.controllerAdministrador.loginAdministrador(adminsitrador);
 	}
-	
+
 	@Override
-	public Usuario loginUsuario(Usuario usuario) throws Exception{
+	public Usuario loginUsuario(Usuario usuario) throws Exception {
 		return this.controllerUsuario.loginUsuario(usuario);
 	}
-	
 
-	//OK
+	// OK
 	@Override
 	public boolean punirUsuario(Administrador administrador) throws Exception {
 		return this.controllerAdministrador.punirUsuario(administrador);
 	}
+
 	@Override
 	public void removerCandidato(Candidato candidato) throws Exception {
 		this.controlCand.removerCandidato(candidato);
@@ -81,5 +87,21 @@ public class Facade implements IFachada {
 	@Override
 	public List<Comentario> visualizarComentsDenuncia() throws Exception {
 		return this.controllerComentario.visualizarComentsDenuncia();
+	}
+
+	@Override
+	public List<Candidato> consultarTodosCandidatos() throws Exception {
+		if (validaControl(this.controlCand))
+			return this.controlCand.consultarTodosCandidatos();
+		else
+			return null;
+	}
+
+	@Override
+	public List<Projeto> consultarTodosProjetos() throws Exception {
+		if (validaControl(this.controllerProjeto))
+			return this.controllerProjeto.consultarTodosProjetos();
+		else
+			return null;
 	}
 }
