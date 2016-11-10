@@ -23,7 +23,7 @@
 				<p:inputMask id="numero" mask="99999" value="#{candidatoBean.candidato.numero_cand}"></p:inputMask>
 				
 				<h:outputLabel for="cidade" value="CIDADE"></h:outputLabel>
-				<p:inputText id="cidade" value="#{candidatoBean.candidato.numero_cand}"></p:inputText>
+				<p:inputText id="cidade" value="#{candidatoBean.candidato.cidade_cand.nome_cid}"></p:inputText>
 			</p:panelGrid>
 			<br />
 			<p:commandButton value="Remover" action="#{candidatoBean.remover()}" update="@form"></p:commandButton>

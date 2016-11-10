@@ -59,7 +59,7 @@ public class CandidatoDAOTest {
 		candidato.setEstado_cand(estado);
 		candidato.setCidade_cand(cidade);
 
-		//candidato.setId_cand(16); //pra remover
+		// candidato.setId_cand(16); //pra remover
 		candidato.setNome_cand("GlauberTest");
 		candidato.setNumero_cand(12345);
 		candidato.setTipo_Cargo_cand("DeputadorTester");
@@ -96,6 +96,7 @@ public class CandidatoDAOTest {
 	}
 
 	@Test
+	@Ignore
 	public void removerCandidatoTest() throws Exception {
 		try {
 			this.cc.removerCandidato(candidato);
@@ -182,15 +183,18 @@ public class CandidatoDAOTest {
 	}
 
 	@Test
-	@Ignore
 	public void consultarCandidatoFiltradosTeste() {
 		try {
-			// candidato.setNome_cand("CandidatoTester");
+			candidato = new Candidato();
+			candidato.setNome_cand("GlauberTest");
+			//candidato.getCidade_cand().setId_cid(1);
 			lista = new ArrayList<>();
 			lista = candiDAO.consultarCandidatosFiltrados(candidato);
-			assertEquals("CandidatoTester", lista.get(0));
+			assertEquals("GlauberTes", lista.get(0).getNome_cand());
+			//assertEquals(4, lista.get(0).getCidade_cand().getId_cid());
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail();
 		}
 	}
 
