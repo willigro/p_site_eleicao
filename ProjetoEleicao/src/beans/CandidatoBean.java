@@ -67,7 +67,14 @@ public class CandidatoBean {
 		return "index";
 	}
 	
-	
+	public void consultarTodosCandidatos(){
+		try {
+			candidatos = fachada.consultarTodosCandidatos();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	// Getters and Setters
 	public Candidato getCandidato() {

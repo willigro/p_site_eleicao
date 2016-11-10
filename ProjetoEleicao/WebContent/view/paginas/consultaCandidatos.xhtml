@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
@@ -10,8 +11,33 @@
 	<title>Tela de Consulta do Candidato</title>
 </h:head>
 <h:body>
-	<f:view>
-		
+	<f:view>	
+		<p:commandButton id="cmd" value="Pesquisar"
+			action="#{candidatoBean.consultarTodosCandidatos()}"
+			update=":formPesquisa"></p:commandButton>
+		<h:form id="formPesquisa">
+			<p:dataGrid columns="3" value="#{candidatoBean.candidatos}"
+				var="cand">
+				<!-- <c:forEach items="#{candidatoBean.candidatos}" var="cand"> -->
+				<div class="ui-md">
+					<div class="ui-md-6">
+						<p:panel>
+							<h:panelGrid>
+								<f:facet name="header">
+									<p:graphicImage value="../img/test.jpg"/>
+									grafficimage size panel							
+								</f:facet>												
+								<h:outputText value="#{cand.tipo_Cargo_cand}"></h:outputText>
+								<h:outputText value="#{cand.numero_cand}"></h:outputText>
+								<h:outputText value="#{cand.partido_cand.sigla_part}"></h:outputText>
+								<p:commandButton id="bAvaliar" icon="fa-bell"></p:commandButton>
+							</h:panelGrid>
+						</p:panel>
+					</div>
+				</div>
+				<!-- </c:forEach> -->
+			</p:dataGrid>
+		</h:form>
 	</f:view>
 </h:body>
 </html>
