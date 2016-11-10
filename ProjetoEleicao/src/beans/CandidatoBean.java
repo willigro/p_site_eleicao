@@ -5,11 +5,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
-
 import classesBasicas.Candidato;
 import classesBasicas.Cidade;
 import classesBasicas.Estado;
@@ -83,7 +81,16 @@ public class CandidatoBean {
 		}
 		return "removerCandidato";
 	}
-	
+
+	public void consultarTodosCandidatos() {
+		try {
+			candidatos = fachada.consultarTodosCandidatos();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	// Getters and Setters
 	public Candidato getCandidato() {
 		return candidato;
@@ -124,5 +131,4 @@ public class CandidatoBean {
 	public void setCandidatos(List<Candidato> candidatos) {
 		this.candidatos = candidatos;
 	}
-
 }

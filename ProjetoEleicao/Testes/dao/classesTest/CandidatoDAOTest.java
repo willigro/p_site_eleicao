@@ -186,12 +186,16 @@ public class CandidatoDAOTest {
 	public void consultarCandidatoFiltradosTeste() {
 		try {
 			candidato = new Candidato();
-			candidato.setNome_cand("GlauberTest");
-			//candidato.getCidade_cand().setId_cid(1);
+			//candidato.setNome_cand("Cand");
+			//candidato.getPartido_cand().setId_part(5);
+			//candidato.getCidade_cand().setId_cid(5);	
+			//candidato.getCidade_cand().setNome_cid("teste");
+			//candidato.getEstado_cand().setId_est(5);
+			//candidato.setTipo_Cargo_cand("teste");
 			lista = new ArrayList<>();
 			lista = candiDAO.consultarCandidatosFiltrados(candidato);
-			assertEquals("GlauberTes", lista.get(0).getNome_cand());
-			//assertEquals(4, lista.get(0).getCidade_cand().getId_cid());
+			//assertEquals("Cand", lista.get(0).getNome_cand());
+			assertEquals(1, lista.get(0).getCidade_cand().getId_cid());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
