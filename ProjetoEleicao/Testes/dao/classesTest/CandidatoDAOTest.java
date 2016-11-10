@@ -21,6 +21,8 @@ import dao.DAOFactory;
 import dao.classes.CandidatoDAO;
 import dao.classes.ProjetoDAO;
 import facade.Facade;
+import classesBasicas.Usuario;
+import dao.classes.UsuarioDAO;
 
 public class CandidatoDAOTest {
 
@@ -50,45 +52,58 @@ public class CandidatoDAOTest {
 		cidades = new ArrayList<>();
 		candidatos = new ArrayList<>();
 
-		this.cidade.setId_cid(10);
-		this.estado.setId_est(10);
-		this.partido.setId_part(10);
+		this.cidade.setId_cid(1);
+		this.estado.setId_est(1);
+		this.partido.setId_part(13);
 		candidato.setPartido_cand(partido);
 		candidato.setEstado_cand(estado);
 		candidato.setCidade_cand(cidade);
 
+		// candidato.setId_cand(16); //pra remover
 		candidato.setNome_cand("GlauberTest");
-		candidato.setNumero_cand(99992);
+		candidato.setNumero_cand(12345);
 		candidato.setTipo_Cargo_cand("DeputadorTester");
-	
-		/*
-		 * partido = new Partido();
-		 * partido.setNome_part("Analistas Desenvolvedores de Surubas");
-		 * partido.setSigla_part("ADS"); candidato.setPartido_cand(partido);
-		 * 
-		 * lista = new ArrayList<Candidato>(); lista.add(candidato);
-		 * partido.setLista_Candidato_part(lista);
-		 * 
-		 * this.estado = new Estado(); estado.setLista_Candidato_est(lista);
-		 * estado.setNome_est("Pernambuco"); estado.setSigla_est("PE");
-		 * 
-		 * lista_Cidadde = new ArrayList<>(); lista_Cidadde.add(cidade);
-		 * estado.setLista_Cidade_est(lista_Cidadde);
-		 * candidato.setEstado_cand(estado);
-		 * 
-		 * this.cidade = new Cidade(); candidato.setCidade_cand(cidade);
-		 * cidade.setNome_cid("Recife"); cidade.setEstado_cid(estado);
-		 */
+
+		// partido = new Partido();
+		// partido.setNome_part("Analistas Desenvolvedores de Surubas");
+		// partido.setSigla_part("ADS");
+		// candidato.setPartido_cand(partido);
+
+		// lista = new ArrayList<Candidato>();
+		// lista.add(candidato);
+		// partido.setLista_Candidato_part(lista);
+		//
+		// this.estado = new Estado();
+		// estado.setLista_Candidato_est(lista);
+		// estado.setNome_est("Pernambuco");
+		// estado.setSigla_est("PE");
+		//
+		// lista_Cidadde = new ArrayList<>();
+		// lista_Cidadde.add(cidade);
+		// estado.setLista_Cidade_est(lista_Cidadde);
+		// candidato.setEstado_cand(estado);
+		//
+		// this.cidade = new Cidade();
+		// candidato.setCidade_cand(cidade);
+		// cidade.setNome_cid("Recife");
+		// cidade.setEstado_cid(estado);
+
 	}
 
 	@After
 	public void limparObjeto() throws Exception {
-		candidato.setNome_cand("");
-		candidato.setNumero_cand(0);
-		candidato.setTipo_Cargo_cand("");
-		
-		String name = this.candidato.getNome_cand();
-		System.out.printf(name);
+		candidato = null;
+	}
+
+	@Test
+	@Ignore
+	public void removerCandidatoTest() throws Exception {
+		try {
+			this.cc.removerCandidato(candidato);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
 	}
 
 	@Test
@@ -98,17 +113,6 @@ public class CandidatoDAOTest {
 			this.cc.cadastrarCandidato(candidato);
 			String name = this.candidato.getNome_cand();
 			System.out.printf(name);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	@Test
-	@Ignore
-	public void removerCandidatoTest() throws Exception {
-		try {
-			this.cc.removerCandidato(candidato);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -129,38 +133,12 @@ public class CandidatoDAOTest {
 
 	@Test
 	@Ignore
-	public void consultarCandidatoTodos(){
-		try{
-		lista = new ArrayList<>();
-		lista = candiDAO.consultarTodosCandidatos();
-		Assert.assertEquals("CandidatoTester", lista.get(2).getNome_cand());
-		}catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-	
-	@Test
-	@Ignore
-	public void consultarCandidatoTodosController(){
-		try{
+	public void consultarCandidatoTodos() {
+		try {
 			lista = new ArrayList<>();
-			lista = cc.consultarTodosCandidatos();
-			assertEquals("CandidatoTester", lista.get(2).getNome_cand());
-		}catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-	
-	@Test
-	@Ignore
-	public void selectAllCandidateFacade(){
-		try{
-			lista = new ArrayList<>();
-			lista = facade.consultarTodosCandidatos();
-			assertEquals("CandidatoTester", lista.get(2).getNome_cand());
-		}catch (Exception e) {
+			lista = candiDAO.consultarTodosCandidatos();
+			Assert.assertEquals("CandidatoTester", lista.get(2).getNome_cand());
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
@@ -168,8 +146,34 @@ public class CandidatoDAOTest {
 
 	@Test
 	@Ignore
-	public void consultarCandidatoTodosQuantidade(){
-		try{			
+	public void consultarCandidatoTodosController() {
+		try {
+			lista = new ArrayList<>();
+			lista = cc.consultarTodosCandidatos();
+			assertEquals("CandidatoTester", lista.get(2).getNome_cand());
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	@Test
+	@Ignore
+	public void selectAllCandidateFacade() {
+		try {
+			lista = new ArrayList<>();
+			lista = facade.consultarTodosCandidatos();
+			assertEquals("GlauberTest", lista.get(0).getNome_cand());
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	@Test
+	@Ignore
+	public void consultarCandidatoTodosQuantidade() {
+		try {
 			lista = new ArrayList<>();
 			lista = candiDAO.consultarTodosCandidatos();
 			assertEquals(1, lista.size());
@@ -179,51 +183,56 @@ public class CandidatoDAOTest {
 	}
 
 	@Test
-	@Ignore
 	public void consultarCandidatoFiltradosTeste() {
 		try {
-			// candidato.setNome_cand("CandidatoTester");
+			candidato = new Candidato();
+			candidato.setNome_cand("GlauberTest");
+			//candidato.getCidade_cand().setId_cid(1);
 			lista = new ArrayList<>();
 			lista = candiDAO.consultarCandidatosFiltrados(candidato);
-			assertEquals("CandidatoTester", lista.get(0));
+			assertEquals("GlauberTes", lista.get(0).getNome_cand());
+			//assertEquals(4, lista.get(0).getCidade_cand().getId_cid());
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail();
 		}
 	}
 
 	@Test
 	@Ignore
-	public void consultarTodosProjetos(){
-		try{
+	public void consultarTodosProjetos() {
+		try {
 			lista_projeto = projetoDAO.consultarTodosProjetos();
 			assertEquals("ProjetoTeste", lista_projeto.get(0).getTitulo_proj());
-		}catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-	
-	@Test
-	@Ignore
-	public void consultarTodosProjetosController(){
-		try{
-			lista_projeto = controllerProjeto.consultarTodosProjetos();
-			assertEquals("ProjetoTeste", lista_projeto.get(0).getTitulo_proj());
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
 
 	@Test
-	public void consultarTodosProjetosFachada(){
-		try{
-			lista_projeto = facade.consultarTodosProjetos();
+	@Ignore
+	public void consultarTodosProjetosController() {
+		try {
+			lista_projeto = controllerProjeto.consultarTodosProjetos();
 			assertEquals("ProjetoTeste", lista_projeto.get(0).getTitulo_proj());
-		}catch (Exception e) {
-			System.out.println(e.getMessage());		
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
+
+	@Test
+	@Ignore
+	public void consultarTodosProjetosFachada() {
+		try {
+			lista_projeto = facade.consultarTodosProjetos();
+			assertEquals("ProjetoTeste", lista_projeto.get(0).getTitulo_proj());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			fail();
+		}
+	}
+
 }

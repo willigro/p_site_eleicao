@@ -39,11 +39,7 @@ public class Facade implements IFachada {
 
 	@Override
 	public void cadastrarUsuario(Usuario usuario) throws Exception {
-		try {
 			this.controllerUsuario.cadastrarUsuario(usuario);
-		} catch (Exception e) {
-			throw new Exception(e.getMessage());
-		}
 	}
 
 	@Override
