@@ -14,9 +14,7 @@
 		<p:toolbar>
 			<p:toolbarGroup align="left">
 				<p:commandButton value="REMOVER CANDIDATO"
-				action="#{candidatoBean.pagRemover()}" update="@form"></p:commandButton>
-				<p:commandButton value="Cadastrar"
-				action="#{candidatoBean.cadastrar()}" update="@form"></p:commandButton>
+					action="#{candidatoBean.pagRemover()}" update="@form"></p:commandButton>
 			</p:toolbarGroup>
 		</p:toolbar>
 		<br />
@@ -32,9 +30,19 @@
 				<h:outputLabel for="tipoCargo" value="TIPO DO CARGO"></h:outputLabel>
 				<p:inputText id="tipoCargo"
 					value="#{candidatoBean.candidato.tipo_Cargo_cand}"></p:inputText>
+
+				<h:outputLabel for="partido" value="PARTIDO"></h:outputLabel>
+				<h:selectOneMenu id="partido" value=""></h:selectOneMenu>
+
+				<h:outputLabel for="estado" value="ESTADO"></h:outputLabel>
+				<h:selectOneMenu id="estado" value=""></h:selectOneMenu>
+
+				<h:outputLabel for="cidade" value="CIDADE"></h:outputLabel>
+				
 			</p:panelGrid>
 			<br />
-			
+			<p:commandButton value="Cadastrar"
+				action="#{candidatoBean.cadastrar()}" update="@form"></p:commandButton>
 		</p:fieldset>
 	</h:form>
 </h:body>
