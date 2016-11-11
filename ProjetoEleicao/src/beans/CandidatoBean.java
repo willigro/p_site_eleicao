@@ -60,6 +60,13 @@ public class CandidatoBean {
 		
 		return "removerCandidato";
 	}
+	
+	/**
+	 * Utiliza a funcao de filtragem na consulta para tornar a navegacao mais dinamica
+	 * */
+	public String pagConsultarCandidato(){
+		return "consultaCandidatos";
+	}
 
 	public String cadastrar() throws Exception {
 		try {

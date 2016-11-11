@@ -1,6 +1,6 @@
 package controller;
 
-import classesBasicas.Administrador;
+
 import classesBasicas.Usuario;
 import dao.DAOFactory;
 import dao.classes.UsuarioDAO;

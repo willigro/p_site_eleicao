@@ -1,8 +1,35 @@
+<<<<<<< HEAD
 /beans/
 /classesBasicas/
 /controller/
+=======
+<<<<<<< HEAD
+/facade/
+/dao/
+/beans/
+/daoTest/
+=======
+<<<<<<< HEAD
+=======
+/META-INF/
+/beans/
+/classesBasicas/
+/config/
+/controller/
+>>>>>>> b33bc01ee79a319f2c0df92f25d343f934d3a771
+>>>>>>> parent of 77fd509... atualização da versao do primefaces e melhoria estetica na tela de cadastro de usuario
 /dao/
 /daoTest/
 /facade/
 /filters/
 /gui_testes/
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+/beans/
+/META-INF/
+/controller/
+=======
+>>>>>>> b33bc01ee79a319f2c0df92f25d343f934d3a771
+>>>>>>> fa02b47366d6b1776df84c6a6ace9c0cb6438d2f
+>>>>>>> parent of 77fd509... atualização da versao do primefaces e melhoria estetica na tela de cadastro de usuario
