@@ -2,17 +2,16 @@
 package daoTest;
 
 import static org.junit.Assert.*;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import classesBasicas.Candidato;
 import classesBasicas.Usuario;
 import dao.DAOFactory;
 import dao.classes.*;
 
 public class DAOGenericoTest {
-	CandidatoDAO candiDAO;
-	Candidato candidato;
 	UsuarioDAO userDao;
 	Usuario user;
 
@@ -26,6 +25,11 @@ public class DAOGenericoTest {
 		this.user.setAtivo_user(true);
 	}
 
+	@After
+	public void tearDown() throws Exception {
+		
+	}
+
 	@Test
 	@Ignore
 	public void isertTest() throws Exception {
@@ -36,19 +40,13 @@ public class DAOGenericoTest {
 		}
 	}
 
-	/*
-	 * Para esse teste é necessário consultar o banco e verificar o ID de Algum
-	 * usuario já cadastrado. O update utilizar o ID para atualizar as
-	 * informações.
-	 */
-
 	@Test
 	@Ignore
 	public void updateTest() throws Exception {
 		try {
 			Usuario user2 = new Usuario();
-			user2.setId_user(3); // Informar um ID real do banco
-			user2.setNome_user("newUser"); // informar o valor que deve ser atualizado.
+			user2.setId_user(7);
+			user2.setNome_user("newUser");
 			user2.setEmail_user("user@email.com");
 			user2.setSenha("minhasenha");
 			assertEquals(user2.getNome_user(), userDao.update(user2).getNome_user());
@@ -58,10 +56,19 @@ public class DAOGenericoTest {
 	}
 
 	@Test
-	@Ignore
 	public void selectTest() throws Exception {
 		try {
-			assertEquals(6, userDao.select(2).getNome_user());
+			assertEquals("erick", userDao.select(2).getNome_user());
+		} catch (Exception e) {
+			fail();
+		}
+	}
+
+	@Test
+	@Ignore
+	public void deleteTest() {
+		try {
+			this.userDao.delete(user);
 		} catch (Exception e) {
 			fail();
 		}
