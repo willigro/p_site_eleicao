@@ -25,12 +25,12 @@ public class AdministradorDAO extends DAOGenerico<Administrador> implements IAdm
 	@Override
 	public Administrador loginAdministrador(Administrador administrador) throws Exception {
 			
-			Query query = super.getManager().createQuery("SELECT a FROM tb_administrador a WHERE email =:Email AND senha_admin=:Senha_admin", Administrador.class);
+																		
+			Query query = super.getManager().createQuery("SELECT a FROM Administrador a WHERE email =:Email AND senha_admin=:Senha_admin", Administrador.class);
 			query.setParameter("Email", administrador.getEmail());
 			query.setParameter("Senha_admin", administrador.getSenha_admin());
-			System.out.println(query);
-			
-			return (Administrador)query.getSingleResult();
+		
+			return (Administrador) query.getSingleResult();
 	}
 
 	@Override
