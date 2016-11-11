@@ -25,7 +25,7 @@ public class Facade implements IFachada {
 		this.controllerProjeto = new ControllerProjeto();
 	}
 
-	public boolean validaControl(Object controlador) throws Exception {		
+	public boolean validaControl(Object controlador) throws Exception {
 		if (controlador != null)
 			return true;
 		else
@@ -39,7 +39,7 @@ public class Facade implements IFachada {
 
 	@Override
 	public void cadastrarUsuario(Usuario usuario) throws Exception {
-			this.controllerUsuario.cadastrarUsuario(usuario);
+		this.controllerUsuario.cadastrarUsuario(usuario);
 	}
 
 	@Override
@@ -101,6 +101,14 @@ public class Facade implements IFachada {
 	public List<Projeto> consultarTodosProjetos() throws Exception {
 		if (validaControl(this.controllerProjeto))
 			return this.controllerProjeto.consultarTodosProjetos();
+		else
+			return null;
+	}
+
+	@Override
+	public List<Candidato> consultarCandidatosFiltrados(Candidato candidato) throws Exception {
+		if (validaControl(this.controlCand))
+			return this.controlCand.consultarCandidatosFiltrados(candidato);
 		else
 			return null;
 	}

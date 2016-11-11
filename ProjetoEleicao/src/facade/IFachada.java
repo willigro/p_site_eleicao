@@ -12,6 +12,8 @@ import classesBasicas.Usuario;
 
 public interface IFachada {
 
+	public List<Candidato> consultarCandidatosFiltrados(Candidato candidato) throws Exception;
+	
 	public void cadastrarUsuario(Usuario usuario) throws Exception;
 
 	public void inserirComentarioCandidato(Comentario comentario) throws Exception;

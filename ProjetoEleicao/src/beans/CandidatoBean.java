@@ -7,11 +7,14 @@ import java.util.Set;
 import java.util.TreeSet;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import classesBasicas.Candidato;
 import classesBasicas.Cidade;
 import classesBasicas.Estado;
 import classesBasicas.Partido;
+import dao.DAOFactory;
+import dao.classes.CandidatoDAO;
 import facade.Facade;
 
 @ManagedBean
@@ -37,15 +40,24 @@ public class CandidatoBean {
 	}
 
 	// Methods
-	public String pagRemover() throws Exception {
-		return "removerCandidato";
+	public void pagRemover() throws Exception {
 	}
 
-	public String pagCadastrar() throws Exception {
-		return "cadastrarCandidato";
+	public void pagCadastrar() throws Exception {
+		FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/ProjetoEleicao/cadastrarCandidato.xhtml");
 	}
 
 	public String remover() throws Exception {
+		try {
+			//consultarCandidatoFiltrado(candidato);
+			//candidato.setNumero_cand(99999);
+			//candidato.getCidade_cand().setNome_cid("cidade");
+			candidato.setId_cand(25);
+			fachada.removerCandidato(candidato);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return "removerCandidato";
 	}
 
@@ -71,14 +83,21 @@ public class CandidatoBean {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "removerCandidato";
+		return "cadastrarCandidato";
+	}
+
+	public void consultarCandidatoFiltrado(Candidato candidato) {
+		try {
+			candidatos = fachada.consultarCandidatosFiltrados(candidato);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void consultarTodosCandidatos() {
 		try {
 			candidatos = fachada.consultarTodosCandidatos();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -91,6 +110,7 @@ public class CandidatoBean {
 	public void setPartido(Partido partido) {
 		this.partido = partido;
 	}
+
 	public Candidato getCandidato() {
 		return candidato;
 	}
