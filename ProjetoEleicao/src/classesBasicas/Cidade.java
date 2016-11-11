@@ -36,7 +36,7 @@ public class Cidade {
 	@Fetch(FetchMode.JOIN)
 	private Estado estado_cid;
 	
-	@OneToMany(mappedBy="cidade_cand", cascade = {CascadeType.ALL})
+	@OneToMany(mappedBy="cidade_cand", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	private List<Candidato> lista_Candidato_cid;
 
 	// Constructor

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Tela de Remoção de Candidato</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:toolbar>
+			<p:toolbarGroup align="left">
+				<p:commandButton value="CADASTRAR CANDIDATO" action="#{candidatoBean.pagCadastrar()}" update="@form"></p:commandButton>
+			</p:toolbarGroup>
+		</p:toolbar>
+		<br />
+		<p:fieldset legend="Dados do Candidato">
+			<p:panelGrid columns="2">
+				<h:outputLabel for="numero" value="NÚMERO"></h:outputLabel>
+				<p:inputMask id="numero" mask="99999" value="#{candidatoBean.candidato.numero_cand}"></p:inputMask>
+				
+				<h:outputLabel for="cidade" value="CIDADE"></h:outputLabel>
+				<p:inputText id="cidade" value="#{candidatoBean.candidato.cidade_cand.nome_cid}"></p:inputText>
+			</p:panelGrid>
+			<br />
+			<p:commandButton value="Remover" action="#{candidatoBean.remover()}" update="@form"></p:commandButton>
+		</p:fieldset>
+	</h:form>
+</h:body>
+</html>

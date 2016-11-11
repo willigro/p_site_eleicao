@@ -3,6 +3,7 @@ package classesBasicas;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -66,7 +69,7 @@ public class Candidato {
 		this.lista_Projeto_cand = new ArrayList<Projeto>();
 		this.cidade_cand = new Cidade();
 		this.estado_cand = new Estado();
-		this.data_Nasc_cand = Calendar.getInstance();
+		//this.data_Nasc_cand = Calendar.getInstance();
 	}
 
 	// Gets and Sets
