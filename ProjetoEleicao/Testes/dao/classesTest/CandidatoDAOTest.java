@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -90,10 +91,10 @@ public class CandidatoDAOTest {
 
 	}
 
-	@After
-	public void limparObjeto() throws Exception {
-		candidato = null;
-	}
+//	@AfterClass
+//	public void limparObjeto() throws Exception {
+//		candidato = null;
+//	}
 
 	@Test
 	@Ignore
@@ -186,16 +187,19 @@ public class CandidatoDAOTest {
 	public void consultarCandidatoFiltradosTeste() {
 		try {
 			candidato = new Candidato();
-			//candidato.setNome_cand("Cand");
-			//candidato.getPartido_cand().setId_part(5);
-			//candidato.getCidade_cand().setId_cid(5);	
-			//candidato.getCidade_cand().setNome_cid("teste");
+			//candidato.setNome_cand("GlauberTest");
+			//candidato.setNumero_cand(12345);
+			//candidato.getCidade_cand().setNome_cid("cidade");
+			//candidato.getPartido_cand().setId_part(1);
+			candidato.getCidade_cand().setId_cid(1);	
 			//candidato.getEstado_cand().setId_est(5);
 			//candidato.setTipo_Cargo_cand("teste");
 			lista = new ArrayList<>();
 			lista = candiDAO.consultarCandidatosFiltrados(candidato);
 			//assertEquals("Cand", lista.get(0).getNome_cand());
-			assertEquals(1, lista.get(0).getCidade_cand().getId_cid());
+			//assertEquals(5, lista.get(0).getCidade_cand().getId_cid());
+			assertEquals(26, lista.get(2).getId_cand());
+			System.out.println(lista.get(2).getId_cand());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

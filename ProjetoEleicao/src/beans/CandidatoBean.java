@@ -36,14 +36,6 @@ public class CandidatoBean {
 		candidatos = new ArrayList<>();
 	}
 
-	public Partido getPartido() {
-		return partido;
-	}
-
-	public void setPartido(Partido partido) {
-		this.partido = partido;
-	}
-
 	// Methods
 	public String pagRemover() throws Exception {
 		return "removerCandidato";
@@ -92,6 +84,13 @@ public class CandidatoBean {
 	}
 
 	// Getters and Setters
+	public Partido getPartido() {
+		return partido;
+	}
+
+	public void setPartido(Partido partido) {
+		this.partido = partido;
+	}
 	public Candidato getCandidato() {
 		return candidato;
 	}

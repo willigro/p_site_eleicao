@@ -68,7 +68,7 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 		 */
 		List<Candidato> lista = criteria.list();
 		if (lista.isEmpty())
-			throw new Exception("Lista vazia");
+			throw new Exception("Não foram encontrados registros para esta pesquisa");
 		else
 			return lista;
 	}
