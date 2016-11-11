@@ -11,23 +11,59 @@
 </h:head>
 <h:body>
 	<h:form>
+		<p:outputLabel>TELA DE REMOÇÃO DE CANDIDATOS - V1.0</p:outputLabel>
+		<br />
+		<br />
+		
 		<p:toolbar>
-			<p:toolbarGroup align="left">
-				<p:commandButton value="CADASTRAR CANDIDATO" action="#{candidatoBean.pagCadastrar()}" update="@form"></p:commandButton>
+			<p:toolbarGroup align="right">
+				<p:commandButton value="PAG. CADASTRAR"
+					action="#{candidatoBean.pagCadastrar()}" update="@form"></p:commandButton>
 			</p:toolbarGroup>
 		</p:toolbar>
 		<br />
+
 		<p:fieldset legend="Dados do Candidato">
 			<p:panelGrid columns="2">
 				<h:outputLabel for="numero" value="NÚMERO"></h:outputLabel>
-				<p:inputMask id="numero" mask="99999" value="#{candidatoBean.candidato.numero_cand}"></p:inputMask>
-				
+				<p:inputMask id="numero" mask="99999"
+					value="#{candidatoBean.candidato.numero_cand}"></p:inputMask>
+
 				<h:outputLabel for="cidade" value="CIDADE"></h:outputLabel>
-				<p:inputText id="cidade" value="#{candidatoBean.candidato.cidade_cand.nome_cid}"></p:inputText>
+				<p:inputText id="cidade"
+					value="#{candidatoBean.candidato.cidade_cand.nome_cid}"></p:inputText>	
 			</p:panelGrid>
 			<br />
-			<p:commandButton value="Remover" action="#{candidatoBean.remover()}" update="@form"></p:commandButton>
+			<p:commandButton value="Remover" action="#{candidatoBean.remover()}"
+				update="@form"></p:commandButton>
 		</p:fieldset>
+		<br />
+
+		<p:fieldset legend="Consultar Candidato">
+			<p:panelGrid columns="2">
+				<h:outputLabel for="nome" value="NOME"></h:outputLabel>
+				<p:inputText id="nome" value="#{candidatoBean.candidato.nome_cand}"></p:inputText>
+			</p:panelGrid>
+			<br />
+
+			<p:commandButton value="Pesquisar"
+				action="#{candidatoBean.consultarTodosCandidatos()}" update="@form"></p:commandButton>
+		</p:fieldset>
+		<br />
+
+		<h:form id="formPesquisa">
+			<p:dataTable value="#{candidatoBean.candidatos}" var="cand">
+				<p:column headerText="Nome">
+					<h:outputText value="#{cand.nome_cand}"></h:outputText>
+				</p:column>
+				<p:column headerText="Numero">
+					<h:outputText value="#{cand.numero_cand}"></h:outputText>
+				</p:column>
+				<p:column headerText="Cidade">
+					<h:outputText value="#{cand.cidade_cand.nome_cid}"></h:outputText>
+				</p:column>
+			</p:dataTable>
+		</h:form>
 	</h:form>
 </h:body>
 </html>
