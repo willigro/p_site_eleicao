@@ -32,20 +32,21 @@ public class DAOGenerico<Classe> {
 	 * null) throw new ExceptionDAO_TransationNull();
 	 */
 
-	public void insert(Classe classe) throws Exception {
+	public void insert(Classe classe) throws Exception {		
 		EntityTransaction tx = null;
 		try {
 			tx = getManager().getTransaction();
 			tx.begin();
 			getManager().persist(classe);
 			tx.commit();
+			getManager().clear();
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 			tx.rollback();
 			throw new Exception();
 		} catch (Exception e) {
 			tx.rollback();
-			throw new Exception();
+			throw new Exception();	
 		}
 	}
 

@@ -30,10 +30,10 @@
             	<h:selectBooleanCheckbox id="checkbox" value="#{loginBean.type}"/>
 
                 
-                <p:inputText id="input_mail" placeholder="Seu e-mail"/>
+                <p:inputText id="input_mail" placeholder="Seu e-mail" value= "#{loginBean.username}" />
 
                 
-                <p:password id="input_password" placeholder="Senha"/>
+                <p:password id="input_password" placeholder="Senha" value= "#{loginBean.password}"/>
 
                 <p:commandButton value="Login " action="#{loginBean.efetuarLogin}" />
             </h:panelGrid>
@@ -44,19 +44,12 @@
 <script type="text/javascript">
       function switch(id) {
         var element = document.getElementById("checkbox");
-        var input_user_mail = document.getElementById("input_mail");
-    	var input_user_pass = document.getElementById("input_pass");
-    	var input_admin_mail= document.getElementById("input_mail");
-    	var input_admin_pass = document.getElementById("input_pass");
     	
         if(element == 'false') {
-			input_user_mail.value = "#{loginBean.usuario.email_user}";
-			input_user_pass.value = "#{loginBean.usuario.senha}";
+			element.value = "false";
 		
         } else {
-        	input_admin_mail.value = "#{loginBean.administrador.email}";
-			input_admin_pass.value = "#{loginBean.administrador.senha_admin}";
-			
+        	element.value = "true";
         }
       }
     </script>

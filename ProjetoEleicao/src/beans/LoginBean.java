@@ -17,7 +17,6 @@ import facade.Facade;
 public class LoginBean {
 
 	String username;
-	
 	String password;
 	private boolean type;
 	private Usuario usuario;
@@ -26,25 +25,25 @@ public class LoginBean {
 	
 	
 	
-	public LoginBean(){
-		
-		this.administrador = new Administrador();
-		this.facade = new Facade();
-		this.usuario = new Usuario();
-		
-	}
-	
 	
 	
 	public String efetuarLogin(){
-		
+		System.out.println(type);
+		this.facade = new Facade();
 		try{
 			if(type){
+				this.administrador = new Administrador();
+				this.administrador.setEmail(username);
+				this.administrador.setSenha_admin(password);
 				
-				if(facade.loginAdministrador(this.administrador) != null){
+				
+				if(facade.loginAdministrador(administrador) != null){
 					return "/admin/index.xhtml";
 				}
 			}else{
+				this.usuario = new Usuario();
+				this.usuario.setEmail_user(username);
+				this.usuario.setSenha(password);
 				
 				if(facade.loginUsuario(this.usuario) != null){
 					return "/usr/index.xhtml";
@@ -52,7 +51,8 @@ public class LoginBean {
 			}
 			
 		}catch(Exception e){
-			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Login/Senha inexistente")); 
+//			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Login/Senha inexistente"));
+			e.printStackTrace();
 		}
 		
 		return "/login.xhtml";

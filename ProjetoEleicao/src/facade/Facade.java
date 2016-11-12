@@ -91,10 +91,7 @@ public class Facade implements IFachada {
 
 	@Override
 	public List<Candidato> consultarTodosCandidatos() throws Exception {
-		if (validaControl(this.controlCand))
-			return this.controlCand.consultarTodosCandidatos();
-		else
-			return null;
+		return this.controlCand.consultarTodosCandidatos();
 	}
 
 	@Override

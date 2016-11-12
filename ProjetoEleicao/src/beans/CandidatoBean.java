@@ -18,7 +18,6 @@ import dao.classes.CandidatoDAO;
 import facade.Facade;
 
 @ManagedBean
-@SessionScoped
 public class CandidatoBean {
 
 	private Candidato candidato;
@@ -36,7 +35,7 @@ public class CandidatoBean {
 		cidade = new Cidade();
 		partido = new Partido();
 		cidades = new ArrayList<>();
-		candidatos = new ArrayList<>();
+		this.candidatos = new ArrayList<>();
 	}
 
 	// Methods
@@ -44,46 +43,48 @@ public class CandidatoBean {
 	}
 
 	public void pagCadastrar() throws Exception {
-		FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/ProjetoEleicao/cadastrarCandidato.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext()
+				.redirect("http://localhost:8080/ProjetoEleicao/cadastrarCandidato.xhtml");
 	}
 
 	public String remover() throws Exception {
 		try {
-			//consultarCandidatoFiltrado(candidato);
-			//candidato.setNumero_cand(99999);
-			//candidato.getCidade_cand().setNome_cid("cidade");
+			// consultarCandidatoFiltrado(candidato);
+			// candidato.setNumero_cand(99999);
+			// candidato.getCidade_cand().setNome_cid("cidade");
 			candidato.setId_cand(25);
 			fachada.removerCandidato(candidato);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return "removerCandidato";
 	}
-	
+
 	/**
-	 * Utiliza a funcao de filtragem na consulta para tornar a navegacao mais dinamica
-	 * */
-	public String pagConsultarCandidato(){
+	 * Utiliza a funcao de filtragem na consulta para tornar a navegacao mais
+	 * dinamica
+	 */
+	public String pagConsultarCandidato() {
 		return "consultaCandidatos";
 	}
 
 	public String cadastrar() throws Exception {
 		try {
-			this.cidade.setId_cid(1);
-			this.estado.setId_est(1);
-			this.partido.setId_part(13);
-			// candidato.getCidade_cand().setId_cid(5);
-			// candidato.getEstado_cand().setId_est(5);
-			// candidato.getPartido_cand().setId_part(5);
-			candidato.setPartido_cand(partido);
+			// this.cidade.setId_cid(1);
+			// this.estado.setId_est(1);
+			// this.partido.setId_part(3);
+			candidato.getCidade_cand().setId_cid(5);
+			candidato.getEstado_cand().setId_est(5);
+			candidato.getPartido_cand().setId_part(5);
+			//candidato.setPartido_cand(partido);
 			// candidatos.add(candidato);
 			// partido.setLista_Candidato_part(candidatos);
 			// estado.setLista_Candidato_est(candidatos);
 			// cidades.add(cidade);
-			candidato.setEstado_cand(estado);
+			//candidato.setEstado_cand(estado);
 			// estado.setLista_Cidade_est(cidades);
-			candidato.setCidade_cand(cidade);
+			//candidato.setCidade_cand(cidade);
 			// cidade.setEstado_cid(estado);
 			//
 			fachada.cadastrarCandidato(candidato);
