@@ -4,7 +4,7 @@ import javax.faces.bean.ManagedBean;
 import classesBasicas.Usuario;
 import facade.Facade;
 
-@ManagedBean()
+@ManagedBean
 public class UsuarioBean {
 	
 	private Usuario usuario;

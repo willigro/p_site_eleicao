@@ -68,9 +68,8 @@ public class ControllerCandidato {
 	}
 
 	public List<Candidato> consultarTodosCandidatos() throws Exception {
-		List<Candidato> listCandidato;
 		if (validarController())
-			return listCandidato = this.iCandidatoDAO.consultarTodosCandidatos();
+			return this.iCandidatoDAO.consultarTodosCandidatos();
 		else
 			return null;
 	}

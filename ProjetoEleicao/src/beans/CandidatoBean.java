@@ -18,7 +18,6 @@ import dao.classes.CandidatoDAO;
 import facade.Facade;
 
 @ManagedBean
-@SessionScoped
 public class CandidatoBean {
 
 	private Candidato candidato;
@@ -36,7 +35,7 @@ public class CandidatoBean {
 		cidade = new Cidade();
 		partido = new Partido();
 		cidades = new ArrayList<>();
-		candidatos = new ArrayList<>();
+		this.candidatos = new ArrayList<>();
 	}
 
 	// Methods

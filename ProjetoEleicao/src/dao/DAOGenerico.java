@@ -45,7 +45,7 @@ public class DAOGenerico<Classe> {
 			throw new Exception();
 		} catch (Exception e) {
 			tx.rollback();
-			throw new Exception();
+			throw new Exception();	
 		}
 	}
 
