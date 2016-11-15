@@ -20,4 +20,5 @@
     <url-pattern>/faces/*</url-pattern>
     <url-pattern>*.jsf</url-pattern>
   </servlet-mapping>
+  
 </web-app>

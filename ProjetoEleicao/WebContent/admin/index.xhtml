@@ -1,51 +1,67 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Inicio</title>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head title="Primefaces Test">
+   <style>
+.ui-layout-north {
+   z-index: 20 !important;
+   overflow: visible !important;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+   overflow: visible !important;
+}
+
+</style>
 </h:head>
+
 <h:body>
-	<h:form>
-		<p:toolbar>
-			<p:toolbarGroup align="left">
-				<p:commandButton value="Cadastrar"
-					action="#{candidatoBean.cadastrar()}" update="@form"></p:commandButton>
-			</p:toolbarGroup>
-		</p:toolbar>
-		<br/>
-		<p:fieldset legend="Dados do Candidato">
-			<p:panelGrid columns="2">
-				<h:outputLabel for="nome" value="NOME"></h:outputLabel>
-				<p:inputText id="nome" value="#{candidatoBean.candidato.nome_cand}"></p:inputText>
-
-				<h:outputLabel for="numero" value="NÚMERO"></h:outputLabel>
-				<p:inputMask id="numero" mask="99999" value="#{candidatoBean.candidato.numero_cand}"></p:inputMask>
-
-				<h:outputLabel for="tipoCargo" value="TIPO DO CARGO"></h:outputLabel>
-				<p:inputText id="tipoCargo" value="#{candidatoBean.candidato.tipo_Cargo_cand}"></p:inputText>
-
-				<h:outputLabel for="nomePartido" value="NOME DO PARTIDO"></h:outputLabel>
-				<p:inputText id="nomePartido" value="#{candidatoBean.candidato.partido_cand.nome_part}"></p:inputText>
+   <h:form>
+      <p:layout fullPage="true">
+         <p:layoutUnit position="north">
+            <p:menubar>
+               <f:facet name="options">
+                  <p:commandButton value="Sair" />
+               </f:facet>
+            </p:menubar>
+         </p:layoutUnit>
+         
+         
+         <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+			<p:menu toggleable="true">
+				<p:submenu label="Ferramentas">
+					<p:menuitem value="Erros do sistema" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+					<p:menuitem value="Informacoes" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+					
+					
+				</p:submenu>
+			
+				<p:submenu label="Usuarios">
+					<p:menuitem value="Consultar" url="/admin/consultarUsuario.xhtml"/>
+					<p:menuitem value="Banir" url="http://www.primefaces.org/documentation.html"/>
 				
-				<h:outputLabel for="siglaPartido" value="SIGLA DO PARTIDO"></h:outputLabel>
-				<p:inputText id="siglaPartido" value="#{candidatoBean.candidato.partido_cand.sigla_part}"></p:inputText>
+				</p:submenu>
+				<p:submenu label="Comentarios">
+					<p:menuitem value="Consultar" url="http://www.primefaces.org/showcase-labs/ui/home.jsf"/>
+					<p:menuitem value="Denuncias" url="http://www.primefaces.org/documentation.html"/>
 				
-				<h:outputLabel for="estado" value="ESTADO"></h:outputLabel>
-				<p:inputText id="estado" value="#{candidatoBean.candidato.estado_cand.nome_est}"></p:inputText>
+				</p:submenu>
 				
-				<h:outputLabel for="siglaEstado" value="SIGLA DO ESTADO"></h:outputLabel>
-				<p:inputText id="siglaEstado" value="#{candidatoBean.candidato.estado_cand.sigla_est}"></p:inputText>
 				
-				<h:outputLabel for="cidade" value="CIDADE"></h:outputLabel>
-				<p:inputText id="cidade" value="#{candidatoBean.candidato.cidade_cand.nome_cid}"></p:inputText>
-
-			</p:panelGrid>
-		</p:fieldset>
-	</h:form>
+			
+			
+			</p:menu>
+		
+		</p:layoutUnit>
+         
+         
+         <p:layoutUnit position="center">
+            <ui:insert name="consultar usuario"></ui:insert>
+         </p:layoutUnit>
+      </p:layout>
+   </h:form>
 </h:body>
 </html>
