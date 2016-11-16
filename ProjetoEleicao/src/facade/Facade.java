@@ -109,4 +109,12 @@ public class Facade implements IFachada {
 		else
 			return null;
 	}
+	
+	
+	public List<Usuario> consultarUsuarios() throws Exception{
+		if(validaControl(this.controllerUsuario))
+		 return this.controllerUsuario.consultarUsuarios();
+		else
+		 return null;
+	}
 }

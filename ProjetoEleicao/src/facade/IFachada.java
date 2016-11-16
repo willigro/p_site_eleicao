@@ -39,4 +39,6 @@ public interface IFachada {
 	public List<Candidato> consultarTodosCandidatos() throws Exception;
 	
 	public List<Projeto> consultarTodosProjetos() throws Exception;
+	
+	public List<Usuario> consultarUsuarios() throws Exception;
 }

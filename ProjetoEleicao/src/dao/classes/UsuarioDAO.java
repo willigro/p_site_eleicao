@@ -1,8 +1,11 @@
 package dao.classes;
 
 import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.List;
 
 import classesBasicas.Administrador;
+import classesBasicas.Projeto;
 import classesBasicas.Usuario;
 import dao.DAOGenerico;
 import dao.interfaces.IUsuarioDAO;
@@ -42,5 +45,24 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 
 		return (Usuario) query.getSingleResult();
 	}
+	
+	
+	public List<Usuario> consultarUsuarios() throws Exception{
+		List<Usuario> usersList = new ArrayList<>();
+		try {
+			usersList = getManager().createQuery("SELECT usuario FROM Usuario usuario").getResultList();
+			if (usersList.isEmpty()) {
+				throw new Exception("Nao ha registros armazenados");
+			}
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		return usersList;
+		
+	}
+	
+	
+	
+	
 
 }

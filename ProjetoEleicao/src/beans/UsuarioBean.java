@@ -3,17 +3,24 @@ package beans;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+
+import java.util.ArrayList;
+
 import javax.faces.application.FacesMessage;
 import classesBasicas.Usuario;
 import facade.Facade;
 
-@ManagedBean()
+@ManagedBean
 public class UsuarioBean {
 
 	private Usuario usuario;
 	private Facade fachada;
+	private ArrayList<Usuario> usuarios;
 
 	public UsuarioBean() {
+	
+		
+		this.usuarios = new ArrayList<>();
 		this.usuario = new Usuario();
 		this.fachada = new Facade();
 	}

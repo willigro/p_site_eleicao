@@ -1,6 +1,8 @@
 package controller;
 
 
+import java.util.List;
+
 import classesBasicas.Usuario;
 import dao.DAOFactory;
 import dao.classes.UsuarioDAO;
@@ -42,5 +44,12 @@ public class ControllerUsuario {
 
 	}
 
+	public List<Usuario> consultarUsuarios() throws Exception{
+		
+		//validate user
+		return usuarioDAO.consultarUsuarios();
+	}
+	
+	
 
 }
