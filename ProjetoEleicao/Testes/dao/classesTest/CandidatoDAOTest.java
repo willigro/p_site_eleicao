@@ -56,11 +56,12 @@ public class CandidatoDAOTest {
 		this.cidade.setId_cid(1);
 		this.estado.setId_est(1);
 		this.partido.setId_part(13);
+		
 		candidato.setPartido_cand(partido);
 		candidato.setEstado_cand(estado);
 		candidato.setCidade_cand(cidade);
 
-		// candidato.setId_cand(16); //pra remover
+		// candidato.setId_cand(16); //pra remover()
 		candidato.setNome_cand("GlauberTest");
 		candidato.setNumero_cand(12345);
 		candidato.setTipo_Cargo_cand("DeputadorTester");

@@ -30,7 +30,7 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 				throw new Exception("Não há registros armazenados");
 			}
 			for (Candidato candidato : lista_candidatos) {
-				System.out.println(candidato.getNumero_cand());
+				System.out.println("Id = " + candidato.getId_cand() + " / Numero = " + candidato.getNumero_cand());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

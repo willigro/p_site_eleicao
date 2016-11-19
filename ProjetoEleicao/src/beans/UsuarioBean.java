@@ -18,8 +18,6 @@ public class UsuarioBean {
 	private ArrayList<Usuario> usuarios;
 
 	public UsuarioBean() {
-	
-		
 		this.usuarios = new ArrayList<>();
 		this.usuario = new Usuario();
 		this.fachada = new Facade();

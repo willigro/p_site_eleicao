@@ -14,15 +14,8 @@
 		<p:outputLabel>TELA DE REMOÇÃO DE CANDIDATOS - V1.0</p:outputLabel>
 		<br />
 		<br />
-		
-		<p:toolbar>
-			<p:toolbarGroup align="right">
-				<p:commandButton value="PAG. CADASTRAR"
-					action="#{candidatoBean.pagCadastrar()}" update="@form"></p:commandButton>
-			</p:toolbarGroup>
-		</p:toolbar>
-		<br />
 
+		<!-- 
 		<p:fieldset legend="Dados do Candidato">
 			<p:panelGrid columns="2">
 				<h:outputLabel for="numero" value="NÚMERO"></h:outputLabel>
@@ -38,6 +31,7 @@
 				update="@form"></p:commandButton>
 		</p:fieldset>
 		<br />
+ -->
 
 		<p:fieldset legend="Consultar Candidato">
 			<p:panelGrid columns="2">
@@ -61,6 +55,10 @@
 				</p:column>
 				<p:column headerText="Cidade">
 					<h:outputText value="#{cand.cidade_cand.nome_cid}"></h:outputText>
+				</p:column>
+				<p:column headerText="Remover">
+					<p:commandButton value="Remover"
+						action="#{candidatoBean.remover()}" update="@form"></p:commandButton>
 				</p:column>
 			</p:dataTable>
 		</h:form>

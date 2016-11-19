@@ -5,37 +5,70 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Tela de Cadastro Cliente</title>
+	<style type="text/css">
+body {
+	background-image: url(img/lightflag.png);
+	background-size: 100%;
+}
+
+.menubar {
+	background-color: #000000;
+}
+
+.grid {
+	position: absolute;
+	top: 40%;
+	left: 40%;
+	margin-top: -10%;
+	margin-left: 0%;
+}
+</style>
 </h:head>
+
 <h:body>
-	<h:form>
-		<p:outputLabel>TELA DE CADASTRO DE CANDIDATOS - V1.0</p:outputLabel>
+	<f:view>
+		<h:form>
+			<p:growl id="messages" />
+			<p:menubar styleClass="menubar">
+				<p:menuitem>
+					<font face="Calibri" color="White" size="6">Brasil
+						Transparente</font>
+				</p:menuitem>
+			</p:menubar>
+		</h:form>
+
 		<br />
 		<br />
 
-		<p:toolbar>
-			<p:toolbarGroup align="right">
-				<p:commandButton value="PAG. REMOVER"
-					action="#{candidatoBean.pagRemover()}" update="@form"></p:commandButton>
-					
-			</p:toolbarGroup>
-		</p:toolbar>
-		<br />
-		<p:fieldset legend="Dados do Candidato">
-			<p:panelGrid columns="2">
-				<h:outputLabel for="nome" value="NOME"></h:outputLabel>
-				<p:inputText id="nome" value="#{candidatoBean.candidato.nome_cand}"></p:inputText>
+		<h:form>
+			<p:messages id="messages" showDetail="true" autoUpdate="true" />
+			<p:fieldset legend="Cadastrar Candidato - Dados do Candidato">
+				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
+					styleClass="">
 
-				<h:outputLabel for="numero" value="NÚMERO"></h:outputLabel>
-				<p:inputMask id="numero" mask="99999"
-					value="#{candidatoBean.candidato.numero_cand}"></p:inputMask>
+					<h:outputLabel for="nome" value="NOME"></h:outputLabel>
+					<p:inputText placeholder="Nome" id="nome"
+						value="#{candidatoBean.candidato.nome_cand}" required="true">
+						<f:validateLength minimum="3" maximum="50" />
+					</p:inputText>
 
-				<h:outputLabel for="tipoCargo" value="TIPO DO CARGO"></h:outputLabel>
-				<p:inputText id="tipoCargo"
-					value="#{candidatoBean.candidato.tipo_Cargo_cand}"></p:inputText>
-<!-- 
+					<h:outputLabel for="numero" value="NÚMERO"></h:outputLabel>
+					<p:inputText placeholder="Número" id="numero"
+						value="#{candidatoBean.candidato.numero_cand}" required="true">
+						<f:validateLength minimum="1" maximum="5" />
+					</p:inputText>
+
+					<h:outputLabel for="tipoCargo" value="TIPO DO CARGO"></h:outputLabel>
+					<p:inputText placeholder="Tipo do Cargo" id="tipoCargo"
+						value="#{candidatoBean.candidato.tipo_Cargo_cand}" required="true">
+						<f:validateLength minimum="3" maximum="50" />
+					</p:inputText>
+
+					<!-- 
 				<h:outputLabel for="cidade" value="CIDADE"></h:outputLabel>
 				<h:selectOneMenu id="cidade"
 					value="#{candidatoBean.candidato.cidade_cand.nome_cid}" style="width:200px;"></h:selectOneMenu>
@@ -48,11 +81,12 @@
 				<h:selectOneMenu id="partido"
 					value="#{candidatoBean.candidato.partido_cand.nome_part}" style="width:200px;"></h:selectOneMenu>
  -->
-			</p:panelGrid>
-			<br />
-			<p:commandButton value="Cadastrar"
-				action="#{candidatoBean.cadastrar()}" update="@form"></p:commandButton>
-		</p:fieldset>
-	</h:form>
+				</p:panelGrid>
+				<br />
+				<p:commandButton value="Cadastrar"
+					action="#{candidatoBean.cadastrar()}" update="matchGrid"></p:commandButton>
+			</p:fieldset>
+		</h:form>
+	</f:view>
 </h:body>
 </html>
