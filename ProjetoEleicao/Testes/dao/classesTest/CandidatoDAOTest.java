@@ -238,20 +238,19 @@ public class CandidatoDAOTest {
 	}
 
 	// ========================================================================
-	// Casos de Testes - Fluxos Alterantivos ou de Exceção
+	// Casos de Testes - Fluxos Alterantivos ou de Exceção (validação)
 	// ========================================================================
 
 	// CADASTRAR CANDIDATO (FA E FE)
 
 	// O método tem que da erro de exceção caso algum dos campos abaixo esteja
 	// nulo.
-	@Test
-	@Ignore
+	@Test(expected = AssertionError.class)
 	public void verificaCamposObgCadastro() throws Exception {
 		try {
 			candidato.setNome_cand(null);
-			// candidato.setNumero_cand(0);
-			// candidato.setTipo_Cargo_cand(null);
+			candidato.setNumero_cand(0);
+			candidato.setTipo_Cargo_cand(null);
 
 			this.cc.cadastrarCandidato(candidato);
 			String name = this.candidato.getNome_cand();
@@ -264,12 +263,11 @@ public class CandidatoDAOTest {
 
 	// O método tem que da erro de exceção caso algum dos campos abaixo esteja
 	// com espaços em branco.
-	@Test
-	@Ignore
+	@Test(expected = AssertionError.class)
 	public void verificaEspacosCadastro() throws Exception {
 		try {
 			candidato.setNome_cand("    ");
-			// candidato.setTipo_Cargo_cand(" ");
+			candidato.setTipo_Cargo_cand("   ");
 
 			this.cc.cadastrarCandidato(candidato);
 			String name = this.candidato.getNome_cand();
@@ -282,12 +280,11 @@ public class CandidatoDAOTest {
 
 	// O método tem que da erro de exceção caso algum dos campos abaixo esteja
 	// vazio.
-	@Test
-	@Ignore
+	@Test(expected = AssertionError.class)
 	public void verificaVazioCadastro() throws Exception {
 		try {
 			candidato.setNome_cand("");
-			// candidato.setTipo_Cargo_cand("");
+			candidato.setTipo_Cargo_cand("");
 
 			this.cc.cadastrarCandidato(candidato);
 			String name = this.candidato.getNome_cand();
@@ -302,14 +299,13 @@ public class CandidatoDAOTest {
 
 	// O método tem que da erro de exceção caso algum dos campos abaixo esteja
 	// nulo.
-	@Test
-	@Ignore
+	@Test(expected = AssertionError.class)
 	public void verificaCamposObgUpdate() throws Exception {
 		try {
 			candidato.setId_cand(27);
 			candidato.setNome_cand("");
-			// candidato.setNumero_cand(0);
-			// candidato.setTipo_Cargo_cand(null);
+			candidato.setNumero_cand(0);
+			candidato.setTipo_Cargo_cand(null);
 
 			this.cc.alterarCandidato(candidato);
 			String name = this.candidato.getNome_cand();
@@ -322,13 +318,12 @@ public class CandidatoDAOTest {
 
 	// O método tem que da erro de exceção caso algum dos campos abaixo esteja
 	// com espaços em branco.
-	@Test
-	@Ignore
+	@Test(expected = AssertionError.class)
 	public void verificaEspacosUpdate() throws Exception {
 		try {
 			candidato.setId_cand(27);
 			candidato.setNome_cand("    ");
-			// candidato.setTipo_Cargo_cand(" ");
+			candidato.setTipo_Cargo_cand("   ");
 
 			this.cc.alterarCandidato(candidato);
 			String name = this.candidato.getNome_cand();
@@ -341,14 +336,13 @@ public class CandidatoDAOTest {
 
 	// O método tem que da erro de exceção caso algum dos campos abaixo esteja
 	// vazio.
-	@Test
-	@Ignore
+	@Test(expected = AssertionError.class)
 	public void verificaVazioUpdate() throws Exception {
 		try {
 
 			candidato.setId_cand(27);
 			candidato.setNome_cand("");
-			// candidato.setTipo_Cargo_cand("");
+			candidato.setTipo_Cargo_cand("");
 
 			this.cc.alterarCandidato(candidato);
 			String name = this.candidato.getNome_cand();

@@ -58,7 +58,7 @@ public class CandidatoBean {
 			e.printStackTrace();
 		}
 
-		return "removerCandidato";
+		return "paginaAdmin";
 	}
 
 	// Utiliza a funcao de filtragem na consulta para tornar a navegacao mais
@@ -90,7 +90,7 @@ public class CandidatoBean {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "cadastrarCandidato";
+		return "paginaAdmin";
 	}
 
 	public void consultarCandidatoFiltrado(Candidato candidato) {
