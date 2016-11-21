@@ -186,45 +186,7 @@ public class CandidatoDAOTest {
 			fail();
 		}
 	}
-<<<<<<< HEAD
-=======
-
-	@Test
-	@Ignore
-	public void consultarTodosProjetos() {
-		try {
-			lista_projeto = projetoDAO.consultarTodosProjetos();
-			assertEquals("ProjetoTeste", lista_projeto.get(0).getTitulo_proj());
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	@Test
-	@Ignore
-	public void consultarTodosProjetosController() {
-		try {
-			lista_projeto = controllerProjeto.consultarTodosProjetos();
-			assertEquals("ProjetoTeste", lista_projeto.get(0).getTitulo_proj());
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	@Test
-	@Ignore
-	public void consultarTodosProjetosFachada() {
-		try {
-			lista_projeto = facade.consultarTodosProjetos();
-			assertEquals("ProjetoTeste", lista_projeto.get(0).getTitulo_proj());
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-			fail();
-		}
-	}
+	
 
 	// O método retorna verdadeiro se o número passado não existir no banco.
 	@Test
@@ -359,6 +321,4 @@ public class CandidatoDAOTest {
 			fail();
 		}
 	}
-
->>>>>>> 73eddf695ee15dcd6bdb11199ee046bbe8562cd6
 }

@@ -41,13 +41,12 @@ public interface IFachada {
 	
 	public List<Projeto> consultarTodosProjetos() throws Exception;
 	
-<<<<<<< HEAD
 	public List<Estado> consultarTodosEstado() throws Exception;
 	
 	public void inserirComentarioProjeto(Comentario comentario) throws Exception;
 	
 	public void inserirAvaliacaoProjeto(Avaliacao avaliacao) throws Exception;
-=======
+
 	public List<Usuario> consultarUsuarios() throws Exception;
->>>>>>> 73eddf695ee15dcd6bdb11199ee046bbe8562cd6
+
 }

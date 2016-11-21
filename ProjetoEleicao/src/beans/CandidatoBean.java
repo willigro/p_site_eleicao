@@ -31,7 +31,7 @@ public class CandidatoBean {
 	private List<Cidade> cidades;
 	private List<Candidato> candidatos;
 	private List<Estado> lista_estados;
-	
+
 	public CandidatoBean() {
 		this.candidato = new Candidato();
 		this.fachada = new Facade();
@@ -44,23 +44,22 @@ public class CandidatoBean {
 	}
 
 	// Methods
-<<<<<<< HEAD
-	
-	public void estadoSelecionado(){
+
+	public void estadoSelecionado() {
 		System.out.println(this.idEstado);
 	}
-	
+
 	public void pagRemover() throws Exception {
 	}
 
 	public void pagCadastrar() throws Exception {
 		FacesContext.getCurrentInstance().getExternalContext()
 				.redirect("http://localhost:8080/ProjetoEleicao/cadastrarCandidato.xhtml");
-=======
+	}
+
 	private void addMensagem(String texto) {
 		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
->>>>>>> 73eddf695ee15dcd6bdb11199ee046bbe8562cd6
 	}
 
 	public String remover() throws Exception {
@@ -86,15 +85,6 @@ public class CandidatoBean {
 
 	public String cadastrar() throws Exception {
 		try {
-<<<<<<< HEAD
-			// this.cidade.setId_cid(1);
-			// this.estado.setId_est(1);
-			// this.partido.setId_part(3);
-			candidato.getCidade_cand().setId_cid(5);
-			candidato.getEstado_cand().setId_est(5);
-			candidato.getPartido_cand().setId_part(5);
-			// candidato.setPartido_cand(partido);
-=======
 			this.cidade.setId_cid(1);
 			this.estado.setId_est(1);
 			this.partido.setId_part(13);
@@ -102,20 +92,15 @@ public class CandidatoBean {
 			// candidato.getEstado_cand().setId_est(5);
 			// candidato.getPartido_cand().setId_part(5);
 			candidato.setPartido_cand(partido);
->>>>>>> 73eddf695ee15dcd6bdb11199ee046bbe8562cd6
 			// candidatos.add(candidato);
 			// partido.setLista_Candidato_part(candidatos);
 			// estado.setLista_Candidato_est(candidatos);
 			// cidades.add(cidade);
-<<<<<<< HEAD
+
 			// candidato.setEstado_cand(estado);
 			// estado.setLista_Cidade_est(cidades);
 			// candidato.setCidade_cand(cidade);
-=======
-			candidato.setEstado_cand(estado);
-			// estado.setLista_Cidade_est(cidades);
-			candidato.setCidade_cand(cidade);
->>>>>>> 73eddf695ee15dcd6bdb11199ee046bbe8562cd6
+
 			// cidade.setEstado_cid(estado);
 			//
 			fachada.cadastrarCandidato(candidato);
@@ -209,5 +194,5 @@ public class CandidatoBean {
 	public void setIdEstado(int idEstado) {
 		this.idEstado = idEstado;
 	}
-	
+
 }
