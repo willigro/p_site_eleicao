@@ -113,6 +113,7 @@ public class Facade implements IFachada {
 		else
 			return null;
 	}
+<<<<<<< HEAD
 
 	@Override
 	public List<Estado> consultarTodosEstado() throws Exception {
@@ -129,5 +130,14 @@ public class Facade implements IFachada {
 	@Override
 	public void inserirAvaliacaoProjeto(Avaliacao avaliacao) throws Exception {
 		this.controllerAvaliacao.inserirAvaliacaoProjeto(avaliacao);
+=======
+	
+	
+	public List<Usuario> consultarUsuarios() throws Exception{
+		if(validaControl(this.controllerUsuario))
+		 return this.controllerUsuario.consultarUsuarios();
+		else
+		 return null;
+>>>>>>> 73eddf695ee15dcd6bdb11199ee046bbe8562cd6
 	}
 }

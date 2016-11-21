@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -42,6 +44,7 @@ public class CandidatoBean {
 	}
 
 	// Methods
+<<<<<<< HEAD
 	
 	public void estadoSelecionado(){
 		System.out.println(this.idEstado);
@@ -53,6 +56,11 @@ public class CandidatoBean {
 	public void pagCadastrar() throws Exception {
 		FacesContext.getCurrentInstance().getExternalContext()
 				.redirect("http://localhost:8080/ProjetoEleicao/cadastrarCandidato.xhtml");
+=======
+	private void addMensagem(String texto) {
+		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
+		FacesContext.getCurrentInstance().addMessage(null, mensagem);
+>>>>>>> 73eddf695ee15dcd6bdb11199ee046bbe8562cd6
 	}
 
 	public String remover() throws Exception {
@@ -60,8 +68,9 @@ public class CandidatoBean {
 			// consultarCandidatoFiltrado(candidato);
 			// candidato.setNumero_cand(99999);
 			// candidato.getCidade_cand().setNome_cid("cidade");
-			candidato.setId_cand(25);
+			candidato.setId_cand(67);
 			fachada.removerCandidato(candidato);
+			addMensagem("Removido com Sucesso!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -69,16 +78,15 @@ public class CandidatoBean {
 		return "removerCandidato";
 	}
 
-	/**
-	 * Utiliza a funcao de filtragem na consulta para tornar a navegacao mais
-	 * dinamica
-	 */
+	// Utiliza a funcao de filtragem na consulta para tornar a navegacao mais
+	// dinamica
 	public String pagConsultarCandidato() {
 		return "consultaCandidatos";
 	}
 
 	public String cadastrar() throws Exception {
 		try {
+<<<<<<< HEAD
 			// this.cidade.setId_cid(1);
 			// this.estado.setId_est(1);
 			// this.partido.setId_part(3);
@@ -86,16 +94,32 @@ public class CandidatoBean {
 			candidato.getEstado_cand().setId_est(5);
 			candidato.getPartido_cand().setId_part(5);
 			// candidato.setPartido_cand(partido);
+=======
+			this.cidade.setId_cid(1);
+			this.estado.setId_est(1);
+			this.partido.setId_part(13);
+			// candidato.getCidade_cand().setId_cid(5);
+			// candidato.getEstado_cand().setId_est(5);
+			// candidato.getPartido_cand().setId_part(5);
+			candidato.setPartido_cand(partido);
+>>>>>>> 73eddf695ee15dcd6bdb11199ee046bbe8562cd6
 			// candidatos.add(candidato);
 			// partido.setLista_Candidato_part(candidatos);
 			// estado.setLista_Candidato_est(candidatos);
 			// cidades.add(cidade);
+<<<<<<< HEAD
 			// candidato.setEstado_cand(estado);
 			// estado.setLista_Cidade_est(cidades);
 			// candidato.setCidade_cand(cidade);
+=======
+			candidato.setEstado_cand(estado);
+			// estado.setLista_Cidade_est(cidades);
+			candidato.setCidade_cand(cidade);
+>>>>>>> 73eddf695ee15dcd6bdb11199ee046bbe8562cd6
 			// cidade.setEstado_cid(estado);
 			//
 			fachada.cadastrarCandidato(candidato);
+			addMensagem("Cadastrado com Sucesso!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

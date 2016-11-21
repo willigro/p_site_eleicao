@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import beans.LoginBean;
 
-@WebFilter("/admin/*")
+//@WebFilter("/admin/*")
 public class LoginFilter implements Filter{
 
 	@Override
