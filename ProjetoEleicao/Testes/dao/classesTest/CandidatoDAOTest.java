@@ -1,10 +1,8 @@
 package dao.classesTest;
 
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -61,16 +59,16 @@ public class CandidatoDAOTest {
 		candidato.setEstado_cand(estado);
 		candidato.setCidade_cand(cidade);
 
-		candidato.setNome_cand("Tezt");
-		candidato.setNumero_cand(88875); //precisa ser Unico
-		candidato.setTipo_Cargo_cand("DeputadorTester");
+		candidato.setNome_cand("TesteNome");
+		candidato.setNumero_cand(98651); // precisa ser Unico
+		candidato.setTipo_Cargo_cand("TesteDeputado");
 
 	}
-	
-	//========================================================================
+
+	// ========================================================================
 	// Casos de Testes - Fluxos Principais
-	//========================================================================
-	
+	// ========================================================================
+
 	@Test
 	@Ignore
 	public void cadastrarCandidatoTest() throws Exception {
@@ -84,19 +82,36 @@ public class CandidatoDAOTest {
 		}
 	}
 
+	// Pra testar o alterar, é necessário pegar o ID já criado no banco
+	// Se colocar sem um ID válido, ele cadastrará o novo candidato.
 	@Test
 	@Ignore
-	public void removerCandidatoTest() throws Exception {
+	public void alterarCandidatoTest() throws Exception {
 		try {
-			// candidato.setId_cand(16); //Necessita setar um ID válido pra remoção.
-			this.cc.removerCandidato(candidato);
+			candidato.setId_cand(27);
+			candidato.setNome_cand("TesteNomeAlterado2");
+			candidato.setNumero_cand(99991);
+			candidato.setTipo_Cargo_cand("TesteDeputadoAlterado");
+
+			this.cc.alterarCandidato(candidato);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
 
-
+	// Necessita setar um ID válido pra remoção.
+	@Test
+	@Ignore
+	public void removerCandidatoTest() throws Exception {
+		try {
+			// candidato.setId_cand(16);
+			this.cc.removerCandidato(candidato);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 
 	@Test
 	@Ignore
@@ -209,19 +224,35 @@ public class CandidatoDAOTest {
 			fail();
 		}
 	}
-	
-	//========================================================================
-	//Casos de Testes - Fluxos Alterantivos ou de Exceção
-	//========================================================================
-	
-	//O método tem que da erro de exceção caso algum dos campos abaixo esteja nulo.
+
+	// O método retorna verdadeiro se o número passado não existir no banco.
 	@Test
-	public void verificaCadastroCamposObg() throws Exception {
+	@Ignore
+	public void verificaNumeroCadastro() throws Exception {
 		try {
-			candidato.setNome_cand("");
-			//candidato.setNumero_cand(0);
-			//candidato.setTipo_Cargo_cand("");
-			
+			assertEquals(true, this.candiDAO.retornaNumero(candidato));
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	// ========================================================================
+	// Casos de Testes - Fluxos Alterantivos ou de Exceção
+	// ========================================================================
+
+	// CADASTRAR CANDIDATO (FA E FE)
+
+	// O método tem que da erro de exceção caso algum dos campos abaixo esteja
+	// nulo.
+	@Test
+	@Ignore
+	public void verificaCamposObgCadastro() throws Exception {
+		try {
+			candidato.setNome_cand(null);
+			// candidato.setNumero_cand(0);
+			// candidato.setTipo_Cargo_cand(null);
+
 			this.cc.cadastrarCandidato(candidato);
 			String name = this.candidato.getNome_cand();
 			System.out.printf(name);
@@ -230,14 +261,98 @@ public class CandidatoDAOTest {
 			fail();
 		}
 	}
-	
-	
-	// O método retorna verdadeiro se o número passado não existir no banco.
+
+	// O método tem que da erro de exceção caso algum dos campos abaixo esteja
+	// com espaços em branco.
 	@Test
 	@Ignore
-	public void verificaCadastroNumero() throws Exception {
+	public void verificaEspacosCadastro() throws Exception {
 		try {
-			assertEquals(true, this.candiDAO.retornaNumero(candidato));
+			candidato.setNome_cand("    ");
+			// candidato.setTipo_Cargo_cand(" ");
+
+			this.cc.cadastrarCandidato(candidato);
+			String name = this.candidato.getNome_cand();
+			System.out.printf(name);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	// O método tem que da erro de exceção caso algum dos campos abaixo esteja
+	// vazio.
+	@Test
+	@Ignore
+	public void verificaVazioCadastro() throws Exception {
+		try {
+			candidato.setNome_cand("");
+			// candidato.setTipo_Cargo_cand("");
+
+			this.cc.cadastrarCandidato(candidato);
+			String name = this.candidato.getNome_cand();
+			System.out.printf(name);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	// ALTERAR CANDIDATO (FA E FE)
+
+	// O método tem que da erro de exceção caso algum dos campos abaixo esteja
+	// nulo.
+	@Test
+	@Ignore
+	public void verificaCamposObgUpdate() throws Exception {
+		try {
+			candidato.setId_cand(27);
+			candidato.setNome_cand("");
+			// candidato.setNumero_cand(0);
+			// candidato.setTipo_Cargo_cand(null);
+
+			this.cc.alterarCandidato(candidato);
+			String name = this.candidato.getNome_cand();
+			System.out.printf(name);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	// O método tem que da erro de exceção caso algum dos campos abaixo esteja
+	// com espaços em branco.
+	@Test
+	@Ignore
+	public void verificaEspacosUpdate() throws Exception {
+		try {
+			candidato.setId_cand(27);
+			candidato.setNome_cand("    ");
+			// candidato.setTipo_Cargo_cand(" ");
+
+			this.cc.alterarCandidato(candidato);
+			String name = this.candidato.getNome_cand();
+			System.out.printf(name);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	// O método tem que da erro de exceção caso algum dos campos abaixo esteja
+	// vazio.
+	@Test
+	@Ignore
+	public void verificaVazioUpdate() throws Exception {
+		try {
+
+			candidato.setId_cand(27);
+			candidato.setNome_cand("");
+			// candidato.setTipo_Cargo_cand("");
+
+			this.cc.alterarCandidato(candidato);
+			String name = this.candidato.getNome_cand();
+			System.out.printf(name);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

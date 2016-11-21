@@ -17,7 +17,6 @@ public class DAOGenerico<Classe> {
 	}
 
 	// Getter e Setter
-
 	public EntityManager getManager() {
 		return manager;
 	}
