@@ -56,58 +56,21 @@ public class CandidatoDAOTest {
 		this.cidade.setId_cid(1);
 		this.estado.setId_est(1);
 		this.partido.setId_part(13);
-		
+
 		candidato.setPartido_cand(partido);
 		candidato.setEstado_cand(estado);
 		candidato.setCidade_cand(cidade);
 
-		// candidato.setId_cand(16); //pra remover()
-		candidato.setNome_cand("GlauberTest");
-		candidato.setNumero_cand(12345);
+		candidato.setNome_cand("Tezt");
+		candidato.setNumero_cand(88875); //precisa ser Unico
 		candidato.setTipo_Cargo_cand("DeputadorTester");
 
-		// partido = new Partido();
-		// partido.setNome_part("Analistas Desenvolvedores de Surubas");
-		// partido.setSigla_part("ADS");
-		// candidato.setPartido_cand(partido);
-
-		// lista = new ArrayList<Candidato>();
-		// lista.add(candidato);
-		// partido.setLista_Candidato_part(lista);
-		//
-		// this.estado = new Estado();
-		// estado.setLista_Candidato_est(lista);
-		// estado.setNome_est("Pernambuco");
-		// estado.setSigla_est("PE");
-		//
-		// lista_Cidadde = new ArrayList<>();
-		// lista_Cidadde.add(cidade);
-		// estado.setLista_Cidade_est(lista_Cidadde);
-		// candidato.setEstado_cand(estado);
-		//
-		// this.cidade = new Cidade();
-		// candidato.setCidade_cand(cidade);
-		// cidade.setNome_cid("Recife");
-		// cidade.setEstado_cid(estado);
-
 	}
-
-//	@AfterClass
-//	public void limparObjeto() throws Exception {
-//		candidato = null;
-//	}
-
-	@Test
-	@Ignore
-	public void removerCandidatoTest() throws Exception {
-		try {
-			this.cc.removerCandidato(candidato);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
+	
+	//========================================================================
+	// Casos de Testes - Fluxos Principais
+	//========================================================================
+	
 	@Test
 	@Ignore
 	public void cadastrarCandidatoTest() throws Exception {
@@ -121,17 +84,19 @@ public class CandidatoDAOTest {
 		}
 	}
 
-	// O método retorna verdadeiro se o número passado não existir no banco.
 	@Test
 	@Ignore
-	public void retornaNumeroTest() throws Exception {
+	public void removerCandidatoTest() throws Exception {
 		try {
-			assertEquals(true, this.candiDAO.retornaNumero(candidato));
+			// candidato.setId_cand(16); //Necessita setar um ID válido pra remoção.
+			this.cc.removerCandidato(candidato);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
+
+
 
 	@Test
 	@Ignore
@@ -185,20 +150,21 @@ public class CandidatoDAOTest {
 	}
 
 	@Test
+	@Ignore
 	public void consultarCandidatoFiltradosTeste() {
 		try {
 			candidato = new Candidato();
-			//candidato.setNome_cand("GlauberTest");
+			// candidato.setNome_cand("GlauberTest");
 			candidato.setNumero_cand(12345);
 			candidato.getCidade_cand().setNome_cid("cidade");
-			//candidato.getPartido_cand().setId_part(1);
-			//candidato.getCidade_cand().setId_cid(1);	
-			//candidato.getEstado_cand().setId_est(5);
-			//candidato.setTipo_Cargo_cand("teste");
+			// candidato.getPartido_cand().setId_part(1);
+			// candidato.getCidade_cand().setId_cid(1);
+			// candidato.getEstado_cand().setId_est(5);
+			// candidato.setTipo_Cargo_cand("teste");
 			lista = new ArrayList<>();
 			lista = candiDAO.consultarCandidatosFiltrados(candidato);
-			//assertEquals("Cand", lista.get(0).getNome_cand());
-			//assertEquals(5, lista.get(0).getCidade_cand().getId_cid());
+			// assertEquals("Cand", lista.get(0).getNome_cand());
+			// assertEquals(5, lista.get(0).getCidade_cand().getId_cid());
 			assertEquals(26, lista.get(2).getId_cand());
 			System.out.println(lista.get(2).getId_cand());
 		} catch (Exception e) {
@@ -239,6 +205,40 @@ public class CandidatoDAOTest {
 			assertEquals("ProjetoTeste", lista_projeto.get(0).getTitulo_proj());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+	//========================================================================
+	//Casos de Testes - Fluxos Alterantivos ou de Exceção
+	//========================================================================
+	
+	//O método tem que da erro de exceção caso algum dos campos abaixo esteja nulo.
+	@Test
+	public void verificaCadastroCamposObg() throws Exception {
+		try {
+			candidato.setNome_cand("");
+			//candidato.setNumero_cand(0);
+			//candidato.setTipo_Cargo_cand("");
+			
+			this.cc.cadastrarCandidato(candidato);
+			String name = this.candidato.getNome_cand();
+			System.out.printf(name);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
+	
+	// O método retorna verdadeiro se o número passado não existir no banco.
+	@Test
+	@Ignore
+	public void verificaCadastroNumero() throws Exception {
+		try {
+			assertEquals(true, this.candiDAO.retornaNumero(candidato));
+		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}

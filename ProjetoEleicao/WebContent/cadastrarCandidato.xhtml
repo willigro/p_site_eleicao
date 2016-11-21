@@ -31,6 +31,7 @@ body {
 
 <h:body>
 	<f:view>
+
 		<h:form>
 			<p:growl id="messages" />
 			<p:menubar styleClass="menubar">
@@ -80,13 +81,14 @@ body {
 				<h:outputLabel for="partido" value="PARTIDO"></h:outputLabel>
 				<h:selectOneMenu id="partido"
 					value="#{candidatoBean.candidato.partido_cand.nome_part}" style="width:200px;"></h:selectOneMenu>
- -->
+ 					-->
 				</p:panelGrid>
 				<br />
 				<p:commandButton value="Cadastrar"
 					action="#{candidatoBean.cadastrar()}" update="matchGrid"></p:commandButton>
 			</p:fieldset>
 		</h:form>
+
 	</f:view>
 </h:body>
 </html>
