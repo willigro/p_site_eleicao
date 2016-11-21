@@ -21,19 +21,19 @@ public class Comentario {
 	@Column(nullable = false, length = 500)
 	private String texto_coment;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne//(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_admin")
 	private Administrador administrador_coment;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne//(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_user")
 	private Usuario usuario_coment;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne//(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_proj")
 	private Projeto projeto_coment;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne//(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_cand")
 	private Candidato candidato_coment;
 	

@@ -28,10 +28,7 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 			lista_candidatos = getManager().createQuery("SELECT cand FROM Candidato cand").getResultList();
 			if (lista_candidatos.isEmpty()) {
 				throw new Exception("Não há registros armazenados");
-			}
-			for (Candidato candidato : lista_candidatos) {
-				System.out.println(candidato.getNumero_cand());
-			}
+			}			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception(e.getMessage());

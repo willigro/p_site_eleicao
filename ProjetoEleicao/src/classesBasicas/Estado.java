@@ -83,4 +83,10 @@ public class Estado {
 	}
 
 	// Methods
+	
+	@Override
+	public String toString() {
+	    return String.format("%s[id=%d]", getClass().getSimpleName(), getId_est());
+	}
+
 }

@@ -24,6 +24,10 @@
 	padding: 6px;
 	padding: 6px;
 }
+
+#painelPrincipal {
+	margin-top: 12px;
+}
 /*
 	position: fixed;
 	z-index: 999;
@@ -49,67 +53,90 @@
 </style>
 </h:head>
 <h:body>
-
 	<f:view>
 		<ui:include src="menuNav.xhtml"></ui:include>
 
-		<div class="ui-g">
-			<div class="ui-g-8 ui-g-nopad">
-				<div class="ui-g-6">6</div>
-				<div class="ui-g-6">6</div>
-				<div class="ui-g-12">12</div>
-			</div>
-			<div class="ui-g-4">4</div>
-		</div>
+		<div class="ui-fluid" id="container">
+			<!-- Container -->
+			<div class="ui-g-12 ui-md-2">
+				<!-- Painel de filtros -->
 
-		<p:commandButton style="margin-top:10px;" id="cmd" value="Pesquisar"
-			action="#{candidatoBean.consultarTodosCandidatos()}"
-			update=":formPesquisa"></p:commandButton>
+				<p:panel id="painelFiltros">
+					<p:commandButton style="margin-top:10px;" id="cmd"
+						value="Pesquisar"
+						action="#{candidatoBean.consultarTodosCandidatos()}"
+						update=":formPesquisa"></p:commandButton>
+					<h:form id="formFiltro">
+						<p:selectOneMenu id="dropTipo" value="#{dropdownView.city}"
+							style="width:150px; margin-top: 4px;">
+							<f:selectItem itemLabel="Cargo" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{dropdownView.cities}" />
+						</p:selectOneMenu>
 
-		<div class="ui-g">
-			<div class="ui-g-4">
-				<div class="divFiltros">
-					<h:form id="stickyFiltro">
-						<p:menu>
-							<p:submenu label="File">
-								<p:menuitem value="Open"></p:menuitem>
-								<p:menuitem value="Edit"></p:menuitem>
-								<p:separator />
-								<p:menuitem value="Exit"></p:menuitem>
-							</p:submenu>
-							<p:submenu label="Help">
-								<p:menuitem value="About Primefaces"></p:menuitem>
-								<p:menuitem value="Contact Us"></p:menuitem>
-								<p:separator />
-								<p:menuitem value="Help"></p:menuitem>
-							</p:submenu>
-						</p:menu>
+						<p:inputText placeholder="Nome"
+							value="#{candidatoBean.candidato.nome_cand}" />
+
+						<p:inputText placeholder="Numero"
+							value="#{candidatoBean.candidato.numero_cand}"
+							style="margin-top: 4px;" />
+
+						<p:selectOneMenu id="dropPatido" value="#{dropdownView.country}"
+							style="width:150px; margin-top: 4px;">
+							<p:ajax listener="#{dropdownView.onCountryChange}" />
+							<f:selectItem itemLabel="Partido" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{dropdownView.countries}" />
+						</p:selectOneMenu>
+
+						<!-- https://www.youtube.com/watch?v=kQVSG_Q8iHg 17:00 -->
+						<p:selectOneMenu id="dropEstado" style="width:150px" filter="true"
+							value="#{candidatoBean.idEstado}">
+							<f:selectItem itemLabel="Estado" itemValue="0"
+								noSelectionOption="true" />
+							<f:selectItems value="#{candidatoBean.lista_estados}"
+								var="estado" itemValue="#{estado.id_est}"
+								itemLabel="#{estado.nome_est} - #{estado.sigla_est}" />
+							<p:ajax listener="#{candidatoBean.estadoSelecionado}"
+								process=":formFiltro:dropEstado"></p:ajax>
+						</p:selectOneMenu>
+
+						<p:selectOneMenu id="dropCidade" value="#{dropdownView.city}"
+							style="width:150px">
+							<f:selectItem itemLabel="Cidade" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{dropdownView.cities}" />
+						</p:selectOneMenu>
 					</h:form>
-					<!-- <p:sticky target="stickyFiltro" /> -->
+				</p:panel>
+			</div>
+			<!-- Fim do Painel de filtros -->
+			<div class="ui-g-12 ui-md-10 ui-g-nopad" id="painelPrincipal">
+				<!-- Painel principal -->
+				<div class="ui-g-12">
+					<h:form id="formPesquisa" class="principal">
+						<p:dataGrid columns="3" value="#{candidatoBean.candidatos}"
+							var="cand">
+							<!-- <c:forEach items="#{candidatoBean.candidatos}" var="cand"> -->
+							<p:panel>
+								<h:panelGrid>
+									<f:facet name="header">
+										<p:graphicImage value="../img/test.jpg" style="width:100%" />
+									</f:facet>
+									<h:outputText value="#{cand.tipo_Cargo_cand}"></h:outputText>
+									<h:outputText value="#{cand.numero_cand}"></h:outputText>
+									<h:outputText value="#{cand.partido_cand.sigla_part}"></h:outputText>
+									<p:commandButton id="bAvaliar" icon="fa-bell"></p:commandButton>
+								</h:panelGrid>
+							</p:panel>
+							<!-- </c:forEach> -->
+						</p:dataGrid>
+					</h:form>
 				</div>
 			</div>
-			<div class="ui-g-7">
-				<h:form id="formPesquisa" class="principal">
-					<p:dataGrid columns="3" value="#{candidatoBean.candidatos}"
-						var="cand">
-						<!-- <c:forEach items="#{candidatoBean.candidatos}" var="cand"> -->
-						<p:panel>
-							<h:panelGrid>
-								<f:facet name="header">
-									<p:graphicImage value="../img/test.jpg" style="width:100%" />
-								</f:facet>
-								
-								<h:outputText value="#{cand.tipo_Cargo_cand}"></h:outputText>
-								<h:outputText value="#{cand.numero_cand}"></h:outputText>
-								<h:outputText value="#{cand.partido_cand.sigla_part}"></h:outputText>
-								<p:commandButton id="bAvaliar" icon="fa-bell"></p:commandButton>
-							</h:panelGrid>
-						</p:panel>
-						<!-- </c:forEach> -->
-					</p:dataGrid>
-				</h:form>
-			</div>
+			<!-- Fim do Painel de filtros -->
 		</div>
+		<!-- Fim do Painel do container -->
 	</f:view>
 </h:body>
 </html>

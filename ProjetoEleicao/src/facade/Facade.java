@@ -9,12 +9,16 @@ import classesBasicas.*;
 
 public class Facade implements IFachada {
 
+	/**
+	 * Implementei o new controllerEstado na chamada do consultarTodosEstados
+	 * */
 	private ControllerCandidato controlCand;
 	private ControllerUsuario controllerUsuario;
 	private ControllerComentario controllerComentario;
 	private ControllerAvaliacao controllerAvaliacao;
 	private ControllerAdministrador controllerAdministrador;
 	private ControllerProjeto controllerProjeto;
+	private ControllerEstado controllerEstado;
 
 	public Facade() {
 		this.controlCand = new ControllerCandidato();
@@ -108,5 +112,22 @@ public class Facade implements IFachada {
 			return this.controlCand.consultarCandidatosFiltrados(candidato);
 		else
 			return null;
+	}
+
+	@Override
+	public List<Estado> consultarTodosEstado() throws Exception {
+		this.controllerEstado = new ControllerEstado();
+		return this.controllerEstado.consultarTodosEstado();
+	}
+
+	@Override
+	public void inserirComentarioProjeto(Comentario comentario) throws Exception {
+		this.controllerComentario = new ControllerComentario();
+		this.controllerComentario.inserirComentarioProjeto(comentario);
+	}
+
+	@Override
+	public void inserirAvaliacaoProjeto(Avaliacao avaliacao) throws Exception {
+		this.controllerAvaliacao.inserirAvaliacaoProjeto(avaliacao);
 	}
 }

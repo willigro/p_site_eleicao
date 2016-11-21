@@ -51,6 +51,7 @@ public class UsuarioDAOTest {
 	 * banco.
 	 */
 	@Test
+	@Ignore
 	public void criptografarSenhaTest() throws Exception {
 		try {
 			int retorno = this.userDao.select(1).getSenha().length();

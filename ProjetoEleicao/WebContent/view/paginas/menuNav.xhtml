@@ -12,19 +12,17 @@
 </h:head>
 <h:body>
 	<f:view>
-		<div class="ui-fluid">
-			<h:form id="stickyMenuNav">
-				<p:growl id="messages" />
-				<p:menubar>
-					<p:menuitem value="Project" url="#" />													
-					<f:facet name="options">
-						<p:inputText style="margin-right:10px" placeholder="Search" />
-						<p:commandButton value="Pesquisar"
-							icon="ui-icon-extlink" action="#{candidatoBean.pagConsultarCandidato()}"/>							
-					</f:facet>
-				</p:menubar>
-			</h:form>
-		</div>
+		<h:form id="stickyMenuNav">
+			<p:growl id="messages" />
+			<p:menubar>
+				<p:menuitem value="Project" url="#" />
+				<f:facet name="options">
+					<p:inputText style="margin-right:10px" placeholder="Search" />
+					<p:commandButton value="Pesquisar" icon="ui-icon-extlink"
+						action="#{candidatoBean.pagConsultarCandidato()}" />
+				</f:facet>
+			</p:menubar>
+		</h:form>
 		<p:sticky target="stickyMenuNav" />
 	</f:view>
 </h:body>
