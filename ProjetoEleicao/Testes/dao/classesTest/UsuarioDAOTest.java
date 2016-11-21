@@ -17,9 +17,9 @@ public class UsuarioDAOTest {
 	@Before
 	public void setUp() throws Exception {
 		this.usuario = new Usuario();
-		usuario.setNome_user("UsuarioTester");
-		usuario.setSenha("senhatester");
-		usuario.setEmail_user("usuario@emailtest.com");
+		usuario.setNome_user("Sarah");
+		usuario.setSenha("12345678");
+		usuario.setEmail_user("sarah@email.com");
 		usuario.setAtivo_user(true);
 		this.userDao = DAOFactory.getUsuarioDAO();
 	}
@@ -51,6 +51,7 @@ public class UsuarioDAOTest {
 	 * banco.
 	 */
 	@Test
+	@Ignore
 	public void criptografarSenhaTest() throws Exception {
 		try {
 			int retorno = this.userDao.select(1).getSenha().length();
