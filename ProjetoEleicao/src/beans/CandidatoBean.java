@@ -51,9 +51,9 @@ public class CandidatoBean {
 			// consultarCandidatoFiltrado(candidato);
 			// candidato.setNumero_cand(99999);
 			// candidato.getCidade_cand().setNome_cid("cidade");
-			// candidato.setId_cand(65);
+			candidato.setId_cand(67);
 			fachada.removerCandidato(candidato);
-			//addMensagem("Removido com Sucesso!");
+			addMensagem("Removido com Sucesso!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
