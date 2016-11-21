@@ -12,17 +12,15 @@ public class ControllerAvaliacao {
 	public ControllerAvaliacao() {
 		this.iavaliacaoDAO = DAOFactory.getAvaliacaoDAO();
 	}
-	
-	private void validarAvaliacao(Avaliacao avaliacao) throws Exception {
-		if (avaliacao.getId_aval() <= 0) {
-			throw new Exception("ID da avaliação inválida");
-		} else if (avaliacao.getUsuario_aval().getId_user() <= 0) {
+
+	private void validarAvaliacao(Avaliacao avaliacao) throws Exception {		
+		if (avaliacao.getUsuario_aval().getId_user() <= 0) {
 			throw new Exception("ID do usuário inválido");
 		} else if (Integer.toString(avaliacao.getNotaAvaliacao()).trim().isEmpty()) {
 			throw new Exception("Informe uma nota");
 		} else if (avaliacao.getNotaAvaliacao() > 5 || avaliacao.getNotaAvaliacao() < 0) {
 			throw new Exception("Informe uma nota entre 0 e 5");
-		} else if(avaliacao.getCandidato_aval().getId_cand() >= 0 && avaliacao.getProjeto_aval().getId_proj() >= 0){
+		} else if (avaliacao.getCandidato_aval().getId_cand() >= 0 && avaliacao.getProjeto_aval().getId_proj() >= 0) {
 			throw new IdAbimguoAvaliacaoException();
 		}
 	}

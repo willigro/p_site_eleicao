@@ -69,4 +69,10 @@ public abstract class DAOFactory {
 		return projetoDAO;
 
 	}
+	
+	public static EstadoDAO getEstadoDAO(){
+		EstadoDAO estadoDAO = new EstadoDAO();
+		estadoDAO.setManager(manager);
+		return estadoDAO;
+	}
 }

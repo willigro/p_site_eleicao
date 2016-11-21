@@ -41,6 +41,7 @@ public class ProjetoDAO extends DAOGenerico<Projeto> implements IProjetoDAO {
 	public List<Projeto> consultarTodosProjetos() throws Exception {
 		List<Projeto> lista_projeto = new ArrayList<>();
 		try {
+			getManager().clear();
 			lista_projeto = getManager().createQuery("SELECT proj FROM Projeto proj").getResultList();
 			if (lista_projeto.isEmpty()) {
 				throw new Exception("Não há registros armazenados");
@@ -50,5 +51,4 @@ public class ProjetoDAO extends DAOGenerico<Projeto> implements IProjetoDAO {
 		}
 		return lista_projeto;
 	}
-
 }

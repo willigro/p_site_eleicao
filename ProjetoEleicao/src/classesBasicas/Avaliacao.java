@@ -19,15 +19,15 @@ public class Avaliacao {
 
 	private int notaAvaliacao;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne//(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_cand")
 	private Candidato candidato_aval;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne//(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_proj")
 	private Projeto projeto_aval;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne//(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_user")
 	private Usuario usuario_aval;
 

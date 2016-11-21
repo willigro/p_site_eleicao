@@ -7,6 +7,7 @@ import java.util.List;
 import classesBasicas.Avaliacao;
 import classesBasicas.Candidato;
 import classesBasicas.Comentario;
+import classesBasicas.Estado;
 import classesBasicas.Projeto;
 import classesBasicas.Usuario;
 
@@ -40,5 +41,12 @@ public interface IFachada {
 	
 	public List<Projeto> consultarTodosProjetos() throws Exception;
 	
+	public List<Estado> consultarTodosEstado() throws Exception;
+	
+	public void inserirComentarioProjeto(Comentario comentario) throws Exception;
+	
+	public void inserirAvaliacaoProjeto(Avaliacao avaliacao) throws Exception;
+
 	public List<Usuario> consultarUsuarios() throws Exception;
+
 }

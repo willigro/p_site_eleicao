@@ -22,6 +22,7 @@ import facade.Facade;
 @ManagedBean
 public class CandidatoBean {
 
+	private int idEstado;
 	private Candidato candidato;
 	private Facade fachada;
 	private Estado estado;
@@ -29,18 +30,33 @@ public class CandidatoBean {
 	private Partido partido;
 	private List<Cidade> cidades;
 	private List<Candidato> candidatos;
+	private List<Estado> lista_estados;
 
 	public CandidatoBean() {
 		this.candidato = new Candidato();
-		fachada = new Facade();
-		estado = new Estado();
-		cidade = new Cidade();
-		partido = new Partido();
-		cidades = new ArrayList<>();
+		this.fachada = new Facade();
+		this.estado = new Estado();
+		this.cidade = new Cidade();
+		this.partido = new Partido();
+		this.cidades = new ArrayList<>();
 		this.candidatos = new ArrayList<>();
+		this.lista_estados = new ArrayList<>();
 	}
 
 	// Methods
+
+	public void estadoSelecionado() {
+		System.out.println(this.idEstado);
+	}
+
+	public void pagRemover() throws Exception {
+	}
+
+	public void pagCadastrar() throws Exception {
+		FacesContext.getCurrentInstance().getExternalContext()
+				.redirect("http://localhost:8080/ProjetoEleicao/cadastrarCandidato.xhtml");
+	}
+
 	private void addMensagem(String texto) {
 		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
@@ -80,9 +96,11 @@ public class CandidatoBean {
 			// partido.setLista_Candidato_part(candidatos);
 			// estado.setLista_Candidato_est(candidatos);
 			// cidades.add(cidade);
-			candidato.setEstado_cand(estado);
+
+			// candidato.setEstado_cand(estado);
 			// estado.setLista_Cidade_est(cidades);
-			candidato.setCidade_cand(cidade);
+			// candidato.setCidade_cand(cidade);
+
 			// cidade.setEstado_cid(estado);
 			//
 			fachada.cadastrarCandidato(candidato);
@@ -103,6 +121,8 @@ public class CandidatoBean {
 
 	public void consultarTodosCandidatos() {
 		try {
+			System.out.println(estado.getNome_est());
+			System.out.println(estado.getId_est());
 			candidatos = fachada.consultarTodosCandidatos();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -157,4 +177,22 @@ public class CandidatoBean {
 	public void setCandidatos(List<Candidato> candidatos) {
 		this.candidatos = candidatos;
 	}
+
+	public List<Estado> getLista_estados() {
+		try {
+			return this.lista_estados = fachada.consultarTodosEstado();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public int getIdEstado() {
+		return idEstado;
+	}
+
+	public void setIdEstado(int idEstado) {
+		this.idEstado = idEstado;
+	}
+
 }
