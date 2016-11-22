@@ -28,8 +28,8 @@ public class ComentarioTest {
 		this.adm = new Administrador();
 		this.usuario = new Usuario();
 		this.fachada = new Facade();
-		this.usuario.setId_user(1);
-		this.candidato.setId_cand(1);
+		this.usuario.setId_user(2);
+		this.candidato.setId_cand(11);
 		this.projeto.setId_proj(1);
 		this.adm.setId_admin(1);
 		this.comentario.setProjeto_coment(projeto);

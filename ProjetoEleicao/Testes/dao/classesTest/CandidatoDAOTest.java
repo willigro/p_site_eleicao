@@ -27,7 +27,7 @@ public class CandidatoDAOTest {
 
 	ControllerCandidato cc = new ControllerCandidato();
 	CandidatoDAO candiDAO = DAOFactory.getCandidatoDAO();
-	Facade facade = new Facade();
+	// Facade facade = new Facade();
 	Candidato candidato;
 	Facade fachada;
 	private List<Cidade> cidades;
@@ -60,7 +60,7 @@ public class CandidatoDAOTest {
 		candidato.setCidade_cand(cidade);
 
 		candidato.setNome_cand("TesteNome");
-		candidato.setNumero_cand(98651); // precisa ser Unico
+		candidato.setNumero_cand(22222);
 		candidato.setTipo_Cargo_cand("TesteDeputado");
 
 	}
@@ -70,7 +70,7 @@ public class CandidatoDAOTest {
 	// ========================================================================
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void cadastrarCandidatoTest() throws Exception {
 		try {
 			this.cc.cadastrarCandidato(candidato);
@@ -85,7 +85,6 @@ public class CandidatoDAOTest {
 	// Pra testar o alterar, é necessário pegar o ID já criado no banco
 	// Se colocar sem um ID válido, ele cadastrará o novo candidato.
 	@Test
-	@Ignore
 	public void alterarCandidatoTest() throws Exception {
 		try {
 			candidato.setId_cand(27);
@@ -93,7 +92,7 @@ public class CandidatoDAOTest {
 			candidato.setNumero_cand(99991);
 			candidato.setTipo_Cargo_cand("TesteDeputadoAlterado");
 
-			this.cc.alterarCandidato(candidato);
+			this.candiDAO.alterarCandidato(candidato);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -102,10 +101,9 @@ public class CandidatoDAOTest {
 
 	// Necessita setar um ID válido pra remoção.
 	@Test
-	@Ignore
 	public void removerCandidatoTest() throws Exception {
 		try {
-			// candidato.setId_cand(16);
+			candidato.setId_cand(69);
 			this.cc.removerCandidato(candidato);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,7 +116,7 @@ public class CandidatoDAOTest {
 		try {
 			lista = new ArrayList<>();
 			lista = candiDAO.consultarTodosCandidatos();
-			Assert.assertEquals("CandidatoTester", lista.get(2).getNome_cand());
+			Assert.assertEquals("Erick2", lista.get(2).getNome_cand());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -126,12 +124,11 @@ public class CandidatoDAOTest {
 	}
 
 	@Test
-	@Ignore
 	public void consultarCandidatoTodosController() {
 		try {
 			lista = new ArrayList<>();
 			lista = cc.consultarTodosCandidatos();
-			assertEquals("CandidatoTester", lista.get(2).getNome_cand());
+			assertEquals("Erick2", lista.get(2).getNome_cand());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -139,11 +136,10 @@ public class CandidatoDAOTest {
 	}
 
 	@Test
-	@Ignore
 	public void selectAllCandidateFacade() {
 		try {
 			lista = new ArrayList<>();
-			lista = facade.consultarTodosCandidatos();
+			lista = cc.consultarTodosCandidatos();
 			assertEquals("GlauberTest", lista.get(0).getNome_cand());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -152,25 +148,24 @@ public class CandidatoDAOTest {
 	}
 
 	@Test
-	@Ignore
 	public void consultarCandidatoTodosQuantidade() {
 		try {
 			lista = new ArrayList<>();
 			lista = candiDAO.consultarTodosCandidatos();
-			assertEquals(1, lista.size());
+			assertEquals(9, lista.size());
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail();
 		}
 	}
 
 	@Test
-	@Ignore
 	public void consultarCandidatoFiltradosTeste() {
 		try {
 			candidato = new Candidato();
 			// candidato.setNome_cand("GlauberTest");
 			candidato.setNumero_cand(12345);
-			candidato.getCidade_cand().setNome_cid("cidade");
+			// candidato.getCidade_cand().setNome_cid("cidade");
 			// candidato.getPartido_cand().setId_part(1);
 			// candidato.getCidade_cand().setId_cid(1);
 			// candidato.getEstado_cand().setId_est(5);
@@ -179,18 +174,15 @@ public class CandidatoDAOTest {
 			lista = candiDAO.consultarCandidatosFiltrados(candidato);
 			// assertEquals("Cand", lista.get(0).getNome_cand());
 			// assertEquals(5, lista.get(0).getCidade_cand().getId_cid());
-			assertEquals(26, lista.get(2).getId_cand());
-			System.out.println(lista.get(2).getId_cand());
+			assertEquals(11, lista.get(0).getId_cand());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 	}
-	
 
 	// O método retorna verdadeiro se o número passado não existir no banco.
 	@Test
-	@Ignore
 	public void verificaNumeroCadastro() throws Exception {
 		try {
 			assertEquals(true, this.candiDAO.retornaNumero(candidato));
@@ -219,7 +211,7 @@ public class CandidatoDAOTest {
 			String name = this.candidato.getNome_cand();
 			System.out.printf(name);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			fail();
 		}
 	}
@@ -236,7 +228,7 @@ public class CandidatoDAOTest {
 			String name = this.candidato.getNome_cand();
 			System.out.printf(name);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			fail();
 		}
 	}
@@ -253,7 +245,7 @@ public class CandidatoDAOTest {
 			String name = this.candidato.getNome_cand();
 			System.out.printf(name);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			fail();
 		}
 	}
@@ -274,7 +266,7 @@ public class CandidatoDAOTest {
 			String name = this.candidato.getNome_cand();
 			System.out.printf(name);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			fail();
 		}
 	}
@@ -292,7 +284,7 @@ public class CandidatoDAOTest {
 			String name = this.candidato.getNome_cand();
 			System.out.printf(name);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			fail();
 		}
 	}
@@ -311,7 +303,7 @@ public class CandidatoDAOTest {
 			String name = this.candidato.getNome_cand();
 			System.out.printf(name);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			fail();
 		}
 	}

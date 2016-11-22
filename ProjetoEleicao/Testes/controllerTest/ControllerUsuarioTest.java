@@ -16,7 +16,7 @@ public class ControllerUsuarioTest {
 	public void setUp() throws Exception {
 		this.control = new ControllerUsuario();
 		user = new Usuario();
-		user.setEmail_user("sarah@email.com");
+		user.setEmail_user("sarah2@email.com");
 		user.setNome_user("Sarah");
 		user.setSenha("12345678");
 		user.setAtivo_user(true);
@@ -27,6 +27,7 @@ public class ControllerUsuarioTest {
 		try {
 			control.cadastrarUsuario(user);
 		} catch (Exception e) {
+			e.printStackTrace();
 			fail();
 		}
 	}

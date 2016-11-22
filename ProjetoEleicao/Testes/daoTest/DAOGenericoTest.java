@@ -26,7 +26,6 @@ public class DAOGenericoTest {
 	}
 
 	@Test
-	@Ignore
 	public void isertTest() throws Exception {
 		try {
 			userDao.insert(user);
@@ -42,12 +41,11 @@ public class DAOGenericoTest {
 	 */
 
 	@Test
-	@Ignore
 	public void updateTest() throws Exception {
 		try {
 			Usuario user2 = new Usuario();
 			user2.setId_user(3); // Informar um ID real do banco
-			user2.setNome_user("newUser"); // informar o valor que deve ser atualizado.
+			user2.setNome_user("newUser3"); // informar o valor que deve ser atualizado.
 			user2.setEmail_user("user@email.com");
 			user2.setSenha("minhasenha");
 			assertEquals(user2.getNome_user(), userDao.update(user2).getNome_user());
@@ -57,10 +55,9 @@ public class DAOGenericoTest {
 	}
 
 	@Test
-	@Ignore
 	public void selectTest() throws Exception {
 		try {
-			assertEquals(6, userDao.select(2).getNome_user());
+			assertEquals("newUser", userDao.select(3).getNome_user());
 		} catch (Exception e) {
 			fail();
 		}

@@ -47,18 +47,6 @@ public class ProjetoTest {
 
 	@Test
 	//@Ignore
-	public void consultarTodosProjetosController() {
-		try {
-			this.lista_projeto = this.controllerProjeto.consultarTodosProjetos();
-			assertEquals("Fuder o Brasil", this.lista_projeto.get(0).getTitulo_proj());
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
-
-	@Test
-	//@Ignore
 	public void consultarTodosProjetosFachada() {
 		try {
 			this.lista_projeto = this.facade.consultarTodosProjetos();
