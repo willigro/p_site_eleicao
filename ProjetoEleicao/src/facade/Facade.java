@@ -11,7 +11,7 @@ public class Facade implements IFachada {
 
 	/**
 	 * Implementei o new controllerEstado na chamada do consultarTodosEstados
-	 * */
+	 */
 	private ControllerCandidato controlCand;
 	private ControllerUsuario controllerUsuario;
 	private ControllerComentario controllerComentario;
@@ -19,6 +19,7 @@ public class Facade implements IFachada {
 	private ControllerAdministrador controllerAdministrador;
 	private ControllerProjeto controllerProjeto;
 	private ControllerEstado controllerEstado;
+	private ControllerCidade controllerCidade;
 
 	public Facade() {
 		this.controlCand = new ControllerCandidato();
@@ -27,6 +28,7 @@ public class Facade implements IFachada {
 		this.controllerAvaliacao = new ControllerAvaliacao();
 		this.controllerAdministrador = new ControllerAdministrador();
 		this.controllerProjeto = new ControllerProjeto();
+		//ControlCidade instanciada na chamada
 	}
 
 	public boolean validaControl(Object controlador) throws Exception {
@@ -121,6 +123,12 @@ public class Facade implements IFachada {
 	}
 
 	@Override
+	public List<Cidade> consultarTodasCidade() throws Exception {
+		this.controllerCidade = new ControllerCidade();
+		return this.controllerCidade.consultarTodosEstado();
+	}
+
+	@Override
 	public void inserirComentarioProjeto(Comentario comentario) throws Exception {
 		this.controllerComentario = new ControllerComentario();
 		this.controllerComentario.inserirComentarioProjeto(comentario);
@@ -130,11 +138,12 @@ public class Facade implements IFachada {
 	public void inserirAvaliacaoProjeto(Avaliacao avaliacao) throws Exception {
 		this.controllerAvaliacao.inserirAvaliacaoProjeto(avaliacao);
 	}
-	
-	public List<Usuario> consultarUsuarios() throws Exception{
-		if(validaControl(this.controllerUsuario))
-		 return this.controllerUsuario.consultarUsuarios();
+
+	public List<Usuario> consultarUsuarios() throws Exception {
+		if (validaControl(this.controllerUsuario))
+			return this.controllerUsuario.consultarUsuarios();
 		else
-		 return null;
+			return null;
 	}
+
 }

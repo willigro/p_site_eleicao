@@ -103,7 +103,7 @@ public class CandidatoDAOTest {
 	@Test
 	public void removerCandidatoTest() throws Exception {
 		try {
-			candidato.setId_cand(69);
+			candidato.setId_cand(72);
 			this.cc.removerCandidato(candidato);
 		} catch (Exception e) {
 			e.printStackTrace();

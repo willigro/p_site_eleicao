@@ -70,6 +70,12 @@ public abstract class DAOFactory {
 
 	}
 	
+	public static CidadeDAO getCidadeDAO(){
+		CidadeDAO cidadeDAO = new CidadeDAO();
+		cidadeDAO.setManager(manager);
+		return cidadeDAO;
+	}
+	
 	public static EstadoDAO getEstadoDAO(){
 		EstadoDAO estadoDAO = new EstadoDAO();
 		estadoDAO.setManager(manager);

@@ -6,6 +6,7 @@ import classesBasicas.Administrador;
 import java.util.List;
 import classesBasicas.Avaliacao;
 import classesBasicas.Candidato;
+import classesBasicas.Cidade;
 import classesBasicas.Comentario;
 import classesBasicas.Estado;
 import classesBasicas.Projeto;
@@ -42,6 +43,8 @@ public interface IFachada {
 	public List<Projeto> consultarTodosProjetos() throws Exception;
 	
 	public List<Estado> consultarTodosEstado() throws Exception;
+	
+	public List<Cidade> consultarTodasCidade() throws Exception;
 	
 	public void inserirComentarioProjeto(Comentario comentario) throws Exception;
 	

@@ -22,7 +22,6 @@ import facade.Facade;
 @ManagedBean
 public class CandidatoBean {
 
-	private int idEstado;
 	private Candidato candidato;
 	private Facade fachada;
 	private Estado estado;
@@ -44,17 +43,12 @@ public class CandidatoBean {
 	}
 
 	// Methods
-
 	public void estadoSelecionado() {
-		System.out.println(this.idEstado);
+		System.out.println(this.candidato.getId_cand());
 	}
 
-	public void pagRemover() throws Exception {
-	}
-
-	public void pagCadastrar() throws Exception {
-		FacesContext.getCurrentInstance().getExternalContext()
-				.redirect("http://localhost:8080/ProjetoEleicao/cadastrarCandidato.xhtml");
+	public void cidadeSelecionada() {
+		System.out.println(this.candidato.getId_cand());
 	}
 
 	private void addMensagem(String texto) {
@@ -64,12 +58,8 @@ public class CandidatoBean {
 
 	public String remover() throws Exception {
 		try {
-			// consultarCandidatoFiltrado(candidato);
-			// candidato.setNumero_cand(99999);
-			// candidato.getCidade_cand().setNome_cid("cidade");
-			candidato.setId_cand(67);
 			fachada.removerCandidato(candidato);
-			addMensagem("Removido com Sucesso!");
+			// addMensagem("Removido com Sucesso!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,24 +75,9 @@ public class CandidatoBean {
 
 	public String cadastrar() throws Exception {
 		try {
-			this.cidade.setId_cid(1);
-			this.estado.setId_est(1);
-			this.partido.setId_part(13);
-			// candidato.getCidade_cand().setId_cid(5);
-			// candidato.getEstado_cand().setId_est(5);
-			// candidato.getPartido_cand().setId_part(5);
-			candidato.setPartido_cand(partido);
-			// candidatos.add(candidato);
-			// partido.setLista_Candidato_part(candidatos);
-			// estado.setLista_Candidato_est(candidatos);
-			// cidades.add(cidade);
-
-			// candidato.setEstado_cand(estado);
-			// estado.setLista_Cidade_est(cidades);
-			// candidato.setCidade_cand(cidade);
-
-			// cidade.setEstado_cid(estado);
-			//
+			this.candidato.getCidade_cand().setId_cid(1);
+			// this.candidato.getEstado_cand().setId_est(this.idEstado);
+			this.candidato.getPartido_cand().setId_part(13);
 			fachada.cadastrarCandidato(candidato);
 			addMensagem("Cadastrado com Sucesso!");
 		} catch (Exception e) {
@@ -163,11 +138,12 @@ public class CandidatoBean {
 	}
 
 	public List<Cidade> getCidades() {
-		return cidades;
-	}
-
-	public void setCidades(List<Cidade> cidades) {
-		this.cidades = cidades;
+		try {
+			this.cidades = this.fachada.consultarTodasCidade();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return this.cidades;
 	}
 
 	public List<Candidato> getCandidatos() {
@@ -186,13 +162,4 @@ public class CandidatoBean {
 		}
 		return null;
 	}
-
-	public int getIdEstado() {
-		return idEstado;
-	}
-
-	public void setIdEstado(int idEstado) {
-		this.idEstado = idEstado;
-	}
-
 }

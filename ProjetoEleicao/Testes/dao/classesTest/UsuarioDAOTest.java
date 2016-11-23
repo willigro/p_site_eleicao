@@ -19,7 +19,7 @@ public class UsuarioDAOTest {
 		this.usuario = new Usuario();
 		usuario.setNome_user("Sarah");
 		usuario.setSenha("12345678");
-		usuario.setEmail_user("sarah@email.com");
+		usuario.setEmail_user("sarah3@email.com");
 		usuario.setAtivo_user(true);
 		this.userDao = DAOFactory.getUsuarioDAO();
 	}
