@@ -70,7 +70,7 @@ public class CandidatoDAOTest {
 	// ========================================================================
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void cadastrarCandidatoTest() throws Exception {
 		try {
 			this.cc.cadastrarCandidato(candidato);
@@ -85,6 +85,7 @@ public class CandidatoDAOTest {
 	// Pra testar o alterar, é necessário pegar o ID já criado no banco
 	// Se colocar sem um ID válido, ele cadastrará o novo candidato.
 	@Test
+	@Ignore
 	public void alterarCandidatoTest() throws Exception {
 		try {
 			candidato.setId_cand(27);
@@ -101,6 +102,7 @@ public class CandidatoDAOTest {
 
 	// Necessita setar um ID válido pra remoção.
 	@Test
+	@Ignore
 	public void removerCandidatoTest() throws Exception {
 		try {
 			candidato.setId_cand(72);
@@ -164,7 +166,7 @@ public class CandidatoDAOTest {
 		try {
 			candidato = new Candidato();
 			// candidato.setNome_cand("GlauberTest");
-			candidato.setNumero_cand(12345);
+			candidato.setNumero_cand(31);
 			// candidato.getCidade_cand().setNome_cid("cidade");
 			// candidato.getPartido_cand().setId_part(1);
 			// candidato.getCidade_cand().setId_cid(1);
@@ -174,7 +176,7 @@ public class CandidatoDAOTest {
 			lista = candiDAO.consultarCandidatosFiltrados(candidato);
 			// assertEquals("Cand", lista.get(0).getNome_cand());
 			// assertEquals(5, lista.get(0).getCidade_cand().getId_cid());
-			assertEquals(11, lista.get(0).getId_cand());
+			assertEquals(3, lista.get(0).getId_cand());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

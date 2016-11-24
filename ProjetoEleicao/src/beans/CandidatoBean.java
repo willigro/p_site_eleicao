@@ -30,6 +30,7 @@ public class CandidatoBean {
 	private List<Cidade> cidades;
 	private List<Candidato> candidatos;
 	private List<Estado> lista_estados;
+	private List<Partido> lista_partidos;
 
 	public CandidatoBean() {
 		this.candidato = new Candidato();
@@ -43,14 +44,18 @@ public class CandidatoBean {
 	}
 
 	// Methods
+	/**
+	 * Metodo para confirmação, apenas.
+	 * */
 	public void estadoSelecionado() {
-		System.out.println(this.candidato.getId_cand());
+		System.out.println(this.candidato.getEstado_cand().getId_est());
+		System.out.println(this.candidato.getPartido_cand().getId_part());
 	}
 
 	public void cidadeSelecionada() {
-		System.out.println(this.candidato.getId_cand());
+		System.out.println(this.candidato.getCidade_cand().getId_cid());
 	}
-
+	
 	private void addMensagem(String texto) {
 		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
@@ -86,9 +91,10 @@ public class CandidatoBean {
 		return "paginaAdmin";
 	}
 
-	public void consultarCandidatoFiltrado(Candidato candidato) {
+	public void consultarCandidatoFiltrado() {
 		try {
-			candidatos = fachada.consultarCandidatosFiltrados(candidato);
+			System.out.println(candidato.toString());
+			this.candidatos = fachada.consultarCandidatosFiltrados(candidato);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -96,8 +102,6 @@ public class CandidatoBean {
 
 	public void consultarTodosCandidatos() {
 		try {
-			System.out.println(estado.getNome_est());
-			System.out.println(estado.getId_est());
 			candidatos = fachada.consultarTodosCandidatos();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -162,4 +166,15 @@ public class CandidatoBean {
 		}
 		return null;
 	}
+
+	public List<Partido> getLista_partidos() {
+		try {
+			return this.lista_partidos = fachada.consultarTodosPartidos();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	
 }

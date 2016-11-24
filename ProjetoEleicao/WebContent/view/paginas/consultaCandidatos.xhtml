@@ -64,7 +64,7 @@
 				<p:panel id="painelFiltros">
 					<p:commandButton style="margin-top:10px;" id="cmd"
 						value="Pesquisar"
-						action="#{candidatoBean.consultarTodosCandidatos()}"
+						action="#{candidatoBean.consultarCandidatoFiltrado}"
 						update=":formPesquisa"></p:commandButton>
 					<h:form id="formFiltro">
 						<p:selectOneMenu id="dropTipo" value="#{dropdownView.city}"
@@ -81,17 +81,20 @@
 							value="#{candidatoBean.candidato.numero_cand}"
 							style="margin-top: 4px;" />
 
-						<p:selectOneMenu id="dropPatido" value="#{dropdownView.country}"
-							style="width:150px; margin-top: 4px;">
-							<p:ajax listener="#{dropdownView.onCountryChange}" />
-							<f:selectItem itemLabel="Partido" itemValue=""
+						<p:selectOneMenu id="dropPartido" style="width:150px" filter="true"
+							value="#{candidatoBean.candidato.partido_cand.id_part}">
+							<f:selectItem itemLabel="Partido" itemValue="0"
 								noSelectionOption="true" />
-							<f:selectItems value="#{dropdownView.countries}" />
+							<f:selectItems value="#{candidatoBean.lista_partidos}"
+								var="partido" itemValue="#{partido.id_part}"
+								itemLabel="#{partido.nome_part} - #{partido.sigla_part}" />
+							<p:ajax listener="#{candidatoBean.estadoSelecionado}"
+								process=":formFiltro:dropPartido"></p:ajax>
 						</p:selectOneMenu>
 
 						<!-- https://www.youtube.com/watch?v=kQVSG_Q8iHg 17:00 -->
 						<p:selectOneMenu id="dropEstado" style="width:150px" filter="true"
-							value="#{candidatoBean.idEstado}">
+							value="#{candidatoBean.candidato.estado_cand.id_est}">
 							<f:selectItem itemLabel="Estado" itemValue="0"
 								noSelectionOption="true" />
 							<f:selectItems value="#{candidatoBean.lista_estados}"

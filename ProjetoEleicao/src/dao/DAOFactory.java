@@ -42,43 +42,47 @@ public abstract class DAOFactory {
 		usuarioDAO.setManager(manager);
 		return usuarioDAO;
 	}
-	
-	public static ComentarioDAO getComentarioDAO(){
+
+	public static ComentarioDAO getComentarioDAO() {
 		ComentarioDAO comentarioDAO = new ComentarioDAO();
 		comentarioDAO.setManager(manager);
 		return comentarioDAO;
 	}
-	
-	public static AvaliacaoDAO getAvaliacaoDAO(){
+
+	public static AvaliacaoDAO getAvaliacaoDAO() {
 		AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
 		avaliacaoDAO.setManager(manager);
 		return avaliacaoDAO;
 	}
-	
 
-	
-	public static AdministradorDAO getAdministradorDAO(){
+	public static AdministradorDAO getAdministradorDAO() {
 		AdministradorDAO administradorDAO = new AdministradorDAO();
 		administradorDAO.setManager(manager);
 		return administradorDAO;
 	}
 
-	public static ProjetoDAO getProjetoDAO(){
+	public static ProjetoDAO getProjetoDAO() {
 		ProjetoDAO projetoDAO = new ProjetoDAO();
 		projetoDAO.setManager(manager);
 		return projetoDAO;
 
 	}
-	
-	public static CidadeDAO getCidadeDAO(){
+
+	public static CidadeDAO getCidadeDAO() {
 		CidadeDAO cidadeDAO = new CidadeDAO();
 		cidadeDAO.setManager(manager);
 		return cidadeDAO;
 	}
-	
-	public static EstadoDAO getEstadoDAO(){
+
+	public static EstadoDAO getEstadoDAO() {
 		EstadoDAO estadoDAO = new EstadoDAO();
 		estadoDAO.setManager(manager);
 		return estadoDAO;
+	}
+
+	public static PartidoDAO getPartidoDAO() {
+		PartidoDAO partidoDAO = new PartidoDAO();
+		partidoDAO.setManager(manager);
+		return partidoDAO;
 	}
 }

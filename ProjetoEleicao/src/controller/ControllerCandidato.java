@@ -80,31 +80,31 @@ public class ControllerCandidato {
 		if (candidato.getId_cand() < 0) {
 			throw new Exception("ID do candidato inválido");
 		}
-
-		if (candidato.getNome_cand().trim().length() > 50) {
-			throw new Exception("O nome do candidato não pode conter mais de 50 caracteres");
+		if (candidato.getNome_cand() != null)
+			if (candidato.getNome_cand().trim().length() > 50) {
+				throw new Exception("O nome do candidato não pode conter mais de 50 caracteres");
+			}
+		if (candidato.getNumero_cand() > 0)
+			if (candidato.getNumero_cand() > 99999) {
+				throw new Exception("O campo Numero não deve ter mais que 5 dígitos");
+			} else if (candidato.getNumero_cand() < 10000) {
+				throw new Exception("O campo Numero não deve ter menos que 5 dígitos");
+			}
+		if (candidato.getTipo_Cargo_cand() != null)
+			if (candidato.getTipo_Cargo_cand().length() > 50) {
+				throw new Exception("O Campo Cargo Elegível não pode conter mais de 50 caracteres");
+			}
+		
+		if (candidato.getEstado_cand().getId_est() < 0) {
+			throw new Exception("ID do estado inválido");
 		}
 
-		if (candidato.getNumero_cand() > 99999) {
-			throw new Exception("O campo Numero não deve ter mais que 5 dígitos");
-		} else if (candidato.getNumero_cand() < 10000) {
-			throw new Exception("O campo Numero não deve ter menos que 5 dígitos");
+		if (candidato.getCidade_cand().getId_cid() < 0) {
+			throw new Exception("ID da cidade inválido");
 		}
 
-		if (candidato.getTipo_Cargo_cand().length() > 50) {
-			throw new Exception("O Campo Cargo Elegível não pode conter mais de 50 caracteres");
-		}
-
-		if (candidato.getEstado_cand().getNome_est().length() > 100) {
-			throw new Exception("O campo Estado não pode conter mais de 100 caracteres");
-		}
-
-		if (candidato.getCidade_cand().getNome_cid().length() > 100) {
-			throw new Exception("O campo Cidade não pode conter mais de 100 caracteres");
-		}
-
-		if (candidato.getPartido_cand().getNome_part().length() > 40) {
-			throw new Exception("O campo Partido não pode conter mais de 40 caraceteres");
+		if (candidato.getPartido_cand().getId_part() < 0) {
+			throw new Exception("ID do partido inválido");
 		}
 
 		return listCandidato = this.iCandidatoDAO.consultarCandidatosFiltrados(candidato);

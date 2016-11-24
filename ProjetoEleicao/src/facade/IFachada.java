@@ -9,6 +9,7 @@ import classesBasicas.Candidato;
 import classesBasicas.Cidade;
 import classesBasicas.Comentario;
 import classesBasicas.Estado;
+import classesBasicas.Partido;
 import classesBasicas.Projeto;
 import classesBasicas.Usuario;
 
@@ -51,5 +52,7 @@ public interface IFachada {
 	public void inserirAvaliacaoProjeto(Avaliacao avaliacao) throws Exception;
 
 	public List<Usuario> consultarUsuarios() throws Exception;
+	
+	public List<Partido> consultarTodosPartidos() throws Exception;
 
 }

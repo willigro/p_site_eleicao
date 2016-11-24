@@ -20,6 +20,7 @@ public class Facade implements IFachada {
 	private ControllerProjeto controllerProjeto;
 	private ControllerEstado controllerEstado;
 	private ControllerCidade controllerCidade;
+	private ControllerPartido controllerPartido;
 
 	public Facade() {
 		this.controlCand = new ControllerCandidato();
@@ -28,7 +29,8 @@ public class Facade implements IFachada {
 		this.controllerAvaliacao = new ControllerAvaliacao();
 		this.controllerAdministrador = new ControllerAdministrador();
 		this.controllerProjeto = new ControllerProjeto();
-		//ControlCidade instanciada na chamada
+		// ControlCidade instanciada na chamada
+		// ControllerPartido instanciado na chamada
 	}
 
 	public boolean validaControl(Object controlador) throws Exception {
@@ -144,6 +146,14 @@ public class Facade implements IFachada {
 			return this.controllerUsuario.consultarUsuarios();
 		else
 			return null;
+	}
+
+	@Override
+	public List<Partido> consultarTodosPartidos() throws Exception {
+		this.controllerPartido = new ControllerPartido();
+		if (this.controllerPartido != null)
+			return this.controllerPartido.consultarTodosPartidos();
+		return null;
 	}
 
 }
