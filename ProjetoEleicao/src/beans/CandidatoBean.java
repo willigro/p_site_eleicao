@@ -9,6 +9,7 @@ import java.util.TreeSet;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import classesBasicas.Candidato;
@@ -20,8 +21,10 @@ import dao.classes.CandidatoDAO;
 import facade.Facade;
 
 @ManagedBean
+@ViewScoped
 public class CandidatoBean {
 
+	private int idEstado;
 	private Candidato candidato;
 	private Facade fachada;
 	private Estado estado;
@@ -48,8 +51,9 @@ public class CandidatoBean {
 	 * Metodo para confirmação, apenas.
 	 * */
 	public void estadoSelecionado() {
-		System.out.println(this.candidato.getEstado_cand().getId_est());
-		System.out.println(this.candidato.getPartido_cand().getId_part());
+		System.out.println(this.idEstado);
+		//System.out.println(this.candidato.getPartido_cand().getId_part());
+		candidato.getEstado_cand().setId_est(idEstado);
 	}
 
 	public void cidadeSelecionada() {
@@ -93,8 +97,10 @@ public class CandidatoBean {
 
 	public void consultarCandidatoFiltrado() {
 		try {
-			System.out.println(candidato.toString());
-			this.candidatos = fachada.consultarCandidatosFiltrados(candidato);
+			System.out.println(idEstado+"");
+			this.candidato.getEstado_cand().setId_est(idEstado);
+			System.out.println(this.candidato.toString());
+			this.candidatos = fachada.consultarCandidatosFiltrados(this.candidato);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -175,6 +181,14 @@ public class CandidatoBean {
 		}
 		return null;
 
+	}
+
+	public int getIdEstado() {
+		return idEstado;
+	}
+
+	public void setIdEstado(int idEstado) {
+		this.idEstado = idEstado;
 	}
 	
 }

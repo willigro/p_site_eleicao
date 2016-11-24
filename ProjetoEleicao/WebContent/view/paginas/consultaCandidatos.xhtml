@@ -92,9 +92,11 @@
 								process=":formFiltro:dropPartido"></p:ajax>
 						</p:selectOneMenu>
 
-						<!-- https://www.youtube.com/watch?v=kQVSG_Q8iHg 17:00 -->
+						<!-- https://www.youtube.com/watch?v=kQVSG_Q8iHg 17:00 
+						candidato.estado_cand.id_est
+						-->
 						<p:selectOneMenu id="dropEstado" style="width:150px" filter="true"
-							value="#{candidatoBean.candidato.estado_cand.id_est}">
+							value="#{candidatoBean.idEstado}">
 							<f:selectItem itemLabel="Estado" itemValue="0"
 								noSelectionOption="true" />
 							<f:selectItems value="#{candidatoBean.lista_estados}"

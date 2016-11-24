@@ -166,11 +166,11 @@ public class CandidatoDAOTest {
 		try {
 			candidato = new Candidato();
 			// candidato.setNome_cand("GlauberTest");
-			candidato.setNumero_cand(31);
+			//candidato.setNumero_cand(31);
 			// candidato.getCidade_cand().setNome_cid("cidade");
 			// candidato.getPartido_cand().setId_part(1);
 			// candidato.getCidade_cand().setId_cid(1);
-			// candidato.getEstado_cand().setId_est(5);
+			 candidato.getEstado_cand().setId_est(1);
 			// candidato.setTipo_Cargo_cand("teste");
 			lista = new ArrayList<>();
 			lista = candiDAO.consultarCandidatosFiltrados(candidato);
