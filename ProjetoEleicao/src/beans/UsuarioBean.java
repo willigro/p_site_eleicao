@@ -19,6 +19,8 @@ public class UsuarioBean {
 	private Facade fachada;
 	private List<Usuario> usuarios;
 	public List<Usuario> consultarUsuarios;
+	LoginBean loginBean;
+	private boolean type;
 	
 	private String search;
 	
@@ -28,6 +30,7 @@ public class UsuarioBean {
 		this.usuarios = new ArrayList<>();
 		this.usuario = new Usuario();
 		this.fachada = new Facade();
+		this.loginBean = new LoginBean();
 	}
 	
 
@@ -39,6 +42,15 @@ public class UsuarioBean {
 
 	public void setSearch(String search) {
 		this.search = search;
+	}
+	
+	
+	public boolean isType() {
+		return type;
+	}
+
+	public void setType(boolean type) {
+		this.type = type;
 	}
 
 
@@ -80,9 +92,17 @@ public class UsuarioBean {
 
 	public void buttonAction(ActionEvent actionEvent) {
 		try {
-			usuario.setAtivo_user(true);
-			this.fachada.cadastrarUsuario(usuario);
-			addMensagem("Cadastrado com Sucesso!");
+			if(type == true){
+				usuario.setAtivo_user(true);
+				this.fachada.cadastrarUsuario(usuario);
+				//addMensagem("Cadastrado com Sucesso!");
+				loginBean.password = usuario.getSenha();
+				loginBean.username = usuario.getEmail_user();
+				loginBean.setType(false);
+				loginBean.efetuarLogin();
+			} else {
+				addMensagem("Aceite os termos de uso");
+			}
 		} catch (Exception e) {
 			addMensagem(e.getMessage());
 		}
