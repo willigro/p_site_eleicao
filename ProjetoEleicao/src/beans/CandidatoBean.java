@@ -67,8 +67,9 @@ public class CandidatoBean {
 
 	public String remover() throws Exception {
 		try {
-			fachada.removerCandidato(candidato);
+			this.fachada.removerCandidato(this.candidato);
 			// addMensagem("Removido com Sucesso!");
+			this.candidatos = this.fachada.consultarTodosCandidatos();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -206,5 +207,4 @@ public class CandidatoBean {
 	public void setIdEstado(int idEstado) {
 		this.idEstado = idEstado;
 	}
-
 }
