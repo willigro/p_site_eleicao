@@ -28,8 +28,7 @@ body {
 }
 </style>
 </h:head>
-
-<h:body>
+<body>
 	<f:view>
 
 		<!-- Cabeçalho da Página -->
@@ -43,15 +42,15 @@ body {
 			</p:menubar>
 		</h:form>
 		<br />
-		<p:commandButton value="Comentários"
-			action="#{candidatoBean.pagComentarios()}" />
+		<p:commandButton value="Retornar"
+			action="#{candidatoBean.pagAdmin()}" />
 		<br />
 		<br />
 
 		<!-- painel de cadastrar -->
 		<h:form id="formCadastro">
 			<p:messages id="messages" showDetail="true" autoUpdate="true" />
-			<p:fieldset legend="Cadastrar Candidato" toggleable="true"
+			<p:fieldset legend="Editar Candidato" toggleable="true"
 				toggleSpeed="500">
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
 					styleClass="">
@@ -111,53 +110,12 @@ body {
 
 				</p:panelGrid>
 				<br />
-				<p:commandButton value="Cadastrar"
-					action="#{candidatoBean.cadastrar()}" update="matchGrid"></p:commandButton>
+				<p:commandButton value="Editar" action="#{candidatoBean.editar()}"
+					update="matchGrid"></p:commandButton>
 			</p:fieldset>
 		</h:form>
 		<br />
 
-		<!-- painel de pesquisar -->
-		<h:form>
-			<p:messages id="messages" showDetail="true" autoUpdate="true" />
-			<p:fieldset legend="Consultar Candidato" toggleable="true"
-				toggleSpeed="500">
-				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
-					styleClass="">
-					<h:outputLabel for="nome" value="NOME"></h:outputLabel>
-					<p:inputText placeholder="Nome" id="nome"
-						value="#{candidatoBean.candidato.nome_cand}">
-					</p:inputText>
-				</p:panelGrid>
-				<br />
-				<p:commandButton value="Pesquisar"
-					action="#{candidatoBean.consultarTodosCandidatos()}" update="@form"></p:commandButton>
-			</p:fieldset>
-			<br />
-
-			<!-- listagem dos candidatos pesquisados -->
-			<h:form id="formPesquisa">
-				<p:dataTable value="#{candidatoBean.candidatos}" var="cand">
-					<p:column headerText="Nome">
-						<h:outputText value="#{cand.nome_cand}"></h:outputText>
-					</p:column>
-					<p:column headerText="Numero">
-						<h:outputText value="#{cand.numero_cand}"></h:outputText>
-					</p:column>
-					<p:column headerText="Cidade">
-						<h:outputText value="#{cand.cidade_cand.nome_cid}"></h:outputText>
-					</p:column>
-					<p:column headerText="Remover">
-						<p:commandButton value="Remover"
-							action="#{candidatoBean.remover()}" update="@form"></p:commandButton>
-					</p:column>
-					<p:column headerText="Editar">
-						<p:commandButton value="Editar"
-							action="#{candidatoBean.pagEditarCandidato()}" update="@form"></p:commandButton>
-					</p:column>
-				</p:dataTable>
-			</h:form>
-		</h:form>
 	</f:view>
-</h:body>
+</body>
 </html>

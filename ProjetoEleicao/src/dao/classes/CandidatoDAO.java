@@ -29,13 +29,13 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 			if (lista_candidatos.isEmpty()) {
 				throw new Exception("Não há registros armazenados");
 			}
-		}catch(
+		} catch (
 
-	Exception e)
-	{
-		e.printStackTrace();
-		throw new Exception(e.getMessage());
-	}return lista_candidatos;
+		Exception e) {
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+		return lista_candidatos;
 	}
 
 	private void addRestrictionIfNotNull(Criteria criteria, String propertyName, int id) {
