@@ -141,12 +141,7 @@ public class Facade implements IFachada {
 		this.controllerAvaliacao.inserirAvaliacaoProjeto(avaliacao);
 	}
 
-	public List<Usuario> consultarUsuarios() throws Exception {
-		if (validaControl(this.controllerUsuario))
-			return this.controllerUsuario.consultarUsuarios();
-		else
-			return null;
-	}
+	
 
 	@Override
 	public List<Partido> consultarTodosPartidos() throws Exception {
@@ -155,5 +150,37 @@ public class Facade implements IFachada {
 			return this.controllerPartido.consultarTodosPartidos();
 		return null;
 	}
+	
+	@Override
+	public List<Usuario> consultarUsuarios() throws Exception {
+		if (validaControl(this.controllerUsuario))
+			return this.controllerUsuario.consultarUsuarios();
+		else
+			return null;
+	}
+	
+	public List<Usuario> consultarUsuarioPorFiltro(Usuario usuario) throws Exception {
+		if(validaControl(this.controllerUsuario)){
+			return this.controllerUsuario.consultarUsuarioPorFiltro(usuario);
+		}
+		return null;
+	}
 
+	@Override
+	public void banirUsuario(Usuario usuario) throws Exception {
+		if(validaControl(this.controllerUsuario)){
+			
+			this.controllerUsuario.banirUsuario(usuario);
+		}
+		
+	}
+	
+	@Override
+	public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception{
+		if(validaControl(this.controllerUsuario)){
+			return this.controllerUsuario.consultarStatusUsuarioBanido(usuario);
+		}
+		return false;
+	}
+	
 }

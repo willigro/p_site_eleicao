@@ -4,7 +4,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import classesBasicas.Usuario;
@@ -15,14 +17,59 @@ public class UsuarioBean {
 
 	private Usuario usuario;
 	private Facade fachada;
-	private ArrayList<Usuario> usuarios;
+	private List<Usuario> usuarios;
+	public List<Usuario> consultarUsuarios;
+	
+	private String search;
+	
 
 	public UsuarioBean() {
+		this.consultarUsuarios = new ArrayList<Usuario>();
 		this.usuarios = new ArrayList<>();
 		this.usuario = new Usuario();
 		this.fachada = new Facade();
 	}
+	
 
+
+	public String getSearch() {
+		return search;
+	}
+
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+
+
+	public List<Usuario> getConsultarUsuarios() {
+		try {
+			consultarUsuarios = fachada.consultarUsuarios();
+			usuarios = consultarUsuarios;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return consultarUsuarios;
+	}
+	
+	public void setConsultarUsuarios(List<Usuario> consultarUsuarios) {
+		this.consultarUsuarios = consultarUsuarios;
+	}
+
+
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -55,5 +102,42 @@ public class UsuarioBean {
 			addMensagem(e.getMessage());
 		}
 		return "";
+	}
+	
+	
+	public List<Usuario> searchUser(){
+		List<Usuario> retorno = new ArrayList<>();
+		try{
+			if(search.equals("")){
+				this.fachada.consultarUsuarios();
+			}else{
+				Usuario u = new Usuario();
+				u.setNome_user(search);
+				this.fachada.consultarUsuarioPorFiltro(u);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return retorno;
+		
+	}
+	
+	
+	public void banirUsuario(){
+		Usuario usuario = new Usuario();
+		usuario = new Usuario();
+		usuario.setId_user(1);
+		usuario.setEmail_user("jaime_t.t@hotmail.com");
+		usuario.setNome_user("jaime");
+		usuario.setSenha("123");
+		usuario.setAtivo_user(true);
+		try {
+			this.fachada.banirUsuario(usuario);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

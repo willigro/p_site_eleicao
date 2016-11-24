@@ -54,5 +54,9 @@ public interface IFachada {
 	public List<Usuario> consultarUsuarios() throws Exception;
 	
 	public List<Partido> consultarTodosPartidos() throws Exception;
+	
+	public void banirUsuario(Usuario usuario) throws Exception;
+	
+    public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception;
 
 }

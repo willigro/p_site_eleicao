@@ -7,31 +7,66 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/admin/index.xhtml">
 	<ui:define name="conteudo">
-		
-		<p:dataTable value="#{usuariobean.usuarios}" var="u">
-		<p:column headerText="Codigo">
-				<h:outputText value="#{u.id_user}">
-				</h:outputText>	
-			</p:column>
-		
-			<p:column headerText="Nome">
-				<h:outputText value="#{u.nome_user}">
-				</h:outputText>	
-			</p:column>
-			<p:column headerText="E-mail">
-				<h:outputText value="#{u.email_user}">
-				</h:outputText>	
-			</p:column>
-		
-		<p:column headerText="Bloqueado">
-				<h:outputText value="#{!u.ativo_users}">
-				</h:outputText>	
-			</p:column>
-		
-		</p:dataTable>
-		
-	</ui:define>
+
 	
+       
+		<p:growl id="msg">
+		
+			<h:panelGrid>
 			
+				<p:dataTable id="dataTable" border="1" var="u" rowIndexVar="rowIndex"  selectionMode="single" selection="#{usuarioBean.usuario}" rowKey="#{usuarioBean.usuarios}" value="#{usuarioBean.consultarUsuarios}" 
+				paginator="false" editable="false" emptyMessage="Nenhum Registro Encontrado.">
+					
+		<f:facet name="header">
+		
+		<h:form>
+            <p:outputPanel>
+            <p:commandButton value="Remover" disabled="true"></p:commandButton>
+		<p:commandButton value="Editar"  disabled="true"></p:commandButton>
+		<p:commandButton value="Bloquear" action="#{usuarioBean.banirUsuario}"></p:commandButton>
+                <p:inputText value="#{usuarioBean.search}" required="true" id="globalFilter"
+                 style="width:300px" placeholder=" Digite e pressione enter para pesquisar"/>
+            	
+            	<p:commandButton value="Procurar" action="#{usuarioBean.searchUser}" update="dataTable">
+            	
+            	</p:commandButton>
+            </p:outputPanel>
+        </h:form>
+        </f:facet>
+					
+					<p:column headerText="Codigo">
+						<div align="center">
+							<h:outputText value="#{u.id_user}">
+							</h:outputText>
+						</div>
+					</p:column>
+
+					<p:column headerText="Nome">
+						<div align="center">
+							<h:outputText value="#{u.nome_user}">
+							</h:outputText>
+						</div>
+					</p:column>
+					
+					<p:column headerText="E-mail">
+						<div align="center">
+							<h:outputText value="#{u.email_user}">
+							</h:outputText>
+						</div>
+					</p:column>
+					
+					<p:column headerText="Ativo">
+					<div align="center">
+						<h:selectBooleanCheckbox value="#{u.ativo_user}" />
+					</div>
+					</p:column>
+					
+
+				</p:dataTable>
+			</h:panelGrid>
+		</p:growl>
+	</ui:define>
+
+
 
 </ui:composition>

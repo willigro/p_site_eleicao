@@ -11,6 +11,11 @@ import dao.DAOGenerico;
 import dao.interfaces.IUsuarioDAO;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Restrictions;
+
 public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 
 	private String criptografarSenha(Usuario usuario) throws Exception {
@@ -47,6 +52,7 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 	}
 	
 	
+	
 	public List<Usuario> consultarUsuarios() throws Exception{
 		List<Usuario> usersList = new ArrayList<>();
 		try {
@@ -61,8 +67,51 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 		
 	}
 	
+	private void addRestrictionIfNotNull(Criteria criteria, String propertyName, int id) {
+		/**
+		 * Object value > int id
+		 */
+		if (id > 0) {
+			criteria.add(Restrictions.eq(propertyName, id));
+		}
+	}
 	
+	public List<Usuario> consultarUsuarioPorFiltro(Usuario usuario) throws Exception{
+		
+		Session session = (Session) getManager().getDelegate();
+		Example cidadeExample = Example.create(usuario).excludeZeroes();
+		Criteria criteria = session.createCriteria(Usuario.class).add(cidadeExample);
+		addRestrictionIfNotNull(criteria, "usuario.id_user", usuario.getId_user());
+		
+		
+		List<Usuario> usersList = new ArrayList<>();
+		
+		
+		
+//		try {
+//			Query query = getManager().createQuery("SELECT usuario FROM Usuario usuario WHERE nome_user:Nome",Usuario.class);
+//			query.setParameter("Nome", usuario.getNome_user());
+//			
+			usersList = criteria.list();//query.getResultList();
+			if (usersList.isEmpty()) {
+				throw new Exception("Nao ha registros armazenados");
+			}else{
+				return usersList;
+			}
+			
+//		} catch (Exception e) {
+//			throw new Exception(e.getMessage());
+//		}
+	}
 	
+	public void banirUsuario(Usuario usuario) throws Exception {
+		System.out.println("entrou no dao");
+		super.update(usuario);
+	}
+	
+	public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception{
+		return true;
+	}
 	
 
 }
