@@ -46,10 +46,12 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 			criteria.add(Restrictions.eq(propertyName, id));
 		}
 	}
+
 	public List<Candidato> consultarCandidatosFiltrados(Candidato candidato) throws Exception {
-		if(candidato.getNome_cand().trim().equals("")){
-			candidato.setNome_cand(null);
-		}
+		if (candidato.getNome_cand() != null)
+			if (candidato.getNome_cand().trim().equals("")) {
+				candidato.setNome_cand(null);
+			}
 		Session session = (Session) getManager().getDelegate();
 		Example cidadeExample = Example.create(candidato).excludeZeroes();
 		Criteria criteria = session.createCriteria(Candidato.class).add(cidadeExample);
