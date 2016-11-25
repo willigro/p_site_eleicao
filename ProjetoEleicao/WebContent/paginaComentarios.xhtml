@@ -43,48 +43,37 @@ body {
 		</h:form>
 		<br />
 		<p:commandButton value="Retornar" action="#{candidatoBean.pagAdmin()}" />
-
-		<br />
 		<br />
 
-		<!-- Lista de Comentários -->
-		<h:form id="formPesquisar">
-			<p:messages id="messages" showDetail="true" autoUpdate="true" />
-			<p:fieldset legend="Comentários Denunciados" toggleable="false"
-				toggleSpeed="500">
-				<br />
-				<p:commandButton value="Botão Temporário"
-					action="#{comentarioBean.consultarComentsDenunciados}"
-					update="@form"></p:commandButton>
-			</p:fieldset>
-			<br />
-		</h:form>
-
-		<!-- listagem dos candidatos pesquisados -->
+		<!-- listagem dos comentários denunciados -->
 		<h:form id="formData">
+			<h1 align="center">
+				<font face="Calibri" color="black">Lista de Comentários Denunciados</font>
+			</h1>
 			<p:dataTable value="#{comentarioBean.comentarios}" var="coments">
 				<p:column headerText="Nome Usuário">
-					<h:outputText value="#{coments.texto_coment}"></h:outputText>
+					<h:outputText value="#{coments.usuario_coment.nome_user}"></h:outputText>
 				</p:column>
 				<p:column headerText="QTD de Denuncias">
-					<h:outputText value="#{coments.texto_coment}"></h:outputText>
+					<h:outputText value="#{coments.qtd_denuncia}"></h:outputText>
 				</p:column>
 				<p:column headerText="Texto Comentádo">
 					<h:outputText value="#{coments.texto_coment}"></h:outputText>
 				</p:column>
 				<p:column headerText="Projeto Comentádo">
-					<h:outputText value="#{coments.texto_coment}"></h:outputText>
+					<h:outputText value="#{coments.projeto_coment.titulo_proj}"></h:outputText>
 				</p:column>
-				<!-- 
+				
 				<p:column headerText="Remover Comentário">
 					<p:commandButton value="Remover" action="#{comentarioBean.remover}"
-						update=":formPesquisar:formData" ajax="true">
+						update=":formData" ajax="true">
 						<f:setPropertyActionListener target="#{comentarioBean.comentario}"
 							value="#{coments}"></f:setPropertyActionListener>
 					</p:commandButton>
 				</p:column>
- 				-->
+ 			
 			</p:dataTable>
+
 		</h:form>
 
 	</f:view>
