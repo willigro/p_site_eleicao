@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -118,6 +117,7 @@ public class CandidatoBean {
 			this.candidato.getEstado_cand().setId_est(idEstado);
 			System.out.println(this.candidato.toString());
 			this.candidatos = fachada.consultarCandidatosFiltrados(this.candidato);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
