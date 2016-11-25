@@ -11,19 +11,21 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 
 	@Override
 	public List<Comentario> visualizarComentsDenuncia() throws Exception {
-		
 		List<Comentario> lista_comentarios = new ArrayList<>();
-		
 		try {
-			lista_comentarios = getManager().createQuery("SELECT comentario FROM Comentario comentario"
-					+ "WHERE qtd_denuncia > 9").getResultList();
+			lista_comentarios = getManager()
+					.createQuery("SELECT comentario FROM Comentario comentario WHERE qtd_denuncia > 9")
+					.getResultList();
+			if (lista_comentarios.isEmpty()) {
+				throw new Exception("Não há registros armazenados");
+			}
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
 		return lista_comentarios;
 	}
 
-//	public void comentarProjeto(Comentario comentario) throws Exception{
-//		super.insert(comentario);
-//	}
+	// public void comentarProjeto(Comentario comentario) throws Exception{
+	// super.insert(comentario);
+	// }
 }
