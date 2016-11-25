@@ -94,12 +94,9 @@ public class CandidatoBean {
 
 	public String cadastrar() throws Exception {
 		try {
-<<<<<<< HEAD
 			this.candidato.getCidade_cand().setId_cid(1);
 			// this.candidato.getEstado_cand().setId_est(this.idEstado);
 			this.candidato.getPartido_cand().setId_part(1);
-=======
->>>>>>> f24b954557bf06569891711a398d76779040995b
 			fachada.cadastrarCandidato(candidato);
 			addMensagem("Cadastrado com Sucesso!");
 		} catch (Exception e) {
