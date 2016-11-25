@@ -98,7 +98,7 @@ body {
 					</p:selectOneMenu>
 
 					<h:outputLabel for="partido" value="PARTIDO"></h:outputLabel>
-					<p:selectOneMenu id="dropPartido" style="width:150px" filter="true"
+					<p:selectOneMenu id="dropPartido" filter="true"
 						value="#{candidatoBean.candidato.partido_cand.id_part}">
 						<f:selectItem itemLabel="Partido" itemValue="0"
 							noSelectionOption="true" />
@@ -108,7 +108,6 @@ body {
 						<p:ajax listener="#{candidatoBean.estadoSelecionado}"
 							process=":formCadastro:dropPartido"></p:ajax>
 					</p:selectOneMenu>
-
 				</p:panelGrid>
 				<br />
 				<p:commandButton value="Cadastrar"
@@ -118,7 +117,7 @@ body {
 		<br />
 
 		<!-- painel de pesquisar -->
-		<h:form>
+		<h:form id="formPesquisar">
 			<p:messages id="messages" showDetail="true" autoUpdate="true" />
 			<p:fieldset legend="Consultar Candidato" toggleable="true"
 				toggleSpeed="500">
@@ -131,12 +130,12 @@ body {
 				</p:panelGrid>
 				<br />
 				<p:commandButton value="Pesquisar"
-					action="#{candidatoBean.consultarTodosCandidatos()}" update="@form"></p:commandButton>
+					action="#{candidatoBean.consultarCandidatoFiltrado()}" update="@form"></p:commandButton>
 			</p:fieldset>
 			<br />
 
 			<!-- listagem dos candidatos pesquisados -->
-			<h:form id="formPesquisa">
+			<h:form id="formData">
 				<p:dataTable value="#{candidatoBean.candidatos}" var="cand">
 					<p:column headerText="Nome">
 						<h:outputText value="#{cand.nome_cand}"></h:outputText>
@@ -149,7 +148,10 @@ body {
 					</p:column>
 					<p:column headerText="Remover">
 						<p:commandButton value="Remover"
-							action="#{candidatoBean.remover()}" update="@form"></p:commandButton>
+							action="#{candidatoBean.remover}" update=":formPesquisar:formData" ajax="true">
+							<f:setPropertyActionListener target="#{candidatoBean.candidato}"
+								value="#{cand}"></f:setPropertyActionListener>
+						</p:commandButton>
 					</p:column>
 					<p:column headerText="Editar">
 						<p:commandButton value="Editar"

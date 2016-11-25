@@ -24,24 +24,25 @@ public class LoginBean {
 	
 	
 	public String efetuarLogin(){
-		System.out.println(type);
+		//System.out.println(type);
 		this.facade = new Facade();
 		try{
 			if(type){
-				this.administrador = new Administrador();
-				this.administrador.setEmail(username);
-				this.administrador.setSenha_admin(password);
-				
-				
-				if(facade.loginAdministrador(administrador) != null){
-					return "/admin/index.xhtml";
-				}
+//				this.administrador = new Administrador();
+//				this.administrador.setEmail(username);
+//				this.administrador.setSenha_admin(password);
+//				
+//				
+//				if(facade.loginAdministrador(administrador) != null){
+//					return "/admin/index.xhtml";
+				//}
 			}else{
 				this.usuario = new Usuario();
 				this.usuario.setEmail_user(username);
 				this.usuario.setSenha(password);
 				
 				if(facade.loginUsuario(this.usuario) != null){
+					System.out.println("Foi");
 					return "/usr/index.xhtml";
 				}
 			}
