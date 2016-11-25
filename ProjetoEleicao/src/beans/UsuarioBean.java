@@ -1,35 +1,35 @@
 package beans;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.faces.application.FacesMessage;
 import classesBasicas.Usuario;
 import facade.Facade;
 
 @ManagedBean
-public class UsuarioBean {
+public class UsuarioBean{
+	
+
 
 	private Usuario usuario;
 	private Facade fachada;
 	private List<Usuario> usuarios;
-	public List<Usuario> consultarUsuarios;
-
 	public Usuario selectedUser;
-	LoginBean loginBean;
-	private boolean type;
 	
-	private String search;
+	LoginBean loginBean;
+	private boolean type; // para verificar se o usuario e adm ou usr
+	
+	private String search = ""; //String de pesquisa
 	
 
 	public UsuarioBean() {
-		this.consultarUsuarios = new ArrayList<Usuario>();
-		this.usuarios = new ArrayList<>();
+		this.usuarios = new ArrayList<Usuario>();
 		this.usuario = new Usuario();
 		this.fachada = new Facade();
 		this.selectedUser = new Usuario();
@@ -67,30 +67,29 @@ public class UsuarioBean {
 
 
 
-	public List<Usuario> getConsultarUsuarios() {
+	public List<Usuario> getUsuarios() {
 		try {
-			consultarUsuarios = fachada.consultarUsuarios();
-			usuarios = consultarUsuarios;
+			if(search.toString().isEmpty()){
+			usuarios = fachada.consultarUsuarios();
+			}else{
+			Usuario u = new Usuario();
+			u.setNome_user(search);
+			usuarios = fachada.consultarUsuarioPorFiltro(usuario);
+			}	
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return consultarUsuarios;
-	}
-	
-	public void setConsultarUsuarios(List<Usuario> consultarUsuarios) {
-		this.consultarUsuarios = consultarUsuarios;
-	}
-
-
-
-	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
-
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
+	
+	public void setUsuarios(List<Usuario> list) {
+		this.usuarios = list;
 	}
+
+
+
 
 
 	
@@ -137,21 +136,22 @@ public class UsuarioBean {
 	}
 	
 	
-	public List<Usuario> searchUser(){
-		List<Usuario> retorno = new ArrayList<>();
+	public void searchUser(){
+		
 		try{
-			if(search.equals("")){
-				this.fachada.consultarUsuarios();
+			if(search.toString().isEmpty()){
+				this.usuarios = this.fachada.consultarUsuarios();
 			}else{
 				Usuario u = new Usuario();
 				u.setNome_user(search);
-				this.fachada.consultarUsuarioPorFiltro(u);
+				System.out.println("valor do filtro: "+search);
+				this.usuarios = this.fachada.consultarUsuarioPorFiltro(u);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 
-		return retorno;
+		
 		
 	}
 	

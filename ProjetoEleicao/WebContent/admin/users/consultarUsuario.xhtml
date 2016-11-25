@@ -1,72 +1,76 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	template="/admin/index.xhtml">
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/admin/index.xhtml">
+
+
+
 	<ui:define name="conteudo">
 
-	
-       
-		<p:growl id="msg">
-		
-			<h:panelGrid>
-			
-				<p:dataTable id="dataTable" border="1" var="u" rowIndexVar="rowIndex"  selectionMode="single" selection="#{usuarioBean.usuario}" rowKey="#{usuarioBean.usuarios}" value="#{usuarioBean.consultarUsuarios}" 
-				paginator="false" editable="false" emptyMessage="Nenhum Registro Encontrado.">
-					
-		<f:facet name="header">
-		
+
 		<h:form>
-            <p:outputPanel>
-            <p:commandButton value="Remover" disabled="true"></p:commandButton>
-		<p:commandButton value="Editar"  disabled="true"></p:commandButton>
-		<p:commandButton value="Bloquear" action="#{usuarioBean.banirUsuario}"></p:commandButton>
-                <p:inputText value="#{usuarioBean.search}" required="true" id="globalFilter"
-                 style="width:300px" placeholder=" Digite e pressione enter para pesquisar"/>
-            	
-            	<p:commandButton value="Procurar" action="#{usuarioBean.searchUser}" update="dataTable">
-            	
-            	</p:commandButton>
-            </p:outputPanel>
-        </h:form>
-        </f:facet>
-					
-					<p:column headerText="Codigo">
-						<div align="center">
-							<h:outputText value="#{u.id_user}">
-							</h:outputText>
-						</div>
+			<p:panel style="border:0px;">
+				<p:commandButton value="Remover" disabled="true" />
+				<p:commandButton value="Editar" disabled="true" />
+				<p:commandButton value="Banir usuario"
+					action="#{usuarioBean.banirUsuario}" />
+				<p:inputText value="#{usuarioBean.search}" style="width:300px"
+					placeholder=" Digite e pressione enter para pesquisar" />
+
+				<p:commandButton value="Procurar" action="#{usuarioBean.searchUser}"
+					update="tbl" />
+			</p:panel>
+
+
+			<p:panel style="border:0px;">
+				<p:dataTable id="tbl" value="#{usuarioBean.usuarios}" var="u"
+					emptyMessage="Nenhum registro encontrado." rowKey="#{u.id_user}"
+					selectionMode="single" selection="#{usuarioBean.selectedUser}"
+					paginator="true" rows="10" rowsPerPageTemplate="10,20,50">
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText id="columnId" value="id" />
+						</f:facet>
+						<h:outputText value="#{u.id_user}" />
 					</p:column>
 
-					<p:column headerText="Nome">
-						<div align="center">
-							<h:outputText value="#{u.nome_user}">
-							</h:outputText>
-						</div>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText id="columnNome" value="Nome" />
+						</f:facet>
+						<h:outputText value="#{u.nome_user}" />
 					</p:column>
-					
-					<p:column headerText="E-mail">
-						<div align="center">
-							<h:outputText value="#{u.email_user}">
-							</h:outputText>
-						</div>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText id="columnEmail" value="E-mail" />
+						</f:facet>
+						<h:outputText value="#{u.email_user}" />
 					</p:column>
-					
-					<p:column headerText="Ativo">
-					<div align="center">
-						<h:selectBooleanCheckbox value="#{u.ativo_user}" />
-					</div>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText id="columnBanido" value="Banido" />
+						</f:facet>
+						<p:selectOneMenu value="#{u.ativo_user}">
+							<f:selectItem itemValue="#{true}" itemLabel="Sim" />
+							<f:selectItem itemValue="#{false}" itemLabel="Nao" />
+						</p:selectOneMenu>
 					</p:column>
-					
+
 
 				</p:dataTable>
-			</h:panelGrid>
-		</p:growl>
+			</p:panel>
+		</h:form>
+
 	</ui:define>
 
 
 
 </ui:composition>
+</html>
