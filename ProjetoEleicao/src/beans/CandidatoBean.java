@@ -49,17 +49,17 @@ public class CandidatoBean {
 	// Methods
 	/**
 	 * Metodo para confirmação, apenas.
-	 * */
+	 */
 	public void estadoSelecionado() {
 		System.out.println(this.idEstado);
-		//System.out.println(this.candidato.getPartido_cand().getId_part());
+		// System.out.println(this.candidato.getPartido_cand().getId_part());
 		candidato.getEstado_cand().setId_est(idEstado);
 	}
 
 	public void cidadeSelecionada() {
 		System.out.println(this.candidato.getCidade_cand().getId_cid());
 	}
-	
+
 	private void addMensagem(String texto) {
 		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
@@ -67,26 +67,39 @@ public class CandidatoBean {
 
 	public String remover() throws Exception {
 		try {
-			fachada.removerCandidato(candidato);
+			this.fachada.removerCandidato(this.candidato);
 			// addMensagem("Removido com Sucesso!");
+			this.candidatos = this.fachada.consultarTodosCandidatos();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return "paginaAdmin";
 	}
 
-	// Utiliza a funcao de filtragem na consulta para tornar a navegacao mais
-	// dinamica
+	public String pagComentarios() {
+		return "paginaComentarios";
+	}
+
 	public String pagConsultarCandidato() {
 		return "consultaCandidatos";
 	}
 
+	public String pagEditarCandidato() {
+		return "paginaEditarCand";
+	}
+	
+	public String pagAdmin(){
+		return "paginaAdmin";
+	}
+
 	public String cadastrar() throws Exception {
 		try {
+<<<<<<< HEAD
 			this.candidato.getCidade_cand().setId_cid(1);
 			// this.candidato.getEstado_cand().setId_est(this.idEstado);
 			this.candidato.getPartido_cand().setId_part(1);
+=======
+>>>>>>> f24b954557bf06569891711a398d76779040995b
 			fachada.cadastrarCandidato(candidato);
 			addMensagem("Cadastrado com Sucesso!");
 		} catch (Exception e) {
@@ -95,9 +108,19 @@ public class CandidatoBean {
 		return "paginaAdmin";
 	}
 
+	public String editar() throws Exception {
+		try {
+			fachada.alterarCandidato(candidato);
+			addMensagem("Editado com Sucesso!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "paginaEditarCand";
+	}
+
 	public void consultarCandidatoFiltrado() {
 		try {
-			System.out.println(idEstado+"");
+			System.out.println(idEstado + "");
 			this.candidato.getEstado_cand().setId_est(idEstado);
 			System.out.println(this.candidato.toString());
 			this.candidatos = fachada.consultarCandidatosFiltrados(this.candidato);
@@ -189,5 +212,4 @@ public class CandidatoBean {
 	public void setIdEstado(int idEstado) {
 		this.idEstado = idEstado;
 	}
-	
 }

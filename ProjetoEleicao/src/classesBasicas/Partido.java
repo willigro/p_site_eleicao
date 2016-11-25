@@ -20,7 +20,7 @@ public class Partido {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id_part;
 
-	@Column(nullable = false, length = 40)
+	@Column(nullable = false, length = 100)
 	private String nome_part;
 
 	@OneToMany(mappedBy = "partido_cand")

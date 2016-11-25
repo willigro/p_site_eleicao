@@ -23,7 +23,7 @@ public class Administrador {
 	@Column(nullable = false, length = 50)
 	private String nome_admin;
 
-	@Column(nullable = false, length = 100)
+	@Column(nullable = false, length = 32)
 	private String senha_admin;
 
 	@OneToMany(mappedBy = "administrador_coment")

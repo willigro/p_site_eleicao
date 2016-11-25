@@ -29,13 +29,13 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 			if (lista_candidatos.isEmpty()) {
 				throw new Exception("Não há registros armazenados");
 			}
-		}catch(
+		} catch (
 
-	Exception e)
-	{
-		e.printStackTrace();
-		throw new Exception(e.getMessage());
-	}return lista_candidatos;
+		Exception e) {
+			e.printStackTrace();
+			throw new Exception(e.getMessage());
+		}
+		return lista_candidatos;
 	}
 
 	private void addRestrictionIfNotNull(Criteria criteria, String propertyName, int id) {
@@ -46,8 +46,10 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 			criteria.add(Restrictions.eq(propertyName, id));
 		}
 	}
-
 	public List<Candidato> consultarCandidatosFiltrados(Candidato candidato) throws Exception {
+		if(candidato.getNome_cand().trim().equals("")){
+			candidato.setNome_cand(null);
+		}
 		Session session = (Session) getManager().getDelegate();
 		Example cidadeExample = Example.create(candidato).excludeZeroes();
 		Criteria criteria = session.createCriteria(Candidato.class).add(cidadeExample);

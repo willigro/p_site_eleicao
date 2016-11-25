@@ -36,20 +36,56 @@ public class ControllerUsuario {
 		}
 		usuarioDAO.cadastrarUsuario(usuario);
 	}
-	
-	
 	public Usuario loginUsuario(Usuario usuario) throws Exception{
 //		validateLoginAdministrador(usuario);
 		return this.usuarioDAO.loginUsuario(usuario);
 
-	}
-
+	}	
+	
 	public List<Usuario> consultarUsuarios() throws Exception{
 		
 		//validate user
 		return usuarioDAO.consultarUsuarios();
 	}
 	
+	public List<Usuario> consultarUsuarioPorFiltro(Usuario usuario) throws Exception{
+		return usuarioDAO.consultarUsuarioPorFiltro(usuario);
+	}
+	
+	public void banirUsuario(Usuario usuario) throws Exception {
+		System.out.println("entrou no controller");
+		//verificar
+		if(usuario.getId_user() <= 0){
+			throw new Exception("Nao sera possivel banir o usuario.  Usuario inexistente.");
+		}
+		if(usuario.getEmail_user().trim().isEmpty()){
+			throw new Exception("Nao sera possivel banir o usuario. Favor, preencha o e-mail.");
+		}
+		if(usuario.getNome_user().trim().isEmpty()){
+			throw new Exception("Nao sera possivel banir o usuario. Favor, preencha o nome.");
+		}
+		if(usuario.getSenha().trim().isEmpty()){
+			throw new Exception("Nao sera possivel banir o usuario. Favor, preencha a senha.");
+		}
+//		if(usuario.getLista_Avaliacao_user().isEmpty()){
+//			throw new Exception("Nao sera possivel banir o usuario. Favor, preencha a lista de avaliacao.");
+//		}
+//		if(usuario.getLista_Comentario_user().isEmpty()){
+//			throw new Exception("Nao sera possivel banir o usuario. Favor, preencha a lista de comentarios.");
+//		}
+			
+		if(usuario.isAtivo_user() != consultarStatusUsuarioBanido(usuario)){
+			usuarioDAO.banirUsuario(usuario);
+		}
+		
+		
+		
+	}
+	
+	public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception{
+		//verificar
+		return this.usuarioDAO.consultarStatusUsuarioBanido(usuario);
+	}
 	
 
 }
