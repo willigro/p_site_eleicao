@@ -19,7 +19,7 @@ public class UsuarioBean {
 	private Facade fachada;
 	private List<Usuario> usuarios;
 	public List<Usuario> consultarUsuarios;
-	
+	public Usuario selectedUser;
 	private String search;
 	
 
@@ -28,9 +28,19 @@ public class UsuarioBean {
 		this.usuarios = new ArrayList<>();
 		this.usuario = new Usuario();
 		this.fachada = new Facade();
+		this.selectedUser = new Usuario();
 	}
 	
 
+	//continuar
+	public Usuario getSelectedUser() {
+		return selectedUser;
+	}
+
+	public void setSelectedUser(Usuario selectedUser) {
+		this.selectedUser = selectedUser;
+	}
+	
 
 	public String getSearch() {
 		return search;
@@ -123,15 +133,10 @@ public class UsuarioBean {
 		
 	}
 	
-	
+	//continuar
 	public void banirUsuario(){
-		Usuario usuario = new Usuario();
-		usuario = new Usuario();
-		usuario.setId_user(1);
-		usuario.setEmail_user("jaime_t.t@hotmail.com");
-		usuario.setNome_user("jaime");
-		usuario.setSenha("123");
-		usuario.setAtivo_user(true);
+		Usuario usuario = getSelectedUser(); 
+		
 		try {
 			this.fachada.banirUsuario(usuario);
 		} catch (Exception e) {
