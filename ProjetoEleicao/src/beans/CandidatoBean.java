@@ -86,7 +86,7 @@ public class CandidatoBean {
 		try {
 			this.candidato.getCidade_cand().setId_cid(1);
 			// this.candidato.getEstado_cand().setId_est(this.idEstado);
-			this.candidato.getPartido_cand().setId_part(13);
+			this.candidato.getPartido_cand().setId_part(1);
 			fachada.cadastrarCandidato(candidato);
 			addMensagem("Cadastrado com Sucesso!");
 		} catch (Exception e) {
@@ -180,7 +180,6 @@ public class CandidatoBean {
 			e.printStackTrace();
 		}
 		return null;
-
 	}
 
 	public int getIdEstado() {
