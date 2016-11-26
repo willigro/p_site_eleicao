@@ -13,6 +13,11 @@
 <h:body>
 	<f:view>
 		<ui:include src="menuNav.xhtml"></ui:include>
+		<h:form>
+		<h3>Deixe seu comentário</h3>
+			<p:inputTextarea rows="5" col="30" counter="display" maxlength="500" counterTemplate="{0} Caracteres Restantes" autoResize="false" />
+			<h:outputText id="display" />
+		</h:form>
 	</f:view>
 </h:body>
 </html>
