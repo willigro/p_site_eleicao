@@ -25,7 +25,4 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 		return lista_comentarios;
 	}
 
-	// public void comentarProjeto(Comentario comentario) throws Exception{
-	// super.insert(comentario);
-	// }
 }

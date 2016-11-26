@@ -11,7 +11,10 @@
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="" />
+<<<<<<< HEAD
 			<!-- <property name="javax.persistence.jdbc.password" value="" /> -->
+=======
+>>>>>>> 512141c8f2d7129ec5776ebb015ad85182b16ef9
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/prj_eleicao_br" />
 		</properties>
 	</persistence-unit>

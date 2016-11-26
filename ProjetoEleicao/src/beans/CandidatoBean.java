@@ -138,6 +138,10 @@ public class CandidatoBean {
 				this.candidato.setTipo_Cargo_cand(cargo.getNome_cargo());
 			System.out.println(this.candidato.toString());
 			this.candidatos = fachada.consultarCandidatosFiltrados(this.candidato);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 512141c8f2d7129ec5776ebb015ad85182b16ef9
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

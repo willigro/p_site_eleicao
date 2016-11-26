@@ -60,9 +60,9 @@ public class ComentarioBean {
 			e.printStackTrace();
 		}
 	}
-	
-	public void remover(){
-		
+
+	public void remover() {
+
 	}
 
 	// getters e setters
@@ -107,10 +107,6 @@ public class ComentarioBean {
 		this.partido = partido;
 	}
 
-	public List<Cidade> getCidades() {
-		return cidades;
-	}
-
 	public void setCidades(List<Cidade> cidades) {
 		this.cidades = cidades;
 	}
@@ -140,7 +136,16 @@ public class ComentarioBean {
 	}
 
 	public List<Comentario> getComentarios() {
+		try {
+			this.comentarios = this.fachada.visualizarComentsDenuncia();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return comentarios;
+	}
+
+	public List<Cidade> getCidades() {
+		return this.cidades;
 	}
 
 	public void setComentarios(List<Comentario> comentarios) {
