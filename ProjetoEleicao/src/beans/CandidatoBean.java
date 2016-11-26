@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -23,7 +24,7 @@ import facade.Facade;
 
 @ManagedBean
 @ViewScoped
-public class CandidatoBean {
+public class CandidatoBean implements Serializable {
 
 	private Cargo cargo;
 	private Candidato candidato;
@@ -71,15 +72,6 @@ public class CandidatoBean {
 		System.out.println(this.candidato.getCidade_cand().getId_cid());
 	}
 
-	/*
-	 * private void addMensagem(String texto) { FacesContext mensagems =
-	 * FacesContext.getCurrentInstance();
-	 * 
-	 * FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO,
-	 * texto, null); FacesContext.getCurrentInstance().addMessage(null,
-	 * mensagem); }
-	 */
-
 	private void addMensagem(String texto) {
 		FacesContext mensagem = FacesContext.getCurrentInstance();
 		mensagem.addMessage(null, new FacesMessage("Cadastrado com Sucesso", "!"));
@@ -115,6 +107,8 @@ public class CandidatoBean {
 	public void pagCandidato() {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("telaCandidato.xhtml");
+			String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idCand");
+			this.candidato.setId_cand(Integer.parseInt(id));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
