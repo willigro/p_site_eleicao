@@ -48,7 +48,8 @@ body {
 		<!-- listagem dos comentários denunciados -->
 		<h:form id="formData">
 			<h1 align="center">
-				<font face="Calibri" color="black">Lista de Comentários Denunciados</font>
+				<font face="Calibri" color="black">Lista de Comentários
+					Denunciados</font>
 			</h1>
 			<p:dataTable value="#{comentarioBean.comentarios}" var="coments">
 				<p:column headerText="Nome Usuário">
@@ -63,17 +64,15 @@ body {
 				<p:column headerText="Projeto Comentádo">
 					<h:outputText value="#{coments.projeto_coment.titulo_proj}"></h:outputText>
 				</p:column>
-				
+
 				<p:column headerText="Remover Comentário">
 					<p:commandButton value="Remover" action="#{comentarioBean.remover}"
 						update=":formData" ajax="true">
-						<f:setPropertyActionListener target="#{comentarioBean.comentario}"
+						<f:setPropertyActionListener target="#{comentarioBean.comentarios}"
 							value="#{coments}"></f:setPropertyActionListener>
 					</p:commandButton>
 				</p:column>
- 			
 			</p:dataTable>
-
 		</h:form>
 
 	</f:view>

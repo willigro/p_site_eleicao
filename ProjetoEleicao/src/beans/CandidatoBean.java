@@ -71,9 +71,18 @@ public class CandidatoBean {
 		System.out.println(this.candidato.getCidade_cand().getId_cid());
 	}
 
+	/*
+	 * private void addMensagem(String texto) { FacesContext mensagems =
+	 * FacesContext.getCurrentInstance();
+	 * 
+	 * FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO,
+	 * texto, null); FacesContext.getCurrentInstance().addMessage(null,
+	 * mensagem); }
+	 */
+
 	private void addMensagem(String texto) {
-		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
-		FacesContext.getCurrentInstance().addMessage(null, mensagem);
+		FacesContext mensagem = FacesContext.getCurrentInstance();
+		mensagem.addMessage(null, new FacesMessage("Cadastrado com Sucesso", "!"));
 	}
 
 	public String remover() throws Exception {
@@ -103,14 +112,14 @@ public class CandidatoBean {
 		return "paginaAdmin";
 	}
 
-	public void pagCandidato(){
+	public void pagCandidato() {
 		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("telaCandidato.xhtml");			
+			FacesContext.getCurrentInstance().getExternalContext().redirect("telaCandidato.xhtml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String cadastrar() throws Exception {
 		try {
 			fachada.cadastrarCandidato(candidato);
@@ -138,10 +147,6 @@ public class CandidatoBean {
 				this.candidato.setTipo_Cargo_cand(cargo.getNome_cargo());
 			System.out.println(this.candidato.toString());
 			this.candidatos = fachada.consultarCandidatosFiltrados(this.candidato);
-<<<<<<< HEAD
-=======
-
->>>>>>> 512141c8f2d7129ec5776ebb015ad85182b16ef9
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
