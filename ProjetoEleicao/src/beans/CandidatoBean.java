@@ -14,6 +14,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import classesBasicas.Candidato;
+import classesBasicas.Cargo;
 import classesBasicas.Cidade;
 import classesBasicas.Estado;
 import classesBasicas.Partido;
