@@ -1,5 +1,7 @@
 package beans;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -21,15 +23,17 @@ import facade.Facade;
 
 @ManagedBean
 @ViewScoped
-public class CandidatoBean {
+public class CandidatoBean implements Serializable {
 
-	private int idEstado;
+	private Cargo cargo;
 	private Candidato candidato;
 	private Facade fachada;
 	private Estado estado;
 	private Cidade cidade;
 	private Partido partido;
+	private List<Cargo> lista_cargos;
 	private List<Cidade> cidades;
+	private List<Cidade> lista_cidades_filtrados;
 	private List<Candidato> candidatos;
 	private List<Estado> lista_estados;
 	private List<Partido> lista_partidos;
@@ -37,22 +41,30 @@ public class CandidatoBean {
 	public CandidatoBean() {
 		this.candidato = new Candidato();
 		this.fachada = new Facade();
+		this.cargo = new Cargo();
 		this.estado = new Estado();
 		this.cidade = new Cidade();
 		this.partido = new Partido();
 		this.cidades = new ArrayList<>();
 		this.candidatos = new ArrayList<>();
 		this.lista_estados = new ArrayList<>();
+		this.lista_cidades_filtrados = new ArrayList<>();
 	}
 
 	// Methods
 	/**
 	 * Metodo para confirma��o, apenas.
 	 */
-	public void estadoSelecionado() {
-		System.out.println(this.idEstado);
-		// System.out.println(this.candidato.getPartido_cand().getId_part());
-		candidato.getEstado_cand().setId_est(idEstado);
+	public void estadoSelecionaCidade() {
+		try {
+			this.cidade.getEstado_cid().setId_est(candidato.getEstado_cand().getId_est());
+			if (cidade.getEstado_cid().getId_est() > 0)
+				this.lista_cidades_filtrados = this.fachada.consultarCidadeFiltrada(this.cidade);
+			else
+				this.lista_cidades_filtrados = new ArrayList<>();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void cidadeSelecionada() {
@@ -60,8 +72,8 @@ public class CandidatoBean {
 	}
 
 	private void addMensagem(String texto) {
-		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
-		FacesContext.getCurrentInstance().addMessage(null, mensagem);
+		FacesContext mensagem = FacesContext.getCurrentInstance();
+		mensagem.addMessage(null, new FacesMessage("Cadastrado com Sucesso", "!"));
 	}
 
 	public String remover() throws Exception {
@@ -86,14 +98,23 @@ public class CandidatoBean {
 	public String pagEditarCandidato() {
 		return "paginaEditarCand";
 	}
-	
-	public String pagAdmin(){
+
+	public String pagAdmin() {
 		return "paginaAdmin";
+	}
+
+	public void pagCandidato() {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("telaCandidato.xhtml");
+			String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idCand");
+			this.candidato.setId_cand(Integer.parseInt(id));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String cadastrar() throws Exception {
 		try {
-
 			this.candidato.getCidade_cand().setId_cid(1);
 			// this.candidato.getEstado_cand().setId_est(this.idEstado);
 			this.candidato.getPartido_cand().setId_part(1);
@@ -104,6 +125,7 @@ public class CandidatoBean {
 			e.printStackTrace();
 		}
 		return "paginaAdmin";
+
 	}
 
 	public String editar() throws Exception {
@@ -118,11 +140,10 @@ public class CandidatoBean {
 
 	public void consultarCandidatoFiltrado() {
 		try {
-			System.out.println(idEstado + "");
-			this.candidato.getEstado_cand().setId_est(idEstado);
+			if (cargo.getNome_cargo() != null && !cargo.getNome_cargo().trim().equals(""))
+				this.candidato.setTipo_Cargo_cand(cargo.getNome_cargo());
 			System.out.println(this.candidato.toString());
 			this.candidatos = fachada.consultarCandidatosFiltrados(this.candidato);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -204,11 +225,28 @@ public class CandidatoBean {
 		return null;
 	}
 
-	public int getIdEstado() {
-		return idEstado;
+	public List<Cidade> getLista_cidades_filtrados() {
+		return lista_cidades_filtrados;
 	}
 
-	public void setIdEstado(int idEstado) {
-		this.idEstado = idEstado;
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+	public List<Cargo> getLista_cargos() {
+		this.lista_cargos = new ArrayList();
+		Cargo presidente = new Cargo();
+		presidente.setId_cargo(1);
+		presidente.setNome_cargo("Presidente");
+		Cargo deputado = new Cargo();
+		deputado.setId_cargo(2);
+		deputado.setNome_cargo("Deputado");
+		Cargo vereador = new Cargo();
+		vereador.setId_cargo(3);
+		vereador.setNome_cargo("Vereador");
+		this.lista_cargos.add(presidente);
+		this.lista_cargos.add(deputado);
+		this.lista_cargos.add(vereador);
+		return lista_cargos;
 	}
 }

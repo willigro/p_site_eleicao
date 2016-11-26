@@ -26,8 +26,8 @@ public class ControllerCandidato {
 	private void validarCandidato(Candidato candidato) throws Exception {
 
 		// Falta: DataNascimeto, FotoCandidato, Validar os ID nulos e etc.
-
-		if (candidato.getNome_cand().trim().equals("")) {
+		
+		if (candidato.getNome_cand().trim().isEmpty()) {
 			throw new Exception("O campo Nome está vazio");
 		} else if (candidato.getNome_cand().length() > 50) {
 			throw new Exception("O nome do candidato não pode conter mais de 50 caracteres");
@@ -35,11 +35,11 @@ public class ControllerCandidato {
 
 		if (candidato.getNumero_cand() > 99999) {
 			throw new Exception("O campo Numero não deve ter mais que 5 dígitos");
-		} else if (candidato.getNumero_cand() < 10000) {
-			throw new Exception("O campo Numero não deve ter menos que 5 dígitos");
+		} else if (candidato.getNumero_cand() < 10) {
+			throw new Exception("O campo Numero não deve ter menos que 2 dígitos");
 		}
 
-		if (candidato.getTipo_Cargo_cand().trim().equals("")) {
+		if (candidato.getTipo_Cargo_cand().trim().isEmpty()) {
 			throw new Exception("O campo Cargo Elegível está vazio");
 		} else if (candidato.getTipo_Cargo_cand().length() > 50) {
 			throw new Exception("O Campo Cargo Elegível não pode conter mais de 50 caracteres");

@@ -182,6 +182,12 @@ public class Facade implements IFachada{
 			this.controllerComentario.denunciarComentario(comentario);
 		}
 	}
+
+	@Override
+	public List<Cidade> consultarCidadeFiltrada(Cidade cidade) throws Exception {
+		this.controllerCidade = new ControllerCidade();
+		return this.controllerCidade.consultarCidadeFiltrada(cidade);
+	}
 	
 //	@Override
 //	public Usuario consultarStatusUsuarioBanido(Usuario usuario) throws Exception{

@@ -62,26 +62,30 @@
 				<!-- Painel de filtros -->
 
 				<p:panel id="painelFiltros">
-					<p:commandButton style="margin-top:10px;" id="cmd"
-						value="Pesquisar"
-						action="#{candidatoBean.consultarCandidatoFiltrado}"
-						update=":formPesquisa"></p:commandButton>
 					<h:form id="formFiltro">
-						<p:selectOneMenu id="dropTipo" value="#{dropdownView.city}"
+						<p:commandButton style="margin-top:10px;" id="cmd"
+							value="Pesquisar"
+							action="#{candidatoBean.consultarCandidatoFiltrado}"
+							update=":formPesquisa"></p:commandButton>
+
+						<p:selectOneMenu id="dropTipo"
+							value="#{candidatoBean.cargo.nome_cargo}"
 							style="width:150px; margin-top: 4px;">
 							<f:selectItem itemLabel="Cargo" itemValue=""
 								noSelectionOption="true" />
-							<f:selectItems value="#{dropdownView.cities}" />
+							<f:selectItems value="#{candidatoBean.lista_cargos}" var="cargo"
+								itemValue="#{cargo.nome_cargo}" itemLabel="#{cargo.nome_cargo}" />
 						</p:selectOneMenu>
 
 						<p:inputText placeholder="Nome"
-							value="#{candidatoBean.candidato.nome_cand}" />
+							value="#{candidatoBean.candidato.nome_cand}" maxlength="50" />
 
 						<p:inputText placeholder="Numero"
 							value="#{candidatoBean.candidato.numero_cand}"
 							style="margin-top: 4px;" />
 
-						<p:selectOneMenu id="dropPartido" style="width:150px" filter="true"
+						<p:selectOneMenu id="dropPartido" style="width:150px"
+							filter="true"
 							value="#{candidatoBean.candidato.partido_cand.id_part}">
 							<f:selectItem itemLabel="Partido" itemValue="0"
 								noSelectionOption="true" />
@@ -96,21 +100,23 @@
 						candidato.estado_cand.id_est
 						-->
 						<p:selectOneMenu id="dropEstado" style="width:150px" filter="true"
-							value="#{candidatoBean.idEstado}">
+							value="#{candidatoBean.candidato.estado_cand.id_est}">
 							<f:selectItem itemLabel="Estado" itemValue="0"
 								noSelectionOption="true" />
 							<f:selectItems value="#{candidatoBean.lista_estados}"
 								var="estado" itemValue="#{estado.id_est}"
 								itemLabel="#{estado.nome_est} - #{estado.sigla_est}" />
-							<p:ajax listener="#{candidatoBean.estadoSelecionado}"
-								process=":formFiltro:dropEstado"></p:ajax>
+							<p:ajax listener="#{candidatoBean.estadoSelecionaCidade}"
+								process=":formFiltro:dropEstado" update=":formFiltro:dropCidade"></p:ajax>
 						</p:selectOneMenu>
 
-						<p:selectOneMenu id="dropCidade" value="#{dropdownView.city}"
+						<p:selectOneMenu id="dropCidade"
+							value="#{candidatoBean.candidato.cidade_cand.id_cid}"
 							style="width:150px">
-							<f:selectItem itemLabel="Cidade" itemValue=""
+							<f:selectItem itemLabel="Cidade" itemValue="0"
 								noSelectionOption="true" />
-							<f:selectItems value="#{dropdownView.cities}" />
+							<f:selectItems value="#{candidatoBean.lista_cidades_filtrados}"
+								var="cid" itemLabel="#{cid.nome_cid}" itemValue="#{cid.id_cid}" />
 						</p:selectOneMenu>
 					</h:form>
 				</p:panel>
@@ -131,7 +137,10 @@
 									<h:outputText value="#{cand.tipo_Cargo_cand}"></h:outputText>
 									<h:outputText value="#{cand.numero_cand}"></h:outputText>
 									<h:outputText value="#{cand.partido_cand.sigla_part}"></h:outputText>
-									<p:commandButton id="bAvaliar" icon="fa-bell"></p:commandButton>
+									<p:commandButton id="bConsultar" icon="fa-bell" value="Abrir"
+										actionListener="#{candidatoBean.pagCandidato()}">
+										<f:param name="idCand" value="#{cand.id_cand}"></f:param>
+										</p:commandButton>
 								</h:panelGrid>
 							</p:panel>
 							<!-- </c:forEach> -->

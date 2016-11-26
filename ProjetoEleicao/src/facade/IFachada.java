@@ -47,6 +47,8 @@ public interface IFachada {
 	
 	public List<Cidade> consultarTodasCidade() throws Exception;
 	
+	public List<Cidade> consultarCidadeFiltrada(Cidade cidade) throws Exception;
+	
 	public void inserirComentarioProjeto(Comentario comentario) throws Exception;
 	
 	public void inserirAvaliacaoProjeto(Avaliacao avaliacao) throws Exception;
