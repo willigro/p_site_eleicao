@@ -169,7 +169,6 @@ public class Facade implements IFachada {
 	@Override
 	public void banirUsuario(Usuario usuario) throws Exception {
 		if(validaControl(this.controllerUsuario)){
-			
 			this.controllerUsuario.banirUsuario(usuario);
 		}
 		
@@ -181,6 +180,12 @@ public class Facade implements IFachada {
 			return this.controllerUsuario.consultarStatusUsuarioBanido(usuario);
 		}
 		return false;
+	}
+
+	@Override
+	public List<Cidade> consultarCidadeFiltrada(Cidade cidade) throws Exception {
+		this.controllerCidade = new ControllerCidade();
+		return this.controllerCidade.consultarCidadeFiltrada(cidade);
 	}
 	
 }

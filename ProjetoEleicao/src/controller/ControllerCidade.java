@@ -16,5 +16,9 @@ public class ControllerCidade {
 	public List<Cidade> consultarTodosEstado() throws Exception {
 		return this.iCidadeDAO.consultarTodasCidades();
 	}
+	
+	public List<Cidade> consultarCidadeFiltrada(Cidade cidade) throws Exception{
+		return this.iCidadeDAO.consultarCidadeFiltrada(cidade);
+	}
 
 }
