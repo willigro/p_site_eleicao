@@ -1,5 +1,6 @@
 package dao.classes;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
@@ -20,6 +21,15 @@ import classesBasicas.Usuario;
 
 public class AdministradorDAO extends DAOGenerico<Administrador> implements IAdministradorDAO{
 
+	private String criptografarSenha(String senha) throws Exception {
+		StringBuilder senhaCriptografada = new StringBuilder();
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		byte[] vetorBytes = md.digest(senha.getBytes("UTF8"));
+		for (byte b : vetorBytes) {
+			senhaCriptografada.append(String.format("%02X", 0xFF & b));
+		}
+		return senhaCriptografada.toString();
+	}
 
 	
 	@Override
@@ -28,7 +38,7 @@ public class AdministradorDAO extends DAOGenerico<Administrador> implements IAdm
 																		
 			Query query = super.getManager().createQuery("SELECT a FROM Administrador a WHERE email =:Email AND senha_admin=:Senha_admin", Administrador.class);
 			query.setParameter("Email", administrador.getEmail());
-			query.setParameter("Senha_admin", administrador.getSenha_admin());
+			query.setParameter("Senha_admin", criptografarSenha(administrador.getSenha_admin()));
 		
 			return (Administrador) query.getSingleResult();
 	}
@@ -49,6 +59,14 @@ public class AdministradorDAO extends DAOGenerico<Administrador> implements IAdm
 		}
 		return false;
 	}
+	
+	
+	
+	public void cadastrarAdministrador(Administrador administrador) throws Exception {
+		administrador.setSenha_admin(criptografarSenha(administrador.getSenha_admin()));
+		super.insert(administrador);
+	}
+	
 
 	@Override
 	public boolean deleteUsuario(int id) throws Exception {
@@ -59,11 +77,7 @@ public class AdministradorDAO extends DAOGenerico<Administrador> implements IAdm
 	@Override
 	public boolean punirUsuario(Administrador administrador) throws Exception {
 		
-		EntityTransaction tx = getManager().getTransaction();
-		tx.begin();
-		getManager().merge(administrador.getLista_Comentario_admin().get(0).getUsuario_coment());
-		tx.commit();
-		
+	
 		return true; 
 
 	}
@@ -192,14 +206,6 @@ public class AdministradorDAO extends DAOGenerico<Administrador> implements IAdm
 		return null;
 	}
 
-	@Override
-	public void denunciarComentario(Comentario comentario) {
-		
-			EntityTransaction tx = getManager().getTransaction();
-			tx.begin();
-			getManager().merge(comentario);
-			tx.commit();			
-		
-	}
+	
 	
 }

@@ -31,31 +31,32 @@ public class ControllerAdministrador{
 	
 
 	public Administrador loginAdministrador(Administrador administrador) throws Exception{
-		//validateLoginAdministrador(administrador);
+		if(administrador == null){
+			throw new Exception("Usuario nulo.");
+		}
+		if(administrador.getEmail().trim().isEmpty()){
+			throw new Exception("Informe o email.");
+		}
+		if(administrador.getEmail().length() > 30){
+			throw new Exception("O email deve conter no maximo 30 caracteres.");
+		}
+		if(!isValidEmailAddress(administrador.getEmail())){
+			throw new Exception("E-mail invalido.");
+		}
+		if(administrador.getSenha_admin().trim().isEmpty()){
+			throw new Exception("Informe uma senha.");
+		}
+		if(administrador.getSenha_admin().length() < 8){
+			throw new Exception("A senha deve conter no manimo oito caracteres.");
+		}
 		return this.administradorDAO.loginAdministrador(administrador);
 
 	}
 
 	public boolean logoutAdministrador(Administrador administrador) throws Exception{
 		
-			if(verificarIdExistenteAdministrador(administrador.getId_admin())){
-				if(administrador.getId_admin() >0){
-					if(!administrador.getEmail().isEmpty()){
-						if(isValidEmailAddress(administrador.getEmail())){
-							
-
-						}else{
-							throw new Exception("e-mail inv�lido");	
-						}
-					}else{
-						throw new Exception("e-mail vazio");	
-					}
-				}else{
-					throw new Exception("id menor ou igual a zero");
-				}
-			}else{
-				throw new Exception("administrador inexistente na base de dados");
-			}
+		
+			
 
 		return false;
 	}
@@ -95,73 +96,7 @@ public class ControllerAdministrador{
 		return result;
 	}
 
-	public boolean verificarIdExistenteAdministrador(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean insertProjeto(Projeto projeto) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
-	
-	public boolean punirUsuario(Administrador administrador) throws Exception {
-		validatePunirUsuario(administrador);	
-		return administradorDAO.punirUsuario(administrador);
-	}
-	
-	private void validatePunirUsuario(Administrador administrador) throws Exception{
-		if(administrador != null){
-			if(administrador.getLista_Comentario_admin() != null){
-				for(int i = 0; i < administrador.getLista_Comentario_admin().size(); i++){
-					Comentario comentario = administrador.getLista_Comentario_admin().get(i);
-					if (comentario != null){
-						if(comentario.getUsuario_coment() != null){
-							if(comentario.getUsuario_coment().isAtivo_user() == false){
-								if(!verificarPunicaoUsuario(comentario.getUsuario_coment())){
-									throw new Exception("Este usu�rio encontra-se punido");
-								}
-							}else{
-								throw new Exception("");
-							}
-						}else{
-//							throw new Exception("usu�rio null");
-						}
-					}else{
-//						throw new Exception("comentario null");						
-					}
-				}
-			}else{
-				throw new Exception("Nenhum coment�rio existente");	
-			}
-
-		}else{
-//			throw new Exception("administrador null");
-		}
-		
-	}
-	
-	private boolean verificarPunicaoUsuario(Usuario usuario){
-		return administradorDAO.verificarPunicaoUsuario(usuario);
-	}
-	
-	
-	
-	public void denunciarComentario(Comentario comentario) {
-		if(verificarComentarioPorID(comentario) != null){
-			int total = comentario.getQtd_denuncia();
-			comentario.setQtd_denuncia(total++);
-			
-			administradorDAO.denunciarComentario(comentario);
-		}
-		
-	}
-	
-	
-	public Comentario verificarComentarioPorID(Comentario comentario){
-		return administradorDAO.verificarComentarioPorID(comentario);
-	}
 
 
 }

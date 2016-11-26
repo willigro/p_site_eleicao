@@ -3,6 +3,9 @@ package controller;
 
 import java.util.List;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 import classesBasicas.Usuario;
 import dao.DAOFactory;
 import dao.classes.UsuarioDAO;
@@ -37,7 +40,26 @@ public class ControllerUsuario {
 		usuarioDAO.cadastrarUsuario(usuario);
 	}
 	public Usuario loginUsuario(Usuario usuario) throws Exception{
-//		validateLoginAdministrador(usuario);
+		
+		if(usuario == null){
+			throw new Exception("Usuario nulo.");
+		}
+		if(usuario.getEmail_user().trim().isEmpty()){
+			throw new Exception("Informe o email.");
+		}
+		if(usuario.getEmail_user().length() > 30){
+			throw new Exception("O email deve conter no maximo 30 caracteres.");
+		}
+		if(!isValidEmailAddress(usuario.getEmail_user())){
+			throw new Exception("E-mail invalido.");
+		}
+		if(usuario.getSenha().trim().isEmpty()){
+			throw new Exception("Informe uma senha.");
+		}
+		if(usuario.getSenha().length() < 8){
+			throw new Exception("A senha deve conter no manimo oito caracteres.");
+		}
+
 		return this.usuarioDAO.loginUsuario(usuario);
 
 	}	
@@ -49,43 +71,74 @@ public class ControllerUsuario {
 	}
 	
 	public List<Usuario> consultarUsuarioPorFiltro(Usuario usuario) throws Exception{
+		if(usuario == null){
+			throw new Exception("O usuario informado e nulo.");
+		}
+		if(usuario.getNome_user().trim().isEmpty()){
+			throw new Exception("O nome informado nao foi preenchido.");
+		}
+		if(usuario.getNome_user().length() > 50){
+			throw new Exception("O nome nao pode conter mais de 50 caracteres.");
+		}
 		return usuarioDAO.consultarUsuarioPorFiltro(usuario);
 	}
 	
 	public void banirUsuario(Usuario usuario) throws Exception {
-		System.out.println("entrou no controller");
-		//verificar
-		if(usuario.getId_user() <= 0){
-			throw new Exception("Nao sera possivel banir o usuario.  Usuario inexistente.");
+		
+		if(consultarStatusUsuarioBanido(usuario) == null){
+			throw new Exception("O usuario por que o usuario informado nao corresponde ao ja existente na base de dados.");
 		}
 		if(usuario.getEmail_user().trim().isEmpty()){
-			throw new Exception("Nao sera possivel banir o usuario. Favor, preencha o e-mail.");
+			throw new Exception("O usuario por que o email nao foi preenchido");
+		}
+		if(consultarStatusUsuarioBanido(usuario).getEmail_user().length() > 30){
+			throw new Exception("O usuario por que o email nao pode conter mais de 30 caracteres.");
+		}
+		if(consultarStatusUsuarioBanido(usuario).getEmail_user().equals(usuario.getEmail_user())){
+			throw new Exception("O email informado nao corresponde ao ja existente na base de dados.");	
 		}
 		if(usuario.getNome_user().trim().isEmpty()){
-			throw new Exception("Nao sera possivel banir o usuario. Favor, preencha o nome.");
+			throw new Exception("O nome informado nao foi preenchido.");
+		}
+		if(consultarStatusUsuarioBanido(usuario).getNome_user().length() > 50){
+			throw new Exception("O nome nao pode conter mais de 50 caracteres.");
+		}
+		if(consultarStatusUsuarioBanido(usuario).getNome_user().equals(usuario.getNome_user())){
+			throw new Exception("O nome informado nao corresponde ao ja existente na base de dados.");
 		}
 		if(usuario.getSenha().trim().isEmpty()){
-			throw new Exception("Nao sera possivel banir o usuario. Favor, preencha a senha.");
+			throw new Exception("A senha informada nao foi preenchida.");
 		}
-//		if(usuario.getLista_Avaliacao_user().isEmpty()){
-//			throw new Exception("Nao sera possivel banir o usuario. Favor, preencha a lista de avaliacao.");
-//		}
-//		if(usuario.getLista_Comentario_user().isEmpty()){
-//			throw new Exception("Nao sera possivel banir o usuario. Favor, preencha a lista de comentarios.");
-//		}
-			
-		if(usuario.isAtivo_user() != consultarStatusUsuarioBanido(usuario)){
+		if(consultarStatusUsuarioBanido(usuario).getEmail_user().length() > 30){
+			throw new Exception("A senha nao pode conter mais de 32 caracteres.");
+		}
+		if(consultarStatusUsuarioBanido(usuario).getSenha().equals(usuario.getSenha())){
+			throw new Exception("A senha informada nao corresponde com a existente na base de dados.");
+		}
+		
 			usuarioDAO.banirUsuario(usuario);
+	}
+	
+	
+	public Usuario consultarStatusUsuarioBanido(Usuario usuario) throws Exception{
+		if(usuario == null){
+			throw new Exception("O usuario informado nao corresponde ao ja existente na base de dados.");
 		}
-		
-		
-		
+		return (Usuario) this.usuarioDAO.consultarUsuarioBanido(usuario);
 	}
 	
-	public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception{
-		//verificar
-		return this.usuarioDAO.consultarStatusUsuarioBanido(usuario);
-	}
-	
+	/*
+	 * VALIDAR EMAIL
+	 */
+	public static boolean isValidEmailAddress(String email) {
+		   boolean result = true;
+		   try {
+		      InternetAddress emailAddr = new InternetAddress(email);
+		      emailAddr.validate();
+		   } catch (AddressException ex) {
+		      result = false;
+		   }
+		   return result;
+		}
 
 }

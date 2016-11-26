@@ -7,7 +7,7 @@ import java.util.List;
 
 import classesBasicas.*;
 
-public class Facade implements IFachada {
+public class Facade implements IFachada{
 
 	/**
 	 * Implementei o new controllerEstado na chamada do consultarTodosEstados
@@ -40,6 +40,18 @@ public class Facade implements IFachada {
 			throw new Exception("Controller null");
 	}
 
+
+	
+	@Override
+	public Administrador loginAdministrador(Administrador adminsitrador) throws Exception {
+		return this.controllerAdministrador.loginAdministrador(adminsitrador);
+	}
+	
+	@Override
+	public void logoutAdministrador() throws Exception{
+		
+	}
+	
 	@Override
 	public void cadastrarCandidato(Candidato candidato) throws Exception {
 		this.controlCand.cadastrarCandidato(candidato);
@@ -65,22 +77,12 @@ public class Facade implements IFachada {
 		this.controllerAvaliacao.inserirAvaliacaoCandidato(avaliacao);
 	}
 
-	// OK
-	@Override
-	public Administrador loginAdministrador(Administrador adminsitrador) throws Exception {
-		return this.controllerAdministrador.loginAdministrador(adminsitrador);
-	}
-
 	@Override
 	public Usuario loginUsuario(Usuario usuario) throws Exception {
 		return this.controllerUsuario.loginUsuario(usuario);
 	}
 
-	// OK
-	@Override
-	public boolean punirUsuario(Administrador administrador) throws Exception {
-		return this.controllerAdministrador.punirUsuario(administrador);
-	}
+	
 
 	@Override
 	public void removerCandidato(Candidato candidato) throws Exception {
@@ -169,18 +171,31 @@ public class Facade implements IFachada {
 	@Override
 	public void banirUsuario(Usuario usuario) throws Exception {
 		if(validaControl(this.controllerUsuario)){
-			
 			this.controllerUsuario.banirUsuario(usuario);
 		}
 		
 	}
 	
 	@Override
-	public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception{
-		if(validaControl(this.controllerUsuario)){
-			return this.controllerUsuario.consultarStatusUsuarioBanido(usuario);
+	public void denunciarComentario(Comentario comentario) throws Exception{
+		if(validaControl(this.controllerComentario)){
+			this.controllerComentario.denunciarComentario(comentario);
 		}
-		return false;
 	}
+	
+//	@Override
+//	public Usuario consultarStatusUsuarioBanido(Usuario usuario) throws Exception{
+//		if(validaControl(this.controllerUsuario)){
+//			return this.controllerUsuario.consultarStatusUsuarioBanido(usuario);
+//		}
+//		return null;
+//	}
+
+
+
+
+
+
+	
 	
 }

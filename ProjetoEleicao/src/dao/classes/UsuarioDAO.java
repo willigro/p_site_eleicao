@@ -3,21 +3,20 @@ package dao.classes;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
-
-import classesBasicas.Administrador;
-import classesBasicas.Projeto;
 import classesBasicas.Usuario;
 import dao.DAOGenerico;
 import dao.interfaces.IUsuarioDAO;
+
+
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Example;
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import com.mysql.jdbc.StringUtils;
+
 
 public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 
@@ -49,7 +48,7 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 
 		Query query = super.getManager().createQuery("SELECT a FROM Usuario a WHERE email_user =:email AND senha=:senha");
 		query.setParameter("email", usuario.getEmail_user());
-		query.setParameter("senha", usuario.getSenha());
+		query.setParameter("senha", criptografarSenha(usuario.getSenha()));
 		System.out.println("" + query.toString());
 		return (Usuario) query.getSingleResult();
 	}
@@ -68,14 +67,6 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 
 	}
 
-	private void addRestrictionIfNotNull(Criteria criteria, String propertyName, int id) {
-		/**
-		 * Object value > int id
-		 */
-		if (id > 0) {
-			criteria.add(Restrictions.eq(propertyName, id));
-		}
-	}
 
 
 	public List<Usuario> consultarUsuarioPorFiltro(Usuario usuario) throws Exception {
@@ -104,8 +95,21 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 		super.update(usuario);
 	}
 
-	public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception {
-		return true;
+	public Usuario consultarUsuarioBanido(Usuario usuario) throws Exception {
+	
+
+		Query query = getManager().createQuery("SELECT u FROM Usuario u WHERE id_user =:Id",Usuario.class);
+		query.setParameter("Id",usuario.getId_user());
+		
+		Usuario usuario0;
+
+		usuario0 = (Usuario) query.getSingleResult();
+		
+		if(usuario0 !=null){
+				return usuario0;
+		}
+		return null;
 	}
+
 
 }

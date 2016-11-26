@@ -20,9 +20,6 @@ public class LoginBean {
 	private Facade facade;
 	
 	
-	
-	
-	
 	public String efetuarLogin(){
 		//System.out.println(type);
 		this.facade = new Facade();

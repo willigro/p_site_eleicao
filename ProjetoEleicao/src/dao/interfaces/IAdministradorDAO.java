@@ -23,7 +23,7 @@ public interface IAdministradorDAO {
 		public boolean verificarIdExistenteAdministrador(int id) throws Exception; //ok
 		
 		
-		//Permissões do adm
+		//Permissï¿½es do adm
 		
 		public boolean deleteUsuario(int id) throws Exception;
 		public boolean punirUsuario(Administrador administrador) throws Exception; //ok
@@ -51,7 +51,7 @@ public interface IAdministradorDAO {
 		public boolean deleteProjeto(Projeto projeto);
 		public List listProjetos();
 		
-		public void denunciarComentario(Comentario comentario);
+	
 		public Comentario verificarComentarioPorID(Comentario comentario);
 
 }

@@ -15,6 +15,10 @@ import classesBasicas.Usuario;
 
 public interface IFachada {
 
+	public Administrador loginAdministrador(Administrador administrador) throws Exception;
+	
+	public void logoutAdministrador() throws Exception;
+	
 	public List<Candidato> consultarCandidatosFiltrados(Candidato candidato) throws Exception;
 	
 	public void cadastrarUsuario(Usuario usuario) throws Exception;
@@ -25,10 +29,6 @@ public interface IFachada {
 	
 	public void inserirAvaliacaoCandidato(Avaliacao avaliacao) throws Exception;
 	
-	public Administrador loginAdministrador(Administrador administrador) throws Exception;
-	
-	public boolean punirUsuario(Administrador administrador) throws Exception;
-
 	public void cadastrarCandidato(Candidato candidato) throws Exception;
 	
 	public void removerCandidato(Candidato candidato) throws Exception;
@@ -57,6 +57,8 @@ public interface IFachada {
 	
 	public void banirUsuario(Usuario usuario) throws Exception;
 	
-    public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception;
-
+	public void denunciarComentario(Comentario comentario) throws Exception;
+	
+   
+	
 }

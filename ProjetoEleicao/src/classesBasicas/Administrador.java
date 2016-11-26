@@ -29,7 +29,7 @@ public class Administrador {
 	@OneToMany(mappedBy = "administrador_coment")
 	private List<Comentario> lista_Comentario_admin;
 
-	@Column(nullable = false, length = 100)
+	@Column(nullable = false, length = 30)
 	private String email;
 
 	// Relacionamentos
