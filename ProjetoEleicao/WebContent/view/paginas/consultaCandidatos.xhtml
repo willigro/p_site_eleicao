@@ -138,7 +138,9 @@
 									<h:outputText value="#{cand.numero_cand}"></h:outputText>
 									<h:outputText value="#{cand.partido_cand.sigla_part}"></h:outputText>
 									<p:commandButton id="bConsultar" icon="fa-bell" value="Abrir"
-										actionListener="#{candidatoBean.pagCandidato()}"></p:commandButton>
+										actionListener="#{candidatoBean.pagCandidato()}">
+										<f:param name="idCand" value="#{cand.id_cand}"></f:param>
+										</p:commandButton>
 								</h:panelGrid>
 							</p:panel>
 							<!-- </c:forEach> -->

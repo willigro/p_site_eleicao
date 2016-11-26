@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -23,7 +24,7 @@ import facade.Facade;
 
 @ManagedBean
 @ViewScoped
-public class CandidatoBean {
+public class CandidatoBean implements Serializable{
 
 	private Cargo cargo;
 	private Candidato candidato;
@@ -105,7 +106,9 @@ public class CandidatoBean {
 
 	public void pagCandidato(){
 		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("telaCandidato.xhtml");			
+			FacesContext.getCurrentInstance().getExternalContext().redirect("telaCandidato.xhtml");
+			String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idCand");			
+			this.candidato.setId_cand(Integer.parseInt(id));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
