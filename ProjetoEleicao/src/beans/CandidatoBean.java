@@ -24,7 +24,7 @@ import facade.Facade;
 
 @ManagedBean
 @ViewScoped
-public class CandidatoBean implements Serializable{
+public class CandidatoBean implements Serializable {
 
 	private Cargo cargo;
 	private Candidato candidato;
@@ -73,8 +73,8 @@ public class CandidatoBean implements Serializable{
 	}
 
 	private void addMensagem(String texto) {
-		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
-		FacesContext.getCurrentInstance().addMessage(null, mensagem);
+		FacesContext mensagem = FacesContext.getCurrentInstance();
+		mensagem.addMessage(null, new FacesMessage("Cadastrado com Sucesso", "!"));
 	}
 
 	public String remover() throws Exception {
@@ -104,16 +104,16 @@ public class CandidatoBean implements Serializable{
 		return "paginaAdmin";
 	}
 
-	public void pagCandidato(){
+	public void pagCandidato() {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("telaCandidato.xhtml");
-			String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idCand");			
+			String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idCand");
 			this.candidato.setId_cand(Integer.parseInt(id));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String cadastrar() throws Exception {
 		try {
 			fachada.cadastrarCandidato(candidato);

@@ -65,7 +65,7 @@ body {
 					<h:outputLabel for="numero" value="NÚMERO"></h:outputLabel>
 					<p:inputText placeholder="Número" id="numero"
 						value="#{candidatoBean.candidato.numero_cand}" required="true">
-						<f:validateLength minimum="1" maximum="5" />
+						<f:validateLength minimum="2" maximum="5" />
 					</p:inputText>
 
 					<h:outputLabel for="tipoCargo" value="TIPO DO CARGO"></h:outputLabel>
@@ -118,7 +118,7 @@ body {
 
 		<!-- painel de pesquisar -->
 		<h:form id="formPesquisar">
-			<p:messages id="messages" showDetail="true" autoUpdate="true" />
+			
 			<p:fieldset legend="Consultar Candidato" toggleable="true"
 				toggleSpeed="500">
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
