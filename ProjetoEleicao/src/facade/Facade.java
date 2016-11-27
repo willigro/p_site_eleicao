@@ -201,6 +201,12 @@ public class Facade implements IFachada{
 		this.controllerVariable = new ControllerVariableInt();
 		return this.controllerVariable.getValue();
 	}
+
+	@Override
+	public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 //	@Override
 //	public Usuario consultarStatusUsuarioBanido(Usuario usuario) throws Exception{
@@ -208,13 +214,6 @@ public class Facade implements IFachada{
 //			return this.controllerUsuario.consultarStatusUsuarioBanido(usuario);
 //		}
 //		return null;
-//	}
-
-
-
-
-
-
-	
+//	}	
 	
 }
