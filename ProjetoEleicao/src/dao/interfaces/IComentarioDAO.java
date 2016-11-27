@@ -9,4 +9,6 @@ public interface IComentarioDAO {
 //	public void comentarProjeto(Comentario comentario) throws Exception;
 	public void insert(Comentario comentario) throws Exception;
 	public Comentario update(Comentario comentario) throws Exception;
+	public void denunciarComentario(Comentario comentario) throws Exception;	
+	public Comentario verificarComentario(Comentario comentario) throws Exception;
 }

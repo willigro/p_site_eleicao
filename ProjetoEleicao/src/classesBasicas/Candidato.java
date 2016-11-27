@@ -14,13 +14,14 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 @Entity
 @Table(name = "tb_candidato")
-public class Candidato {
+public class Candidato implements Serializable{
 	// Attributes
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -5,6 +5,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.component.datatable.DataTable;
+import org.primefaces.event.SelectEvent;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -149,10 +152,7 @@ public class UsuarioBean{
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-		}
-
-		
-		
+		}	
 	}
 	
 	//continuar

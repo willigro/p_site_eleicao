@@ -22,18 +22,17 @@
 				<p:inputText value="#{usuarioBean.search}" style="width:300px"
 					placeholder=" Digite e pressione enter para pesquisar" />
 
-				<p:commandButton value="Procurar" action="#{usuarioBean.searchUser}"
-					update="tbl" />
+				<p:commandButton value="Procurar" action="#{usuarioBean.searchUser}" icon="ui-icon-search" update="tbl"/>
 			</p:panel>
 
 
 			<p:panel style="border:0px;">
 				<p:dataTable id="tbl" value="#{usuarioBean.usuarios}" var="u"
 					emptyMessage="Nenhum registro encontrado." rowKey="#{u.id_user}"
-					selectionMode="single" selection="#{usuarioBean.selectedUser}"
+					selectionMode="single" 
+					selection="#{usuarioBean.selectedUser}"
 					paginator="true" rows="10" rowsPerPageTemplate="10,20,50">
-
-					<p:column>
+					<p:column style="width:80px">
 						<f:facet name="header">
 							<h:outputText id="columnId" value="id" />
 						</f:facet>
@@ -53,7 +52,7 @@
 						</f:facet>
 						<h:outputText value="#{u.email_user}" />
 					</p:column>
-					<p:column>
+					<p:column style="width:80px">
 						<f:facet name="header">
 							<h:outputText id="columnBanido" value="Banido" />
 						</f:facet>

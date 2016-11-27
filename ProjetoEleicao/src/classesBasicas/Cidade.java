@@ -17,12 +17,13 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.ManyToAny;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="tb_cidade")
-public class Cidade {
+public class Cidade implements Serializable{
 	// Attributes
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

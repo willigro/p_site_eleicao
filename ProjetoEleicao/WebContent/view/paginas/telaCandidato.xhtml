@@ -13,10 +13,12 @@
 <h:body>
 	<f:view>
 		<ui:include src="menuNav.xhtml"></ui:include>
+		 <f:event listener="#{candidatoSelecionadoBean.catchIdCandidato}" type="preRenderView" /> 
 		<div id="container">
 			<div class="ui-g">
 				<div id="candidato" class="ui-g-3 ui-md-3">
 					<p:graphicImage value="../img/test.jpg" style="width:100%" />
+					<h:outputLabel value="#{candidatoSelecionadoBean.candidato.id_cand}"></h:outputLabel>
 				</div>
 				<div id="propostas" class="ui-g-6 ui-md-6">
 					<h:form id="formPropostas">
@@ -52,5 +54,4 @@
 		</div>
 	</f:view>
 </h:body>
->>>>>>> a939c8e69f504f1d2463bba95dc05e57a714eea3
 </html>
