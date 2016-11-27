@@ -18,7 +18,18 @@
 			<div class="ui-g">
 				<div id="candidato" class="ui-g-3 ui-md-3">
 					<p:graphicImage value="../img/test.jpg" style="width:100%" />
-					<h:outputLabel value="#{candidatoSelecionadoBean.candidato.id_cand}"></h:outputLabel>
+					<p:outputPanel>
+					<h:panelGrid columns="2" cellpadding="3">
+					<p:outputLabel value="#{candidatoSelecionadoBean.candidato.tipo_Cargo_cand}"></p:outputLabel>
+					<br></br>								
+					<p:outputLabel value="#{candidatoSelecionadoBean.candidato.nome_cand}"></p:outputLabel>
+					<p:outputLabel value="#{candidatoSelecionadoBean.candidato.numero_cand}"></p:outputLabel>
+					<p:outputLabel value="#{candidatoSelecionadoBean.candidato.partido_cand.sigla_part} - #{candidatoSelecionadoBean.candidato.partido_cand.nome_part}"></p:outputLabel>
+					<br></br>
+					<p:outputLabel value="#{candidatoSelecionadoBean.candidato.estado_cand.nome_est}"></p:outputLabel>					
+					<p:outputLabel value="#{candidatoSelecionadoBean.candidato.cidade_cand.nome_cid}"></p:outputLabel>
+					</h:panelGrid>
+					</p:outputPanel>
 				</div>
 				<div id="propostas" class="ui-g-6 ui-md-6">
 					<h:form id="formPropostas">
