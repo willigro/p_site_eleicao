@@ -47,7 +47,7 @@ public class CandidatoBean implements Serializable {
 
 	// Methods
 	/**
-	 * Metodo para confirmação, apenas.
+	 * Metodo para confirmaï¿½ï¿½o, apenas.
 	 */
 	public void estadoSelecionaCidade() {
 		try {
@@ -110,6 +110,10 @@ public class CandidatoBean implements Serializable {
 
 	public String cadastrar() throws Exception {
 		try {
+			this.candidato.getCidade_cand().setId_cid(1);
+			// this.candidato.getEstado_cand().setId_est(this.idEstado);
+			this.candidato.getPartido_cand().setId_part(1);
+
 			fachada.cadastrarCandidato(candidato);
 			addMensagem("Cadastrado com Sucesso!");
 		} catch (Exception e) {
