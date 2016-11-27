@@ -97,8 +97,8 @@ public class CandidatoBean implements Serializable {
 
 	public void pagCandidato(Candidato candidato) {
 		try {
-			System.out.println("id cand: " + candidato.getId_cand());
-			this.fachada.armazenarVariavel(candidato.getId_cand());
+			System.out.println("id cand: " + candidato.getId_cand() + " nome: "  + candidato.getNome_cand());
+			this.fachada.armazenarVariavel(candidato);
 			System.out.println("pag: " + candidato.toString());
 			FacesContext.getCurrentInstance().getExternalContext().redirect("telaCandidato.xhtml");
 		} catch (Exception e) {
