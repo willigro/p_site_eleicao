@@ -1,15 +1,15 @@
 package controller;
 
-public class ControllerVariableInt {
+public class ControllerVariableObject {
 
-	private static int value;
+	private static Object value;
 
-	public int getValue() {
+	public Object getValue() {
 		System.out.println("get:" + value);
 		return value;
 	}
 
-	public void setValue(int value) {
+	public void setValue(Object value) {
 		this.value = value;
 		System.out.println("set:" + value);
 	}
