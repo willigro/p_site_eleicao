@@ -75,8 +75,8 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 
 		try {
 			
-			Query query = getManager().createQuery("SELECT u FROM Usuario u WHERE nome_user =:Nome",Usuario.class);
-			query.setParameter("Nome",usuario.getNome_user());
+			Query query = getManager().createQuery("SELECT u FROM Usuario u WHERE nome_user like:Nome",Usuario.class);
+			query.setParameter("Nome","%"+usuario.getNome_user()+"%");
 
 			usersList = (List<Usuario>) query.getResultList();
 			

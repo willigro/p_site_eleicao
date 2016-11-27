@@ -66,6 +66,10 @@ public class ControllerComentario {
 		if(comentario == null){
 			throw new Exception("Comentario nulo");
 		}
+		if(comentario.getCandidato_coment() == null){
+			throw new Exception("Usuario do comentario nulo");
+		}
+//		if(comentario.getCandidato_coment().getId_cand())
 		if(!consultarComentarioPorId(comentario)){
 			throw new Exception("Comentario inextente na base de dados");
 		}	

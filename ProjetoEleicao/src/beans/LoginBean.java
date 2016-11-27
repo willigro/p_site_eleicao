@@ -1,7 +1,13 @@
 package beans;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+import javax.faces.application.FacesMessage;
 
 import classesBasicas.Administrador;
 import classesBasicas.Usuario;
@@ -10,7 +16,9 @@ import facade.Facade;
 
 @ManagedBean(name="loginBean")
 @SessionScoped
-public class LoginBean {
+public class LoginBean implements Serializable{
+	
+	private static final long serialVersionUID = 1094801825228386363L;
 
 	String username;
 	String password;
@@ -18,39 +26,82 @@ public class LoginBean {
 	private Usuario usuario;
 	private Administrador administrador;
 	private Facade facade;
+	private boolean loggedIn;	
+	@ManagedProperty(value="#{navigationBean}")
+    private NavigationBean navigationBean;
 	
 	
+
 	public String efetuarLogin(){
-		//System.out.println(type);
 		this.facade = new Facade();
 		try{
 			if(type){
-//				this.administrador = new Administrador();
-//				this.administrador.setEmail(username);
-//				this.administrador.setSenha_admin(password);
-//				
-//				
-//				if(facade.loginAdministrador(administrador) != null){
-//					return "/admin/index.xhtml";
-				//}
+				this.administrador = new Administrador();
+				this.administrador.setEmail(username);
+				this.administrador.setSenha_admin(password);
+				
+				
+				if(facade.loginAdministrador(administrador) != null){
+					
+					FacesContext facesContext = FacesContext.getCurrentInstance();
+					HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+					session.setAttribute("username", administrador.getEmail());
+					
+					 loggedIn = true;
+		             return navigationBean.redirectToMainAdministrador();
+				}else{
+					System.out.println("entrou no else do login");
+					FacesContext.getCurrentInstance().addMessage(
+							null,
+							new FacesMessage(FacesMessage.SEVERITY_WARN,
+									"A Senha ou E-amil estao incorretos!",
+									"Por favor, escreva seu E-mail e Senha corretamente"));		
+				}
+				
 			}else{
 				this.usuario = new Usuario();
 				this.usuario.setEmail_user(username);
 				this.usuario.setSenha(password);
 				
 				if(facade.loginUsuario(this.usuario) != null){
-					System.out.println("Foi");
-					return "/usr/index.xhtml";
+					FacesContext facesContext = FacesContext.getCurrentInstance();
+					HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+					session.setAttribute("username", usuario.getEmail_user());
+					loggedIn = true;
+		            return navigationBean.redirectToMainUsuario();
+				}else{
+					FacesContext.getCurrentInstance().addMessage(
+							null,
+							new FacesMessage(FacesMessage.SEVERITY_WARN,
+									"A Senha ou E-amil estao incorretos!",
+									"Por favor, escreva seu E-mail e Senha corretamente"));		
 				}
 			}
 			
 		}catch(Exception e){
-//			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Login/Senha inexistente"));
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN,"Atencao! ",e.getMessage()));
 			e.printStackTrace();
 		}
 		
-		return "/login.xhtml";
+		return navigationBean.toWelcome();
 	}
+	
+	//logout event, invalidate session
+		public String logout() {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+			session.invalidate();
+			 loggedIn = false;
+	         
+		        // Set logout message
+		        FacesMessage msg = new FacesMessage("Logout success!", "INFO MSG");
+		        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+		        FacesContext.getCurrentInstance().addMessage(null, msg);
+		         
+		        return navigationBean.toLogin();
+		}
 	
 	public Object getUsuarioLogado(){
 		if(!type){
@@ -126,6 +177,22 @@ public class LoginBean {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public NavigationBean getNavigationBean() {
+		return navigationBean;
+	}
+
+	public void setNavigationBean(NavigationBean navigationBean) {
+		this.navigationBean = navigationBean;
+	}
+
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
 	}
 
 
