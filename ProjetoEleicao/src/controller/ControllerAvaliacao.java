@@ -1,11 +1,14 @@
 package controller;
 
 import dao.interfaces.IAvaliacaoDAO;
+
+import java.io.Serializable;
+
 import classesBasicas.Avaliacao;
 import dao.DAOFactory;
 import controller.exceptions.IdAbimguoAvaliacaoException;
 
-public class ControllerAvaliacao {
+public class ControllerAvaliacao implements Serializable{
 
 	private IAvaliacaoDAO iavaliacaoDAO;
 

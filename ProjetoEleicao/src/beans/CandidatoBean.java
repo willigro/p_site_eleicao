@@ -3,23 +3,16 @@ package beans;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import classesBasicas.Candidato;
 import classesBasicas.Cargo;
 import classesBasicas.Cidade;
 import classesBasicas.Estado;
 import classesBasicas.Partido;
-import dao.DAOFactory;
-import dao.classes.CandidatoDAO;
 import facade.Facade;
 
 @ManagedBean
@@ -104,12 +97,13 @@ public class CandidatoBean implements Serializable {
 		return "paginaAdmin";
 	}
 
-	public void pagCandidato() {
+	public void pagCandidato(Candidato candidato) {
 		try {
+			System.out.println("id cand: " + candidato.getId_cand());
+			this.fachada.armazenarVariavel(candidato.getId_cand());
+			System.out.println("pag: " + candidato.toString());
 			FacesContext.getCurrentInstance().getExternalContext().redirect("telaCandidato.xhtml");
-			String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idCand");
-			this.candidato.setId_cand(Integer.parseInt(id));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -143,7 +137,9 @@ public class CandidatoBean implements Serializable {
 		try {
 			if (cargo.getNome_cargo() != null && !cargo.getNome_cargo().trim().equals(""))
 				this.candidato.setTipo_Cargo_cand(cargo.getNome_cargo());
-			System.out.println(this.candidato.toString());
+			else
+				this.candidato.setTipo_Cargo_cand(null);
+			System.out.println("consul: " + this.candidato.toString());
 			this.candidatos = fachada.consultarCandidatosFiltrados(this.candidato);
 		} catch (Exception e) {
 			e.printStackTrace();

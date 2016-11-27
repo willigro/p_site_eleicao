@@ -12,12 +12,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "tb_estado")
-public class Estado {
+public class Estado implements Serializable{
 	// Attributes
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
