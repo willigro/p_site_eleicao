@@ -21,6 +21,7 @@ public class Facade implements IFachada {
 	private ControllerEstado controllerEstado;
 	private ControllerCidade controllerCidade;
 	private ControllerPartido controllerPartido;
+	private ControllerVariableInt controllerVariable;
 
 	public Facade() {
 		this.controlCand = new ControllerCandidato();
@@ -186,6 +187,18 @@ public class Facade implements IFachada {
 	public List<Cidade> consultarCidadeFiltrada(Cidade cidade) throws Exception {
 		this.controllerCidade = new ControllerCidade();
 		return this.controllerCidade.consultarCidadeFiltrada(cidade);
+	}
+
+	@Override
+	public void armazenarVariavel(int value) throws Exception {
+		this.controllerVariable = new ControllerVariableInt();
+		this.controllerVariable.setValue(value);
+	}
+
+	@Override
+	public int retornarVariavel() throws Exception {
+		this.controllerVariable = new ControllerVariableInt();
+		return this.controllerVariable.getValue();
 	}
 	
 }

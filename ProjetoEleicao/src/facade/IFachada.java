@@ -60,5 +60,9 @@ public interface IFachada {
 	public void banirUsuario(Usuario usuario) throws Exception;
 	
     public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception;
+    
+    public void armazenarVariavel(int value) throws Exception;
+    
+    public int retornarVariavel() throws Exception;
 
 }
