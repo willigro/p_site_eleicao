@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -34,13 +35,20 @@ public class AdministradorDAO extends DAOGenerico<Administrador> implements IAdm
 	
 	@Override
 	public Administrador loginAdministrador(Administrador administrador) throws Exception {
-			
+			Administrador admin;
 																		
 			Query query = super.getManager().createQuery("SELECT a FROM Administrador a WHERE email =:Email AND senha_admin=:Senha_admin", Administrador.class);
 			query.setParameter("Email", administrador.getEmail());
-			query.setParameter("Senha_admin", criptografarSenha(administrador.getSenha_admin()));
-		
-			return (Administrador) query.getSingleResult();
+			//query.setParameter("Senha_admin", criptografarSenha(administrador.getSenha_admin()));
+			query.setParameter("Senha_admin", administrador.getSenha_admin());
+			
+			try{
+			admin = (Administrador) query.getSingleResult();
+			}catch(NoResultException noResult){
+				throw new Exception("Nenhum Usuario encontrado!");
+			}
+			
+		return (Administrador) query.getSingleResult();		
 	}
 
 	@Override

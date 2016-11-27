@@ -94,7 +94,7 @@ public class ControllerUsuario {
 		if(consultarStatusUsuarioBanido(usuario).getEmail_user().length() > 30){
 			throw new Exception("O usuario por que o email nao pode conter mais de 30 caracteres.");
 		}
-		if(consultarStatusUsuarioBanido(usuario).getEmail_user().equals(usuario.getEmail_user())){
+		if(!consultarStatusUsuarioBanido(usuario).getEmail_user().equals(usuario.getEmail_user())){
 			throw new Exception("O email informado nao corresponde ao ja existente na base de dados.");	
 		}
 		if(usuario.getNome_user().trim().isEmpty()){
@@ -103,7 +103,7 @@ public class ControllerUsuario {
 		if(consultarStatusUsuarioBanido(usuario).getNome_user().length() > 50){
 			throw new Exception("O nome nao pode conter mais de 50 caracteres.");
 		}
-		if(consultarStatusUsuarioBanido(usuario).getNome_user().equals(usuario.getNome_user())){
+		if(!consultarStatusUsuarioBanido(usuario).getNome_user().equals(usuario.getNome_user())){
 			throw new Exception("O nome informado nao corresponde ao ja existente na base de dados.");
 		}
 		if(usuario.getSenha().trim().isEmpty()){
@@ -112,7 +112,7 @@ public class ControllerUsuario {
 		if(consultarStatusUsuarioBanido(usuario).getEmail_user().length() > 30){
 			throw new Exception("A senha nao pode conter mais de 32 caracteres.");
 		}
-		if(consultarStatusUsuarioBanido(usuario).getSenha().equals(usuario.getSenha())){
+		if(!consultarStatusUsuarioBanido(usuario).getSenha().equals(usuario.getSenha())){
 			throw new Exception("A senha informada nao corresponde com a existente na base de dados.");
 		}
 		

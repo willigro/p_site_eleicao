@@ -20,15 +20,12 @@
 
 
 <h:body>
-
-
- 
    <p:growl id="messages" />
       <p:layout fullPage="true">
          <p:layoutUnit position="north">
             <p:menubar>
                <f:facet name="options">
-                  <p:commandButton value="Sair" />
+                  <p:commandButton value="Sair" icon="ui-icon-extlink" action="#{loginBean.logout()}"/>
                </f:facet>
             </p:menubar>
          </p:layoutUnit>

@@ -10,29 +10,39 @@ import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 import beans.LoginBean;
+import beans.NavigationBean;
 
-//@WebFilter("/admin/*")
+@WebFilter("/admin/*")
 public class LoginFilter implements Filter{
 
+	private NavigationBean navigationBean;
+	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest) request;
-		HttpSession sessao = req.getSession();
-				
-		if(sessao == null || sessao.getAttribute("loginBean") == null 
-		   || (((LoginBean) sessao.getAttribute("loginBean")).getUsuarioLogado()== null)){
-			RequestDispatcher dis = request.getRequestDispatcher("/login.xhtml");
-			dis.forward(request, response);
-		} 	
+		navigationBean = new NavigationBean();
+		HttpServletRequest req = (HttpServletRequest)request;
+        HttpServletResponse res = (HttpServletResponse)response;
+        LoginBean session = (LoginBean)req.getSession().getAttribute("loginBean");
+        String url = req.getRequestURI();
+        if(session == null || session.isLoggedIn() == false)
+        {
+            if(!url.equals(navigationBean.toLogin()))
+            {
+                res.sendRedirect(req.getContextPath() + navigationBean.toLogin());
+            }
+        }
+        else
+        {
+            chain.doFilter(request, response);
+        } 	
 	}
 
 	@Override

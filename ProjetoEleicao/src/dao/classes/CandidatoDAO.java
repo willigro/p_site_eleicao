@@ -27,7 +27,7 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 		try {
 			lista_candidatos = getManager().createQuery("SELECT cand FROM Candidato cand").getResultList();
 			if (lista_candidatos.isEmpty()) {
-				throw new Exception("Não há registros armazenados");
+				throw new Exception("Nï¿½o hï¿½ registros armazenados");
 			}
 		} catch (
 
@@ -74,7 +74,7 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 		 */
 		List<Candidato> lista = criteria.list();
 		if (lista.isEmpty())
-			throw new Exception("Não foram encontrados registros para esta pesquisa");
+			throw new Exception("Nao foram encontrados registros para esta pesquisa");
 		else
 			return lista;
 	}
