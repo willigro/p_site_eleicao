@@ -61,14 +61,16 @@ public class ControllerCandidato {
 		this.iCandidatoDAO.removerCandidato(candidato);
 	}
 
-	public Candidato alterarCandidato(Candidato candidato) throws Exception {
+	public void alterarCandidato(Candidato candidato) throws Exception {
+		System.out.println("2 - " + candidato.getId_cand() + " ID assim que entra no controllador");
 		this.validarCandidato(candidato);
 		if (iCandidatoDAO.retornaID(candidato) == true) {
-			throw new Exception("O candidato informado não existe cadastrado.");
+			throw new Exception("3 - " + "O candidato informado não existe cadastrado.");
 		} else {
+			System.out.println(candidato.getId_cand() + " ID antes de entrar no DAO");
 			this.iCandidatoDAO.alterarCandidato(candidato);
+			System.out.println("4 - " + candidato.getId_cand() + " ID depois de entrar no DAO");
 		}
-		return candidato;
 	}
 
 	public List<Candidato> consultarTodosCandidatos() throws Exception {

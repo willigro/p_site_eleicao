@@ -96,8 +96,8 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 	}
 
 	@Override
-	public Candidato alterarCandidato(Candidato candidato) throws Exception {
-		return super.update(candidato);
+	public void alterarCandidato(Candidato candidato) throws Exception {
+		super.update(candidato);
 	}
 
 	@Override

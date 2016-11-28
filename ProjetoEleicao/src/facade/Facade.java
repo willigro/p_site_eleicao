@@ -44,7 +44,6 @@ public class Facade implements IFachada{
 			throw new Exception("Controller null");
 	}
 
-
 	
 	@Override
 	public Administrador loginAdministrador(Administrador adminsitrador) throws Exception {
@@ -94,8 +93,8 @@ public class Facade implements IFachada{
 	}
 
 	@Override
-	public Candidato alterarCandidato(Candidato candidato) throws Exception {
-		return this.controlCand.alterarCandidato(candidato);
+	public  void alterarCandidato(Candidato candidato) throws Exception {
+		 this.controlCand.alterarCandidato(candidato);
 	}
 
 	@Override
