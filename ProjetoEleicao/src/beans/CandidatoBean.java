@@ -46,9 +46,6 @@ public class CandidatoBean implements Serializable {
 	}
 
 	// Methods
-	/**
-	 * Metodo para confirma��o, apenas.
-	 */
 	public void estadoSelecionaCidade() {
 		try {
 			this.cidade.getEstado_cid().setId_est(candidato.getEstado_cand().getId_est());
@@ -73,7 +70,6 @@ public class CandidatoBean implements Serializable {
 	public String remover() throws Exception {
 		try {
 			this.fachada.removerCandidato(this.candidato);
-			// addMensagem("Removido com Sucesso!");
 			this.candidatos = this.fachada.consultarTodosCandidatos();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -89,7 +85,9 @@ public class CandidatoBean implements Serializable {
 		return "consultaCandidatos";
 	}
 
-	public String pagEditarCandidato() {
+	public String paginaEditarCand() {
+		//System.out.println(candidato.getNome_cand());
+		System.out.println(candidato.getId_cand());
 		return "paginaEditarCand";
 	}
 
@@ -110,10 +108,6 @@ public class CandidatoBean implements Serializable {
 
 	public String cadastrar() throws Exception {
 		try {
-			this.candidato.getCidade_cand().setId_cid(1);
-			// this.candidato.getEstado_cand().setId_est(this.idEstado);
-			this.candidato.getPartido_cand().setId_part(1);
-
 			fachada.cadastrarCandidato(candidato);
 			addMensagem("Cadastrado com Sucesso!");
 		} catch (Exception e) {
@@ -127,6 +121,7 @@ public class CandidatoBean implements Serializable {
 		try {
 			fachada.alterarCandidato(candidato);
 			addMensagem("Editado com Sucesso!");
+			//System.out.println(candidato.getId_cand());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

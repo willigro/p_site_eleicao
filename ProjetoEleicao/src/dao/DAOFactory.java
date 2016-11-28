@@ -85,4 +85,10 @@ public abstract class DAOFactory {
 		partidoDAO.setManager(manager);
 		return partidoDAO;
 	}
+	
+	public static ErroSiteDAO getErroSiteDAO(){
+		ErroSiteDAO erroSiteDAO = new ErroSiteDAO();
+		erroSiteDAO.setManager(manager);
+		return erroSiteDAO;
+	}
 }

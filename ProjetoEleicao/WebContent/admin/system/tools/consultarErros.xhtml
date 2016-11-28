@@ -1,12 +1,58 @@
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:h="http://java.sun.com/jsf/html"
-   xmlns:f="http://java.sun.com/jsf/core"
-   xmlns:p="http://primefaces.org/ui"
-   xmlns:ui="http://java.sun.com/jsf/facelets">
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-<h:head title="Primefaces Test">
-</h:head>
-<body>
+<ui:composition template="/admin/index.xhtml">
 
-</body>
+
+
+	<ui:define name="conteudo">
+
+
+		<h:form>
+			<p:panel style="border:0px;">
+				<p:inputText  style="width:300px"
+				 	value="#{errositeBean.search}"
+					placeholder=" Digite e pressione enter para pesquisar" />
+
+				<p:commandButton value="Procurar" action="#{errositeBean.getErros()}" icon="ui-icon-search" update="tbl"/>
+			</p:panel>
+
+
+			<p:panel style="border:0px;">
+				<p:dataTable id="tbl" value="#{errositeBean.getErros()}" var="e"
+					emptyMessage="Nenhum registro encontrado." 
+					rowKey="#{e.id_erroSite}"
+					selectionMode="single" 
+					selection="#{errositeBean.selectedErroSite}"
+					paginator="true" 
+					rows="10" 
+					rowsPerPageTemplate="10,20,50">
+					
+					<p:column style="width:80px">
+						<f:facet name="header">
+							<h:outputText id="columnId" value="id" />
+						</f:facet>
+						<h:outputText value="#{e.id_erroSite}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText id="columnNome" value="Descricao" />
+						</f:facet>
+						<h:outputText value="#{e.descricao}" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+
+
+
+</ui:composition>
 </html>
