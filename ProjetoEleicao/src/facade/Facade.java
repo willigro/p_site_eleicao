@@ -22,6 +22,7 @@ public class Facade implements IFachada{
 	private ControllerCidade controllerCidade;
 	private ControllerPartido controllerPartido;
 	private ControllerVariableInt controllerVariable;
+	private ControllerErroSite controllerErroSite;
 
 	public Facade() {
 		this.controlCand = new ControllerCandidato();
@@ -30,6 +31,7 @@ public class Facade implements IFachada{
 		this.controllerAvaliacao = new ControllerAvaliacao();
 		this.controllerAdministrador = new ControllerAdministrador();
 		this.controllerProjeto = new ControllerProjeto();
+		this.controllerErroSite = new ControllerErroSite();
 		// ControlCidade instanciada na chamada
 		// ControllerPartido instanciado na chamada
 	}
@@ -211,10 +213,18 @@ public class Facade implements IFachada{
 //	}
 
 
+	@Override
+	public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 
 
-
+	public List<ErroSite> consultarErros() throws Exception{
+		this.controllerErroSite = new ControllerErroSite();
+		return this.controllerErroSite.consultarErros();
+	}
 	
 	
 }

@@ -57,7 +57,7 @@ public class LoginBean implements Serializable{
 									"A Senha ou E-amil estao incorretos!",
 									"Por favor, escreva seu E-mail e Senha corretamente"));		
 				}
-				
+				return navigationBean.toLogin();
 			}else{
 				this.usuario = new Usuario();
 				this.usuario.setEmail_user(username);
@@ -82,7 +82,7 @@ public class LoginBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_WARN,"Atencao! ",e.getMessage()));
-			e.printStackTrace();
+			
 		}
 		
 		return navigationBean.toWelcome();
@@ -96,7 +96,7 @@ public class LoginBean implements Serializable{
 			 loggedIn = false;
 	         
 		        // Set logout message
-		        FacesMessage msg = new FacesMessage("Logout success!", "INFO MSG");
+		        FacesMessage msg = new FacesMessage("", "Desconectou-se com sucesso!");
 		        msg.setSeverity(FacesMessage.SEVERITY_INFO);
 		        FacesContext.getCurrentInstance().addMessage(null, msg);
 		         
