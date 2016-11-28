@@ -95,15 +95,15 @@ public class CandidatoBean implements Serializable {
 		return "paginaAdmin";
 	}
 
-	public void pagCandidato(Candidato candidato) {
+	public String pagCandidato(Candidato candidato) {
 		try {
 			System.out.println("id cand: " + candidato.getId_cand() + " nome: "  + candidato.getNome_cand());
 			this.fachada.armazenarVariavel(candidato);
 			System.out.println("pag: " + candidato.toString());
-			FacesContext.getCurrentInstance().getExternalContext().redirect("telaCandidato.xhtml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return "telaCandidato.xhtml";
 	}
 
 	public String cadastrar() throws Exception {

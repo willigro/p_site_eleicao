@@ -16,20 +16,17 @@ import classesBasicas.Usuario;
 import facade.Facade;
 
 @ManagedBean
-public class UsuarioBean{
-	
-
+public class UsuarioBean {
 
 	private Usuario usuario;
 	private Facade fachada;
 	private List<Usuario> usuarios;
 	public Usuario selectedUser;
-	
+
 	LoginBean loginBean;
 	private boolean type; // para verificar se o usuario e adm ou usr
-	
-	private String search = ""; //String de pesquisa
-	
+
+	private String search = ""; // String de pesquisa
 
 	public UsuarioBean() {
 		this.usuarios = new ArrayList<Usuario>();
@@ -38,9 +35,8 @@ public class UsuarioBean{
 		this.selectedUser = new Usuario();
 		this.loginBean = new LoginBean();
 	}
-	
 
-	//continuar
+	// continuar
 	public Usuario getSelectedUser() {
 		return selectedUser;
 	}
@@ -48,18 +44,15 @@ public class UsuarioBean{
 	public void setSelectedUser(Usuario selectedUser) {
 		this.selectedUser = selectedUser;
 	}
-	
 
 	public String getSearch() {
 		return search;
 	}
 
-
 	public void setSearch(String search) {
 		this.search = search;
 	}
-	
-	
+
 	public boolean isType() {
 		return type;
 	}
@@ -68,34 +61,27 @@ public class UsuarioBean{
 		this.type = type;
 	}
 
-
-
 	public List<Usuario> getUsuarios() {
 		try {
-			if(search.toString().isEmpty()){
-			usuarios = fachada.consultarUsuarios();
-			}else{
-			Usuario u = new Usuario();
-			u.setNome_user(search);
-			usuarios = fachada.consultarUsuarioPorFiltro(usuario);
-			}	
-			
+			if (search.toString().isEmpty()) {
+				usuarios = fachada.consultarUsuarios();
+			} else {
+				Usuario u = new Usuario();
+				u.setNome_user(search);
+				usuarios = fachada.consultarUsuarioPorFiltro(usuario);
+			}
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return usuarios;
 	}
-	
+
 	public void setUsuarios(List<Usuario> list) {
 		this.usuarios = list;
 	}
 
-
-
-
-
-	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -106,10 +92,10 @@ public class UsuarioBean{
 
 	public void buttonAction(ActionEvent actionEvent) {
 		try {
-			if(type == true){
+			if (type == true) {
 				usuario.setAtivo_user(true);
 				this.fachada.cadastrarUsuario(usuario);
-				//addMensagem("Cadastrado com Sucesso!");
+				// addMensagem("Cadastrado com Sucesso!");
 				loginBean.password = usuario.getSenha();
 				loginBean.username = usuario.getEmail_user();
 				loginBean.setType(false);
@@ -137,34 +123,37 @@ public class UsuarioBean{
 		}
 		return "";
 	}
-	
-	
-	public void searchUser(){
-		
-		try{
-			if(search.toString().isEmpty()){
+
+	public void searchUser() {
+
+		try {
+			if (search.toString().isEmpty()) {
 				this.usuarios = this.fachada.consultarUsuarios();
-			}else{
+			} else {
 				Usuario u = new Usuario();
 				u.setNome_user(search);
-				System.out.println("valor do filtro: "+search);
+				System.out.println("valor do filtro: " + search);
 				this.usuarios = this.fachada.consultarUsuarioPorFiltro(u);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}	
+		}
 	}
-	
-	//continuar
-	public void banirUsuario(){
-		Usuario usuario = getSelectedUser(); 
-		
+
+	// continuar
+	public void banirUsuario() {
+		Usuario usuario = getSelectedUser();
+
 		try {
 			this.fachada.banirUsuario(usuario);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+	}
+	
+	public String testeFoward(){
+		return "Resultado.xhtml";
 	}
 }
