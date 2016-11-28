@@ -207,6 +207,11 @@ public class Facade implements IFachada{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public List<Projeto> consultarProjetosFiltrados(Projeto projeto) throws Exception {
+		return this.controllerProjeto.consultarProjetosFiltrados(projeto);
+	}
 	
 //	@Override
 //	public Usuario consultarStatusUsuarioBanido(Usuario usuario) throws Exception{
