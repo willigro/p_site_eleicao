@@ -42,14 +42,14 @@ body {
 			</p:menubar>
 		</h:form>
 		<br />
-		<p:commandButton value="Retornar" action="#{candidatoBean.pagAdmin()}" />
+		<p:commandButton value="Retornar" action="#{candidatoBean.pagAdmin}" />
 		<br />
 		<br />
 
 		<!-- painel de update -->
-		<h:form id="formCadastro">
+		<h:form id="formEditar">
 			<p:messages id="messages" showDetail="true" autoUpdate="true" />
-			<p:fieldset legend="Cadastrar Candidato" toggleable="true"
+			<p:fieldset legend="Editar Candidato" toggleable="true"
 				toggleSpeed="500">
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
 					styleClass="">
@@ -81,7 +81,7 @@ body {
 							itemValue="#{estado.id_est}"
 							itemLabel="#{estado.nome_est} - #{estado.sigla_est}" />
 						<p:ajax listener="#{candidatoBean.estadoSelecionaCidade}"
-							process=":formCadastro:dropEstado"></p:ajax>
+							process=":formEditar:dropEstado"></p:ajax>
 					</p:selectOneMenu>
 
 					<h:outputLabel for="cidade" value="CIDADE"></h:outputLabel>
@@ -92,7 +92,7 @@ body {
 						<f:selectItems value="#{candidatoBean.cidades}" var="cidade"
 							itemValue="#{cidade.id_cid}" itemLabel="#{cidade.nome_cid}" />
 						<p:ajax listener="#{candidatoBean.cidadeSelecionada}"
-							process=":formCadastro:dropCidade"></p:ajax>
+							process=":formEditar:dropCidade"></p:ajax>
 					</p:selectOneMenu>
 
 					<h:outputLabel for="partido" value="PARTIDO"></h:outputLabel>
@@ -104,7 +104,7 @@ body {
 							var="partido" itemValue="#{partido.id_part}"
 							itemLabel="#{partido.nome_part} - #{partido.sigla_part}" />
 						<p:ajax listener="#{candidatoBean.estadoSelecionaCidade}"
-							process=":formCadastro:dropPartido"></p:ajax>
+							process=":formEditar:dropPartido"></p:ajax>
 					</p:selectOneMenu>
 				</p:panelGrid>
 				<br />
