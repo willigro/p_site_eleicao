@@ -119,9 +119,10 @@ public class CandidatoBean implements Serializable {
 
 	public String editar() throws Exception {
 		try {
-			fachada.alterarCandidato(candidato);
+			System.out.println("1 - " + candidato.getId_cand() + " ID antes de chamar o alterarBEAN");
+			fachada.alterarCandidato(this.candidato);
 			addMensagem("Editado com Sucesso!");
-			//System.out.println(candidato.getId_cand());
+			System.out.println("5 - " + candidato.getId_cand() + " ID depois de chamar o alterarBEAN");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
