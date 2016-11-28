@@ -61,9 +61,10 @@ public interface IFachada {
 	
     public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception;
     
-    public void armazenarVariavel(int value) throws Exception;
+    public void armazenarVariavel(Object value) throws Exception;
     
-    public int retornarVariavel() throws Exception;
+    public Object retornarVariavel() throws Exception;
 
 	public void denunciarComentario(Comentario comentario) throws Exception;
+
 }

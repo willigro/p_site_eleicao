@@ -26,7 +26,7 @@ public class ControllerCandidato {
 	private void validarCandidato(Candidato candidato) throws Exception {
 
 		// Falta: DataNascimeto, FotoCandidato, Validar os ID nulos e etc.
-		
+
 		if (candidato.getNome_cand().trim().isEmpty()) {
 			throw new Exception("O campo Nome está vazio");
 		} else if (candidato.getNome_cand().length() > 50) {
@@ -63,7 +63,11 @@ public class ControllerCandidato {
 
 	public Candidato alterarCandidato(Candidato candidato) throws Exception {
 		this.validarCandidato(candidato);
-		this.iCandidatoDAO.alterarCandidato(candidato);
+		if (iCandidatoDAO.retornaID(candidato) == true) {
+			throw new Exception("O candidato informado não existe cadastrado.");
+		} else {
+			this.iCandidatoDAO.alterarCandidato(candidato);
+		}
 		return candidato;
 	}
 
@@ -94,7 +98,7 @@ public class ControllerCandidato {
 			if (candidato.getTipo_Cargo_cand().length() > 50) {
 				throw new Exception("O Campo Cargo Elegível não pode conter mais de 50 caracteres");
 			}
-		
+
 		if (candidato.getEstado_cand().getId_est() < 0) {
 			throw new Exception("ID do estado inválido");
 		}

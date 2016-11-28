@@ -23,7 +23,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 
 	public void catchIdCandidato() {
 		try {			
-			this.candidato.setId_cand(this.fachada.retornarVariavel());
+			this.candidato = (Candidato) fachada.retornarVariavel();
 			System.out.println(this.candidato.getId_cand());
 		} catch (Exception e) {
 			e.printStackTrace();

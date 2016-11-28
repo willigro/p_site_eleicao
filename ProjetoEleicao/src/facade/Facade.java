@@ -21,6 +21,7 @@ public class Facade implements IFachada{
 	private ControllerEstado controllerEstado;
 	private ControllerCidade controllerCidade;
 	private ControllerPartido controllerPartido;
+
 	private ControllerVariableInt controllerVariable;
 	private ControllerErroSite controllerErroSite;
 
@@ -193,15 +194,21 @@ public class Facade implements IFachada{
 	}
 
 	@Override
-	public void armazenarVariavel(int value) throws Exception {
-		this.controllerVariable = new ControllerVariableInt();
+	public void armazenarVariavel(Object value) throws Exception {
+		this.controllerVariable = new ControllerVariableObject();
 		this.controllerVariable.setValue(value);
 	}
 
 	@Override
-	public int retornarVariavel() throws Exception {
-		this.controllerVariable = new ControllerVariableInt();
+	public Object retornarVariavel() throws Exception {
+		this.controllerVariable = new ControllerVariableObject();
 		return this.controllerVariable.getValue();
+	}
+
+	@Override
+	public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 //	@Override
@@ -213,11 +220,6 @@ public class Facade implements IFachada{
 //	}
 
 
-	@Override
-	public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	public List<ErroSite> consultarErrosPorFiltro(ErroSite erroSite) throws Exception{
 		if(validaControl(this.controllerErroSite)){
@@ -234,5 +236,5 @@ public class Facade implements IFachada{
 		return null;
 	}
 	
-	
+
 }

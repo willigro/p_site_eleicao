@@ -82,7 +82,7 @@ body {
 						<f:selectItems value="#{candidatoBean.lista_estados}" var="estado"
 							itemValue="#{estado.id_est}"
 							itemLabel="#{estado.nome_est} - #{estado.sigla_est}" />
-						<p:ajax listener="#{candidatoBean.estadoSelecionado}"
+						<p:ajax listener="#{candidatoBean.estadoSelecionaCidade}"
 							process=":formCadastro:dropEstado"></p:ajax>
 					</p:selectOneMenu>
 
@@ -105,7 +105,7 @@ body {
 						<f:selectItems value="#{candidatoBean.lista_partidos}"
 							var="partido" itemValue="#{partido.id_part}"
 							itemLabel="#{partido.nome_part} - #{partido.sigla_part}" />
-						<p:ajax listener="#{candidatoBean.estadoSelecionado}"
+						<p:ajax listener="#{candidatoBean.estadoSelecionaCidade}"
 							process=":formCadastro:dropPartido"></p:ajax>
 					</p:selectOneMenu>
 				</p:panelGrid>
@@ -118,7 +118,7 @@ body {
 
 		<!-- painel de pesquisar -->
 		<h:form id="formPesquisar">
-			
+
 			<p:fieldset legend="Consultar Candidato" toggleable="true"
 				toggleSpeed="500">
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
@@ -130,7 +130,8 @@ body {
 				</p:panelGrid>
 				<br />
 				<p:commandButton value="Pesquisar"
-					action="#{candidatoBean.consultarCandidatoFiltrado()}" update="@form"></p:commandButton>
+					action="#{candidatoBean.consultarCandidatoFiltrado()}"
+					update="@form"></p:commandButton>
 			</p:fieldset>
 			<br />
 
@@ -147,19 +148,23 @@ body {
 						<h:outputText value="#{cand.cidade_cand.nome_cid}"></h:outputText>
 					</p:column>
 					<p:column headerText="Remover">
-						<p:commandButton value="Remover"
-							action="#{candidatoBean.remover}" update=":formPesquisar:formData" ajax="true">
+						<p:commandButton value="Remover" action="#{candidatoBean.remover}"
+							update=":formPesquisar:formData" ajax="true">
 							<f:setPropertyActionListener target="#{candidatoBean.candidato}"
 								value="#{cand}"></f:setPropertyActionListener>
 						</p:commandButton>
 					</p:column>
 					<p:column headerText="Editar">
-						<p:commandButton value="Editar"
-							action="#{candidatoBean.pagEditarCandidato()}" update="@form"></p:commandButton>
+						<p:commandButton value="Editar" action="#{candidatoBean.paginaEditarCand}"
+							update=":formPesquisar:formData" ajax="true">
+							<f:setPropertyActionListener target="#{candidatoBean.candidato}"
+								value="#{cand}"></f:setPropertyActionListener>
+						</p:commandButton>
 					</p:column>
+
 				</p:dataTable>
 			</h:form>
-			
+
 		</h:form>
 	</f:view>
 </h:body>

@@ -42,15 +42,14 @@ body {
 			</p:menubar>
 		</h:form>
 		<br />
-		<p:commandButton value="Retornar"
-			action="#{candidatoBean.pagAdmin()}" />
+		<p:commandButton value="Retornar" action="#{candidatoBean.pagAdmin()}" />
 		<br />
 		<br />
 
-		<!-- painel de cadastrar -->
+		<!-- painel de update -->
 		<h:form id="formCadastro">
 			<p:messages id="messages" showDetail="true" autoUpdate="true" />
-			<p:fieldset legend="Editar Candidato" toggleable="true"
+			<p:fieldset legend="Cadastrar Candidato" toggleable="true"
 				toggleSpeed="500">
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
 					styleClass="">
@@ -64,7 +63,7 @@ body {
 					<h:outputLabel for="numero" value="NÚMERO"></h:outputLabel>
 					<p:inputText placeholder="Número" id="numero"
 						value="#{candidatoBean.candidato.numero_cand}" required="true">
-						<f:validateLength minimum="1" maximum="5" />
+						<f:validateLength minimum="2" maximum="5" />
 					</p:inputText>
 
 					<h:outputLabel for="tipoCargo" value="TIPO DO CARGO"></h:outputLabel>
@@ -81,7 +80,7 @@ body {
 						<f:selectItems value="#{candidatoBean.lista_estados}" var="estado"
 							itemValue="#{estado.id_est}"
 							itemLabel="#{estado.nome_est} - #{estado.sigla_est}" />
-						<p:ajax listener="#{candidatoBean.estadoSelecionado}"
+						<p:ajax listener="#{candidatoBean.estadoSelecionaCidade}"
 							process=":formCadastro:dropEstado"></p:ajax>
 					</p:selectOneMenu>
 
@@ -97,17 +96,16 @@ body {
 					</p:selectOneMenu>
 
 					<h:outputLabel for="partido" value="PARTIDO"></h:outputLabel>
-					<p:selectOneMenu id="dropPartido" style="width:150px" filter="true"
+					<p:selectOneMenu id="dropPartido" filter="true"
 						value="#{candidatoBean.candidato.partido_cand.id_part}">
 						<f:selectItem itemLabel="Partido" itemValue="0"
 							noSelectionOption="true" />
 						<f:selectItems value="#{candidatoBean.lista_partidos}"
 							var="partido" itemValue="#{partido.id_part}"
 							itemLabel="#{partido.nome_part} - #{partido.sigla_part}" />
-						<p:ajax listener="#{candidatoBean.estadoSelecionado}"
+						<p:ajax listener="#{candidatoBean.estadoSelecionaCidade}"
 							process=":formCadastro:dropPartido"></p:ajax>
 					</p:selectOneMenu>
-
 				</p:panelGrid>
 				<br />
 				<p:commandButton value="Editar" action="#{candidatoBean.editar()}"

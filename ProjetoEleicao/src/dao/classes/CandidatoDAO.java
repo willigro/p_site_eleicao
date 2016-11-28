@@ -112,4 +112,12 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 		query.setParameter("Cidade", candidato.getCidade_cand().getId_cid());
 		return query.getResultList().isEmpty();
 	}
+
+	@Override
+	public boolean retornaID(Candidato candidato) throws Exception {
+		Query query = super.getManager().createQuery(
+				"SELECT u FROM Candidato u WHERE Id_cand = :Id", Candidato.class);
+		query.setParameter("Id", candidato.getId_cand());
+		return query.getResultList().isEmpty();
+	}
 }
