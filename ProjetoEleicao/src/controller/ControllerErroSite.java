@@ -17,7 +17,11 @@ public class ControllerErroSite {
 	
 	public List<ErroSite> consultarErros() throws Exception{
 		
-		return iErroSiteDAO.consultarErros();
+		return validateErroSiteSelect(iErroSiteDAO.consultarErros());
+	}
+	
+	public List<ErroSite> consultarErrosPorFiltro(ErroSite erroSite) throws Exception{
+		return validateErroSiteSelect(iErroSiteDAO.consultarErrosPorFiltro(erroSite));
 	}
 	
 	

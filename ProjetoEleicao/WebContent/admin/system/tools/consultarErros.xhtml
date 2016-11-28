@@ -16,9 +16,10 @@
 		<h:form>
 			<p:panel style="border:0px;">
 				<p:inputText  style="width:300px"
+				 	value="#{errositeBean.search}"
 					placeholder=" Digite e pressione enter para pesquisar" />
 
-				<p:commandButton value="Procurar" icon="ui-icon-search" update="tbl"/>
+				<p:commandButton value="Procurar" action="#{errositeBean.getErros()}" icon="ui-icon-search" update="tbl"/>
 			</p:panel>
 
 

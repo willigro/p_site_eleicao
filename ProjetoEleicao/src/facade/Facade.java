@@ -219,11 +219,19 @@ public class Facade implements IFachada{
 		return false;
 	}
 
+	public List<ErroSite> consultarErrosPorFiltro(ErroSite erroSite) throws Exception{
+		if(validaControl(this.controllerErroSite)){
+		return this.controllerErroSite.consultarErrosPorFiltro(erroSite);
+		}
+		return null;
+	}
 
 
 	public List<ErroSite> consultarErros() throws Exception{
-		this.controllerErroSite = new ControllerErroSite();
+		if(validaControl(this.controllerErroSite)){
 		return this.controllerErroSite.consultarErros();
+		}
+		return null;
 	}
 	
 	

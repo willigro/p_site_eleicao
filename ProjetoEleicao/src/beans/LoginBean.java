@@ -16,9 +16,9 @@ import facade.Facade;
 
 @ManagedBean(name="loginBean")
 @SessionScoped
-public class LoginBean implements Serializable{
+public class LoginBean{
 	
-	private static final long serialVersionUID = 1094801825228386363L;
+//	private static final long serialVersionUID = 1094801825228386363L;
 
 	String username;
 	String password;
