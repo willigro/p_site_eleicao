@@ -22,7 +22,7 @@ public class Facade implements IFachada{
 	private ControllerCidade controllerCidade;
 	private ControllerPartido controllerPartido;
 
-	private ControllerVariableInt controllerVariable;
+	private ControllerVariableObject controllerVariable;
 	private ControllerErroSite controllerErroSite;
 
 	public Facade() {
@@ -212,8 +212,8 @@ public class Facade implements IFachada{
 	}
 
 	@Override
-	public List<Projeto> consultarProjetosFiltrados(Projeto projeto) throws Exception {
-		return this.controllerProjeto.consultarProjetosFiltrados(projeto);
+	public List<Projeto> consultarProjetosFiltradosIdCand(Projeto projeto) throws Exception {
+		return this.controllerProjeto.consultarProjetosFiltradosIdCand(projeto);
 	}
 	
 //	@Override

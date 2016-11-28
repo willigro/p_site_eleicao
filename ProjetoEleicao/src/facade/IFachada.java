@@ -43,7 +43,7 @@ public interface IFachada {
 	
 	public List<Projeto> consultarTodosProjetos() throws Exception;
 	
-	public List<Projeto> consultarProjetosFiltrados(Projeto projeto) throws Exception;
+	public List<Projeto> consultarProjetosFiltradosIdCand(Projeto projeto) throws Exception;
 	
 	public List<Estado> consultarTodosEstado() throws Exception;
 	

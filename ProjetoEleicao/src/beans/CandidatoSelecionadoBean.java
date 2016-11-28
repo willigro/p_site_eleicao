@@ -23,6 +23,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 	public CandidatoSelecionadoBean() {
 		this.candidato = new Candidato();
 		this.fachada = new Facade();		
+		this.projeto = new Projeto();
 	}
 
 	public void catchIdCandidato() {
@@ -46,7 +47,8 @@ public class CandidatoSelecionadoBean implements Serializable {
 	public List<Projeto> getLista_projeto() {
 		try {
 			this.projeto.getCanditado_proj().setId_cand(this.candidato.getId_cand());
-			this.fachada.consultarProjetosFiltrados(this.projeto);
+			lista_projeto = this.fachada.consultarProjetosFiltradosIdCand(this.projeto);
+			System.out.println(lista_projeto.get(0).getId_proj());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

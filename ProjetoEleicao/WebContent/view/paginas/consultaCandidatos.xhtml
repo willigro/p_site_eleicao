@@ -95,8 +95,6 @@
 							<f:selectItems value="#{candidatoBean.lista_partidos}"
 								var="partido" itemValue="#{partido.id_part}"
 								itemLabel="#{partido.nome_part} - #{partido.sigla_part}" />
-							<p:ajax listener="#{candidatoBean.estadoSelecionado}"
-								process=":formFiltro:dropPartido"></p:ajax>
 						</p:selectOneMenu>
 
 						<!-- https://www.youtube.com/watch?v=kQVSG_Q8iHg 17:00 

@@ -47,7 +47,7 @@ public class CandidatoBean implements Serializable {
 
 	// Methods
 	public void estadoSelecionaCidade() {
-		try {
+		try {		
 			this.cidade.getEstado_cid().setId_est(candidato.getEstado_cand().getId_est());
 			if (cidade.getEstado_cid().getId_est() > 0)
 				this.lista_cidades_filtrados = this.fachada.consultarCidadeFiltrada(this.cidade);
