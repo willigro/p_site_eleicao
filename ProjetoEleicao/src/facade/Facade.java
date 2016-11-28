@@ -21,7 +21,9 @@ public class Facade implements IFachada{
 	private ControllerEstado controllerEstado;
 	private ControllerCidade controllerCidade;
 	private ControllerPartido controllerPartido;
+
 	private ControllerVariableObject controllerVariable;
+	private ControllerErroSite controllerErroSite;
 
 	public Facade() {
 		this.controlCand = new ControllerCandidato();
@@ -30,6 +32,7 @@ public class Facade implements IFachada{
 		this.controllerAvaliacao = new ControllerAvaliacao();
 		this.controllerAdministrador = new ControllerAdministrador();
 		this.controllerProjeto = new ControllerProjeto();
+		this.controllerErroSite = new ControllerErroSite();
 		// ControlCidade instanciada na chamada
 		// ControllerPartido instanciado na chamada
 	}
@@ -206,6 +209,11 @@ public class Facade implements IFachada{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public List<Projeto> consultarProjetosFiltradosIdCand(Projeto projeto) throws Exception {
+		return this.controllerProjeto.consultarProjetosFiltradosIdCand(projeto);
+	}
 	
 //	@Override
 //	public Usuario consultarStatusUsuarioBanido(Usuario usuario) throws Exception{
@@ -213,6 +221,24 @@ public class Facade implements IFachada{
 //			return this.controllerUsuario.consultarStatusUsuarioBanido(usuario);
 //		}
 //		return null;
-//	}	
+//	}
+
+
+
+	public List<ErroSite> consultarErrosPorFiltro(ErroSite erroSite) throws Exception{
+		if(validaControl(this.controllerErroSite)){
+		return this.controllerErroSite.consultarErrosPorFiltro(erroSite);
+		}
+		return null;
+	}
+
+
+	public List<ErroSite> consultarErros() throws Exception{
+		if(validaControl(this.controllerErroSite)){
+		return this.controllerErroSite.consultarErros();
+		}
+		return null;
+	}
 	
+
 }

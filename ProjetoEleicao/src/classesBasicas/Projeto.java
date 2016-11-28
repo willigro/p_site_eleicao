@@ -1,5 +1,6 @@
 package classesBasicas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_projeto")
-public class Projeto {
+public class Projeto implements Serializable{
 	// Attributes
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
