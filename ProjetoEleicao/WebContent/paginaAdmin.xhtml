@@ -156,7 +156,7 @@ body {
 					</p:column>
 					<p:column headerText="Editar">
 						<p:commandButton value="Editar" action="#{candidatoBean.paginaEditarCand}"
-							update=":formPesquisar:formData" ajax="true">
+						 update=":formPesquisar:formData" ajax="true">
 							<f:setPropertyActionListener target="#{candidatoBean.candidato}"
 								value="#{cand}"></f:setPropertyActionListener>
 						</p:commandButton>

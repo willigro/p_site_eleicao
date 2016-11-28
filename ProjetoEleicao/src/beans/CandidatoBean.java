@@ -87,8 +87,8 @@ public class CandidatoBean implements Serializable {
 
 	public String paginaEditarCand() {
 		//System.out.println(candidato.getNome_cand());
-		System.out.println(candidato.getId_cand());
-		return "paginaEditarCand";
+		System.out.println(this.candidato.getId_cand());
+		return "paginaEditarCand.xhtml";
 	}
 
 	public String pagAdmin() {

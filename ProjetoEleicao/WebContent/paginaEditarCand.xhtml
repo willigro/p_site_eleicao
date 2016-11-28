@@ -54,7 +54,7 @@ body {
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
 					styleClass="">
 
-					<h:outputLabel for="nome" value="NOME"></h:outputLabel>
+					<h:outputLabel for="nome" value="#{candidatoBean.candidato.nome_cand}"></h:outputLabel>
 					<p:inputText placeholder="Nome" id="nome"
 						value="#{candidatoBean.candidato.nome_cand}" required="true">
 						<f:validateLength minimum="3" maximum="50" />
