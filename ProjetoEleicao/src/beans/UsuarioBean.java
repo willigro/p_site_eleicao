@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import classesBasicas.Usuario;
+import dao.DAOFactory;
+import dao.classes.UsuarioDAO;
 import facade.Facade;
 
 @ManagedBean
@@ -22,6 +24,7 @@ public class UsuarioBean {
 	private Facade fachada;
 	private List<Usuario> usuarios;
 	public Usuario selectedUser;
+	private UsuarioDAO dao;
 
 	LoginBean loginBean;
 	private boolean type; // para verificar se o usuario e adm ou usr
@@ -34,6 +37,7 @@ public class UsuarioBean {
 		this.fachada = new Facade();
 		this.selectedUser = new Usuario();
 		this.loginBean = new LoginBean();
+		this.dao = DAOFactory.getUsuarioDAO();
 	}
 
 	// continuar

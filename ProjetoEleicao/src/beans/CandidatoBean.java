@@ -120,7 +120,7 @@ public class CandidatoBean implements Serializable {
 	public String editar() throws Exception {
 		try {
 			// setando manualmente o novo candidato ID (num e city pega na view)
-			candidato.setId_cand(118);
+			candidato.setId_cand(113);
 			System.out.println(candidato.getId_cand());
 
 			fachada.alterarCandidato(this.candidato);
