@@ -68,7 +68,7 @@ body {
 					<f:validateLength minimum="8" />
 				</p:password>
 				<h:panelGrid columns = "2">
-				    <p:selectBooleanCheckbox value="#{usuarioBean.type}" />
+				    <p:selectBooleanCheckbox value="#{usuarioBean.termosUso}" />
 				    <h:outputText value="  Concordo com termos de uso" />
 				</h:panelGrid>
 				<p:commandButton value="Criar minha conta" actionListener="#{usuarioBean.buttonAction}" update="matchGrid" style="width:230px" />

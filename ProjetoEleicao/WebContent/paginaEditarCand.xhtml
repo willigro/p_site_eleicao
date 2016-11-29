@@ -34,7 +34,7 @@ body {
 			type="preRenderView" />
 		<!-- Cabeçalho da Página -->
 		<h:form>
-			<p:growl id="messages" />
+			<p:growl id="messages" showDetail="true"/>
 			<p:menubar styleClass="menubar">
 				<p:menuitem>
 					<font face="Calibri" color="White" size="6">Brasil
@@ -62,7 +62,7 @@ body {
 						value="#{candidatoSelecionadoBean.candidato.nome_cand}"></h:outputLabel>
 					<p:inputText
 						placeholder="#{candidatoSelecionadoBean.candidato.nome_cand}"
-						id="nome" value="#{candidatoBean.candidato.nome_cand}"
+						id="nome" value="#{candidatoSelecionadoBean.candidato.nome_cand}"
 						required="true">
 						<f:validateLength minimum="3" maximum="50" />
 					</p:inputText>
@@ -71,7 +71,7 @@ body {
 						value="#{candidatoSelecionadoBean.candidato.numero_cand}"></h:outputLabel>
 					<p:inputText
 						placeholder="#{candidatoSelecionadoBean.candidato.numero_cand}"
-						id="numero" value="#{candidatoBean.candidato.numero_cand}"
+						id="numero" value="#{candidatoSelecionadoBean.candidato.numero_cand}"
 						required="true">
 						<f:validateLength minimum="2" maximum="5" />
 					</p:inputText>
@@ -81,7 +81,7 @@ body {
 					</h:outputLabel>
 					<p:inputText
 						placeholder="#{candidatoSelecionadoBean.candidato.tipo_Cargo_cand}"
-						id="tipoCargo" value="#{candidatoBean.candidato.tipo_Cargo_cand}"
+						id="tipoCargo" value="#{candidatoSelecionadoBean.candidato.tipo_Cargo_cand}"
 						required="true">
 						<f:validateLength minimum="3" maximum="50" />
 					</p:inputText>
@@ -117,12 +117,12 @@ body {
 						<f:selectItems value="#{candidatoBean.lista_partidos}"
 							var="partido" itemValue="#{partido.id_part}"
 							itemLabel="#{partido.nome_part} - #{partido.sigla_part}" />
-						<p:ajax listener="#{candidatoBean.estadoSelecionaCidade}"
+						<p:ajax listener="#{candidatoSelecionadoBean.estadoSelecionaCidade}"
 							process=":formEditar:dropPartido"></p:ajax>
 					</p:selectOneMenu>
 				</p:panelGrid>
 				<br />
-				<p:commandButton value="Editar" action="#{candidatoBean.editar()}"
+				<p:commandButton value="Editar" action="#{candidatoSelecionadoBean.editar()}"
 					update="matchGrid"></p:commandButton>
 			</p:fieldset>
 		</h:form>

@@ -25,10 +25,9 @@ public class UsuarioBean {
 	private Facade fachada;
 	private List<Usuario> usuarios;
 	public Usuario selectedUser;
-	private UsuarioDAO dao;
-
-	LoginBean loginBean;
+	private LoginBean loginBean;
 	private boolean type; // para verificar se o usuario e adm ou usr
+	private boolean termosUso;
 
 	private String search = ""; // String de pesquisa
 
@@ -38,7 +37,7 @@ public class UsuarioBean {
 		this.fachada = new Facade();
 		this.selectedUser = new Usuario();
 		this.loginBean = new LoginBean();
-		this.dao = DAOFactory.getUsuarioDAO();
+
 	}
 
 	// continuar
@@ -97,16 +96,16 @@ public class UsuarioBean {
 
 	public void buttonAction(ActionEvent actionEvent) {
 		try {
-			if (type == true) {
-				usuario.setAtivo_user(true);
+			if (this.termosUso == true) {
+				this.usuario.setAtivo_user(true);
+				this.loginBean.username = usuario.getEmail_user();
+				this.loginBean.password = usuario.getSenha();
+				this.loginBean.setType(false);
 				this.fachada.cadastrarUsuario(usuario);
-				// addMensagem("Cadastrado com Sucesso!");
-				loginBean.password = usuario.getSenha();
-				loginBean.username = usuario.getEmail_user();
-				loginBean.setType(false);
-				loginBean.efetuarLogin();
+				this.loginBean.efetuarLogin();
 			} else {
-				addMensagem("Aceite os termos de uso");
+				FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: ", "Aceite os termos de uso");
+				FacesContext.getCurrentInstance().addMessage(null, mensagem);
 			}
 		} catch (Exception e) {
 			addMensagem(e.getMessage());
@@ -114,8 +113,7 @@ public class UsuarioBean {
 	}
 
 	private void addMensagem(String texto) {
-		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
-		FacesContext.getCurrentInstance().addMessage(null, mensagem);
+		
 	}
 
 	public String cadastrarUsuario() {
@@ -166,8 +164,13 @@ public class UsuarioBean {
 		}
 
 	}
-	
-	public String testeFoward(){
-		return "Resultado.xhtml";
+
+	public boolean isTermosUso() {
+		return termosUso;
 	}
+
+	public void setTermosUso(boolean termosUso) {
+		this.termosUso = termosUso;
+	}
+
 }

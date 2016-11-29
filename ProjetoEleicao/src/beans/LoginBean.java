@@ -62,6 +62,7 @@ public class LoginBean{
 				this.usuario.setSenha(password);
 
 				if(facade.loginUsuario(this.usuario) != null){
+					System.out.println("Não está nulo");
 					FacesContext facesContext = FacesContext.getCurrentInstance();
 					HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 					session.setAttribute("username", usuario.getEmail_user());
@@ -77,6 +78,7 @@ public class LoginBean{
 			}
 
 		}catch(Exception e){
+			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,"Atencao! ",e.getMessage()));

@@ -7,7 +7,7 @@ import java.util.List;
 
 import classesBasicas.*;
 
-public class Facade implements IFachada{
+public class Facade implements IFachada {
 
 	/**
 	 * Implementei o new controllerEstado na chamada do consultarTodosEstados
@@ -46,17 +46,16 @@ public class Facade implements IFachada{
 			throw new Exception("Controller null");
 	}
 
-	
 	@Override
 	public Administrador loginAdministrador(Administrador adminsitrador) throws Exception {
 		return this.controllerAdministrador.loginAdministrador(adminsitrador);
 	}
-	
+
 	@Override
-	public void logoutAdministrador() throws Exception{
-		
+	public void logoutAdministrador() throws Exception {
+
 	}
-	
+
 	@Override
 	public void cadastrarCandidato(Candidato candidato) throws Exception {
 		this.controlCand.cadastrarCandidato(candidato);
@@ -87,16 +86,14 @@ public class Facade implements IFachada{
 		return this.controllerUsuario.loginUsuario(usuario);
 	}
 
-	
-
 	@Override
 	public void removerCandidato(Candidato candidato) throws Exception {
 		this.controlCand.removerCandidato(candidato);
 	}
 
 	@Override
-	public  void alterarCandidato(Candidato candidato) throws Exception {
-		 this.controlCand.alterarCandidato(candidato);
+	public void alterarCandidato(Candidato candidato) throws Exception {
+		this.controlCand.alterarCandidato(candidato);
 	}
 
 	@Override
@@ -148,8 +145,6 @@ public class Facade implements IFachada{
 		this.controllerAvaliacao.inserirAvaliacaoProjeto(avaliacao);
 	}
 
-	
-
 	@Override
 	public List<Partido> consultarTodosPartidos() throws Exception {
 		this.controllerPartido = new ControllerPartido();
@@ -157,7 +152,7 @@ public class Facade implements IFachada{
 			return this.controllerPartido.consultarTodosPartidos();
 		return null;
 	}
-	
+
 	@Override
 	public List<Usuario> consultarUsuarios() throws Exception {
 		if (validaControl(this.controllerUsuario))
@@ -165,9 +160,9 @@ public class Facade implements IFachada{
 		else
 			return null;
 	}
-	
+
 	public List<Usuario> consultarUsuarioPorFiltro(Usuario usuario) throws Exception {
-		if(validaControl(this.controllerUsuario)){
+		if (validaControl(this.controllerUsuario)) {
 			return this.controllerUsuario.consultarUsuarioPorFiltro(usuario);
 		}
 		return null;
@@ -175,15 +170,15 @@ public class Facade implements IFachada{
 
 	@Override
 	public void banirUsuario(Usuario usuario) throws Exception {
-		if(validaControl(this.controllerUsuario)){
+		if (validaControl(this.controllerUsuario)) {
 			this.controllerUsuario.banirUsuario(usuario);
 		}
-		
+
 	}
-	
+
 	@Override
-	public void denunciarComentario(Comentario comentario) throws Exception{
-		if(validaControl(this.controllerComentario)){
+	public void denunciarComentario(Comentario comentario) throws Exception {
+		if (validaControl(this.controllerComentario)) {
 			this.controllerComentario.denunciarComentario(comentario);
 		}
 	}
@@ -216,44 +211,49 @@ public class Facade implements IFachada{
 	public List<Projeto> consultarProjetosFiltradosIdCand(Projeto projeto) throws Exception {
 		return this.controllerProjeto.consultarProjetosFiltradosIdCand(projeto);
 	}
-	
-//	@Override
-//	public Usuario consultarStatusUsuarioBanido(Usuario usuario) throws Exception{
-//		if(validaControl(this.controllerUsuario)){
-//			return this.controllerUsuario.consultarStatusUsuarioBanido(usuario);
-//		}
-//		return null;
-//	}
 
+	// @Override
+	// public Usuario consultarStatusUsuarioBanido(Usuario usuario) throws
+	// Exception{
+	// if(validaControl(this.controllerUsuario)){
+	// return this.controllerUsuario.consultarStatusUsuarioBanido(usuario);
+	// }
+	// return null;
+	// }
 
-
-	public List<ErroSite> consultarErrosPorFiltro(ErroSite erroSite) throws Exception{
-		if(validaControl(this.controllerErroSite)){
-		return this.controllerErroSite.consultarErrosPorFiltro(erroSite);
+	public List<ErroSite> consultarErrosPorFiltro(ErroSite erroSite) throws Exception {
+		if (validaControl(this.controllerErroSite)) {
+			return this.controllerErroSite.consultarErrosPorFiltro(erroSite);
 		}
 		return null;
 	}
 
-
-	public List<ErroSite> consultarErros() throws Exception{
-		if(validaControl(this.controllerErroSite)){
-		return this.controllerErroSite.consultarErros();
+	public List<ErroSite> consultarErros() throws Exception {
+		if (validaControl(this.controllerErroSite)) {
+			return this.controllerErroSite.consultarErros();
 		}
 		return null;
 	}
-	
-	public void denunciarComentario(Denuncia denuncia) throws Exception{
-		if(validaControl(this.controllerDenuncia)){
+
+	@Override
+	public List<Comentario> consultarComentarioFiltradosIdProjt(Projeto projeto) throws Exception {
+		if (validaControl(this.controllerComentario)) {
+			return this.controllerComentario.consultarComentarioFiltradosIdProjt(projeto);
+		}
+		return null;
+	}
+
+	public void denunciarComentario(Denuncia denuncia) throws Exception {
+		if (validaControl(this.controllerDenuncia)) {
 			controllerDenuncia.denunciarComentario(denuncia);
 		}
 	}
-	
+
 	public Denuncia consultarDenunciaDoComentario(Denuncia denuncia) throws Exception {
-		if(validaControl(controllerDenuncia)){
-		return controllerDenuncia.consultarDenuncia(denuncia);
+		if (validaControl(controllerDenuncia)) {
+			return controllerDenuncia.consultarDenuncia(denuncia);
 		}
 		return null;
 	}
-	
 
 }

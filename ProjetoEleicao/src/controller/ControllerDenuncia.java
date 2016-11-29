@@ -1,7 +1,6 @@
 package controller;
 
 
-import classesBasicas.Comentario;
 import classesBasicas.Denuncia;
 import dao.DAOFactory;
 import dao.interfaces.IDenunciaDAO;
@@ -43,22 +42,19 @@ public class ControllerDenuncia {
 	public void removerDenunciaComentario(Denuncia denuncia) throws Exception{
 		
 		if(denuncia == null){
-			throw new Exception("Denuncia nula");
+			throw new Exception("");
 		}
 		if(denuncia.getUsuario() == null){
-			throw new Exception("Usuario nulo");
-		}		
-		if(!controllerUsuario.verificarUsuarioPorID(denuncia.getUsuario())){
-			throw new Exception("Usuario inexistente na base de dados");
+			throw new Exception("");
+		}
+		if(denuncia.getUsuario().getId_user() > 0){
+			throw new Exception("");
 		}
 		if(denuncia.getComentario() == null){
-			throw new Exception("Comentario nulo");
+			throw new Exception("");
 		}
-		if(!controllerComentario.consultarComentarioPorId(denuncia.getComentario())){
-			throw new Exception("Comentario inexistente na base de dados");
-		}
-		if(iDenunciaDAO.consultarDenunciaDoComentario(denuncia) == null){
-			throw new Exception("Voce nao pode retirar denuncia de um comentario inexistente");
+		if(denuncia.getComentario().getId_coment() > 0){
+			throw new Exception("");
 		}
 		
 		iDenunciaDAO.removerDenunciaComentario(denuncia);
@@ -67,9 +63,9 @@ public class ControllerDenuncia {
 	public Denuncia consultarDenuncia(Denuncia denuncia){
 		
 		try {
-			
 			return iDenunciaDAO.consultarDenunciaDoComentario(denuncia);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

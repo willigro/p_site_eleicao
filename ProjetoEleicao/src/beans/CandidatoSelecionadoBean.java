@@ -1,14 +1,22 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import classesBasicas.Administrador;
 import classesBasicas.Candidato;
+import classesBasicas.Cargo;
+import classesBasicas.Cidade;
+import classesBasicas.Comentario;
+import classesBasicas.Estado;
+import classesBasicas.Partido;
 import classesBasicas.Projeto;
+import classesBasicas.Usuario;
 import facade.Facade;
 
 @ManagedBean
@@ -19,23 +27,61 @@ public class CandidatoSelecionadoBean implements Serializable {
 	private Candidato candidato;
 	private Projeto projeto;
 	private List<Projeto> lista_projeto;
-	
+	private Usuario usuario;
+	private Comentario comentario;
+	private List<Comentario> lista_comentario;
+	private Administrador adm;
+
 	public CandidatoSelecionadoBean() {
 		this.candidato = new Candidato();
-		this.fachada = new Facade();		
+		this.fachada = new Facade();
 		this.projeto = new Projeto();
+
+		this.candidato = new Candidato();
+		this.fachada = new Facade();
+		this.projeto = new Projeto();
+		this.usuario = new Usuario();
+		this.comentario = new Comentario();
+		this.adm = new Administrador();
 	}
 
-	//Methods
+	// Methods
+	public String comentarioProsposta() {
+		try {
+			this.adm.setId_admin(1);
+			this.usuario.setId_user(1);
+			this.comentario.setUsuario_coment(this.usuario);
+			this.comentario.setCandidato_coment(this.projeto.getCanditado_proj());
+			this.comentario.setAdministrador_coment(adm);
+			this.comentario.setProjeto_coment(this.projeto);
+			this.comentario.setId_coment(0);
+			this.fachada.inserirComentarioProjeto(this.comentario);
+			popularComentariosProposta(this.projeto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void popularComentariosProposta(Projeto projeto) {
+		try {
+			this.projeto = projeto;
+			lista_comentario = this.fachada.consultarComentarioFiltradosIdProjt(projeto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void catchIdCandidato() {
-		try {			
+		try {
 			this.candidato = (Candidato) fachada.retornarVariavel();
 			System.out.println(this.candidato.getId_cand());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public List<Projeto> getLista_projeto() {
 		try {
 			this.projeto.getCanditado_proj().setId_cand(this.candidato.getId_cand());
@@ -47,7 +93,35 @@ public class CandidatoSelecionadoBean implements Serializable {
 		return lista_projeto;
 	}
 
-	//Getters e Setters
+	public String editar() throws Exception {
+		try {
+
+			System.out.println("ID DEPOIS DO BOTÃO EDITAR: " + candidato.getId_cand());
+			System.out.println("NUMERO DEPOIS DO BOTÃO EDITAR: " + candidato.getNumero_cand());
+			System.out.println("CIDADE ID DEPOIS DO BOTÃO EDITAR: " + candidato.getCidade_cand().getId_cid());
+			System.out.println("CIDADE ID DEPOIS DO BOTÃO EDITAR: " + candidato.getCidade_cand().getNome_cid());
+
+			fachada.alterarCandidato(candidato);
+			mensagemSucessoEdit("Editado com Sucesso!");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mensagemFalhaEdit(e.getMessage());
+		}
+		return "paginaEditarCand";
+	}
+
+	private void mensagemSucessoEdit(String texto) {
+		FacesContext mensagem = FacesContext.getCurrentInstance();
+		mensagem.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualizado com Sucesso", texto));
+	}
+
+	private void mensagemFalhaEdit(String texto) {
+		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", texto);
+
+		FacesContext.getCurrentInstance().addMessage(null, mensagem);
+	}
+
+	// Getters e Setters
 	public Candidato getCandidato() {
 		return candidato;
 	}
@@ -64,4 +138,25 @@ public class CandidatoSelecionadoBean implements Serializable {
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Comentario getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(Comentario comentario) {
+		this.comentario = comentario;
+	}
+
+	public List<Comentario> getLista_comentario() {
+		return lista_comentario;
+	}
+
 }
