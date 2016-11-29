@@ -26,6 +26,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 		this.projeto = new Projeto();
 	}
 
+	//Methods
 	public void catchIdCandidato() {
 		try {			
 			this.candidato = (Candidato) fachada.retornarVariavel();
@@ -34,7 +35,19 @@ public class CandidatoSelecionadoBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<Projeto> getLista_projeto() {
+		try {
+			this.projeto.getCanditado_proj().setId_cand(this.candidato.getId_cand());
+			lista_projeto = this.fachada.consultarProjetosFiltradosIdCand(this.projeto);
+			System.out.println(lista_projeto.get(0).getId_proj());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lista_projeto;
+	}
 
+	//Getters e Setters
 	public Candidato getCandidato() {
 		return candidato;
 	}
@@ -42,18 +55,6 @@ public class CandidatoSelecionadoBean implements Serializable {
 	public void setCandidato(Candidato candidato) {
 		System.out.println("candS set: " + this.candidato.getId_cand());
 		this.candidato = candidato;
-	}
-
-	public List<Projeto> getLista_projeto() {
-		try {
-			this.projeto.getCanditado_proj().setId_cand(this.candidato.getId_cand());
-			lista_projeto = this.fachada.consultarProjetosFiltradosIdCand(this.projeto);
-			System.out.println(lista_projeto.get(0).getId_proj());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return lista_projeto;
 	}
 
 	public Projeto getProjeto() {

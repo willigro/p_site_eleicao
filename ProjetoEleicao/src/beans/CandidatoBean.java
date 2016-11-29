@@ -87,12 +87,19 @@ public class CandidatoBean implements Serializable {
 		return "consultaCandidatos";
 	}
 
-	public String paginaEditarCand() {
-		return "paginaEditarCand";
-	}
-
 	public String pagAdmin() {
 		return "paginaAdmin";
+	}
+
+	public String paginaEditarCand(Candidato candidato) {
+		try {
+			System.out.println("id cand: " + candidato.getId_cand() + " nome: " + candidato.getNome_cand());
+			this.fachada.armazenarVariavel(candidato);
+			System.out.println("pag: " + candidato.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "paginaEditarCand.xhtml";
 	}
 
 	public String pagCandidato(Candidato candidato) {
@@ -120,11 +127,12 @@ public class CandidatoBean implements Serializable {
 	public String editar() throws Exception {
 		try {
 			// setando manualmente o novo candidato ID (num e city pega na view)
-			candidato.setId_cand(113);
-			System.out.println(candidato.getId_cand());
+			//candidato.setId_cand(113);
+			//System.out.println(candidato.getId_cand());
 
+			System.out.println("DEPOIS DO BOTÃO EDITAR: " + candidato.getId_cand());
+			
 			fachada.alterarCandidato(this.candidato);
-			System.out.println(candidato.getId_cand());
 			addMensagem("Editado com Sucesso!");
 		} catch (Exception e) {
 			e.printStackTrace();

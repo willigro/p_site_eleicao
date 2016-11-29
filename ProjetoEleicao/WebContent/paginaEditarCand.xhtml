@@ -30,7 +30,8 @@ body {
 </h:head>
 <body>
 	<f:view>
-
+		<f:event listener="#{candidatoSelecionadoBean.catchIdCandidato}"
+			type="preRenderView" />
 		<!-- Cabeçalho da Página -->
 		<h:form>
 			<p:growl id="messages" />
@@ -54,25 +55,38 @@ body {
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
 					styleClass="">
 
-					<h:outputLabel for="nome" value="NOME"></h:outputLabel>
-					<p:inputText placeholder="Nome" id="nome"
-						value="#{candidatoBean.candidato.nome_cand}" required="true">
+					<h:outputLabel value="CANDIDATO ATUAL:"></h:outputLabel>
+					<h:outputLabel value="CANDIDATO EDITADO:"></h:outputLabel>
+
+					<h:outputLabel
+						value="#{candidatoSelecionadoBean.candidato.nome_cand}"></h:outputLabel>
+					<p:inputText
+						placeholder="#{candidatoSelecionadoBean.candidato.nome_cand}"
+						id="nome" value="#{candidatoBean.candidato.nome_cand}"
+						required="true">
 						<f:validateLength minimum="3" maximum="50" />
 					</p:inputText>
 
-					<h:outputLabel for="numero" value="NÚMERO"></h:outputLabel>
-					<p:inputText placeholder="Número" id="numero"
-						value="#{candidatoBean.candidato.numero_cand}" required="true">
+					<h:outputLabel
+						value="#{candidatoSelecionadoBean.candidato.numero_cand}"></h:outputLabel>
+					<p:inputText
+						placeholder="#{candidatoSelecionadoBean.candidato.numero_cand}"
+						id="numero" value="#{candidatoBean.candidato.numero_cand}"
+						required="true">
 						<f:validateLength minimum="2" maximum="5" />
 					</p:inputText>
 
-					<h:outputLabel for="tipoCargo" value="TIPO DO CARGO"></h:outputLabel>
-					<p:inputText placeholder="Tipo do Cargo" id="tipoCargo"
-						value="#{candidatoBean.candidato.tipo_Cargo_cand}" required="true">
+					<h:outputLabel
+						value="#{candidatoSelecionadoBean.candidato.tipo_Cargo_cand}">
+					</h:outputLabel>
+					<p:inputText
+						placeholder="#{candidatoSelecionadoBean.candidato.tipo_Cargo_cand}"
+						id="tipoCargo" value="#{candidatoBean.candidato.tipo_Cargo_cand}"
+						required="true">
 						<f:validateLength minimum="3" maximum="50" />
 					</p:inputText>
 
-					<h:outputLabel for="estado" value="ESTADO"></h:outputLabel>
+					<h:outputLabel value="#{candidatoSelecionadoBean.candidato.estado_cand.nome_est}"></h:outputLabel>
 					<p:selectOneMenu id="dropEstado" style="width:150px" filter="true"
 						value="#{candidatoBean.candidato.estado_cand.id_est}">
 						<f:selectItem itemLabel="Estado" itemValue="0"
@@ -84,7 +98,7 @@ body {
 							process=":formEditar:dropEstado"></p:ajax>
 					</p:selectOneMenu>
 
-					<h:outputLabel for="cidade" value="CIDADE"></h:outputLabel>
+					<h:outputLabel value="#{candidatoSelecionadoBean.candidato.cidade_cand.nome_cid}"></h:outputLabel>
 					<p:selectOneMenu id="dropCidade" style="width:150px" filter="true"
 						value="#{candidatoBean.candidato.cidade_cand.id_cid}">
 						<f:selectItem itemLabel="Cidade" itemValue="0"
@@ -95,7 +109,7 @@ body {
 							process=":formEditar:dropCidade"></p:ajax>
 					</p:selectOneMenu>
 
-					<h:outputLabel for="partido" value="PARTIDO"></h:outputLabel>
+					<h:outputLabel value="#{candidatoSelecionadoBean.candidato.partido_cand.sigla_part} - #{candidatoSelecionadoBean.candidato.partido_cand.nome_part}"></h:outputLabel>
 					<p:selectOneMenu id="dropPartido" filter="true"
 						value="#{candidatoBean.candidato.partido_cand.id_part}">
 						<f:selectItem itemLabel="Partido" itemValue="0"
