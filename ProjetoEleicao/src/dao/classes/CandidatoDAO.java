@@ -119,5 +119,5 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 				"SELECT u FROM Candidato u WHERE Id_cand = :Id", Candidato.class);
 		query.setParameter("Id", candidato.getId_cand());
 		return query.getResultList().isEmpty();
-	}
+	}	
 }

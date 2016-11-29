@@ -43,10 +43,17 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 	}
 
 	@Override
+<<<<<<< HEAD
 	public Comentario verificarComentario(Comentario comentario) throws Exception {
 		Query query = getManager().createQuery("SELECT u FROM Usuario u WHERE id_user =:Id", Comentario.class);
 		query.setParameter("Id", comentario.getId_coment());
 
+=======
+	public Comentario verificarComentario(Comentario comentario) throws Exception{
+		Query query = getManager().createQuery("SELECT c FROM Comentario c WHERE id_coment =:Id",Comentario.class);
+		query.setParameter("Id",comentario.getId_coment());
+		
+>>>>>>> e3aad8aa03d082a59b7b847f83f3670ac01c7330
 		Comentario c = (Comentario) query.getSingleResult();
 		if (c == null) {
 			throw new Exception("Nao ha registros armazenados");

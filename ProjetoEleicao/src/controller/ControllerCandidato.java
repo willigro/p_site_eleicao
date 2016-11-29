@@ -51,7 +51,7 @@ public class ControllerCandidato {
 		this.validarCandidato(candidato);
 
 		if (iCandidatoDAO.retornaNumero(candidato) == false) {
-			throw new Exception("O numero informado já consta cadastrado.");
+			throw new Exception("O numero informado na mesma cidade já consta cadastrado.");
 		} else {
 			iCandidatoDAO.cadastrarCandidato(candidato);
 		}
@@ -62,15 +62,29 @@ public class ControllerCandidato {
 	}
 
 	public void alterarCandidato(Candidato candidato) throws Exception {
-		System.out.println("2 - " + candidato.getId_cand() + " ID assim que entra no controllador");
+
+		// Setando abaixo enquanto não consigo passar o objeto entre telas
+		int numero = 11111;
+		int cidade = 1;
+
 		this.validarCandidato(candidato);
+
+		System.out.println(candidato.getId_cand() + "ID do candidato novo (setado)");
+
 		if (iCandidatoDAO.retornaID(candidato) == true) {
-			throw new Exception("3 - " + "O candidato informado não existe cadastrado.");
+			throw new Exception("O candidato informado não existe cadastrado.");
 		} else {
-			System.out.println(candidato.getId_cand() + " ID antes de entrar no DAO");
-			this.iCandidatoDAO.alterarCandidato(candidato);
-			System.out.println("4 - " + candidato.getId_cand() + " ID depois de entrar no DAO");
+			if ((candidato.getNumero_cand() == numero) && (candidato.getCidade_cand().getId_cid()) == cidade) {
+				this.iCandidatoDAO.alterarCandidato(candidato);
+			} else {
+				if (iCandidatoDAO.retornaNumero(candidato) == false) {
+					throw new Exception("O numero informado na mesma cidade já consta cadastrado.");
+				} else {
+					this.iCandidatoDAO.alterarCandidato(candidato);
+				}
+			}
 		}
+
 	}
 
 	public List<Candidato> consultarTodosCandidatos() throws Exception {

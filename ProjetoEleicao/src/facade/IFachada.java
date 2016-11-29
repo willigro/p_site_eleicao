@@ -8,6 +8,7 @@ import classesBasicas.Avaliacao;
 import classesBasicas.Candidato;
 import classesBasicas.Cidade;
 import classesBasicas.Comentario;
+import classesBasicas.Denuncia;
 import classesBasicas.Estado;
 import classesBasicas.Partido;
 import classesBasicas.Projeto;
@@ -69,6 +70,10 @@ public interface IFachada {
 
 	public void denunciarComentario(Comentario comentario) throws Exception;
 	
+<<<<<<< HEAD
 	public List<Comentario> consultarComentarioFiltradosIdProjt(Projeto projeto) throws Exception;
+=======
+	public void denunciarComentario(Denuncia denuncia) throws Exception;
+>>>>>>> e3aad8aa03d082a59b7b847f83f3670ac01c7330
 
 }
