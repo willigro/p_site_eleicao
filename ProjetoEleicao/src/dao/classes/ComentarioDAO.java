@@ -32,7 +32,7 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 	@Override
 	public void denunciarComentario(Comentario comentario) throws Exception{
 		Query query = getManager().createQuery("UPDATE Comentario as c set qtd_denuncia = :Qtd WHERE id_coment = :Id");
-		query.setParameter("Qtd", comentario.getQtd_denuncia());
+		//query.setParameter("Qtd", comentario.getQtd_denuncia());
 		query.setParameter("Id", comentario.getId_coment());
 		
 		query.executeUpdate();

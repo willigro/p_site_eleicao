@@ -74,9 +74,9 @@ public class ControllerComentario {
 			throw new Exception("Comentario inextente na base de dados");
 		}	
 		
-		if(comentario.getQtd_denuncia() == verificarQuantidadeDenunciasComentario(comentario)){
-			throw new Exception("A quantidade de denuncia informada nao pode ser igual a da base de dados");
-		}	
+//		if(comentario.getQtd_denuncia() == verificarQuantidadeDenunciasComentario(comentario)){
+//			throw new Exception("A quantidade de denuncia informada nao pode ser igual a da base de dados");
+//		}	
 			this.iComentarioDAO.denunciarComentario(comentario);		
 	}
 	
@@ -89,16 +89,16 @@ public class ControllerComentario {
 	
 	
 	//RETORNA A QUANTIDADE DE DENUNCIAS DO COMENTARIO ESPECIFICO
-	public int verificarQuantidadeDenunciasComentario(Comentario comentario) throws Exception{
-		if(comentario == null){
-			throw new Exception("Comentario nulo");
-		}
-		if(comentario.getId_coment() <= 0){
-			throw new Exception("O id do comentario nao pode ser igual ou menor que zero");
-		}
-		
-		return iComentarioDAO.verificarComentario(comentario).getQtd_denuncia();
-	}
+//	public int verificarQuantidadeDenunciasComentario(Comentario comentario) throws Exception{
+//		if(comentario == null){
+//			throw new Exception("Comentario nulo");
+//		}
+//		if(comentario.getId_coment() <= 0){
+//			throw new Exception("O id do comentario nao pode ser igual ou menor que zero");
+//		}
+//		
+//		return iComentarioDAO.verificarComentario(comentario).getQtd_denuncia();
+//	}
 	
 	//RETORNA SE O ID DO COMENTARIO EXISTE NA BASE DE DADOS (TRUE)=EXISTE / (FALSE)=N EXISTE
 	public boolean consultarComentarioPorId(Comentario comentario) throws Exception{
