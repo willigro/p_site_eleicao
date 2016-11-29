@@ -64,12 +64,15 @@ public class ControllerCandidato {
 	public void alterarCandidato(Candidato candidato) throws Exception {
 
 		// Setando abaixo enquanto não consigo passar o objeto entre telas
-		int numero = 11111;
+		int numero = 55555;
 		int cidade = 1;
 
 		this.validarCandidato(candidato);
 
-		System.out.println(candidato.getId_cand() + "ID do candidato novo (setado)");
+		System.out.println(candidato.getId_cand() + " ID do candidato novo (setado)");
+		System.out.println(candidato.getCidade_cand().getId_cid() + " ID City do candidato novo (setado)");
+		System.out.println(candidato.getNumero_cand() + " Numero do candidato novo (setado)");
+		System.out.println(candidato.getNome_cand() + " Novo Nome do candidato novo (setado)");
 
 		if (iCandidatoDAO.retornaID(candidato) == true) {
 			throw new Exception("O candidato informado não existe cadastrado.");
