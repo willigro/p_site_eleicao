@@ -14,8 +14,10 @@ import javax.faces.model.SelectItem;
 import classesBasicas.Candidato;
 import classesBasicas.Cidade;
 import classesBasicas.Comentario;
+import classesBasicas.Denuncia;
 import classesBasicas.Estado;
 import classesBasicas.Partido;
+import classesBasicas.Usuario;
 import dao.DAOFactory;
 import dao.classes.CandidatoDAO;
 import facade.Facade;
@@ -34,8 +36,16 @@ public class ComentarioBean {
 	private List<Estado> lista_estados;
 	private List<Partido> lista_partidos;
 	private List<Comentario> comentarios;
+	private Denuncia denunciar;
+	private Usuario usuarioLogado;
+	private Comentario comentarioSelecionado;
+
+
 
 	public ComentarioBean() {
+		this.usuarioLogado = new Usuario();
+		this.comentarioSelecionado = new Comentario();
+		this.denunciar = new Denuncia();
 		this.candidato = new Candidato();
 		this.fachada = new Facade();
 		this.estado = new Estado();
@@ -52,7 +62,21 @@ public class ComentarioBean {
 		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
 	}
-
+	
+	public void denunciarComentario(){
+		this.denunciar.setUsuario(usuarioLogado);
+		this.denunciar.setComentario(comentarioSelecionado);
+		try {
+			this.fachada.denunciarComentario(denunciar);
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Comentario denunciado!", null);
+		} catch (Exception e) {
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null);
+		}
+	}
+	
+	
+	
+	//Nao sei quem fez esse metodo mas vou talvez nao precise utiliza-lo
 	public void consultarComentsDenunciados() {
 		try {
 			this.comentarios = fachada.visualizarComentsDenuncia();
@@ -154,5 +178,30 @@ public class ComentarioBean {
 
 	public String pagComentarios() {
 		return "paginaComentarios";
+	}
+	
+	public Denuncia getDenunciar() {
+		return denunciar;
+	}
+
+	public void setDenunciar(Denuncia denunciar) {
+		this.denunciar = denunciar;
+	}
+
+
+	public Usuario getUsuarioLogado() {
+		return usuarioLogado;
+	}
+
+	public void setUsuarioLogado(Usuario usuarioLogado) {
+		this.usuarioLogado = usuarioLogado;
+	}
+
+	public Comentario getComentarioSelecionado() {
+		return comentarioSelecionado;
+	}
+
+	public void setComentarioSelecionado(Comentario comentarioSelecionado) {
+		this.comentarioSelecionado = comentarioSelecionado;
 	}
 }
