@@ -92,7 +92,7 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 		super.update(usuario);
 	}
 
-	public Usuario consultarUsuarioBanido(Usuario usuario) throws Exception {
+	public Usuario consultarUsuarioPorId(Usuario usuario) throws Exception {
 
 		Query query = getManager().createQuery("SELECT u FROM Usuario u WHERE id_user =:Id", Usuario.class);
 		query.setParameter("Id", usuario.getId_user());

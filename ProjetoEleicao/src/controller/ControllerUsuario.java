@@ -122,12 +122,26 @@ public class ControllerUsuario {
 			usuarioDAO.banirUsuario(usuario);
 	}
 	
+	public boolean verificarUsuarioPorID(Usuario usuario){
+		
+		try {
+			if(this.usuarioDAO.consultarUsuarioPorId(usuario) != null){
+				return true;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 	
 	public Usuario consultarStatusUsuarioBanido(Usuario usuario) throws Exception{
 		if(usuario == null){
 			throw new Exception("O usuario informado nao corresponde ao ja existente na base de dados.");
 		}
-		return (Usuario) this.usuarioDAO.consultarUsuarioBanido(usuario);
+		return (Usuario) this.usuarioDAO.consultarUsuarioPorId(usuario);
 	}
 	
 	/*

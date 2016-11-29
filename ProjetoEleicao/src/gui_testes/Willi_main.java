@@ -23,7 +23,7 @@ public class Willi_main {
 		
 		
 		try {
-			fachada.consultarDenunciaDoComentario(denuncia);
+			fachada.denunciarComentario(denuncia);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

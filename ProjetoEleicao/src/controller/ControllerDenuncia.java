@@ -19,38 +19,24 @@ public class ControllerDenuncia {
 	}
 	
 	public void denunciarComentario(Denuncia denuncia) throws Exception{
-//		if(denuncia == null){
-//			
-//		}
-//		if(denuncia.getUsuario() == null){
-//			throw new Exception("");
-//		}
-//		if(controllerUsuario.consultarUsuarioPorFiltro(denuncia.getUsuario()) != null){
-//			throw new Exception("");
-//		}
-//		
-//		if(denuncia.getUsuario().getId_user() > 0){
-//			throw new Exception("");
-//		}
-//		if(denuncia.getComentario() == null){
-//			throw new Exception("");
-//		}
-//		if(controllerComentario.consultarComentarioPorId(denuncia.getComentario())){
-//			throw new Exception("");
-//		}
-//		
-//		if(denuncia.getComentario().getId_coment() > 0){
-//			throw new Exception("");
-//		}
-//		if(denuncia.getComentario().getTexto_coment().isEmpty()){
-//			throw new Exception("");
-//		}
-		
+		if(denuncia == null){
+			throw new Exception("Denuncia nula");
+		}
+		if(denuncia.getUsuario() == null){
+			throw new Exception("Usuario nulo");
+		}		
+		if(!controllerUsuario.verificarUsuarioPorID(denuncia.getUsuario())){
+			throw new Exception("Usuario inexistente na base de dados");
+		}
+		if(denuncia.getComentario() == null){
+			throw new Exception("Comentario nulo");
+		}
+		if(!controllerComentario.consultarComentarioPorId(denuncia.getComentario())){
+			throw new Exception("Comentario inexistente na base de dados");
+		}
 		if(iDenunciaDAO.consultarDenunciaDoComentario(denuncia) != null){
 			throw new Exception("Voce nao pode denunciar mais de uma vez o mesmo comentario");
 		}
-		
-		
 		iDenunciaDAO.denunciarComentario(denuncia);
 	}
 	

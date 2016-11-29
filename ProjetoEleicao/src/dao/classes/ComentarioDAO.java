@@ -40,7 +40,7 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 	
 	@Override
 	public Comentario verificarComentario(Comentario comentario) throws Exception{
-		Query query = getManager().createQuery("SELECT u FROM Usuario u WHERE id_user =:Id",Comentario.class);
+		Query query = getManager().createQuery("SELECT c FROM Comentario c WHERE id_coment =:Id",Comentario.class);
 		query.setParameter("Id",comentario.getId_coment());
 		
 		Comentario c = (Comentario) query.getSingleResult();
