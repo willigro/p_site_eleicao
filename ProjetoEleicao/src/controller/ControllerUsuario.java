@@ -59,6 +59,9 @@ public class ControllerUsuario {
 		if(usuario.getSenha().length() < 8){
 			throw new Exception("A senha deve conter no manimo oito caracteres.");
 		}
+		if(usuarioDAO.loginUsuario(usuario).isAtivo_user()){
+			throw new Exception("Nao sera possivel realizar login por que sua conta encontra-se desabilitada.");
+		}
 
 		return this.usuarioDAO.loginUsuario(usuario);
 
@@ -119,12 +122,26 @@ public class ControllerUsuario {
 			usuarioDAO.banirUsuario(usuario);
 	}
 	
+	public boolean verificarUsuarioPorID(Usuario usuario){
+		
+		try {
+			if(this.usuarioDAO.consultarUsuarioPorId(usuario) != null){
+				return true;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 	
 	public Usuario consultarStatusUsuarioBanido(Usuario usuario) throws Exception{
 		if(usuario == null){
 			throw new Exception("O usuario informado nao corresponde ao ja existente na base de dados.");
 		}
-		return (Usuario) this.usuarioDAO.consultarUsuarioBanido(usuario);
+		return (Usuario) this.usuarioDAO.consultarUsuarioPorId(usuario);
 	}
 	
 	/*

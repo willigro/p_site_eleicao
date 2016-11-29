@@ -46,9 +46,9 @@ public class ControllerAdministrador{
 		if(administrador.getSenha_admin().trim().isEmpty()){
 			throw new Exception("Informe uma senha.");
 		}
-//		if(administrador.getSenha_admin().length() < 8){
-//			throw new Exception("A senha deve conter no manimo oito caracteres.");
-//		}
+		if(administrador.getSenha_admin().length() < 8){
+			throw new Exception("A senha deve conter no manimo oito caracteres.");
+		}
 		return this.administradorDAO.loginAdministrador(administrador);
 
 	}

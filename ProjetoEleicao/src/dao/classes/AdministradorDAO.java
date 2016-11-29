@@ -39,8 +39,7 @@ public class AdministradorDAO extends DAOGenerico<Administrador> implements IAdm
 																		
 			Query query = super.getManager().createQuery("SELECT a FROM Administrador a WHERE email =:Email AND senha_admin=:Senha_admin", Administrador.class);
 			query.setParameter("Email", administrador.getEmail());
-			//query.setParameter("Senha_admin", criptografarSenha(administrador.getSenha_admin()));
-			query.setParameter("Senha_admin", administrador.getSenha_admin());
+			query.setParameter("Senha_admin", criptografarSenha(administrador.getSenha_admin()));
 			
 			try{
 			admin = (Administrador) query.getSingleResult();

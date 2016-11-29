@@ -8,6 +8,7 @@ import classesBasicas.Avaliacao;
 import classesBasicas.Candidato;
 import classesBasicas.Cidade;
 import classesBasicas.Comentario;
+import classesBasicas.Denuncia;
 import classesBasicas.Estado;
 import classesBasicas.Partido;
 import classesBasicas.Projeto;
@@ -68,5 +69,7 @@ public interface IFachada {
     public Object retornarVariavel() throws Exception;
 
 	public void denunciarComentario(Comentario comentario) throws Exception;
+	
+	public void denunciarComentario(Denuncia denuncia) throws Exception;
 
 }

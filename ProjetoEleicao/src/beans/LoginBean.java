@@ -1,7 +1,5 @@
 package beans;
 
-import java.io.Serializable;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -17,8 +15,8 @@ import facade.Facade;
 @ManagedBean(name="loginBean")
 @SessionScoped
 public class LoginBean{
-	
-//	private static final long serialVersionUID = 1094801825228386363L;
+
+	//	private static final long serialVersionUID = 1094801825228386363L;
 
 	String username;
 	String password;
@@ -28,9 +26,8 @@ public class LoginBean{
 	private Facade facade;
 	private boolean loggedIn;	
 	@ManagedProperty(value="#{navigationBean}")
-    private NavigationBean navigationBean;
-	
-	
+	private NavigationBean navigationBean;
+
 
 	public String efetuarLogin(){
 		this.facade = new Facade();
@@ -39,72 +36,73 @@ public class LoginBean{
 				this.administrador = new Administrador();
 				this.administrador.setEmail(username);
 				this.administrador.setSenha_admin(password);
-				
-				
+
+
 				if(facade.loginAdministrador(administrador) != null){
-					
+
 					FacesContext facesContext = FacesContext.getCurrentInstance();
 					HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 					session.setAttribute("username", administrador.getEmail());
-					
-					 loggedIn = true;
-		             return navigationBean.redirectToMainAdministrador();
+
+					loggedIn = true;
+					return navigationBean.toMainAdministrador();
 				}else{
-					System.out.println("entrou no else do login");
 					FacesContext.getCurrentInstance().addMessage(
 							null,
-							new FacesMessage(FacesMessage.SEVERITY_WARN,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR,
 									"A Senha ou E-amil estao incorretos!",
 									"Por favor, escreva seu E-mail e Senha corretamente"));		
 				}
+
 				return navigationBean.toLogin();
+
 			}else{
 				this.usuario = new Usuario();
 				this.usuario.setEmail_user(username);
 				this.usuario.setSenha(password);
-				
+
 				if(facade.loginUsuario(this.usuario) != null){
 					System.out.println("Não está nulo");
 					FacesContext facesContext = FacesContext.getCurrentInstance();
 					HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 					session.setAttribute("username", usuario.getEmail_user());
 					loggedIn = true;
-		            return navigationBean.redirectToMainUsuario();
+					return navigationBean.toMainUsuario();
 				}else{
 					FacesContext.getCurrentInstance().addMessage(
 							null,
-							new FacesMessage(FacesMessage.SEVERITY_WARN,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR,
 									"A Senha ou E-amil estao incorretos!",
 									"Por favor, escreva seu E-mail e Senha corretamente"));		
 				}
 			}
-			
+
 		}catch(Exception e){
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
-					new FacesMessage(FacesMessage.SEVERITY_WARN,"Atencao! ",e.getMessage()));
-			
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,"Atencao! ",e.getMessage()));
+
 		}
-		
-		return navigationBean.toWelcome();
+
+		return navigationBean.toLogin();
 	}
-	
+
 	//logout event, invalidate session
-		public String logout() {
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
-			session.invalidate();
-			 loggedIn = false;
-	         
-		        // Set logout message
-		        FacesMessage msg = new FacesMessage("", "Desconectou-se com sucesso!");
-		        msg.setSeverity(FacesMessage.SEVERITY_INFO);
-		        FacesContext.getCurrentInstance().addMessage(null, msg);
-		         
-		        return navigationBean.toLogin();
-		}
-	
+	public String logout() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+		session.invalidate();
+		loggedIn = false;
+
+		// Set logout message
+		FacesMessage msg = new FacesMessage("", "Desconectou-se com sucesso!");
+		msg.setSeverity(FacesMessage.SEVERITY_INFO);
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		
+		return navigationBean.redirectToLogin();
+	}
+
 	public Object getUsuarioLogado(){
 		if(!type){
 
@@ -127,8 +125,8 @@ public class LoginBean{
 	public void setType(boolean type) {
 		this.type = type;
 	}
-	
-	
+
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -158,7 +156,7 @@ public class LoginBean{
 		this.facade = facade;
 	}
 
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -180,7 +178,7 @@ public class LoginBean{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public NavigationBean getNavigationBean() {
 		return navigationBean;
 	}
