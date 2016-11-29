@@ -89,7 +89,7 @@ public class ControllerComentario {
 	
 	
 	//RETORNA A QUANTIDADE DE DENUNCIAS DO COMENTARIO ESPECIFICO
-	private int verificarQuantidadeDenunciasComentario(Comentario comentario) throws Exception{
+	public int verificarQuantidadeDenunciasComentario(Comentario comentario) throws Exception{
 		if(comentario == null){
 			throw new Exception("Comentario nulo");
 		}
@@ -101,7 +101,7 @@ public class ControllerComentario {
 	}
 	
 	//RETORNA SE O ID DO COMENTARIO EXISTE NA BASE DE DADOS (TRUE)=EXISTE / (FALSE)=N EXISTE
-	private boolean consultarComentarioPorId(Comentario comentario) throws Exception{
+	public boolean consultarComentarioPorId(Comentario comentario) throws Exception{
 		
 		if(iComentarioDAO.verificarComentario(comentario) != null){
 			return true;

@@ -38,8 +38,13 @@ public class Usuario {
 	@Column(nullable=false,length=32)
 	private String senha;
 	
+	@OneToMany(mappedBy = "usuario")
+	private List<Denuncia> denuncias;
+	
+
 	// Constructor
 	public Usuario() {
+		this.denuncias = new ArrayList<Denuncia>();
 		this.lista_Avaliacao_user = new ArrayList<Avaliacao>();
 		this.lista_Comentario_user = new ArrayList<Comentario>();
 	}
@@ -99,5 +104,14 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+
+	public List<Denuncia> getDenuncias() {
+		return denuncias;
+	}
+
+	public void setDenuncias(List<Denuncia> denuncias) {
+		this.denuncias = denuncias;
 	}
 }	

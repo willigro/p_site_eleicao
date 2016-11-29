@@ -1,6 +1,8 @@
 package classesBasicas;
 
-import javax.persistence.CascadeType;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -37,12 +40,14 @@ public class Comentario {
 	@JoinColumn(name = "id_cand")
 	private Candidato candidato_coment;
 	
-	@Column(name = "qtd_denuncia")
-	private int qtd_denuncia;
+
+	@OneToMany(mappedBy = "comentario")
+	private List<Denuncia> denuncias;
 
 
 	// Constructor
 	public Comentario() {
+		this.denuncias = new ArrayList<Denuncia>();
 		this.usuario_coment = new Usuario();
 		this.projeto_coment = new Projeto();
 		this.candidato_coment = new Candidato();
@@ -98,16 +103,17 @@ public class Comentario {
 		this.candidato_coment = candidato_coment;
 	}
 
+	public List<Denuncia> getDenuncias() {
+		return denuncias;
+	}
+
+	public void setDenuncias(List<Denuncia> denuncias) {
+		this.denuncias = denuncias;
+	}
+	
 	// Methods
 	
-	public int getQtd_denuncia() {
-		return qtd_denuncia;
-	}
 
-
-	public void setQtd_denuncia(int qtd_denuncia) {
-		this.qtd_denuncia = qtd_denuncia;
-	}
 
 	
 }

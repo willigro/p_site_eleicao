@@ -59,6 +59,9 @@ public class ControllerUsuario {
 		if(usuario.getSenha().length() < 8){
 			throw new Exception("A senha deve conter no manimo oito caracteres.");
 		}
+		if(usuarioDAO.loginUsuario(usuario).isAtivo_user()){
+			throw new Exception("Nao sera possivel realizar login por que sua conta encontra-se desabilitada.");
+		}
 
 		return this.usuarioDAO.loginUsuario(usuario);
 

@@ -21,11 +21,13 @@ public class Facade implements IFachada{
 	private ControllerEstado controllerEstado;
 	private ControllerCidade controllerCidade;
 	private ControllerPartido controllerPartido;
+	private ControllerDenuncia controllerDenuncia;
 
 	private ControllerVariableInt controllerVariable;
 	private ControllerErroSite controllerErroSite;
 
 	public Facade() {
+		this.controllerDenuncia = new ControllerDenuncia();
 		this.controlCand = new ControllerCandidato();
 		this.controllerUsuario = new ControllerUsuario();
 		this.controllerComentario = new ControllerComentario();
@@ -232,6 +234,19 @@ public class Facade implements IFachada{
 	public List<ErroSite> consultarErros() throws Exception{
 		if(validaControl(this.controllerErroSite)){
 		return this.controllerErroSite.consultarErros();
+		}
+		return null;
+	}
+	
+	public void denunciarComentario(Denuncia denuncia) throws Exception{
+		if(validaControl(this.controllerDenuncia)){
+			controllerDenuncia.denunciarComentario(denuncia);
+		}
+	}
+	
+	public Denuncia consultarDenunciaDoComentario(Denuncia denuncia) throws Exception {
+		if(validaControl(controllerDenuncia)){
+		return controllerDenuncia.consultarDenuncia(denuncia);
 		}
 		return null;
 	}
