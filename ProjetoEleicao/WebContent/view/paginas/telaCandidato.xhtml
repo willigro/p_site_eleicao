@@ -23,7 +23,7 @@
 				<!-- Div Tela -->
 				<div id="candidato" class="ui-g-3 ui-md-3">
 					<!-- Div Candidato -->
-					<p:graphicImage value="../img/test.jpg" style="width:100%" />
+					<p:graphicImage value="../img/quePorraEssa.jpg" style="width:100%" />
 					<p:outputPanel>
 						<h:panelGrid columns="2" cellpadding="3">
 							<p:outputLabel
@@ -53,11 +53,39 @@
 								<h:panelGrid columns="2" cellpadding="10">
 									<h:outputText value="#{proj.descricao_proj}" />
 								</h:panelGrid>
+								<p:commandButton value="Comentar"
+									actionListener="#{candidatoSelecionadoBean.popularComentariosProposta(proj)}"
+									onclick="PF('dlg1').show();" update=":comentarios:tableComent">									
+								</p:commandButton>
 							</p:tab>
 						</p:accordionPanel>
 					</h:form>
 				</div>
 				<!-- Fim Div propostas do candidato -->
+				<div>
+					<!-- Div comentario das propostas -->
+					<h:form id="comentarios">
+						<p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40"
+							width="25%">
+							<p:dataTable id="tableComent" var="coment"
+								value="#{candidatoSelecionadoBean.lista_comentario}">
+								<p:column>									
+									<p:outputLabel value="#{coment.usuario_coment.nome_user}"></p:outputLabel>									
+									<br></br>
+									<p:outputLabel value="#{coment.texto_coment}"></p:outputLabel>
+								</p:column>
+							</p:dataTable>
+							<p:outputLabel value="Deixe o seu comentário"></p:outputLabel>
+							<br></br>
+							<p:inputTextarea rows="5" col="50" maxlength="500"
+								style="width: 100%" autoResize="false"
+								value="#{candidatoSelecionadoBean.comentario.texto_coment}" />
+							<p:commandButton value="Enviar"
+								action="#{candidatoSelecionadoBean.comentarioProsposta}" update=":comentarios:tableComent"></p:commandButton>
+						</p:dialog>
+					</h:form>
+				</div>
+				<!-- Fim Div comentario das propostas -->
 			</div>
 			<!-- Fim Div Tela -->
 			<h:form>

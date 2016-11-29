@@ -68,5 +68,7 @@ public interface IFachada {
     public Object retornarVariavel() throws Exception;
 
 	public void denunciarComentario(Comentario comentario) throws Exception;
+	
+	public List<Comentario> consultarComentarioFiltradosIdProjt(Projeto projeto) throws Exception;
 
 }
