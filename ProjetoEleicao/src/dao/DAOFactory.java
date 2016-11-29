@@ -91,4 +91,10 @@ public abstract class DAOFactory {
 		erroSiteDAO.setManager(manager);
 		return erroSiteDAO;
 	}
+	
+	public static DenunciaDAO getDenunciaDAO(){
+		DenunciaDAO denunciaDAO = new DenunciaDAO();
+		denunciaDAO.setManager(manager);
+		return denunciaDAO;
+	}
 }
