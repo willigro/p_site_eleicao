@@ -44,7 +44,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 			this.comentario.setCandidato_coment(this.projeto.getCanditado_proj());
 			this.comentario.setAdministrador_coment(adm);
 			this.comentario.setProjeto_coment(this.projeto);
-			this.comentario.setId_coment(0);					
+			this.comentario.setId_coment(0);
 			this.fachada.inserirComentarioProjeto(this.comentario);
 			popularComentariosProposta(this.projeto);
 		} catch (Exception e) {
@@ -57,7 +57,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 	public void popularComentariosProposta(Projeto projeto) {
 		try {
 			this.projeto = projeto;
-			lista_comentario = this.fachada.consultarComentarioFiltradosIdProjt(projeto);					
+			lista_comentario = this.fachada.consultarComentarioFiltradosIdProjt(projeto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -121,5 +121,9 @@ public class CandidatoSelecionadoBean implements Serializable {
 	public List<Comentario> getLista_comentario() {
 		return lista_comentario;
 	}
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> 52a878ae4cb5fbe2311fbb739f768c67b9fc7e58
