@@ -8,33 +8,33 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Restrictions;
+
 import classesBasicas.Projeto;
 
 public class ProjetoDAO extends DAOGenerico<Projeto> implements IProjetoDAO {
 
-	@Override
-	public List<Projeto> consultarProjetosFiltrados(Projeto projeto) throws Exception {		
-		String montagemQuery = "SELECT proj FROM Projeto proj WHERE id_proj = id_proj";
-		Query query = null;
-		try{
-			if(projeto.getTitulo_proj() != null || !projeto.getTitulo_proj().trim().equals("")){
-				montagemQuery += " AND proj.titulo_proj = :titulo_proj";
-			}
-			if(projeto.getCanditado_proj().getNome_cand() != null || !projeto.getCanditado_proj().getNome_cand().trim().equals("")){
-				//montagemQuery += " AND proj.titulo_proj = :titulo_proj";
-				throw new Exception("Implementar getCandidato NOME");
-			}
-			if(projeto.getCanditado_proj().getId_cand() > 0){
-				//montagemQuery += " AND proj.titulo_proj = :titulo_proj";
-				throw new Exception("Implementar getCandidato ID");	
-			}
-			if(projeto.getId_proj() > 0){
-				montagemQuery += " AND proj.id_proj = :id_proj";
-			}
-		}catch (Exception e) {
-			throw new Exception(e.getMessage());
+	private void addRestrictionIdCand(Criteria criteria, String propertyName, int id) {		
+		if (id > 0) {
+			criteria.add(Restrictions.eq(propertyName, id));
 		}
-		return query.getResultList();
+	}
+	
+	@Override
+	public List<Projeto> consultarProjetosFiltradosIdCand(Projeto projeto) throws Exception {		
+		Session session = (Session) getManager().getDelegate();
+		Example cidadeExample = Example.create(projeto).excludeProperty("descricao_proj").excludeProperty("titulo_proj");
+		Criteria criteria = session.createCriteria(Projeto.class).add(cidadeExample);
+		addRestrictionIdCand(criteria, "canditado_proj.id_cand", projeto.getCanditado_proj().getId_cand());		
+	
+		List<Projeto> lista = criteria.list();
+		if (lista.isEmpty())
+			throw new Exception("Nao foram encontrados registros para esta pesquisa");
+		else
+			return lista;
 	}
 
 	@Override

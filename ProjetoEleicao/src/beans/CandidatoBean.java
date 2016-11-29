@@ -19,6 +19,7 @@ import facade.Facade;
 @ViewScoped
 public class CandidatoBean implements Serializable {
 
+	private Candidato oldCandidato;
 	private Cargo cargo;
 	private Candidato candidato;
 	private Facade fachada;
@@ -33,6 +34,7 @@ public class CandidatoBean implements Serializable {
 	private List<Partido> lista_partidos;
 
 	public CandidatoBean() {
+		this.oldCandidato = new Candidato();
 		this.candidato = new Candidato();
 		this.fachada = new Facade();
 		this.cargo = new Cargo();
@@ -85,25 +87,30 @@ public class CandidatoBean implements Serializable {
 		return "consultaCandidatos";
 	}
 
-	public String paginaEditarCand() {
-		//System.out.println(candidato.getNome_cand());
-		System.out.println(candidato.getId_cand());
-		return "paginaEditarCand";
-	}
-
 	public String pagAdmin() {
 		return "paginaAdmin";
 	}
 
-	public void pagCandidato(Candidato candidato) {
+	public String paginaEditarCand(Candidato candidato) {
 		try {
-			System.out.println("id cand: " + candidato.getId_cand() + " nome: "  + candidato.getNome_cand());
+			System.out.println("id cand: " + candidato.getId_cand() + " nome: " + candidato.getNome_cand());
 			this.fachada.armazenarVariavel(candidato);
 			System.out.println("pag: " + candidato.toString());
-			FacesContext.getCurrentInstance().getExternalContext().redirect("telaCandidato.xhtml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return "paginaEditarCand.xhtml";
+	}
+
+	public String pagCandidato(Candidato candidato) {
+		try {
+			System.out.println("id cand: " + candidato.getId_cand() + " nome: " + candidato.getNome_cand());
+			this.fachada.armazenarVariavel(candidato);
+			System.out.println("pag: " + candidato.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "telaCandidato.xhtml";
 	}
 
 	public String cadastrar() throws Exception {
@@ -119,9 +126,14 @@ public class CandidatoBean implements Serializable {
 
 	public String editar() throws Exception {
 		try {
-			fachada.alterarCandidato(candidato);
-			addMensagem("Editado com Sucesso!");
+			// setando manualmente o novo candidato ID (num e city pega na view)
+			//candidato.setId_cand(113);
 			//System.out.println(candidato.getId_cand());
+
+			System.out.println("DEPOIS DO BOTÃO EDITAR: " + candidato.getId_cand());
+			
+			fachada.alterarCandidato(this.candidato);
+			addMensagem("Editado com Sucesso!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -150,6 +162,14 @@ public class CandidatoBean implements Serializable {
 	}
 
 	// Getters and Setters
+	public Candidato getCandidatoSelect() {
+		return oldCandidato;
+	}
+
+	public void setCandidatoSelect(Candidato candidatoSelect) {
+		this.oldCandidato = candidatoSelect;
+	}
+
 	public Partido getPartido() {
 		return partido;
 	}

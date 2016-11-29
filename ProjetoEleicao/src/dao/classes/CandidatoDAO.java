@@ -96,8 +96,8 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 	}
 
 	@Override
-	public Candidato alterarCandidato(Candidato candidato) throws Exception {
-		return super.update(candidato);
+	public void alterarCandidato(Candidato candidato) throws Exception {
+		super.update(candidato);
 	}
 
 	@Override
@@ -119,5 +119,5 @@ public class CandidatoDAO extends DAOGenerico<Candidato> implements ICandidatoDA
 				"SELECT u FROM Candidato u WHERE Id_cand = :Id", Candidato.class);
 		query.setParameter("Id", candidato.getId_cand());
 		return query.getResultList().isEmpty();
-	}
+	}	
 }

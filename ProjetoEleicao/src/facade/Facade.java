@@ -23,7 +23,7 @@ public class Facade implements IFachada{
 	private ControllerPartido controllerPartido;
 	private ControllerDenuncia controllerDenuncia;
 
-	private ControllerVariableInt controllerVariable;
+	private ControllerVariableObject controllerVariable;
 	private ControllerErroSite controllerErroSite;
 
 	public Facade() {
@@ -45,7 +45,6 @@ public class Facade implements IFachada{
 		else
 			throw new Exception("Controller null");
 	}
-
 
 	
 	@Override
@@ -96,8 +95,8 @@ public class Facade implements IFachada{
 	}
 
 	@Override
-	public Candidato alterarCandidato(Candidato candidato) throws Exception {
-		return this.controlCand.alterarCandidato(candidato);
+	public  void alterarCandidato(Candidato candidato) throws Exception {
+		 this.controlCand.alterarCandidato(candidato);
 	}
 
 	@Override
@@ -211,6 +210,11 @@ public class Facade implements IFachada{
 	public boolean consultarStatusUsuarioBanido(Usuario usuario) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<Projeto> consultarProjetosFiltradosIdCand(Projeto projeto) throws Exception {
+		return this.controllerProjeto.consultarProjetosFiltradosIdCand(projeto);
 	}
 	
 //	@Override

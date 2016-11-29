@@ -1,26 +1,32 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import classesBasicas.Candidato;
+import classesBasicas.Projeto;
 import facade.Facade;
 
 @ManagedBean
 @ViewScoped
 public class CandidatoSelecionadoBean implements Serializable {
 
-	private Candidato candidato;
 	private Facade fachada;
+	private Candidato candidato;
+	private Projeto projeto;
+	private List<Projeto> lista_projeto;
 	
 	public CandidatoSelecionadoBean() {
 		this.candidato = new Candidato();
-		this.fachada = new Facade();
+		this.fachada = new Facade();		
+		this.projeto = new Projeto();
 	}
 
+	//Methods
 	public void catchIdCandidato() {
 		try {			
 			this.candidato = (Candidato) fachada.retornarVariavel();
@@ -29,7 +35,19 @@ public class CandidatoSelecionadoBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<Projeto> getLista_projeto() {
+		try {
+			this.projeto.getCanditado_proj().setId_cand(this.candidato.getId_cand());
+			lista_projeto = this.fachada.consultarProjetosFiltradosIdCand(this.projeto);
+			System.out.println(lista_projeto.get(0).getId_proj());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lista_projeto;
+	}
 
+	//Getters e Setters
 	public Candidato getCandidato() {
 		return candidato;
 	}
@@ -39,4 +57,11 @@ public class CandidatoSelecionadoBean implements Serializable {
 		this.candidato = candidato;
 	}
 
+	public Projeto getProjeto() {
+		return projeto;
+	}
+
+	public void setProjeto(Projeto projeto) {
+		this.projeto = projeto;
+	}
 }
