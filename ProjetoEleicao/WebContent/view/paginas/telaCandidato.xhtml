@@ -1,3 +1,105 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Tela do Candidato</title>
+</h:head>
+<h:body>
+	<f:view>
+		<ui:include src="menuNav.xhtml"></ui:include>
+		<!-- Include menu -->
+		<f:event listener="#{candidatoSelecionadoBean.catchIdCandidato}"
+			type="preRenderView" />
+		<!-- Renderiza com candidato selecionado -->
+		<div id="container">
+			<!-- Container -->
+			<div class="ui-g ui-md">
+				<!-- Div Tela -->
+				<div id="candidato" class="ui-g-3 ui-md-3">
+					<!-- Div Candidato -->
+					<p:graphicImage value="../img/quePorraEssa.jpg" style="width:100%" />
+					<p:outputPanel>
+						<h:panelGrid columns="2" cellpadding="3">
+							<p:outputLabel
+								value="#{candidatoSelecionadoBean.candidato.tipo_Cargo_cand}"></p:outputLabel>
+							<br></br>
+							<p:outputLabel
+								value="#{candidatoSelecionadoBean.candidato.nome_cand}"></p:outputLabel>
+							<p:outputLabel
+								value="#{candidatoSelecionadoBean.candidato.numero_cand}"></p:outputLabel>
+							<p:outputLabel
+								value="#{candidatoSelecionadoBean.candidato.partido_cand.sigla_part} - #{candidatoSelecionadoBean.candidato.partido_cand.nome_part}"></p:outputLabel>
+							<br></br>
+							<p:outputLabel
+								value="#{candidatoSelecionadoBean.candidato.estado_cand.nome_est}"></p:outputLabel>
+							<p:outputLabel
+								value="#{candidatoSelecionadoBean.candidato.cidade_cand.nome_cid}"></p:outputLabel>
+						</h:panelGrid>
+					</p:outputPanel>
+				</div>
+				<!-- Fim Div Candidato -->
+				<div id="propostas" class="ui-g-6 ui-md-6">
+					<!-- Div propostas do candidato -->
+					<h:form id="formPropostas">
+						<p:accordionPanel
+							value="#{candidatoSelecionadoBean.lista_projeto}" var="proj">
+							<p:tab title="#{proj.titulo_proj}">
+								<h:panelGrid columns="2" cellpadding="10">
+									<h:outputText value="#{proj.descricao_proj}" />
+								</h:panelGrid>
+								<p:commandButton value="Comentar"
+									actionListener="#{candidatoSelecionadoBean.popularComentariosProposta(proj)}"
+									onclick="PF('dlg1').show();" update=":comentarios:tableComent">									
+								</p:commandButton>
+							</p:tab>
+						</p:accordionPanel>
+					</h:form>
+				</div>
+				<!-- Fim Div propostas do candidato -->
+				<div>
+					<!-- Div comentario das propostas -->
+					<h:form id="comentarios">
+						<p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40"
+							width="25%">
+							<p:dataTable id="tableComent" var="coment"
+								value="#{candidatoSelecionadoBean.lista_comentario}" scrollable="true" scrollHeight="300">
+								<p:column>									
+									<p:outputLabel value="#{coment.usuario_coment.nome_user}"></p:outputLabel>									
+									<br></br>
+									<p:outputLabel value="#{coment.texto_coment}"></p:outputLabel>
+								</p:column>
+							</p:dataTable>
+							<p:outputLabel value="Deixe o seu comentário"></p:outputLabel>
+							<br></br>
+							<p:inputTextarea rows="5" col="50" maxlength="500"
+								style="width: 100%" autoResize="false"
+								value="#{candidatoSelecionadoBean.comentario.texto_coment}" />
+							<p:commandButton value="Enviar"
+								action="#{candidatoSelecionadoBean.comentarioProsposta}" update=":comentarios:tableComent"></p:commandButton>
+						</p:dialog>
+					</h:form>
+				</div>
+				<!-- Fim Div comentario das propostas -->
+			</div>
+			<!-- Fim Div Tela -->
+			<h:form>
+				<h3>Deixe seu comentário</h3>
+				<p:inputTextarea rows="5" col="30" counter="display" maxlength="500"
+					counterTemplate="{0} Caracteres Restantes" autoResize="false" />
+				<h:outputText id="display" />
+			</h:form>
+		</div>
+		<!-- Fim Container -->
+	</f:view>
+</h:body>
+=======
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -70,4 +172,5 @@
 		<!-- Fim Container -->
 	</f:view>
 </h:body>
+>>>>>>> e3aad8aa03d082a59b7b847f83f3670ac01c7330
 </html>

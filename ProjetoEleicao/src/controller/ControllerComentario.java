@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import classesBasicas.Candidato;
 import classesBasicas.Comentario;
+import classesBasicas.Projeto;
 import classesBasicas.Usuario;
 import controller.exceptions.IdAbimguoAvaliacaoException;
 import dao.interfaces.IComentarioDAO;
@@ -52,7 +53,7 @@ public class ControllerComentario {
 	public void inserirComentarioProjeto(Comentario comentario) throws Exception {
 		if (comentario.getProjeto_coment() == null) {
 			throw new Exception("Projeto nï¿½o encontrado: Null - comentï¿½rio");
-		} else if (comentario.getProjeto_coment().getId_proj() == 0) {
+		} else if (comentario.getProjeto_coment().getId_proj() <= 0) {
 			throw new Exception("Projeto nï¿½o encontrado: ID - comentï¿½rio");
 		} else
 			this.validarComentario(comentario);
@@ -109,6 +110,9 @@ public class ControllerComentario {
 		return false;
 	}
 	
-	
+	//Retorna uma lista de comentários filtrados pelo id de um projeto
+	public List<Comentario> consultarComentarioFiltradosIdProjt(Projeto projeto) throws Exception{
+		return this.iComentarioDAO.consultarComentarioFiltradosIdProjt(projeto);
+	}
 
 }
