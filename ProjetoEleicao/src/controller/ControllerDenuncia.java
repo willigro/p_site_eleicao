@@ -1,7 +1,6 @@
 package controller;
 
 
-import classesBasicas.Comentario;
 import classesBasicas.Denuncia;
 import dao.DAOFactory;
 import dao.interfaces.IDenunciaDAO;
