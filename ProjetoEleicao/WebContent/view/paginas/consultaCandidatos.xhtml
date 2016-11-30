@@ -56,9 +56,10 @@
 	<f:view>
 		<ui:include src="menuNav.xhtml"></ui:include>
 
-<f:metadata>
-<f:event listener="#{candidatoBean.consultarCandidatoFiltrado}" type="preRenderView"></f:event>
-</f:metadata>
+		<f:metadata>
+			<f:event listener="#{candidatoBean.consultarCandidatoFiltrado}"
+				type="preRenderView"></f:event>
+		</f:metadata>
 		<div class="ui-fluid" id="container">
 			<!-- Container -->
 			<div class="ui-g-12 ui-md-2">
@@ -139,7 +140,7 @@
 									<h:outputText value="#{cand.numero_cand}"></h:outputText>
 									<h:outputText value="#{cand.partido_cand.sigla_part}"></h:outputText>
 									<p:commandButton id="bConsultar" icon="fa-bell" value="Abrir"
-										action="#{candidatoBean.pagCandidato(cand)}">								
+										action="#{candidatoBean.pagCandidato(cand)}">
 									</p:commandButton>
 								</h:panelGrid>
 							</p:panel>
