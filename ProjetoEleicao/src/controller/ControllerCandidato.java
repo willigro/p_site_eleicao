@@ -110,8 +110,8 @@ public class ControllerCandidato {
 		if (candidato.getNumero_cand() > 0)
 			if (candidato.getNumero_cand() > 99999) {
 				throw new Exception("O campo Numero não deve ter mais que 5 dígitos");
-			} else if (candidato.getNumero_cand() < 10000) {
-				throw new Exception("O campo Numero não deve ter menos que 5 dígitos");
+			} else if (candidato.getNumero_cand() < 10) {
+				throw new Exception("O campo Numero não deve ter menos que 2 dígitos");
 			}
 		if (candidato.getTipo_Cargo_cand() != null)
 			if (candidato.getTipo_Cargo_cand().length() > 50) {
