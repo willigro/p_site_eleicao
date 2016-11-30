@@ -75,20 +75,15 @@
 									<br></br>
 									<p:outputLabel value="#{coment.texto_coment}"></p:outputLabel>
 									<br></br>
-									<p:commandLink value="Editar" onclick="PF('dlg2').show();"
+									<p:commandLink value="Editar " onclick="PF('dlg2').show();"
 										update=":comentarios:formEditarComentario:txtAreaEditComent">
 										<f:setPropertyActionListener
 											target="#{candidatoSelecionadoBean.comentarioEditar}"
 											value="#{coment}" />
 									</p:commandLink>
-								</p:column>																
-								<p:column>
-									<p:outputLabel value="#{coment.usuario_coment.nome_user}"></p:outputLabel>
-									<br></br>
-									<p:outputLabel value="#{coment.texto_coment}"></p:outputLabel>
-									<p:commandButton value="Denunciar"
-										action="#{usuarioBean.searchUser}" />
-								</p:column>
+									<p:commandLink value="Denunciar"
+										action="#{usuarioBean.searchUser}"></p:commandLink>
+										</p:column>
 							</p:dataTable>
 							<p:outputLabel value="Deixe o seu comentário"></p:outputLabel>
 							<br></br>
