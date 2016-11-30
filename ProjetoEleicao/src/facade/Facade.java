@@ -256,4 +256,12 @@ public class Facade implements IFachada {
 		return null;
 	}
 
+	@Override
+	public List<Comentario> consultarComentarioFiltradosIdCand(Candidato candidato) throws Exception {
+		if (validaControl(this.controllerComentario)) {
+			return this.controllerComentario.consultarComentarioFiltradosIdCand(candidato);
+		}
+		return null;
+	}
+
 }
