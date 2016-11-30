@@ -67,12 +67,15 @@
 					<h:form id="comentarios">
 						<p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40"
 							width="25%">
+							
 							<p:dataTable id="tableComent" var="coment"
 								value="#{candidatoSelecionadoBean.lista_comentario}" scrollable="true" scrollHeight="300">
+								
 								<p:column>									
 									<p:outputLabel value="#{coment.usuario_coment.nome_user}"></p:outputLabel>									
 									<br></br>
 									<p:outputLabel value="#{coment.texto_coment}"></p:outputLabel>
+									<p:commandButton value="Denunciar" action="#{usuarioBean.searchUser}"/>
 								</p:column>
 							</p:dataTable>
 							<p:outputLabel value="Deixe o seu comentário"></p:outputLabel>
