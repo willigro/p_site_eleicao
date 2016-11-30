@@ -51,7 +51,11 @@ public class ControllerComentario {
 	public void removerComentario(Comentario comentario) throws Exception {
 		this.removerComentario(comentario);
 	}
-
+	
+	public void removerComentDenunciado(Comentario comentario) throws Exception {
+		this.iComentarioDAO.removerComentDenunciado(comentario);
+	}
+	
 	public void inserirComentarioProjeto(Comentario comentario) throws Exception {
 		if (comentario.getProjeto_coment() == null) {
 			throw new Exception("Projeto n�o encontrado: Null - coment�rio");

@@ -5,6 +5,7 @@ import dao.interfaces.IComentarioDAO;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import org.hibernate.Criteria;
@@ -23,11 +24,8 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 	public List<Comentario> visualizarComentsDenuncia() throws Exception {
 		List<Comentario> lista_comentarios = new ArrayList<>();
 		try {
-			// lista_comentarios = getManager().createQuery("SELECT comentario
-			// FROM Comentario comentario WHERE qtd_denuncia >
-			// 9").getResultList();
-			lista_comentarios = getManager()
-					.createQuery("SELECT comentario FROM Comentario comentario").getResultList();
+			lista_comentarios = getManager().createQuery("SELECT comentario FROM Comentario comentario")
+					.getResultList();
 			if (lista_comentarios.isEmpty()) {
 				throw new Exception("Não há registros armazenados");
 			}
@@ -102,8 +100,20 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 			return lista;
 	}
 
-	// public void comentarProjeto(Comentario comentario) throws Exception{
-	// super.insert(comentario);
-	// }
+	@Override
+	public void removerComentDenunciado(Comentario comentario) throws Exception {
+		EntityTransaction tx = null;
+		try {
+			tx = getManager().getTransaction();
+			tx.begin();
+			Query query = getManager().createQuery("delete Comentario where Id_coment = :id");
+			query.setParameter("id", comentario.getId_coment());
+			query.executeUpdate();
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+		}
+	}
 
 }

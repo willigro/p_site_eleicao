@@ -47,6 +47,11 @@ public class Facade implements IFachada {
 	}
 
 	@Override
+	public void removerComentDenunciado (Comentario comentario) throws Exception{
+		this.controllerComentario.removerComentDenunciado(comentario);
+	}
+	
+	@Override
 	public Administrador loginAdministrador(Administrador adminsitrador) throws Exception {
 		return this.controllerAdministrador.loginAdministrador(adminsitrador);
 	}

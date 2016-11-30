@@ -26,6 +26,7 @@ import facade.Facade;
 @ViewScoped
 public class ComentarioBean {
 
+	private Comentario comentario;
 	private Candidato candidato;
 	private Facade fachada;
 	private Estado estado;
@@ -40,9 +41,8 @@ public class ComentarioBean {
 	private Usuario usuarioLogado;
 	private Comentario comentarioSelecionado;
 
-
-
 	public ComentarioBean() {
+		this.comentario = new Comentario();
 		this.usuarioLogado = new Usuario();
 		this.comentarioSelecionado = new Comentario();
 		this.denunciar = new Denuncia();
@@ -58,12 +58,7 @@ public class ComentarioBean {
 	}
 
 	// Methods
-	private void addMensagem(String texto) {
-		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
-		FacesContext.getCurrentInstance().addMessage(null, mensagem);
-	}
-	
-	public void denunciarComentario(){
+	public void denunciarComentario() {
 		this.denunciar.setUsuario(usuarioLogado);
 		this.denunciar.setComentario(comentarioSelecionado);
 		try {
@@ -73,10 +68,7 @@ public class ComentarioBean {
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null);
 		}
 	}
-	
-	
-	
-	//Nao sei quem fez esse metodo mas vou talvez nao precise utiliza-lo
+
 	public void consultarComentsDenunciados() {
 		try {
 			this.comentarios = fachada.visualizarComentsDenuncia();
@@ -85,8 +77,14 @@ public class ComentarioBean {
 		}
 	}
 
-	public void remover() {
-
+	public String removerComent() throws Exception {
+		try {
+			this.fachada.removerComentDenunciado(this.comentario);;
+			this.comentarios = this.fachada.visualizarComentsDenuncia();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	// getters e setters
@@ -179,7 +177,7 @@ public class ComentarioBean {
 	public String pagComentarios() {
 		return "paginaComentarios";
 	}
-	
+
 	public Denuncia getDenunciar() {
 		return denunciar;
 	}
@@ -187,7 +185,6 @@ public class ComentarioBean {
 	public void setDenunciar(Denuncia denunciar) {
 		this.denunciar = denunciar;
 	}
-
 
 	public Usuario getUsuarioLogado() {
 		return usuarioLogado;
