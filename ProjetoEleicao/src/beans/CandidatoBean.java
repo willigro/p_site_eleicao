@@ -84,7 +84,7 @@ public class CandidatoBean implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "paginaAdmin";
+		return null;
 	}
 
 	public String pagComentarios() {

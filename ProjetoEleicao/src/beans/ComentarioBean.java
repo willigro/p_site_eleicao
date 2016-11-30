@@ -48,11 +48,6 @@ public class ComentarioBean {
 	}
 
 	// Methods
-	private void addMensagem(String texto) {
-		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
-		FacesContext.getCurrentInstance().addMessage(null, mensagem);
-	}
-
 	public void consultarComentsDenunciados() {
 		try {
 			this.comentarios = fachada.visualizarComentsDenuncia();

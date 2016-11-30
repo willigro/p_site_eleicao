@@ -34,7 +34,7 @@ body {
 			type="preRenderView" />
 		<!-- Cabeçalho da Página -->
 		<h:form>
-			<p:growl id="messages" showDetail="true"/>
+			<p:growl id="messages" showDetail="true" />
 			<p:menubar styleClass="menubar">
 				<p:menuitem>
 					<font face="Calibri" color="White" size="6">Brasil
@@ -43,7 +43,8 @@ body {
 			</p:menubar>
 		</h:form>
 		<br />
-		<p:commandButton value="Retornar" action="#{candidatoBean.pagAdmin}" />
+		<p:commandButton icon="ui-icon-arrowreturn-1-w" value="Retornar"
+			action="#{candidatoBean.pagAdmin}" />
 		<br />
 		<br />
 
@@ -71,7 +72,8 @@ body {
 						value="#{candidatoSelecionadoBean.candidato.numero_cand}"></h:outputLabel>
 					<p:inputText
 						placeholder="#{candidatoSelecionadoBean.candidato.numero_cand}"
-						id="numero" value="#{candidatoSelecionadoBean.candidato.numero_cand}"
+						id="numero"
+						value="#{candidatoSelecionadoBean.candidato.numero_cand}"
 						required="true">
 						<f:validateLength minimum="2" maximum="5" />
 					</p:inputText>
@@ -81,12 +83,14 @@ body {
 					</h:outputLabel>
 					<p:inputText
 						placeholder="#{candidatoSelecionadoBean.candidato.tipo_Cargo_cand}"
-						id="tipoCargo" value="#{candidatoSelecionadoBean.candidato.tipo_Cargo_cand}"
+						id="tipoCargo"
+						value="#{candidatoSelecionadoBean.candidato.tipo_Cargo_cand}"
 						required="true">
 						<f:validateLength minimum="3" maximum="50" />
 					</p:inputText>
 
-					<h:outputLabel value="#{candidatoSelecionadoBean.candidato.estado_cand.nome_est}"></h:outputLabel>
+					<h:outputLabel
+						value="#{candidatoSelecionadoBean.candidato.estado_cand.nome_est}"></h:outputLabel>
 					<p:selectOneMenu id="dropEstado" style="width:150px" filter="true"
 						value="#{candidatoBean.candidato.estado_cand.id_est}">
 						<f:selectItem itemLabel="Estado" itemValue="0"
@@ -98,7 +102,8 @@ body {
 							process=":formEditar:dropEstado"></p:ajax>
 					</p:selectOneMenu>
 
-					<h:outputLabel value="#{candidatoSelecionadoBean.candidato.cidade_cand.nome_cid}"></h:outputLabel>
+					<h:outputLabel
+						value="#{candidatoSelecionadoBean.candidato.cidade_cand.nome_cid}"></h:outputLabel>
 					<p:selectOneMenu id="dropCidade" style="width:150px" filter="true"
 						value="#{candidatoBean.candidato.cidade_cand.id_cid}">
 						<f:selectItem itemLabel="Cidade" itemValue="0"
@@ -109,7 +114,8 @@ body {
 							process=":formEditar:dropCidade"></p:ajax>
 					</p:selectOneMenu>
 
-					<h:outputLabel value="#{candidatoSelecionadoBean.candidato.partido_cand.sigla_part} - #{candidatoSelecionadoBean.candidato.partido_cand.nome_part}"></h:outputLabel>
+					<h:outputLabel
+						value="#{candidatoSelecionadoBean.candidato.partido_cand.sigla_part} - #{candidatoSelecionadoBean.candidato.partido_cand.nome_part}"></h:outputLabel>
 					<p:selectOneMenu id="dropPartido" filter="true"
 						value="#{candidatoBean.candidato.partido_cand.id_part}">
 						<f:selectItem itemLabel="Partido" itemValue="0"
@@ -117,13 +123,14 @@ body {
 						<f:selectItems value="#{candidatoBean.lista_partidos}"
 							var="partido" itemValue="#{partido.id_part}"
 							itemLabel="#{partido.nome_part} - #{partido.sigla_part}" />
-						<p:ajax listener="#{candidatoSelecionadoBean.estadoSelecionaCidade}"
+						<p:ajax
+							listener="#{candidatoSelecionadoBean.estadoSelecionaCidade}"
 							process=":formEditar:dropPartido"></p:ajax>
 					</p:selectOneMenu>
 				</p:panelGrid>
 				<br />
-				<p:commandButton value="Editar" action="#{candidatoSelecionadoBean.editar()}"
-					update="matchGrid"></p:commandButton>
+				<p:commandButton icon="ui-icon-pencil" value="Editar"
+					action="#{candidatoSelecionadoBean.editar()}" update="matchGrid"></p:commandButton>
 			</p:fieldset>
 		</h:form>
 		<br />
