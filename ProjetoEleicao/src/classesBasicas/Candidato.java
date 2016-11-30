@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,7 +22,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tb_candidato")
-public class Candidato implements Serializable{
+public class Candidato implements Serializable {
 	// Attributes
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,15 +31,12 @@ public class Candidato implements Serializable{
 	@Column(nullable = false, length = 50)
 	private String nome_cand;
 
-	private Calendar data_Nasc_cand;
-	
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private int numero_cand;
 
 	@Column(nullable = false, length = 50)
 	private String tipo_Cargo_cand;
-
-	// Ignorar até decidir a estrategia
+	
 	private String foto_cand;
 
 	@ManyToOne
@@ -70,14 +68,14 @@ public class Candidato implements Serializable{
 		this.lista_Projeto_cand = new ArrayList<Projeto>();
 		this.cidade_cand = new Cidade();
 		this.estado_cand = new Estado();
-		//this.data_Nasc_cand = Calendar.getInstance();
+		// this.data_Nasc_cand = Calendar.getInstance();
 	}
 
 	// Gets and Sets
 	public void setId_cand(int id_cand) {
 		this.id_cand = id_cand;
 	}
-	
+
 	public String getNome_cand() {
 		return nome_cand;
 	}
@@ -92,14 +90,6 @@ public class Candidato implements Serializable{
 
 	public void setPartido_cand(Partido partido_cand) {
 		this.partido_cand = partido_cand;
-	}
-
-	public Calendar getData_Nasc_cand() {
-		return data_Nasc_cand;
-	}
-
-	public void setData_Nasc_cand(Calendar data_Nasc_cand) {
-		this.data_Nasc_cand = data_Nasc_cand;
 	}
 
 	public int getNumero_cand() {
@@ -141,7 +131,7 @@ public class Candidato implements Serializable{
 	public void setFoto_cand(String foto_cand) {
 		this.foto_cand = foto_cand;
 	}
-
+	
 	public List<Avaliacao> getLista_Avaliacao_cand() {
 		return lista_Avaliacao_cand;
 	}
@@ -172,7 +162,7 @@ public class Candidato implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Candidato [id_cand=" + id_cand + ", nome_cand=" + nome_cand + ", data_Nasc_cand=" + data_Nasc_cand
+		return "Candidato [id_cand=" + id_cand + ", nome_cand=" + nome_cand
 				+ ", numero_cand=" + numero_cand + ", tipo_Cargo_cand=" + tipo_Cargo_cand + ", foto_cand=" + foto_cand
 				+ ", partido_cand=" + partido_cand + ", cidade_cand=" + cidade_cand + ", estado_cand=" + estado_cand
 				+ ", lista_Avaliacao_cand=" + lista_Avaliacao_cand + ", lista_Comentario_cand=" + lista_Comentario_cand
@@ -184,7 +174,6 @@ public class Candidato implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cidade_cand == null) ? 0 : cidade_cand.hashCode());
-		result = prime * result + ((data_Nasc_cand == null) ? 0 : data_Nasc_cand.hashCode());
 		result = prime * result + ((estado_cand == null) ? 0 : estado_cand.hashCode());
 		result = prime * result + ((foto_cand == null) ? 0 : foto_cand.hashCode());
 		result = prime * result + id_cand;
@@ -211,11 +200,6 @@ public class Candidato implements Serializable{
 			if (other.cidade_cand != null)
 				return false;
 		} else if (!cidade_cand.equals(other.cidade_cand))
-			return false;
-		if (data_Nasc_cand == null) {
-			if (other.data_Nasc_cand != null)
-				return false;
-		} else if (!data_Nasc_cand.equals(other.data_Nasc_cand))
 			return false;
 		if (estado_cand == null) {
 			if (other.estado_cand != null)
@@ -265,5 +249,5 @@ public class Candidato implements Serializable{
 	}
 
 	// Methods
-	
+
 }

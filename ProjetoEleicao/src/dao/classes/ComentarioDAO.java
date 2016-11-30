@@ -24,8 +24,9 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 	public List<Comentario> visualizarComentsDenuncia() throws Exception {
 		List<Comentario> lista_comentarios = new ArrayList<>();
 		try {
-			lista_comentarios = getManager().createQuery("SELECT comentario FROM Comentario comentario")
-					.getResultList();
+			//lista_comentarios = getManager().createQuery("SELECT comentario FROM Comentario comentario")
+				//	.getResultList();
+			lista_comentarios = getManager().createQuery("select d.comentario.id_coment, count(id_coment) > 9 from Denuncia d group by d.comentario.id_coment").getResultList();
 			if (lista_comentarios.isEmpty()) {
 				throw new Exception("Não há registros armazenados");
 			}
