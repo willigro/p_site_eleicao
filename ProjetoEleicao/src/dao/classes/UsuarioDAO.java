@@ -7,6 +7,7 @@ import classesBasicas.Usuario;
 import dao.DAOGenerico;
 import dao.interfaces.IUsuarioDAO;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -49,7 +50,17 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements IUsuarioDAO {
 		query.setParameter("email", usuario.getEmail_user());
 		query.setParameter("senha", criptografarSenha(usuario.getSenha()));
 		System.out.println("" + query.toString());
-		return (Usuario) query.getSingleResult();
+		
+		Usuario user = null;
+		try{
+		
+		user = (Usuario) query.getSingleResult();
+		
+		}catch(NoResultException e){
+			throw new Exception("Nenhum usuario encontrado");
+		}
+		
+		return user;
 	}
 
 	public List<Usuario> consultarUsuarios() throws Exception {

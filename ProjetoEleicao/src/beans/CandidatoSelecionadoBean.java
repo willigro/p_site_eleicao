@@ -29,19 +29,20 @@ public class CandidatoSelecionadoBean implements Serializable {
 	private List<Projeto> lista_projeto;
 	private Usuario usuario;
 	private Comentario comentario;
+	private Comentario comentarioEditar;
 	private List<Comentario> lista_comentario;
 	private Administrador adm;
-
+	
 	public CandidatoSelecionadoBean() {
 		this.candidato = new Candidato();
 		this.fachada = new Facade();
 		this.projeto = new Projeto();
-
 		this.candidato = new Candidato();
 		this.fachada = new Facade();
 		this.projeto = new Projeto();
 		this.usuario = new Usuario();
 		this.comentario = new Comentario();
+		this.comentarioEditar = new Comentario();
 		this.adm = new Administrador();
 	}
 
@@ -63,7 +64,17 @@ public class CandidatoSelecionadoBean implements Serializable {
 		}
 		return null;
 	}
-
+	
+	public String editarComentarioProposta(){
+		try{			
+			this.fachada.atualizarComentario(this.comentarioEditar);
+			popularComentariosProposta(this.projeto);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public void popularComentariosProposta(Projeto projeto) {
 		try {
 			this.projeto = projeto;
@@ -117,7 +128,6 @@ public class CandidatoSelecionadoBean implements Serializable {
 
 	private void mensagemFalhaEdit(String texto) {
 		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", texto);
-
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
 	}
 
@@ -157,6 +167,15 @@ public class CandidatoSelecionadoBean implements Serializable {
 
 	public List<Comentario> getLista_comentario() {
 		return lista_comentario;
+	}
+
+	public Comentario getComentarioEditar() {
+		return comentarioEditar;
+	}
+
+	public void setComentarioEditar(Comentario comentarioEditar) {
+		System.out.println("Sera que setou: " + comentarioEditar.getTexto_coment());
+		this.comentarioEditar = comentarioEditar;
 	}
 
 }
