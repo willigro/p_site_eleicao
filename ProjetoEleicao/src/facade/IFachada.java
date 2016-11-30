@@ -75,4 +75,6 @@ public interface IFachada {
 
 	public void denunciarComentario(Denuncia denuncia) throws Exception;
 
+	void removerComentDenunciado(Comentario comentario) throws Exception;
+
 }
