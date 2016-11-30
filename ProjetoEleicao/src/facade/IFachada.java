@@ -75,6 +75,8 @@ public interface IFachada {
 	public List<Comentario> consultarComentarioFiltradosIdCand(Candidato candidato) throws Exception;
 	
 	public void denunciarComentario(Denuncia denuncia) throws Exception;
+	
+	public List<Denuncia> consultarDenunciaDoComentario() throws Exception;
 
 	void removerComentDenunciado(Comentario comentario) throws Exception;
 

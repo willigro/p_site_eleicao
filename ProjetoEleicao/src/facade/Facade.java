@@ -254,9 +254,10 @@ public class Facade implements IFachada {
 		}
 	}
 
-	public Denuncia consultarDenunciaDoComentario(Denuncia denuncia) throws Exception {
+	@Override
+	public List<Denuncia> consultarDenunciaDoComentario() throws Exception {
 		if (validaControl(controllerDenuncia)) {
-			return controllerDenuncia.consultarDenuncia(denuncia);
+			return controllerDenuncia.consultarDenuncia();
 		}
 		return null;
 	}

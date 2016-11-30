@@ -37,6 +37,7 @@ public class ComentarioBean {
 	private List<Estado> lista_estados;
 	private List<Partido> lista_partidos;
 	private List<Comentario> comentarios;
+	private List<Denuncia> lista_denunciados;
 	private Denuncia denunciar;
 	private Usuario usuarioLogado;
 	private Comentario comentarioSelecionado;
@@ -201,4 +202,16 @@ public class ComentarioBean {
 	public void setComentarioSelecionado(Comentario comentarioSelecionado) {
 		this.comentarioSelecionado = comentarioSelecionado;
 	}
+
+	public List<Denuncia> getLista_denunciados() {
+		try {
+			this.lista_denunciados = this.fachada.consultarDenunciaDoComentario();			
+			//System.out.println(this.lista_denunciados.get(0).getUsuario().getNome_user());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lista_denunciados;
+	}
+	
 }
