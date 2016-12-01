@@ -40,6 +40,11 @@
 								value="#{candidatoSelecionadoBean.candidato.estado_cand.nome_est}"></p:outputLabel>
 							<p:outputLabel
 								value="#{candidatoSelecionadoBean.candidato.cidade_cand.nome_cid}"></p:outputLabel>
+								<h:outputText value="Avaliar:" />
+							<p:rating value="#{usuarioBean.avaliacao.notaAvaliacao}">
+								<p:ajax event="rate" listener="#{usuarioBean.onrate}" />
+								<p:ajax event="cancel" listener="#{usuarioBean.oncancel}" />
+							</p:rating>
 						</h:panelGrid>
 					</p:outputPanel>
 				</div>
