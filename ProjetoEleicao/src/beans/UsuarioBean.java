@@ -4,14 +4,20 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.component.datatable.DataTable;
+import org.primefaces.event.RateEvent;
 import org.primefaces.event.SelectEvent;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
+
+import classesBasicas.Avaliacao;
+import classesBasicas.Candidato;
 import classesBasicas.Usuario;
 import dao.DAOFactory;
 import dao.classes.UsuarioDAO;
@@ -25,8 +31,9 @@ public class UsuarioBean {
 	private List<Usuario> usuarios;
 	public Usuario selectedUser;
 	private LoginBean loginBean;
-	private boolean type; // para verificar se o usuario e adm ou usr
 	private boolean termosUso;
+	private Avaliacao avaliacao;
+	
 
 	private String search = ""; // String de pesquisa
 
@@ -36,10 +43,11 @@ public class UsuarioBean {
 		this.fachada = new Facade();
 		this.selectedUser = new Usuario();
 		this.loginBean = new LoginBean();
+		this.avaliacao = new Avaliacao();
 
 	}
 
-	// continuar
+	// construtores
 	public Usuario getSelectedUser() {
 		return selectedUser;
 	}
@@ -56,14 +64,27 @@ public class UsuarioBean {
 		this.search = search;
 	}
 
-	public boolean isType() {
-		return type;
+	public boolean isTermosUso() {
+		return termosUso;
 	}
 
-	public void setType(boolean type) {
-		this.type = type;
+	public void setTermosUso(boolean termosUso) {
+		this.termosUso = termosUso;
 	}
 
+	public void setUsuarios(List<Usuario> list) {
+		this.usuarios = list;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	// Metodos
 	public List<Usuario> getUsuarios() {
 		try {
 			if (search.toString().isEmpty()) {
@@ -81,16 +102,21 @@ public class UsuarioBean {
 		return usuarios;
 	}
 
-	public void setUsuarios(List<Usuario> list) {
-		this.usuarios = list;
-	}
+	public void onrate(RateEvent rateEvent) {
+		try {
+			Usuario user = new Usuario();
+			user.setId_user(16);
+			Candidato cand = new Candidato();
+			cand.setId_cand(3);
+			this.avaliacao.setCandidato_aval(cand);
+			this.avaliacao.setUsuario_aval(user);
+			this.avaliacao.setProjeto_aval(null);
+			this.fachada.inserirAvaliacaoCandidato(avaliacao);
+		} catch (Exception e) {
+			FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: ", e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, mensagem);
+		}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public void buttonAction(ActionEvent actionEvent) {
@@ -101,27 +127,24 @@ public class UsuarioBean {
 				this.loginBean.password = usuario.getSenha();
 				this.loginBean.setType(false);
 				this.fachada.cadastrarUsuario(usuario);
-				this.loginBean.efetuarLogin();
+				//this.loginBean.efetuarLogin();
 			} else {
-				FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: ", "Aceite os termos de uso");
+				FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: ",
+						"Aceite os termos de uso");
 				FacesContext.getCurrentInstance().addMessage(null, mensagem);
 			}
 		} catch (Exception e) {
-			addMensagem(e.getMessage());
+			FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: ", e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, mensagem);
 		}
-	}
-
-	private void addMensagem(String texto) {
-		
 	}
 
 	public String cadastrarUsuario() {
 		try {
 			usuario.setAtivo_user(true);
 			this.fachada.cadastrarUsuario(usuario);
-			addMensagem("Cadastrado com Sucesso!");
 		} catch (Exception e) {
-			addMensagem(e.getMessage());
+
 		}
 		return "";
 	}
@@ -142,7 +165,6 @@ public class UsuarioBean {
 		}
 	}
 
-	// continuar
 	public void banirUsuario() {
 		Usuario usuario = getSelectedUser();
 
@@ -153,14 +175,6 @@ public class UsuarioBean {
 			e.printStackTrace();
 		}
 
-	}
-
-	public boolean isTermosUso() {
-		return termosUso;
-	}
-
-	public void setTermosUso(boolean termosUso) {
-		this.termosUso = termosUso;
 	}
 
 }

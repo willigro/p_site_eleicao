@@ -23,7 +23,7 @@
 				<!-- Div Tela -->
 				<div id="candidato" class="ui-g-3 ui-md-3">
 					<!-- Div Candidato -->
-					<p:graphicImage value="../img/quePorraEssa.jpg" style="width:100%" />
+					<p:graphicImage value="../img/test.jpg" style="width:100%" />
 					<p:outputPanel>
 						<h:panelGrid columns="2" cellpadding="3">
 							<p:outputLabel
@@ -40,6 +40,11 @@
 								value="#{candidatoSelecionadoBean.candidato.estado_cand.nome_est}"></p:outputLabel>
 							<p:outputLabel
 								value="#{candidatoSelecionadoBean.candidato.cidade_cand.nome_cid}"></p:outputLabel>
+							<h:outputText value="Avaliar:" />
+							<p:rating value="#{usuarioBean.avaliacao.notaAvaliacao}">
+								<p:ajax event="rate" listener="#{usuarioBean.onrate}" />
+								<p:ajax event="cancel" listener="#{usuarioBean.oncancel}" />
+							</p:rating>
 						</h:panelGrid>
 					</p:outputPanel>
 				</div>
@@ -55,7 +60,7 @@
 								</h:panelGrid>
 								<p:commandButton value="Comentar"
 									actionListener="#{candidatoSelecionadoBean.popularComentariosProposta(proj)}"
-									onclick="PF('dlg1').show();" update=":comentarios:tableComent">									
+									onclick="PF('dlg1').show();" update=":comentarios:tableComent">
 								</p:commandButton>
 							</p:tab>
 						</p:accordionPanel>
@@ -68,9 +73,10 @@
 						<p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40"
 							width="25%">
 							<p:dataTable id="tableComent" var="coment"
-								value="#{candidatoSelecionadoBean.lista_comentario}" scrollable="true" scrollHeight="300">
-								<p:column>									
-									<p:outputLabel value="#{coment.usuario_coment.nome_user}"></p:outputLabel>									
+								value="#{candidatoSelecionadoBean.lista_comentario}"
+								scrollable="true" scrollHeight="300">
+								<p:column>
+									<p:outputLabel value="#{coment.usuario_coment.nome_user}"></p:outputLabel>
 									<br></br>
 									<p:outputLabel value="#{coment.texto_coment}"></p:outputLabel>
 								</p:column>
@@ -81,7 +87,8 @@
 								style="width: 100%" autoResize="false"
 								value="#{candidatoSelecionadoBean.comentario.texto_coment}" />
 							<p:commandButton value="Enviar"
-								action="#{candidatoSelecionadoBean.comentarioProsposta}" update=":comentarios:tableComent"></p:commandButton>
+								action="#{candidatoSelecionadoBean.comentarioProsposta}"
+								update=":comentarios:tableComent"></p:commandButton>
 						</p:dialog>
 					</h:form>
 				</div>
