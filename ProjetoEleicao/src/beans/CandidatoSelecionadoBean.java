@@ -65,7 +65,8 @@ public class CandidatoSelecionadoBean implements Serializable {
 			this.fachada.inserirComentarioProjeto(this.comentario);
 			popularComentariosProposta(this.projeto);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			FacesContext mensagem = FacesContext.getCurrentInstance();
+			mensagem.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: ", e.getMessage()));
 			e.printStackTrace();
 		}
 		return null;

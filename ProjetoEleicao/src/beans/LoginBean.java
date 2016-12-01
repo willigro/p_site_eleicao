@@ -61,9 +61,11 @@ public class LoginBean{
 				if(facade.loginUsuario(this.usuario) != null){
 					FacesContext facesContext = FacesContext.getCurrentInstance();
 					HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-					session.setAttribute("temp", usuario.getId_user());
-					loggedIn = true;
-					return navigationBean.toMainUsuario();
+					session.setAttribute("usuarioLogado", usuario);
+					loggedIn = true;		
+					System.out.println("Login nome user: " + this.usuario.getNome_user());
+					System.out.println("Login nome username: " + this.username);
+					return "consultaCandidatos?faces-redirect=true";
 				}else{
 					returnMessage(FacesMessage.SEVERITY_ERROR,"A Senha ou E-amil estao incorretos!","Por favor, escreva seu E-mail e Senha corretamente");		
 				}
