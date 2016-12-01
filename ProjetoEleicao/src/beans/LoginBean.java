@@ -5,6 +5,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
+import java.util.Enumeration;
+
 import javax.faces.application.FacesMessage;
 
 import classesBasicas.Administrador;
@@ -16,10 +19,8 @@ import facade.Facade;
 @SessionScoped
 public class LoginBean{
 
-	//	private static final long serialVersionUID = 1094801825228386363L;
-
-	String username;
-	String password;
+	protected String username;
+	protected String password;
 	private boolean type;
 	private Usuario usuario;
 	private Administrador administrador;
@@ -42,16 +43,12 @@ public class LoginBean{
 
 					FacesContext facesContext = FacesContext.getCurrentInstance();
 					HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-					session.setAttribute("username", administrador.getEmail());
+					session.setAttribute("temp", administrador.getId_admin());
 
 					loggedIn = true;
 					return navigationBean.toMainAdministrador();
 				}else{
-					FacesContext.getCurrentInstance().addMessage(
-							null,
-							new FacesMessage(FacesMessage.SEVERITY_ERROR,
-									"A Senha ou E-amil estao incorretos!",
-									"Por favor, escreva seu E-mail e Senha corretamente"));		
+					returnMessage(FacesMessage.SEVERITY_ERROR,"A Senha ou E-amil estao incorretos!","Por favor, escreva seu E-mail e Senha corretamente");		
 				}
 
 				return navigationBean.toLogin();
@@ -62,29 +59,19 @@ public class LoginBean{
 				this.usuario.setSenha(password);
 
 				if(facade.loginUsuario(this.usuario) != null){
-					System.out.println("Não está nulo");
 					FacesContext facesContext = FacesContext.getCurrentInstance();
 					HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-					session.setAttribute("username", usuario.getEmail_user());
+					session.setAttribute("temp", usuario.getId_user());
 					loggedIn = true;
 					return navigationBean.toMainUsuario();
 				}else{
-					FacesContext.getCurrentInstance().addMessage(
-							null,
-							new FacesMessage(FacesMessage.SEVERITY_ERROR,
-									"A Senha ou E-amil estao incorretos!",
-									"Por favor, escreva seu E-mail e Senha corretamente"));		
+					returnMessage(FacesMessage.SEVERITY_ERROR,"A Senha ou E-amil estao incorretos!","Por favor, escreva seu E-mail e Senha corretamente");		
 				}
 			}
 
 		}catch(Exception e){
-			e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,"Atencao! ",e.getMessage()));
-
+			returnMessage(FacesMessage.SEVERITY_ERROR,"Atencao! ",e.getMessage());
 		}
-
 		return navigationBean.toLogin();
 	}
 
@@ -95,14 +82,31 @@ public class LoginBean{
 		session.invalidate();
 		loggedIn = false;
 
-		// Set logout message
-		FacesMessage msg = new FacesMessage("", "Desconectou-se com sucesso!");
-		msg.setSeverity(FacesMessage.SEVERITY_INFO);
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		
+		returnMessage(FacesMessage.SEVERITY_ERROR,"", "Desconectou-se com sucesso!");
+
 		return navigationBean.redirectToLogin();
 	}
+	
+	public String getAtributeInCurrentSession(){
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
+			Enumeration e = session.getAttributeNames();
+			String value = "";
+			
+			while (e.hasMoreElements())
+			{
+			  String attr = (String)e.nextElement();
+			  Object value1 = session.getValue(attr);
+			  value = value1.toString();
+			}
+		return value;
+	} 
+	private void returnMessage(FacesMessage.Severity facesMessageSeverity,String title, String message){
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(facesMessageSeverity,title,message));
 
+	}
 	public Object getUsuarioLogado(){
 		if(!type){
 
@@ -117,83 +121,52 @@ public class LoginBean{
 		}
 		return null;
 	}
-
 	public boolean isType() {
 		return type;
 	}
-
 	public void setType(boolean type) {
 		this.type = type;
 	}
-
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
-
-
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
-
 	public Administrador getAdministrador() {
 		return administrador;
 	}
-
-
 	public void setAdministrador(Administrador administrador) {
 		this.administrador = administrador;
 	}
-
-
 	public Facade getFacade() {
 		return facade;
 	}
-
-
 	public void setFacade(Facade facade) {
 		this.facade = facade;
 	}
-
-
 	public String getUsername() {
 		return username;
 	}
-
-
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-
-
 	public String getPassword() {
 		return password;
 	}
-
-
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	public NavigationBean getNavigationBean() {
 		return navigationBean;
 	}
-
 	public void setNavigationBean(NavigationBean navigationBean) {
 		this.navigationBean = navigationBean;
 	}
-
 	public boolean isLoggedIn() {
 		return loggedIn;
 	}
-
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
 	}
-
-
 }

@@ -31,34 +31,14 @@ public class LoginFilter implements Filter{
 			throws IOException, ServletException {
 		navigationBean = new NavigationBean();
 		LoginBean loginBean = (LoginBean)((HttpServletRequest)request).getSession().getAttribute("loginBean");
-		
-		
+
+
 		if(loginBean == null || loginBean.isLoggedIn() == false)
 		{
 			((HttpServletResponse) response).sendRedirect(((HttpServletRequest)request).getContextPath() + navigationBean.toLogin());
-		}else
-		{
-//			String url = ((HttpServletRequest)request).getRequestURL().toString();
-//			System.out.println("entrou e a url e: "+url.toString());
-//			
-//		
-//			if(url.equals(((HttpServletRequest) request).getContextPath() + navigationBean.toLogin())){
-//				
-//				if(loginBean.getUsuarioLogado().getClass() == Usuario.class){
-//					System.out.println("user");
-//					((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + navigationBean.toMainUsuario());
-//				}
-//				else if(loginBean.getUsuarioLogado().getClass() == Administrador.class){
-//					System.out.println("adm");
-//					((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + navigationBean.toMainAdministrador());	
-//				}
-//				
-//			}
-			
-		  chain.doFilter(request, response);
 		}
-			
-		}
+		chain.doFilter(request, response);
+	}
 
 	
 
