@@ -12,21 +12,15 @@
 </h:head>
 <h:body>
 	<f:view>
-		<!-- 
-		<h:form id="stickyMenuNav">
-			<p:growl id="messages" />
-			<p:menubar>
-				<p:menuitem value="Project" url="#" />
-				<f:facet name="options">
-					<p:inputText style="margin-right:10px" placeholder="Search" />
-					<p:commandButton value="Candidatos" icon="ui-icon-extlink"
-						url="http://localhost:8080/ProjetoEleicao/view/paginas/consultaCandidatos.xhtml" />
-				</f:facet>
-			</p:menubar>
+		<h:form>
+			<p:commandLink value="Principal"
+				action="principal?faces-redirect=true"></p:commandLink>
+			<p:commandLink value="Candidatos"
+				action="consultaCandidatos?faces-redirect=true"></p:commandLink>
+				<p:commandLink value="Cadastrar"
+				action="cadastroUsuario?faces-redirect=true"></p:commandLink>
+			<p:commandLink value="Login" action="login?faces-redirect=true"></p:commandLink>
 		</h:form>
-		<p:sticky target="stickyMenuNav" />
-		 -->
-		 <p:commandLink value="Candidatos" action="consultaCandidatos"></p:commandLink>
 	</f:view>
 </h:body>
 </html>

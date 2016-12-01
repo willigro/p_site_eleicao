@@ -21,8 +21,8 @@ public class ControllerAvaliacao implements Serializable{
 			throw new Exception("ID do usuário inválido");
 		} else if (Integer.toString(avaliacao.getNotaAvaliacao()).trim().isEmpty()) {
 			throw new Exception("Informe uma nota");
-		} else if (avaliacao.getNotaAvaliacao() > 5 || avaliacao.getNotaAvaliacao() < 0) {
-			throw new Exception("Informe uma nota entre 0 e 5");
+		} else if (avaliacao.getNotaAvaliacao() > 5 || avaliacao.getNotaAvaliacao() < 1) {
+			throw new Exception("Informe uma nota entre 1 e 5");
 		} else if (avaliacao.getCandidato_aval().getId_cand() >= 0 && avaliacao.getProjeto_aval().getId_proj() >= 0) {
 			throw new IdAbimguoAvaliacaoException();
 		}
@@ -34,7 +34,7 @@ public class ControllerAvaliacao implements Serializable{
 		} else
 			this.validarAvaliacao(avaliacao);
 
-		this.iavaliacaoDAO.insert(avaliacao);
+		this.iavaliacaoDAO.inserirAvaliacao(avaliacao);
 	}
 
 	public void inserirAvaliacaoProjeto(Avaliacao avaliacao) throws Exception {
@@ -43,7 +43,7 @@ public class ControllerAvaliacao implements Serializable{
 		} else
 			this.validarAvaliacao(avaliacao);
 
-		this.iavaliacaoDAO.insert(avaliacao);
+		//this.iavaliacaoDAO.insert(avaliacao);
 	}
 
 }
