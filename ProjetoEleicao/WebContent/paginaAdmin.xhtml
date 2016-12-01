@@ -43,8 +43,7 @@ body {
 			</p:menubar>
 		</h:form>
 		<br />
-		<p:commandButton icon="ui-icon-seek-next"
-			value="Comentários Denunciados"
+		<p:commandButton icon="ui-icon-seek-next" value="Comentários Denunciados"
 			action="#{candidatoBean.pagComentarios()}" />
 		<br />
 		<br />
@@ -56,13 +55,6 @@ body {
 				toggleSpeed="500">
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
 					styleClass="">
-
-					<h:outputLabel for="foto" value="FOTO:"></h:outputLabel>
-					<p:fileUpload
-						fileUploadListener="#{candidatoBean.mensagemSucessoUpload}"
-						mode="advanced" dragDropSupport="false" update="messages"
-						sizeLimit="2000000" fileLimit="3"
-						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 
 					<h:outputLabel for="nome" value="NOME"></h:outputLabel>
 					<p:inputText placeholder="Nome" id="nome"
@@ -119,14 +111,14 @@ body {
 				</p:panelGrid>
 				<br />
 				<p:commandButton icon="ui-icon-plusthick" value="Cadastrar"
-					action="#{candidatoBean.cadastrar()}" update="matchGrid"
-					actionListener="#{candidatoBean.click}"></p:commandButton>
+					action="#{candidatoBean.cadastrar()}" update="matchGrid"></p:commandButton>
 			</p:fieldset>
 		</h:form>
 		<br />
 
 		<!-- painel de pesquisar -->
 		<h:form id="formPesquisar">
+
 			<p:fieldset legend="Consultar Candidato" toggleable="true"
 				toggleSpeed="500">
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
@@ -137,45 +129,34 @@ body {
 					</p:inputText>
 				</p:panelGrid>
 				<br />
-				<p:commandButton value="Pesquisar" icon="ui-icon-search"
-					action="#{candidatoBean.consultarCandidatoFiltrado()}"
+				<p:commandButton value="Pesquisar"
+					icon="ui-icon-search" action="#{candidatoBean.consultarCandidatoFiltrado()}"
 					update="@form"></p:commandButton>
 			</p:fieldset>
 			<br />
 
 			<!-- listagem dos candidatos pesquisados -->
 			<h:form id="formData">
-				<p:dataTable id="tabela" value="#{candidatoBean.candidatos}"
-					var="cand">
-
-					<f:facet name="header">
-           				Candidatos Pesquisados
-      				</f:facet>
-
+				<p:dataTable id="tabela" value="#{candidatoBean.candidatos}" var="cand">
 					<p:column headerText="Nome">
 						<h:outputText value="#{cand.nome_cand}"></h:outputText>
 					</p:column>
-
 					<p:column headerText="Numero">
 						<h:outputText value="#{cand.numero_cand}"></h:outputText>
 					</p:column>
-
 					<p:column headerText="Cidade">
 						<h:outputText value="#{cand.cidade_cand.nome_cid}"></h:outputText>
 					</p:column>
-
 					<p:column headerText="Remover">
-						<p:commandButton icon="ui-icon-trash" value="Remover"
-							action="#{candidatoBean.remover}"
+						<p:commandButton icon="ui-icon-trash" value="Remover" action="#{candidatoBean.remover}"
 							update=":formPesquisar:formData:tabela" ajax="true">
 							<f:setPropertyActionListener value="#{cand}"
 								target="#{candidatoBean.candidato}"></f:setPropertyActionListener>
 						</p:commandButton>
 					</p:column>
-
 					<p:column headerText="Editar">
-						<p:commandButton icon="ui-icon-pencil" id="bConsultar"
-							value="Editar" action="#{candidatoBean.paginaEditarCand(cand)}">
+						<p:commandButton icon="ui-icon-pencil" id="bConsultar" value="Editar"
+							action="#{candidatoBean.paginaEditarCand(cand)}">
 						</p:commandButton>
 					</p:column>
 

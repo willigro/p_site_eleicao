@@ -29,10 +29,8 @@ public class CandidatoSelecionadoBean implements Serializable {
 	private List<Projeto> lista_projeto;
 	private Usuario usuario;
 	private Comentario comentario;
-	private Comentario comentarioEditarProjeto;
-	private Comentario comentarioEditarCandidato;
-	private List<Comentario> lista_comentarioProjeto;
-	private List<Comentario> lista_comentarioCandidato;
+	private Comentario comentarioEditar;
+	private List<Comentario> lista_comentario;
 	private Administrador adm;
 	
 	public CandidatoSelecionadoBean() {
@@ -44,8 +42,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 		this.projeto = new Projeto();
 		this.usuario = new Usuario();
 		this.comentario = new Comentario();
-		this.comentarioEditarProjeto = new Comentario();
-		this.comentarioEditarCandidato = new Comentario();
+		this.comentarioEditar = new Comentario();
 		this.adm = new Administrador();
 	}
 
@@ -68,27 +65,9 @@ public class CandidatoSelecionadoBean implements Serializable {
 		return null;
 	}
 	
-	public String comentarioCandidato() {
-		try {
-			this.adm.setId_admin(1);
-			this.usuario.setId_user(1);
-			this.comentario.setUsuario_coment(this.usuario);
-			this.comentario.setCandidato_coment(this.candidato);
-			this.comentario.setAdministrador_coment(adm);
-			this.comentario.setProjeto_coment(null);
-			this.comentario.setId_coment(0);
-			this.fachada.inserirComentarioCandidato(this.comentario);
-			getLista_comentarioCandidato();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
 	public String editarComentarioProposta(){
 		try{			
-			this.fachada.atualizarComentario(this.comentarioEditarProjeto);
+			this.fachada.atualizarComentario(this.comentarioEditar);
 			popularComentariosProposta(this.projeto);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -99,7 +78,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 	public void popularComentariosProposta(Projeto projeto) {
 		try {
 			this.projeto = projeto;
-			lista_comentarioProjeto = this.fachada.consultarComentarioFiltradosIdProjt(projeto);
+			lista_comentario = this.fachada.consultarComentarioFiltradosIdProjt(projeto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -107,7 +86,8 @@ public class CandidatoSelecionadoBean implements Serializable {
 
 	public void catchIdCandidato() {
 		try {
-			this.candidato = (Candidato) fachada.retornarVariavel();			
+			this.candidato = (Candidato) fachada.retornarVariavel();
+			System.out.println(this.candidato.getId_cand());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -116,7 +96,8 @@ public class CandidatoSelecionadoBean implements Serializable {
 	public List<Projeto> getLista_projeto() {
 		try {
 			this.projeto.getCanditado_proj().setId_cand(this.candidato.getId_cand());
-			lista_projeto = this.fachada.consultarProjetosFiltradosIdCand(this.projeto);			
+			lista_projeto = this.fachada.consultarProjetosFiltradosIdCand(this.projeto);
+			System.out.println(lista_projeto.get(0).getId_proj());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -155,7 +136,8 @@ public class CandidatoSelecionadoBean implements Serializable {
 		return candidato;
 	}
 
-	public void setCandidato(Candidato candidato) {		
+	public void setCandidato(Candidato candidato) {
+		System.out.println("candS set: " + this.candidato.getId_cand());
 		this.candidato = candidato;
 	}
 
@@ -183,34 +165,17 @@ public class CandidatoSelecionadoBean implements Serializable {
 		this.comentario = comentario;
 	}
 
-	public List<Comentario> getLista_comentarioProjeto() {
-		return lista_comentarioProjeto;
+	public List<Comentario> getLista_comentario() {
+		return lista_comentario;
 	}
 
-	public Comentario getComentarioEditarProjeto() {
-		return comentarioEditarProjeto;
+	public Comentario getComentarioEditar() {
+		return comentarioEditar;
 	}
 
-	public void setComentarioEditarProjeto(Comentario comentarioEditar) {		
-		this.comentarioEditarProjeto = comentarioEditar;
-	}
-
-	public List<Comentario> getLista_comentarioCandidato() {
-		try {
-			this.lista_comentarioCandidato = this.fachada.consultarComentarioFiltradosIdCand(this.candidato);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return lista_comentarioCandidato;
-	}
-
-	public Comentario getComentarioEditarCandidato() {
-		return comentarioEditarCandidato;
-	}
-
-	public void setComentarioEditarCandidato(Comentario comentarioEditarCandidato) {
-		this.comentarioEditarCandidato = comentarioEditarCandidato;
+	public void setComentarioEditar(Comentario comentarioEditar) {
+		System.out.println("Sera que setou: " + comentarioEditar.getTexto_coment());
+		this.comentarioEditar = comentarioEditar;
 	}
 
 }

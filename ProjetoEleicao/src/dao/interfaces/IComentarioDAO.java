@@ -1,8 +1,6 @@
 package dao.interfaces;
 
 import java.util.List;
-
-import classesBasicas.Candidato;
 import classesBasicas.Comentario;
 import classesBasicas.Projeto;
 import classesBasicas.Usuario;
@@ -15,6 +13,4 @@ public interface IComentarioDAO {
 	public void denunciarComentario(Comentario comentario) throws Exception;	
 	public Comentario verificarComentario(Comentario comentario) throws Exception;
 	public List<Comentario> consultarComentarioFiltradosIdProjt(Projeto projeto) throws Exception;
-	public List<Comentario> consultarComentarioFiltradosIdCand(Candidato candidato) throws Exception;
-	void removerComentDenunciado(Comentario comentario) throws Exception;
 }

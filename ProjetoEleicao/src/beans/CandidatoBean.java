@@ -15,20 +15,10 @@ import classesBasicas.Estado;
 import classesBasicas.Partido;
 import facade.Facade;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
-import org.primefaces.context.RequestContext;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.event.SelectEvent;
-
 @ManagedBean
 @ViewScoped
 public class CandidatoBean implements Serializable {
 
-	private Date date1;
 	private Cargo cargo;
 	private Candidato candidato;
 	private Facade fachada;
@@ -56,20 +46,6 @@ public class CandidatoBean implements Serializable {
 	}
 
 	// Methods
-	public void onDateSelect(SelectEvent event) {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		facesContext.addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-	}
-
-	public void click() {
-		RequestContext requestContext = RequestContext.getCurrentInstance();
-
-		requestContext.update("form:display");
-		requestContext.execute("PF('dlg').show()");
-	}
-
 	public void estadoSelecionaCidade() {
 		try {
 			this.cidade.getEstado_cid().setId_est(candidato.getEstado_cand().getId_est());
@@ -95,16 +71,11 @@ public class CandidatoBean implements Serializable {
 		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", texto);
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
 	}
-
+	
 	private void mensagemFalhaConsulta(String texto) {
 		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", texto);
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
 	}
-	
-	public void mensagemSucessoUpload(FileUploadEvent event) {
-        FacesMessage message = new FacesMessage("Sucesso!", "A imagem: " + event.getFile().getFileName() + " foi salva!");
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
 
 	public String remover() throws Exception {
 		try {
@@ -201,14 +172,6 @@ public class CandidatoBean implements Serializable {
 	}
 
 	// Getters and Setters
-	public Date getDate1() {
-		return date1;
-	}
-
-	public void setDate1(Date date1) {
-		this.date1 = date1;
-	}
-
 	public Partido getPartido() {
 		return partido;
 	}
