@@ -16,6 +16,10 @@ public class NavigationBean implements Serializable {
  
     private static final long serialVersionUID = 1520318172495977648L;
  
+    
+    public NavigationBean() {
+	
+	}
     /**
      * Redirect to login page.
      * @return Login page name.

@@ -25,8 +25,6 @@ public class ControllerCandidato {
 
 	private void validarCandidato(Candidato candidato) throws Exception {
 
-		// Falta: DataNascimeto, FotoCandidato, Validar os ID nulos e etc.
-
 		if (candidato.getNome_cand().trim().isEmpty()) {
 			throw new Exception("O campo Nome está vazio");
 		} else if (candidato.getNome_cand().length() > 50) {
@@ -61,20 +59,18 @@ public class ControllerCandidato {
 		this.iCandidatoDAO.removerCandidato(candidato);
 	}
 
-	public void alterarCandidato(Candidato candidato) throws Exception {
+	public void alterarCandidato(Candidato candidato, Candidato oldCand) throws Exception {
 
 		// Setando abaixo enquanto não consigo passar o objeto entre telas
-		int numero = 11111;
+		int numero = 1231;
 		int cidade = 1;
 
 		this.validarCandidato(candidato);
 
-		System.out.println(candidato.getId_cand() + "ID do candidato novo (setado)");
-
 		if (iCandidatoDAO.retornaID(candidato) == true) {
 			throw new Exception("O candidato informado não existe cadastrado.");
 		} else {
-			if ((candidato.getNumero_cand() == numero) && (candidato.getCidade_cand().getId_cid()) == cidade) {
+			if ((candidato.getNumero_cand() == oldCand.getNumero_cand()) && (candidato.getCidade_cand().getId_cid()) == oldCand.getCidade_cand().getId_cid()) {
 				this.iCandidatoDAO.alterarCandidato(candidato);
 			} else {
 				if (iCandidatoDAO.retornaNumero(candidato) == false) {
@@ -107,8 +103,8 @@ public class ControllerCandidato {
 		if (candidato.getNumero_cand() > 0)
 			if (candidato.getNumero_cand() > 99999) {
 				throw new Exception("O campo Numero não deve ter mais que 5 dígitos");
-			} else if (candidato.getNumero_cand() < 10000) {
-				throw new Exception("O campo Numero não deve ter menos que 5 dígitos");
+			} else if (candidato.getNumero_cand() < 10) {
+				throw new Exception("O campo Numero não deve ter menos que 2 dígitos");
 			}
 		if (candidato.getTipo_Cargo_cand() != null)
 			if (candidato.getTipo_Cargo_cand().length() > 50) {

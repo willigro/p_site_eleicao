@@ -9,11 +9,14 @@
 <style type="text/css">
 .ui-widget {
 	font-size: 12px !important;
+	
 }
+
 
 .panelGridCenter {
     margin: 0 auto;
 }
+
 </style>
 
 </h:head>
@@ -23,7 +26,12 @@
    <p:growl id="messages" />
       <p:layout fullPage="true">
          <p:layoutUnit position="north">
+         
             <p:menubar>
+            <p:menuitem url="/admin/index.xhtml">
+            <font face="Calibri" color="White">Brasil
+						Transparente</font>
+						</p:menuitem>
                <f:facet name="options">
                   <p:commandButton value="Sair" icon="ui-icon-extlink" action="#{loginBean.logout()}"/>
                </f:facet>

@@ -22,10 +22,13 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 	public List<Comentario> visualizarComentsDenuncia() throws Exception {
 		List<Comentario> lista_comentarios = new ArrayList<>();
 		try {
+			// lista_comentarios = getManager().createQuery("SELECT comentario
+			// FROM Comentario comentario WHERE qtd_denuncia >
+			// 9").getResultList();
 			lista_comentarios = getManager()
-					.createQuery("SELECT comentario FROM Comentario comentario WHERE qtd_denuncia > 9").getResultList();
+					.createQuery("SELECT comentario FROM Comentario comentario").getResultList();
 			if (lista_comentarios.isEmpty()) {
-				throw new Exception("Nï¿½o hï¿½ registros armazenados");
+				throw new Exception("Não há registros armazenados");
 			}
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
@@ -36,16 +39,16 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 	@Override
 	public void denunciarComentario(Comentario comentario) throws Exception {
 		Query query = getManager().createQuery("UPDATE Comentario as c set qtd_denuncia = :Qtd WHERE id_coment = :Id");
-		//query.setParameter("Qtd", comentario.getQtd_denuncia());
+		// query.setParameter("Qtd", comentario.getQtd_denuncia());
 		query.setParameter("Id", comentario.getId_coment());
 
 		query.executeUpdate();
 	}
 
 	@Override
-	public Comentario verificarComentario(Comentario comentario) throws Exception{
-		Query query = getManager().createQuery("SELECT c FROM Comentario c WHERE id_coment =:Id",Comentario.class);
-		query.setParameter("Id",comentario.getId_coment());
+	public Comentario verificarComentario(Comentario comentario) throws Exception {
+		Query query = getManager().createQuery("SELECT c FROM Comentario c WHERE id_coment =:Id", Comentario.class);
+		query.setParameter("Id", comentario.getId_coment());
 		Comentario c = (Comentario) query.getSingleResult();
 		if (c == null) {
 			throw new Exception("Nao ha registros armazenados");

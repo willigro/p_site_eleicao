@@ -1,9 +1,13 @@
 package beans;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
 import classesBasicas.ErroSite;
 import facade.Facade;
 
@@ -26,6 +30,8 @@ public class ErroSiteBean {
 	
 	
 	public List<ErroSite> getErros(){
+		
+		
 	    try {
 	    	if(search.isEmpty()){
 	    		this.errosSite = this.facade.consultarErros();	
@@ -35,12 +41,11 @@ public class ErroSiteBean {
 	    		this.errosSite = this.facade.consultarErrosPorFiltro(erroSite);
 	    	}
 			return this.errosSite;
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	    return null;
 	}
-	
 	
 	
 

@@ -1,13 +1,14 @@
 package beans;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
 import classesBasicas.Candidato;
 import classesBasicas.Cargo;
 import classesBasicas.Cidade;
@@ -19,7 +20,6 @@ import facade.Facade;
 @ViewScoped
 public class CandidatoBean implements Serializable {
 
-	private Candidato oldCandidato;
 	private Cargo cargo;
 	private Candidato candidato;
 	private Facade fachada;
@@ -34,7 +34,6 @@ public class CandidatoBean implements Serializable {
 	private List<Partido> lista_partidos;
 
 	public CandidatoBean() {
-		this.oldCandidato = new Candidato();
 		this.candidato = new Candidato();
 		this.fachada = new Facade();
 		this.cargo = new Cargo();
@@ -64,9 +63,19 @@ public class CandidatoBean implements Serializable {
 		System.out.println(this.candidato.getCidade_cand().getId_cid());
 	}
 
-	private void addMensagem(String texto) {
+	private void mensagemSucessoCadastrado(String texto) {
 		FacesContext mensagem = FacesContext.getCurrentInstance();
-		mensagem.addMessage(null, new FacesMessage("Cadastrado com Sucesso", "!"));
+		mensagem.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com Sucesso", texto));
+	}
+
+	private void mensagemFalhaCadastro(String texto) {
+		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", texto);
+		FacesContext.getCurrentInstance().addMessage(null, mensagem);
+	}
+
+	private void mensagemFalhaConsulta(String texto) {
+		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", texto);
+		FacesContext.getCurrentInstance().addMessage(null, mensagem);
 	}
 
 	public String remover() throws Exception {
@@ -76,7 +85,7 @@ public class CandidatoBean implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "paginaAdmin";
+		return null;
 	}
 
 	public String pagComentarios() {
@@ -104,42 +113,37 @@ public class CandidatoBean implements Serializable {
 
 	public String pagCandidato(Candidato candidato) {
 		try {
-			System.out.println("id cand: " + candidato.getId_cand() + " nome: " + candidato.getNome_cand());
 			this.fachada.armazenarVariavel(candidato);
-			System.out.println("pag: " + candidato.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "telaCandidato.xhtml";
+		return "telaCandidato.xhtml?faces-redirect=true";
 	}
 
 	public String cadastrar() throws Exception {
 		try {
 			fachada.cadastrarCandidato(candidato);
-			addMensagem("Cadastrado com Sucesso!");
+			mensagemSucessoCadastrado("");
 		} catch (Exception e) {
 			e.printStackTrace();
+			mensagemFalhaCadastro(e.getMessage());
 		}
 		return "paginaAdmin";
 
 	}
 
-	public String editar() throws Exception {
-		try {
-			// setando manualmente o novo candidato ID (num e city pega na view)
-			//candidato.setId_cand(113);
-			//System.out.println(candidato.getId_cand());
-
-			System.out.println("DEPOIS DO BOTÃO EDITAR: " + candidato.getId_cand());
-			
-			fachada.alterarCandidato(this.candidato);
-			addMensagem("Editado com Sucesso!");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "paginaEditarCand";
-	}
-
+	/*
+	 * public String editar() throws Exception { try { // setando manualmente o
+	 * novo candidato ID (num e city pega na view) // candidato.setId_cand(113);
+	 * // System.out.println(candidato.getId_cand());
+	 * 
+	 * System.out.println("DEPOIS DO BOTÃO EDITAR: " + candidato.getId_cand());
+	 * 
+	 * fachada.alterarCandidato(this.candidato); //
+	 * addMensagem("Editado com Sucesso!"); } catch (Exception e) {
+	 * e.printStackTrace(); } return "paginaEditarCand"; }
+	 */
+	
 	public void consultarCandidatoFiltrado() {
 		try {
 			if (cargo.getNome_cargo() != null && !cargo.getNome_cargo().trim().equals(""))
@@ -150,6 +154,7 @@ public class CandidatoBean implements Serializable {
 			this.candidatos = fachada.consultarCandidatosFiltrados(this.candidato);
 		} catch (Exception e) {
 			e.printStackTrace();
+			mensagemFalhaConsulta(e.getMessage());
 		}
 	}
 
@@ -162,14 +167,6 @@ public class CandidatoBean implements Serializable {
 	}
 
 	// Getters and Setters
-	public Candidato getCandidatoSelect() {
-		return oldCandidato;
-	}
-
-	public void setCandidatoSelect(Candidato candidatoSelect) {
-		this.oldCandidato = candidatoSelect;
-	}
-
 	public Partido getPartido() {
 		return partido;
 	}

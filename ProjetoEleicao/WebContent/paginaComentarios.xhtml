@@ -33,7 +33,6 @@ body {
 	<f:view>
 		<!-- Cabeçalho da Página -->
 		<h:form>
-			<p:growl id="messages" />
 			<p:menubar styleClass="menubar">
 				<p:menuitem>
 					<font face="Calibri" color="White" size="6">Brasil
@@ -42,7 +41,8 @@ body {
 			</p:menubar>
 		</h:form>
 		<br />
-		<p:commandButton value="Retornar" action="#{candidatoBean.pagAdmin()}" />
+		<p:commandButton icon="ui-icon-arrowreturn-1-w" value="Retornar"
+			action="#{candidatoBean.pagAdmin()}" />
 		<br />
 
 		<!-- listagem dos comentários denunciados -->
@@ -51,25 +51,24 @@ body {
 				<font face="Calibri" color="black">Lista de Comentários
 					Denunciados</font>
 			</h1>
-			<p:dataTable value="#{comentarioBean.comentarios}" var="coments">
+			<p:dataTable value="#{comentarioBean.lista_denunciados}" var="denun">
 				<p:column headerText="Nome Usuário">
-					<h:outputText value="#{coments.usuario_coment.nome_user}"></h:outputText>
+					<h:outputText value="#{denun.usuario.nome_user}"></h:outputText>
 				</p:column>
 				<p:column headerText="QTD de Denuncias">
-					<h:outputText value="#{coments.qtd_denuncia}"></h:outputText>
 				</p:column>
 				<p:column headerText="Texto Comentádo">
-					<h:outputText value="#{coments.texto_coment}"></h:outputText>
+					<h:outputText value="#{denun.comentario.texto_coment}"></h:outputText>
 				</p:column>
 				<p:column headerText="Projeto Comentádo">
-					<h:outputText value="#{coments.projeto_coment.titulo_proj}"></h:outputText>
+					<h:outputText value="#{denun.comentario.projeto_coment.titulo_proj}"></h:outputText>
 				</p:column>
 
 				<p:column headerText="Remover Comentário">
-					<p:commandButton value="Remover" action="#{comentarioBean.remover}"
-						update=":formData" ajax="true">
-						<f:setPropertyActionListener target="#{comentarioBean.comentarios}"
-							value="#{coments}"></f:setPropertyActionListener>
+					<p:commandButton icon="ui-icon-trash" value="Remover"
+						action="#{comentarioBean.remover}" update=":formData" ajax="true">
+						<f:setPropertyActionListener
+							target="#{comentarioBean.denunciar}" value="#{denun}"></f:setPropertyActionListener>
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

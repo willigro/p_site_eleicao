@@ -92,8 +92,8 @@ public class Facade implements IFachada {
 	}
 
 	@Override
-	public void alterarCandidato(Candidato candidato) throws Exception {
-		this.controlCand.alterarCandidato(candidato);
+	public void alterarCandidato(Candidato candidato, Candidato oldCand) throws Exception {
+		this.controlCand.alterarCandidato(candidato, oldCand);
 	}
 
 	@Override
@@ -249,9 +249,10 @@ public class Facade implements IFachada {
 		}
 	}
 
-	public Denuncia consultarDenunciaDoComentario(Denuncia denuncia) throws Exception {
+	@Override
+	public List<Denuncia> consultarDenunciaDoComentario() throws Exception {
 		if (validaControl(controllerDenuncia)) {
-			return controllerDenuncia.consultarDenuncia(denuncia);
+			return controllerDenuncia.consultarDenuncia();
 		}
 		return null;
 	}
