@@ -39,8 +39,10 @@ public class LoginBean{
 				this.administrador.setSenha_admin(password);
 
 
-				if(facade.loginAdministrador(administrador) != null){
-					this.administrador = facade.loginAdministrador(administrador);
+				this.administrador = facade.loginAdministrador(administrador);
+				
+				if(this.administrador != null){
+								
 					FacesContext facesContext = FacesContext.getCurrentInstance();
 					HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 					session.setAttribute("temp", administrador.getId_admin());
@@ -58,8 +60,10 @@ public class LoginBean{
 				this.usuario.setEmail_user(username);
 				this.usuario.setSenha(password);
 
-				if(facade.loginUsuario(this.usuario) != null){
+				
 					this.usuario = facade.loginUsuario(usuario);
+					
+					if(this.usuario != null){
 					FacesContext facesContext = FacesContext.getCurrentInstance();
 					HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 					session.setAttribute("usuarioLogado", usuario);
