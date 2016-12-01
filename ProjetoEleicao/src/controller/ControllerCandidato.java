@@ -61,12 +61,8 @@ public class ControllerCandidato {
 
 	public void alterarCandidato(Candidato candidato, Candidato oldCand) throws Exception {
 
-		// Setando abaixo enquanto não consigo passar o objeto entre telas
-		int numero = 1231;
-		int cidade = 1;
-
 		this.validarCandidato(candidato);
-
+		
 		if (iCandidatoDAO.retornaID(candidato) == true) {
 			throw new Exception("O candidato informado não existe cadastrado.");
 		} else {

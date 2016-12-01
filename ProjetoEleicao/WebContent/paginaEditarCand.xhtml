@@ -82,7 +82,7 @@ body {
 						required="true">
 						<f:validateLength minimum="3" maximum="50" />
 					</p:inputText>
-					
+
 					<!-- 
 					<h:outputLabel value="ESTADO:"></h:outputLabel>
 					<p:selectOneMenu id="dropEstado" style="width:150px" filter="true"
@@ -114,12 +114,46 @@ body {
 							process=":formEditar:dropPartido"></p:ajax>
 					</p:selectOneMenu>
 					 -->
-				
+
 				</p:panelGrid>
 				<br />
 				<p:commandButton icon="ui-icon-pencil" value="Editar"
 					action="#{candidatoSelecionadoBean.editar()}" update="matchGrid"></p:commandButton>
 			</p:fieldset>
+			<br />
+
+			<!-- painel de projetos -->
+			<!-- 
+			<h:form id="formProjetos">
+				<p:fieldset legend="Adicionar Propostas" toggleable="true"
+					toggleSpeed="500">
+					<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
+						styleClass="">
+
+						<h:outputText value="Titulo do Projeto"></h:outputText>
+						<h:inputText id="titProp"
+							value="#{candidatoSelecionadoBean.projeto.titulo_proj}"
+							required="false">
+							<f:validateLength minimum="2" maximum="100" />
+						</h:inputText>
+
+						<h:outputText id="titulo" value="Descrição do Projeto"></h:outputText>
+						<h:inputTextarea id="desProp"
+							value="#{candidatoSelecionadoBean.projeto.descricao_proj}"
+							required="false">
+							<f:validateLength minimum="2" maximum="500" />
+						</h:inputTextarea>
+
+					</p:panelGrid>
+					<br />
+					<p:commandButton icon="ui-icon-plusthick" value="Adicionar"
+						action="#{candidatoSelecionadoBean.addProjeto()}"
+						update="matchGrid"></p:commandButton>
+				</p:fieldset>
+			</h:form>
+			<br />
+ 			-->
+
 		</h:form>
 		<br />
 	</f:view>

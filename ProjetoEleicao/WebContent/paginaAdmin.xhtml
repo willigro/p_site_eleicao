@@ -113,23 +113,6 @@ body {
 						<p:ajax listener="#{candidatoBean.estadoSelecionaCidade}"
 							process=":formCadastro:dropPartido"></p:ajax>
 					</p:selectOneMenu>
-
-					<!-- 
-					<h:outputLabel for="projetotitulo" value="Titulo do Projeto"></h:outputLabel>
-					<p:inputText placeholder="Titulo" id="projetotitulo"
-						value="#{candidatoBean.candidato.tipo_Cargo_cand}"
-						required="false">
-						<f:validateLength minimum="3" maximum="100" />
-					</p:inputText>
-
-					<h:outputLabel for="projetodesc" value="Descrição do Projeto"></h:outputLabel>
-					<p:inputTextarea placeholder="Descrição" id="projetodesc"
-						value="#{candidatoBean.candidato.tipo_Cargo_cand}"
-						required="false">
-						<f:validateLength minimum="3" maximum="500" />
-					</p:inputTextarea>
- 					-->
-
 				</p:panelGrid>
 				<br />
 				<p:commandButton icon="ui-icon-plusthick" value="Cadastrar"
@@ -140,7 +123,6 @@ body {
 
 		<!-- painel de pesquisar -->
 		<h:form id="formPesquisar">
-
 			<p:fieldset legend="Consultar Candidato" toggleable="true"
 				toggleSpeed="500">
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
@@ -167,8 +149,8 @@ body {
 					<p:column headerText="Numero">
 						<h:outputText value="#{cand.numero_cand}"></h:outputText>
 					</p:column>
-					<p:column headerText="Cidade">
-						<h:outputText value="#{cand.cidade_cand.nome_cid}"></h:outputText>
+					<p:column headerText="Cargo">
+						<h:outputText value="#{cand.tipo_Cargo_cand}"></h:outputText>
 					</p:column>
 					<p:column headerText="Remover">
 						<p:commandButton icon="ui-icon-trash" value="Remover"

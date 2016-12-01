@@ -25,6 +25,7 @@ import facade.Facade;
 @SessionScoped
 public class CandidatoSelecionadoBean implements Serializable {
 
+	private List<Projeto> projetos;
 	private Candidato oldCand;
 	private Facade fachada;
 	private Candidato candidato;
@@ -37,6 +38,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 	private Administrador adm;
 
 	public CandidatoSelecionadoBean() {
+		this.projetos = new ArrayList<>();
 		this.oldCand = new Candidato();
 		this.candidato = new Candidato();
 		this.fachada = new Facade();
@@ -134,12 +136,21 @@ public class CandidatoSelecionadoBean implements Serializable {
 		return lista_projeto;
 	}
 
-	public String editar() throws Exception {
+	public void addProjeto() throws Exception {
 		try {
-			
-			System.out.println("ID do old: " + this.oldCand.getId_cand());
-			System.out.println("ID do novo: " + this.candidato.getId_cand());
-			
+
+			this.projeto.getCanditado_proj().setId_cand(this.candidato.getId_cand());
+
+			lista_projeto.add(this.projeto);
+			mensagemSucessoProposta("Adicionado com sucesso!");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mensagemSucessoFalha(e.getMessage());
+		}
+	}
+
+	public String editar() throws Exception {
+		try {			
 			fachada.alterarCandidato(candidato, oldCand);
 			mensagemSucessoEdit("Editado com Sucesso!");
 		} catch (Exception e) {
@@ -159,7 +170,25 @@ public class CandidatoSelecionadoBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
 	}
 
+	private void mensagemSucessoProposta(String texto) {
+		FacesContext mensagem = FacesContext.getCurrentInstance();
+		mensagem.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Adicionado Proposta", texto));
+	}
+
+	private void mensagemSucessoFalha(String texto) {
+		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", texto);
+		FacesContext.getCurrentInstance().addMessage(null, mensagem);
+	}
+
 	// Getters e Setters
+	public List<Projeto> getProjetos() {
+		return projetos;
+	}
+
+	public void setProjetos(List<Projeto> projetos) {
+		this.projetos = projetos;
+	}
+
 	public Candidato getOldCand() {
 		return oldCand;
 	}
@@ -167,7 +196,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 	public void setOldCand(Candidato oldCand) {
 		this.oldCand = oldCand;
 	}
-	
+
 	public Candidato getCandidato() {
 		return candidato;
 	}
