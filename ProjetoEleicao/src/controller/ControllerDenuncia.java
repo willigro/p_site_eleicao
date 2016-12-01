@@ -1,8 +1,6 @@
 package controller;
 
 
-import java.util.List;
-
 import classesBasicas.Denuncia;
 import dao.DAOFactory;
 import dao.interfaces.IDenunciaDAO;
@@ -35,7 +33,9 @@ public class ControllerDenuncia {
 		if(!controllerComentario.consultarComentarioPorId(denuncia.getComentario())){
 			throw new Exception("Comentario inexistente na base de dados");
 		}
-		//Refazer a validação de denunciar apenas uma vez
+		if(iDenunciaDAO.consultarDenunciaDoComentario(denuncia) != null){
+			throw new Exception("Voce nao pode denunciar mais de uma vez o mesmo comentario");
+		}
 		iDenunciaDAO.denunciarComentario(denuncia);
 	}
 	
@@ -60,13 +60,15 @@ public class ControllerDenuncia {
 		iDenunciaDAO.removerDenunciaComentario(denuncia);
 	}
 	
-	public List<Denuncia> consultarDenuncia(){
+	public Denuncia consultarDenuncia(Denuncia denuncia){
+		
 		try {
-			return iDenunciaDAO.consultarDenunciaDoComentario();
+			return iDenunciaDAO.consultarDenunciaDoComentario(denuncia);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return null;
 	}
 

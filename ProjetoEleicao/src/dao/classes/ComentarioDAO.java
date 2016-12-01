@@ -5,7 +5,6 @@ import dao.interfaces.IComentarioDAO;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import org.hibernate.Criteria;
@@ -13,7 +12,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
 
-import classesBasicas.Candidato;
 import classesBasicas.Comentario;
 import classesBasicas.Projeto;
 import classesBasicas.Usuario;
@@ -24,8 +22,11 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 	public List<Comentario> visualizarComentsDenuncia() throws Exception {
 		List<Comentario> lista_comentarios = new ArrayList<>();
 		try {
-			lista_comentarios = getManager().createQuery("SELECT comentario FROM Comentario comentario")
-					.getResultList();
+			// lista_comentarios = getManager().createQuery("SELECT comentario
+			// FROM Comentario comentario WHERE qtd_denuncia >
+			// 9").getResultList();
+			lista_comentarios = getManager()
+					.createQuery("SELECT comentario FROM Comentario comentario").getResultList();
 			if (lista_comentarios.isEmpty()) {
 				throw new Exception("Não há registros armazenados");
 			}
@@ -56,7 +57,7 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 		return c;
 	}
 
-	private void addRestrictionIdProj(Criteria criteria, String propertyName, int id) {
+	private void addRestrictionIdCand(Criteria criteria, String propertyName, int id) {
 		if (id > 0) {
 			criteria.add(Restrictions.eq(propertyName, id));
 		}
@@ -69,7 +70,7 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 		comt.getProjeto_coment().setId_proj(projeto.getId_proj());
 		Example cidadeExample = Example.create(comt).excludeZeroes();
 		Criteria criteria = session.createCriteria(Comentario.class).add(cidadeExample);
-		addRestrictionIdProj(criteria, "projeto_coment.id_proj", projeto.getId_proj());
+		addRestrictionIdCand(criteria, "projeto_coment.id_proj", projeto.getId_proj());
 
 		List<Comentario> lista = criteria.list();
 		if (lista.isEmpty())
@@ -78,42 +79,8 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 			return lista;
 	}
 
-	private void addRestrictionIdCand(Criteria criteria, String propertyName, int id) {
-		if (id > 0) {
-			criteria.add(Restrictions.eq(propertyName, id));
-		}
-	}
-	
-	@Override
-	public List<Comentario> consultarComentarioFiltradosIdCand(Candidato candidato) throws Exception {
-		Session session = (Session) getManager().getDelegate();
-		Comentario comt = new Comentario();
-		comt.getProjeto_coment().setId_proj(candidato.getId_cand());
-		Example cidadeExample = Example.create(comt).excludeZeroes();
-		Criteria criteria = session.createCriteria(Comentario.class).add(cidadeExample).add(Restrictions.isNull("projeto_coment.id_proj"));
-		addRestrictionIdProj(criteria, "candidato_coment.id_cand", candidato.getId_cand());
-
-		List<Comentario> lista = criteria.list();
-		if (lista.isEmpty())
-			throw new Exception("Nao foram encontrados registros para esta pesquisa");
-		else
-			return lista;
-	}
-
-	@Override
-	public void removerComentDenunciado(Comentario comentario) throws Exception {
-		EntityTransaction tx = null;
-		try {
-			tx = getManager().getTransaction();
-			tx.begin();
-			Query query = getManager().createQuery("delete Comentario where Id_coment = :id");
-			query.setParameter("id", comentario.getId_coment());
-			query.executeUpdate();
-			tx.commit();
-		} catch (Exception e) {
-			tx.rollback();
-			e.printStackTrace();
-		}
-	}
+	// public void comentarProjeto(Comentario comentario) throws Exception{
+	// super.insert(comentario);
+	// }
 
 }

@@ -51,27 +51,24 @@ body {
 				<font face="Calibri" color="black">Lista de Comentários
 					Denunciados</font>
 			</h1>
-			<p:dataTable id="tabela" value="#{comentarioBean.lista_denunciados}"
-				var="denun">
-				<p:column headerText="Nome do Usuário">
-					<h:outputText value="#{denun.usuario.nome_user}"></h:outputText>
+			<p:dataTable value="#{comentarioBean.comentarios}" var="coments">
+				<p:column headerText="Nome Usuário">
+					<h:outputText value="#{coments.usuario_coment.nome_user}"></h:outputText>
 				</p:column>
-				<p:column headerText="Comentário Denunciado">
-					<h:outputText value="#{denun.comentario.texto_coment}"></h:outputText>
+				<p:column headerText="QTD de Denuncias">
 				</p:column>
-				<p:column headerText="Nome do Candidato">
-					<h:outputText value="#{denun.comentario.administrador_coment.nome_admin}"></h:outputText>
+				<p:column headerText="Texto Comentádo">
+					<h:outputText value="#{coments.texto_coment}"></h:outputText>
 				</p:column>
-				<p:column headerText="Comentádo no Projeto">
-					<h:outputText value="#{denun.comentario.projeto_coment.titulo_proj}"></h:outputText>
+				<p:column headerText="Projeto Comentádo">
+					<h:outputText value="#{coments.projeto_coment.titulo_proj}"></h:outputText>
 				</p:column>
 
 				<p:column headerText="Remover Comentário">
 					<p:commandButton icon="ui-icon-trash" value="Remover"
-						action="#{comentarioBean.removerComent}" update=":formData:tabela"
-						ajax="true">
-						<f:setPropertyActionListener value="#{coments}"
-							target="#{comentarioBean.comentario}"></f:setPropertyActionListener>
+						action="#{comentarioBean.remover}" update=":formData" ajax="true">
+						<f:setPropertyActionListener
+							target="#{comentarioBean.comentarios}" value="#{coments}"></f:setPropertyActionListener>
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

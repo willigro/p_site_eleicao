@@ -56,11 +56,8 @@ body {
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
 					styleClass="">
 
-					<h:outputLabel value="CANDIDATO ATUAL:"></h:outputLabel>
-					<h:outputLabel value="CANDIDATO EDITADO:"></h:outputLabel>
-
 					<h:outputLabel
-						value="#{candidatoSelecionadoBean.candidato.nome_cand}"></h:outputLabel>
+						value="NOME:"></h:outputLabel>
 					<p:inputText
 						placeholder="#{candidatoSelecionadoBean.candidato.nome_cand}"
 						id="nome" value="#{candidatoSelecionadoBean.candidato.nome_cand}"
@@ -69,7 +66,7 @@ body {
 					</p:inputText>
 
 					<h:outputLabel
-						value="#{candidatoSelecionadoBean.candidato.numero_cand}"></h:outputLabel>
+						value="NÚMERO:"></h:outputLabel>
 					<p:inputText
 						placeholder="#{candidatoSelecionadoBean.candidato.numero_cand}"
 						id="numero"
@@ -79,7 +76,7 @@ body {
 					</p:inputText>
 
 					<h:outputLabel
-						value="#{candidatoSelecionadoBean.candidato.tipo_Cargo_cand}">
+						value="CARGO:">
 					</h:outputLabel>
 					<p:inputText
 						placeholder="#{candidatoSelecionadoBean.candidato.tipo_Cargo_cand}"
@@ -90,9 +87,9 @@ body {
 					</p:inputText>
 
 					<h:outputLabel
-						value="#{candidatoSelecionadoBean.candidato.estado_cand.nome_est}"></h:outputLabel>
+						value="ESTADO:"></h:outputLabel>
 					<p:selectOneMenu id="dropEstado" style="width:150px" filter="true"
-						value="#{candidatoBean.candidato.estado_cand.id_est}">
+						value="#{candidatoSelecionadoBean.candidato.estado_cand.id_est}">
 						<f:selectItem itemLabel="Estado" itemValue="0"
 							noSelectionOption="true" />
 						<f:selectItems value="#{candidatoBean.lista_estados}" var="estado"
@@ -103,7 +100,7 @@ body {
 					</p:selectOneMenu>
 
 					<h:outputLabel
-						value="#{candidatoSelecionadoBean.candidato.cidade_cand.nome_cid}"></h:outputLabel>
+						value="CIDADE:"></h:outputLabel>
 					<p:selectOneMenu id="dropCidade" style="width:150px" filter="true"
 						value="#{candidatoBean.candidato.cidade_cand.id_cid}">
 						<f:selectItem itemLabel="Cidade" itemValue="0"
@@ -115,9 +112,9 @@ body {
 					</p:selectOneMenu>
 
 					<h:outputLabel
-						value="#{candidatoSelecionadoBean.candidato.partido_cand.sigla_part} - #{candidatoSelecionadoBean.candidato.partido_cand.nome_part}"></h:outputLabel>
+						value="PARTIDO:"></h:outputLabel>
 					<p:selectOneMenu id="dropPartido" filter="true"
-						value="#{candidatoBean.candidato.partido_cand.id_part}">
+						value="#{candidatoSelecionadoBean.candidato.partido_cand.sigla_part} - #{candidatoSelecionadoBean.candidato.partido_cand.nome_part}">
 						<f:selectItem itemLabel="Partido" itemValue="0"
 							noSelectionOption="true" />
 						<f:selectItems value="#{candidatoBean.lista_partidos}"
