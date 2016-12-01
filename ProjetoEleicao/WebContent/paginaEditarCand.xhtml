@@ -56,8 +56,7 @@ body {
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
 					styleClass="">
 
-					<h:outputLabel
-						value="NOME:"></h:outputLabel>
+					<h:outputLabel value="NOME:"></h:outputLabel>
 					<p:inputText
 						placeholder="#{candidatoSelecionadoBean.candidato.nome_cand}"
 						id="nome" value="#{candidatoSelecionadoBean.candidato.nome_cand}"
@@ -65,8 +64,7 @@ body {
 						<f:validateLength minimum="3" maximum="50" />
 					</p:inputText>
 
-					<h:outputLabel
-						value="NÚMERO:"></h:outputLabel>
+					<h:outputLabel value="NÚMERO:"></h:outputLabel>
 					<p:inputText
 						placeholder="#{candidatoSelecionadoBean.candidato.numero_cand}"
 						id="numero"
@@ -75,8 +73,7 @@ body {
 						<f:validateLength minimum="2" maximum="5" />
 					</p:inputText>
 
-					<h:outputLabel
-						value="CARGO:">
+					<h:outputLabel value="CARGO:">
 					</h:outputLabel>
 					<p:inputText
 						placeholder="#{candidatoSelecionadoBean.candidato.tipo_Cargo_cand}"
@@ -86,12 +83,9 @@ body {
 						<f:validateLength minimum="3" maximum="50" />
 					</p:inputText>
 
-					<h:outputLabel
-						value="ESTADO:"></h:outputLabel>
+					<h:outputLabel value="ESTADO:"></h:outputLabel>
 					<p:selectOneMenu id="dropEstado" style="width:150px" filter="true"
 						value="#{candidatoSelecionadoBean.candidato.estado_cand.id_est}">
-						<f:selectItem itemLabel="Estado" itemValue="0"
-							noSelectionOption="true" />
 						<f:selectItems value="#{candidatoBean.lista_estados}" var="estado"
 							itemValue="#{estado.id_est}"
 							itemLabel="#{estado.nome_est} - #{estado.sigla_est}" />
@@ -99,24 +93,18 @@ body {
 							process=":formEditar:dropEstado"></p:ajax>
 					</p:selectOneMenu>
 
-					<h:outputLabel
-						value="CIDADE:"></h:outputLabel>
+					<h:outputLabel value="CIDADE:"></h:outputLabel>
 					<p:selectOneMenu id="dropCidade" style="width:150px" filter="true"
 						value="#{candidatoBean.candidato.cidade_cand.id_cid}">
-						<f:selectItem itemLabel="Cidade" itemValue="0"
-							noSelectionOption="true" />
 						<f:selectItems value="#{candidatoBean.cidades}" var="cidade"
 							itemValue="#{cidade.id_cid}" itemLabel="#{cidade.nome_cid}" />
 						<p:ajax listener="#{candidatoBean.cidadeSelecionada}"
 							process=":formEditar:dropCidade"></p:ajax>
 					</p:selectOneMenu>
 
-					<h:outputLabel
-						value="PARTIDO:"></h:outputLabel>
+					<h:outputLabel value="PARTIDO:"></h:outputLabel>
 					<p:selectOneMenu id="dropPartido" filter="true"
 						value="#{candidatoSelecionadoBean.candidato.partido_cand.sigla_part} - #{candidatoSelecionadoBean.candidato.partido_cand.nome_part}">
-						<f:selectItem itemLabel="Partido" itemValue="0"
-							noSelectionOption="true" />
 						<f:selectItems value="#{candidatoBean.lista_partidos}"
 							var="partido" itemValue="#{partido.id_part}"
 							itemLabel="#{partido.nome_part} - #{partido.sigla_part}" />
