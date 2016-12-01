@@ -92,8 +92,8 @@ public class Facade implements IFachada {
 	}
 
 	@Override
-	public void alterarCandidato(Candidato candidato) throws Exception {
-		this.controlCand.alterarCandidato(candidato);
+	public void alterarCandidato(Candidato candidato, Candidato oldCand) throws Exception {
+		this.controlCand.alterarCandidato(candidato, oldCand);
 	}
 
 	@Override

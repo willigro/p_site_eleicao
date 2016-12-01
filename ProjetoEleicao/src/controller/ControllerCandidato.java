@@ -25,8 +25,6 @@ public class ControllerCandidato {
 
 	private void validarCandidato(Candidato candidato) throws Exception {
 
-		// Falta: DataNascimeto, FotoCandidato, Validar os ID nulos e etc.
-
 		if (candidato.getNome_cand().trim().isEmpty()) {
 			throw new Exception("O campo Nome está vazio");
 		} else if (candidato.getNome_cand().length() > 50) {
@@ -61,23 +59,18 @@ public class ControllerCandidato {
 		this.iCandidatoDAO.removerCandidato(candidato);
 	}
 
-	public void alterarCandidato(Candidato candidato) throws Exception {
+	public void alterarCandidato(Candidato candidato, Candidato oldCand) throws Exception {
 
 		// Setando abaixo enquanto não consigo passar o objeto entre telas
-		int numero = 55555;
+		int numero = 1231;
 		int cidade = 1;
 
 		this.validarCandidato(candidato);
 
-		System.out.println(candidato.getId_cand() + " ID do candidato novo (setado)");
-		System.out.println(candidato.getCidade_cand().getId_cid() + " ID City do candidato novo (setado)");
-		System.out.println(candidato.getNumero_cand() + " Numero do candidato novo (setado)");
-		System.out.println(candidato.getNome_cand() + " Novo Nome do candidato novo (setado)");
-
 		if (iCandidatoDAO.retornaID(candidato) == true) {
 			throw new Exception("O candidato informado não existe cadastrado.");
 		} else {
-			if ((candidato.getNumero_cand() == numero) && (candidato.getCidade_cand().getId_cid()) == cidade) {
+			if ((candidato.getNumero_cand() == oldCand.getNumero_cand()) && (candidato.getCidade_cand().getId_cid()) == oldCand.getCidade_cand().getId_cid()) {
 				this.iCandidatoDAO.alterarCandidato(candidato);
 			} else {
 				if (iCandidatoDAO.retornaNumero(candidato) == false) {

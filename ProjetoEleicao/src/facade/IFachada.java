@@ -34,7 +34,7 @@ public interface IFachada {
 	
 	public void removerCandidato(Candidato candidato) throws Exception;
 	
-	public void alterarCandidato(Candidato candidato) throws Exception;
+	public void alterarCandidato(Candidato candidato, Candidato oldCand) throws Exception;
 	
 	public List<Comentario> visualizarComentsDenuncia() throws Exception;
 

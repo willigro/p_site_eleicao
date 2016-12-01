@@ -82,7 +82,8 @@ body {
 						required="true">
 						<f:validateLength minimum="3" maximum="50" />
 					</p:inputText>
-
+					
+					<!-- 
 					<h:outputLabel value="ESTADO:"></h:outputLabel>
 					<p:selectOneMenu id="dropEstado" style="width:150px" filter="true"
 						value="#{candidatoSelecionadoBean.candidato.estado_cand.id_est}">
@@ -104,14 +105,16 @@ body {
 
 					<h:outputLabel value="PARTIDO:"></h:outputLabel>
 					<p:selectOneMenu id="dropPartido" filter="true"
-						value="#{candidatoSelecionadoBean.candidato.partido_cand.sigla_part} - #{candidatoSelecionadoBean.candidato.partido_cand.nome_part}">
+						value="#{partido.nome_part} - #{partido.sigla_part}">
 						<f:selectItems value="#{candidatoBean.lista_partidos}"
 							var="partido" itemValue="#{partido.id_part}"
 							itemLabel="#{partido.nome_part} - #{partido.sigla_part}" />
 						<p:ajax
-							listener="#{candidatoSelecionadoBean.estadoSelecionaCidade}"
+							listener="#{candidatoBean.estadoSelecionaCidade}"
 							process=":formEditar:dropPartido"></p:ajax>
 					</p:selectOneMenu>
+					 -->
+				
 				</p:panelGrid>
 				<br />
 				<p:commandButton icon="ui-icon-pencil" value="Editar"
@@ -119,7 +122,6 @@ body {
 			</p:fieldset>
 		</h:form>
 		<br />
-
 	</f:view>
 </body>
 </html>

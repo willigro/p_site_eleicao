@@ -72,7 +72,7 @@ public class CandidatoBean implements Serializable {
 		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", texto);
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
 	}
-	
+
 	private void mensagemFalhaConsulta(String texto) {
 		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", texto);
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
@@ -112,7 +112,7 @@ public class CandidatoBean implements Serializable {
 	}
 
 	public String pagCandidato(Candidato candidato) {
-		try {			
+		try {
 			this.fachada.armazenarVariavel(candidato);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -132,22 +132,18 @@ public class CandidatoBean implements Serializable {
 
 	}
 
-	public String editar() throws Exception {
-		try {
-			// setando manualmente o novo candidato ID (num e city pega na view)
-			// candidato.setId_cand(113);
-			// System.out.println(candidato.getId_cand());
-
-			System.out.println("DEPOIS DO BOTÃO EDITAR: " + candidato.getId_cand());
-
-			fachada.alterarCandidato(this.candidato);
-			// addMensagem("Editado com Sucesso!");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "paginaEditarCand";
-	}
-
+	/*
+	 * public String editar() throws Exception { try { // setando manualmente o
+	 * novo candidato ID (num e city pega na view) // candidato.setId_cand(113);
+	 * // System.out.println(candidato.getId_cand());
+	 * 
+	 * System.out.println("DEPOIS DO BOTÃO EDITAR: " + candidato.getId_cand());
+	 * 
+	 * fachada.alterarCandidato(this.candidato); //
+	 * addMensagem("Editado com Sucesso!"); } catch (Exception e) {
+	 * e.printStackTrace(); } return "paginaEditarCand"; }
+	 */
+	
 	public void consultarCandidatoFiltrado() {
 		try {
 			if (cargo.getNome_cargo() != null && !cargo.getNome_cargo().trim().equals(""))
