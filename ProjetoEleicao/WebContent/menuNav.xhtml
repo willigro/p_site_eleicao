@@ -26,7 +26,13 @@
 		</h:form>
 		<p:sticky target="stickyMenuNav" />
 		 -->
-		 <p:commandLink value="Candidatos" action="consultaCandidatos"></p:commandLink>
+		<h:form>
+			<p:commandLink value="Principal"
+				action="principal?faces-redirect=true"></p:commandLink>
+			<p:commandLink value="Candidatos"
+				action="consultaCandidatos?faces-redirect=true"></p:commandLink>
+			<p:commandLink value="Login" action="login?faces-redirect=true"></p:commandLink>
+		</h:form>
 	</f:view>
 </h:body>
 </html>
