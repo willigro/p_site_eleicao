@@ -70,7 +70,8 @@ public interface IFachada {
 
 	public void denunciarComentario(Comentario comentario) throws Exception;
 	
-
+	public List<Denuncia> consultarDenunciaDoComentario() throws Exception;
+	
 	public List<Comentario> consultarComentarioFiltradosIdProjt(Projeto projeto) throws Exception;
 
 	public void denunciarComentario(Denuncia denuncia) throws Exception;
