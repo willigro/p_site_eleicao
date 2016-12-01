@@ -1,13 +1,14 @@
 package beans;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
 import classesBasicas.Candidato;
 import classesBasicas.Cargo;
 import classesBasicas.Cidade;
@@ -111,14 +112,12 @@ public class CandidatoBean implements Serializable {
 	}
 
 	public String pagCandidato(Candidato candidato) {
-		try {
-			System.out.println("id cand: " + candidato.getId_cand() + " nome: " + candidato.getNome_cand());
+		try {			
 			this.fachada.armazenarVariavel(candidato);
-			System.out.println("pag: " + candidato.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "telaCandidato.xhtml";
+		return "telaCandidato.xhtml?faces-redirect=true";
 	}
 
 	public String cadastrar() throws Exception {

@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import classesBasicas.Administrador;
@@ -20,7 +22,7 @@ import classesBasicas.Usuario;
 import facade.Facade;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class CandidatoSelecionadoBean implements Serializable {
 
 	private Facade fachada;
@@ -34,7 +36,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 	private List<Comentario> lista_comentarioProjeto;
 	private List<Comentario> lista_comentarioCandidato;
 	private Administrador adm;
-	
+
 	public CandidatoSelecionadoBean() {
 		this.candidato = new Candidato();
 		this.fachada = new Facade();
@@ -67,7 +69,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 		}
 		return null;
 	}
-	
+
 	public String comentarioCandidato() {
 		try {
 			this.adm.setId_admin(1);
@@ -85,17 +87,17 @@ public class CandidatoSelecionadoBean implements Serializable {
 		}
 		return null;
 	}
-	
-	public String editarComentarioProposta(){
-		try{			
+
+	public String editarComentarioProposta() {
+		try {
 			this.fachada.atualizarComentario(this.comentarioEditarProjeto);
 			popularComentariosProposta(this.projeto);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+
 	public void popularComentariosProposta(Projeto projeto) {
 		try {
 			this.projeto = projeto;
@@ -107,7 +109,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 
 	public void catchIdCandidato() {
 		try {
-			this.candidato = (Candidato) fachada.retornarVariavel();			
+			this.candidato = (Candidato) fachada.retornarVariavel();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -115,8 +117,13 @@ public class CandidatoSelecionadoBean implements Serializable {
 
 	public List<Projeto> getLista_projeto() {
 		try {
-			this.projeto.getCanditado_proj().setId_cand(this.candidato.getId_cand());
-			lista_projeto = this.fachada.consultarProjetosFiltradosIdCand(this.projeto);			
+			if (this.candidato != null) {
+				this.projeto.getCanditado_proj().setId_cand(this.candidato.getId_cand());
+				lista_projeto = this.fachada.consultarProjetosFiltradosIdCand(this.projeto);
+			} else {
+				ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+				context.redirect("consultaCandidato.xhtml");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -155,7 +162,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 		return candidato;
 	}
 
-	public void setCandidato(Candidato candidato) {		
+	public void setCandidato(Candidato candidato) {
 		this.candidato = candidato;
 	}
 
@@ -191,13 +198,18 @@ public class CandidatoSelecionadoBean implements Serializable {
 		return comentarioEditarProjeto;
 	}
 
-	public void setComentarioEditarProjeto(Comentario comentarioEditar) {		
+	public void setComentarioEditarProjeto(Comentario comentarioEditar) {
 		this.comentarioEditarProjeto = comentarioEditar;
 	}
 
 	public List<Comentario> getLista_comentarioCandidato() {
 		try {
-			this.lista_comentarioCandidato = this.fachada.consultarComentarioFiltradosIdCand(this.candidato);
+			if (this.candidato != null) {
+				this.lista_comentarioCandidato = this.fachada.consultarComentarioFiltradosIdCand(this.candidato);
+			} else {
+				ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+				context.redirect("consultaCandidato.xhtml");
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
