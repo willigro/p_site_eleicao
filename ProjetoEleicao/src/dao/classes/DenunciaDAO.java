@@ -1,5 +1,7 @@
 package dao.classes;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.hibernate.Criteria;
@@ -40,53 +42,26 @@ public class DenunciaDAO extends DAOGenerico<Denuncia> implements IDenunciaDAO {
 		}
 
 	}
-    /*
+    
 	@Override
-	public Denuncia consultarDenunciaDoComentario(Denuncia denuncia) throws Exception {
-
-		Query query = getManager().createQuery(
-				"SELECT denuncia FROM Denuncia denuncia WHERE id_coment = :IdComentario AND id_user = :IdUsuario",
-				Denuncia.class);
-		query.setParameter("IdComentario", denuncia.getComentario().getId_coment());
-		query.setParameter("IdUsuario", denuncia.getUsuario().getId_user());
-
-		Denuncia result = (Denuncia) query.getSingleResult();
-		if (result == null) {
-			// Query query = getManager().createQuery(
-			// "SELECT d FROM Denuncia d WHERE d.comentario.id_coment = "
-			// + "(SELECT count(de.comentario.id_coment) > 1 FROM Denuncia de
-			// group
-			// by de.comentario.id_coment)",
-			// Denuncia.class);
-			
+	public List<Denuncia> consultarDenunciaDoComentario() throws Exception {			
 			Session session = (Session) getManager().getDelegate();
 			SQLQuery query = session.createSQLQuery(
 					"SELECT den.id_comentario_denunciado, den.id_coment, den.id_user FROM tb_denuncia as den"
 							+ " INNER JOIN tb_usuario ON den.id_user = tb_usuario.id_user"
 							+ " INNER JOIN tb_comentario ON den.id_coment = tb_comentario.id_coment AND den.id_coment = (SELECT COUNT(id_coment) > 1 FROM tb_denuncia ORDER BY id_coment)"
-							+ ";");
-
-			
+							+ ";");		
 			/*
 			 * SELECT id_comentario_denunciado, id_coment FROM tb_denuncia WHERE
 			 * id_coment = (SELECT COUNT(id_coment) > 1 FROM tb_denuncia ORDER
 			 * BY id_coment)
 			 * 
-			 
+			 */
 			query.addEntity(Denuncia.class);
 			List<Denuncia> result = query.list();
 			if (result == null) {
 				throw new Exception("Nao ha registros armazenados");
 			}
-			
 			return result;
 		}
-	}
-    */
-
-	@Override
-	public Denuncia consultarDenunciaDoComentario(Denuncia denuncia) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
