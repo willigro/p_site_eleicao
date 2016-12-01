@@ -35,7 +35,9 @@ public class ControllerDenuncia {
 		if(!controllerComentario.consultarComentarioPorId(denuncia.getComentario())){
 			throw new Exception("Comentario inexistente na base de dados");
 		}
-		//Refazer a validação de denunciar apenas uma vez
+//		if(iDenunciaDAO.consultarDenunciaDoComentario(denuncia) != null){
+//			throw new Exception("Voce nao pode denunciar mais de uma vez o mesmo comentario");
+//		}
 		iDenunciaDAO.denunciarComentario(denuncia);
 	}
 	
@@ -61,12 +63,14 @@ public class ControllerDenuncia {
 	}
 	
 	public List<Denuncia> consultarDenuncia(){
+		
 		try {
 			return iDenunciaDAO.consultarDenunciaDoComentario();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return null;
 	}
 

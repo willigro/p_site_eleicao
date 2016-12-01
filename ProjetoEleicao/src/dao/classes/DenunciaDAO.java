@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -46,17 +45,12 @@ public class DenunciaDAO extends DAOGenerico<Denuncia> implements IDenunciaDAO {
 
 	@Override
 	public List<Denuncia> consultarDenunciaDoComentario() throws Exception {
-
-//		Query query = getManager().createQuery(
-//				"SELECT d FROM Denuncia d WHERE d.comentario.id_coment = "
-//				+ "(SELECT count(de.comentario.id_coment) > 1 FROM Denuncia de group by de.comentario.id_coment)",
-//				Denuncia.class);
 		Session session = (Session) getManager().getDelegate();
-		SQLQuery query = session.createSQLQuery("SELECT den.id_comentario_denunciado, den.id_coment, den.id_user FROM tb_denuncia as den"
-+" INNER JOIN tb_usuario ON den.id_user = tb_usuario.id_user" 
-+" INNER JOIN tb_comentario ON den.id_coment = tb_comentario.id_coment AND den.id_coment = (SELECT COUNT(id_coment) > 1 FROM tb_denuncia ORDER BY id_coment)"
-+";");
-		
+		SQLQuery query = session.createSQLQuery(
+				"SELECT den.id_comentario_denunciado, den.id_coment, den.id_user FROM tb_denuncia as den"
+						+ " INNER JOIN tb_usuario ON den.id_user = tb_usuario.id_user"
+						+ " INNER JOIN tb_comentario ON den.id_coment = tb_comentario.id_coment AND den.id_coment = (SELECT COUNT(id_coment) > 1 FROM tb_denuncia ORDER BY id_coment)"
+						+ ";");
 		/*
 		 * SELECT id_comentario_denunciado, id_coment FROM tb_denuncia WHERE
 		 * id_coment = (SELECT COUNT(id_coment) > 1 FROM tb_denuncia ORDER BY
@@ -70,5 +64,4 @@ public class DenunciaDAO extends DAOGenerico<Denuncia> implements IDenunciaDAO {
 		}
 		return result;
 	}
-
 }

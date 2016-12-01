@@ -1,13 +1,14 @@
 package beans;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
 import classesBasicas.Candidato;
 import classesBasicas.Cargo;
 import classesBasicas.Cidade;
@@ -15,20 +16,10 @@ import classesBasicas.Estado;
 import classesBasicas.Partido;
 import facade.Facade;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
-import org.primefaces.context.RequestContext;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.event.SelectEvent;
-
 @ManagedBean
 @ViewScoped
 public class CandidatoBean implements Serializable {
 
-	private Date date1;
 	private Cargo cargo;
 	private Candidato candidato;
 	private Facade fachada;
@@ -56,20 +47,6 @@ public class CandidatoBean implements Serializable {
 	}
 
 	// Methods
-	public void onDateSelect(SelectEvent event) {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		facesContext.addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-	}
-
-	public void click() {
-		RequestContext requestContext = RequestContext.getCurrentInstance();
-
-		requestContext.update("form:display");
-		requestContext.execute("PF('dlg').show()");
-	}
-
 	public void estadoSelecionaCidade() {
 		try {
 			this.cidade.getEstado_cid().setId_est(candidato.getEstado_cand().getId_est());
@@ -100,11 +77,6 @@ public class CandidatoBean implements Serializable {
 		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", texto);
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
 	}
-	
-	public void mensagemSucessoUpload(FileUploadEvent event) {
-        FacesMessage message = new FacesMessage("Sucesso!", "A imagem: " + event.getFile().getFileName() + " foi salva!");
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
 
 	public String remover() throws Exception {
 		try {
@@ -141,13 +113,11 @@ public class CandidatoBean implements Serializable {
 
 	public String pagCandidato(Candidato candidato) {
 		try {
-			System.out.println("id cand: " + candidato.getId_cand() + " nome: " + candidato.getNome_cand());
 			this.fachada.armazenarVariavel(candidato);
-			System.out.println("pag: " + candidato.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "telaCandidato.xhtml";
+		return "telaCandidato.xhtml?faces-redirect=true";
 	}
 
 	public String cadastrar() throws Exception {
@@ -162,22 +132,18 @@ public class CandidatoBean implements Serializable {
 
 	}
 
-	public String editar() throws Exception {
-		try {
-			// setando manualmente o novo candidato ID (num e city pega na view)
-			// candidato.setId_cand(113);
-			// System.out.println(candidato.getId_cand());
-
-			System.out.println("DEPOIS DO BOTÃO EDITAR: " + candidato.getId_cand());
-
-			fachada.alterarCandidato(this.candidato);
-			// addMensagem("Editado com Sucesso!");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "paginaEditarCand";
-	}
-
+	/*
+	 * public String editar() throws Exception { try { // setando manualmente o
+	 * novo candidato ID (num e city pega na view) // candidato.setId_cand(113);
+	 * // System.out.println(candidato.getId_cand());
+	 * 
+	 * System.out.println("DEPOIS DO BOTÃO EDITAR: " + candidato.getId_cand());
+	 * 
+	 * fachada.alterarCandidato(this.candidato); //
+	 * addMensagem("Editado com Sucesso!"); } catch (Exception e) {
+	 * e.printStackTrace(); } return "paginaEditarCand"; }
+	 */
+	
 	public void consultarCandidatoFiltrado() {
 		try {
 			if (cargo.getNome_cargo() != null && !cargo.getNome_cargo().trim().equals(""))
@@ -201,14 +167,6 @@ public class CandidatoBean implements Serializable {
 	}
 
 	// Getters and Setters
-	public Date getDate1() {
-		return date1;
-	}
-
-	public void setDate1(Date date1) {
-		this.date1 = date1;
-	}
-
 	public Partido getPartido() {
 		return partido;
 	}

@@ -34,7 +34,7 @@ public interface IFachada {
 	
 	public void removerCandidato(Candidato candidato) throws Exception;
 	
-	public void alterarCandidato(Candidato candidato) throws Exception;
+	public void alterarCandidato(Candidato candidato, Candidato oldCand) throws Exception;
 	
 	public List<Comentario> visualizarComentsDenuncia() throws Exception;
 
@@ -69,15 +69,11 @@ public interface IFachada {
     public Object retornarVariavel() throws Exception;
 
 	public void denunciarComentario(Comentario comentario) throws Exception;
-
-	public List<Comentario> consultarComentarioFiltradosIdProjt(Projeto projeto) throws Exception;
-
-	public List<Comentario> consultarComentarioFiltradosIdCand(Candidato candidato) throws Exception;
-	
-	public void denunciarComentario(Denuncia denuncia) throws Exception;
 	
 	public List<Denuncia> consultarDenunciaDoComentario() throws Exception;
+	
+	public List<Comentario> consultarComentarioFiltradosIdProjt(Projeto projeto) throws Exception;
 
-	void removerComentDenunciado(Comentario comentario) throws Exception;
+	public void denunciarComentario(Denuncia denuncia) throws Exception;
 
 }

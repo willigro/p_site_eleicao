@@ -57,12 +57,15 @@ body {
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
 					styleClass="">
 
+					<!-- 
 					<h:outputLabel for="foto" value="FOTO:"></h:outputLabel>
 					<p:fileUpload
 						fileUploadListener="#{candidatoBean.mensagemSucessoUpload}"
 						mode="advanced" dragDropSupport="false" update="messages"
 						sizeLimit="2000000" fileLimit="3"
-						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+						allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
+					</p:fileUpload>
+ 					-->
 
 					<h:outputLabel for="nome" value="NOME"></h:outputLabel>
 					<p:inputText placeholder="Nome" id="nome"
@@ -85,8 +88,6 @@ body {
 					<h:outputLabel for="estado" value="ESTADO"></h:outputLabel>
 					<p:selectOneMenu id="dropEstado" style="width:150px" filter="true"
 						value="#{candidatoBean.candidato.estado_cand.id_est}">
-						<f:selectItem itemLabel="Estado" itemValue="0"
-							noSelectionOption="true" />
 						<f:selectItems value="#{candidatoBean.lista_estados}" var="estado"
 							itemValue="#{estado.id_est}"
 							itemLabel="#{estado.nome_est} - #{estado.sigla_est}" />
@@ -97,8 +98,6 @@ body {
 					<h:outputLabel for="cidade" value="CIDADE"></h:outputLabel>
 					<p:selectOneMenu id="dropCidade" style="width:150px" filter="true"
 						value="#{candidatoBean.candidato.cidade_cand.id_cid}">
-						<f:selectItem itemLabel="Cidade" itemValue="0"
-							noSelectionOption="true" />
 						<f:selectItems value="#{candidatoBean.cidades}" var="cidade"
 							itemValue="#{cidade.id_cid}" itemLabel="#{cidade.nome_cid}" />
 						<p:ajax listener="#{candidatoBean.cidadeSelecionada}"
@@ -108,25 +107,40 @@ body {
 					<h:outputLabel for="partido" value="PARTIDO"></h:outputLabel>
 					<p:selectOneMenu id="dropPartido" filter="true"
 						value="#{candidatoBean.candidato.partido_cand.id_part}">
-						<f:selectItem itemLabel="Partido" itemValue="0"
-							noSelectionOption="true" />
 						<f:selectItems value="#{candidatoBean.lista_partidos}"
 							var="partido" itemValue="#{partido.id_part}"
 							itemLabel="#{partido.nome_part} - #{partido.sigla_part}" />
 						<p:ajax listener="#{candidatoBean.estadoSelecionaCidade}"
 							process=":formCadastro:dropPartido"></p:ajax>
 					</p:selectOneMenu>
+
+					<!-- 
+					<h:outputLabel for="projetotitulo" value="Titulo do Projeto"></h:outputLabel>
+					<p:inputText placeholder="Titulo" id="projetotitulo"
+						value="#{candidatoBean.candidato.tipo_Cargo_cand}"
+						required="false">
+						<f:validateLength minimum="3" maximum="100" />
+					</p:inputText>
+
+					<h:outputLabel for="projetodesc" value="Descrição do Projeto"></h:outputLabel>
+					<p:inputTextarea placeholder="Descrição" id="projetodesc"
+						value="#{candidatoBean.candidato.tipo_Cargo_cand}"
+						required="false">
+						<f:validateLength minimum="3" maximum="500" />
+					</p:inputTextarea>
+ 					-->
+
 				</p:panelGrid>
 				<br />
 				<p:commandButton icon="ui-icon-plusthick" value="Cadastrar"
-					action="#{candidatoBean.cadastrar()}" update="matchGrid"
-					actionListener="#{candidatoBean.click}"></p:commandButton>
+					action="#{candidatoBean.cadastrar()}" update="matchGrid"></p:commandButton>
 			</p:fieldset>
 		</h:form>
 		<br />
 
 		<!-- painel de pesquisar -->
 		<h:form id="formPesquisar">
+
 			<p:fieldset legend="Consultar Candidato" toggleable="true"
 				toggleSpeed="500">
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
@@ -147,23 +161,15 @@ body {
 			<h:form id="formData">
 				<p:dataTable id="tabela" value="#{candidatoBean.candidatos}"
 					var="cand">
-
-					<f:facet name="header">
-           				Candidatos Pesquisados
-      				</f:facet>
-
 					<p:column headerText="Nome">
 						<h:outputText value="#{cand.nome_cand}"></h:outputText>
 					</p:column>
-
 					<p:column headerText="Numero">
 						<h:outputText value="#{cand.numero_cand}"></h:outputText>
 					</p:column>
-
 					<p:column headerText="Cidade">
 						<h:outputText value="#{cand.cidade_cand.nome_cid}"></h:outputText>
 					</p:column>
-
 					<p:column headerText="Remover">
 						<p:commandButton icon="ui-icon-trash" value="Remover"
 							action="#{candidatoBean.remover}"
@@ -172,7 +178,6 @@ body {
 								target="#{candidatoBean.candidato}"></f:setPropertyActionListener>
 						</p:commandButton>
 					</p:column>
-
 					<p:column headerText="Editar">
 						<p:commandButton icon="ui-icon-pencil" id="bConsultar"
 							value="Editar" action="#{candidatoBean.paginaEditarCand(cand)}">

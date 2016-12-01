@@ -47,11 +47,6 @@ public class Facade implements IFachada {
 	}
 
 	@Override
-	public void removerComentDenunciado (Comentario comentario) throws Exception{
-		this.controllerComentario.removerComentDenunciado(comentario);
-	}
-	
-	@Override
 	public Administrador loginAdministrador(Administrador adminsitrador) throws Exception {
 		return this.controllerAdministrador.loginAdministrador(adminsitrador);
 	}
@@ -97,8 +92,8 @@ public class Facade implements IFachada {
 	}
 
 	@Override
-	public void alterarCandidato(Candidato candidato) throws Exception {
-		this.controlCand.alterarCandidato(candidato);
+	public void alterarCandidato(Candidato candidato, Candidato oldCand) throws Exception {
+		this.controlCand.alterarCandidato(candidato, oldCand);
 	}
 
 	@Override
@@ -258,14 +253,6 @@ public class Facade implements IFachada {
 	public List<Denuncia> consultarDenunciaDoComentario() throws Exception {
 		if (validaControl(controllerDenuncia)) {
 			return controllerDenuncia.consultarDenuncia();
-		}
-		return null;
-	}
-
-	@Override
-	public List<Comentario> consultarComentarioFiltradosIdCand(Candidato candidato) throws Exception {
-		if (validaControl(this.controllerComentario)) {
-			return this.controllerComentario.consultarComentarioFiltradosIdCand(candidato);
 		}
 		return null;
 	}

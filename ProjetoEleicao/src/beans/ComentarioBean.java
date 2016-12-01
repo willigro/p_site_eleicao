@@ -26,7 +26,6 @@ import facade.Facade;
 @ViewScoped
 public class ComentarioBean {
 
-	private Comentario comentario;
 	private Candidato candidato;
 	private Facade fachada;
 	private Estado estado;
@@ -43,7 +42,6 @@ public class ComentarioBean {
 	private Comentario comentarioSelecionado;
 
 	public ComentarioBean() {
-		this.comentario = new Comentario();
 		this.usuarioLogado = new Usuario();
 		this.comentarioSelecionado = new Comentario();
 		this.denunciar = new Denuncia();
@@ -59,6 +57,11 @@ public class ComentarioBean {
 	}
 
 	// Methods
+	private void addMensagem(String texto) {
+		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
+		FacesContext.getCurrentInstance().addMessage(null, mensagem);
+	}
+
 	public void denunciarComentario() {
 		this.denunciar.setUsuario(usuarioLogado);
 		this.denunciar.setComentario(comentarioSelecionado);
@@ -70,6 +73,7 @@ public class ComentarioBean {
 		}
 	}
 
+	// Nao sei quem fez esse metodo mas vou talvez nao precise utiliza-lo
 	public void consultarComentsDenunciados() {
 		try {
 			this.comentarios = fachada.visualizarComentsDenuncia();
@@ -78,14 +82,8 @@ public class ComentarioBean {
 		}
 	}
 
-	public String removerComent() throws Exception {
-		try {
-			this.fachada.removerComentDenunciado(this.comentario);;
-			this.comentarios = this.fachada.visualizarComentsDenuncia();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+	public void remover() {
+
 	}
 
 	// getters e setters
@@ -205,13 +203,12 @@ public class ComentarioBean {
 
 	public List<Denuncia> getLista_denunciados() {
 		try {
-			this.lista_denunciados = this.fachada.consultarDenunciaDoComentario();			
-			//System.out.println(this.lista_denunciados.get(0).getUsuario().getNome_user());
+			this.lista_denunciados = this.fachada.consultarDenunciaDoComentario();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return lista_denunciados;
 	}
+	
 	
 }
