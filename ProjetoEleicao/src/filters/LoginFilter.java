@@ -6,10 +6,12 @@ package filters;
  */
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -31,13 +33,19 @@ public class LoginFilter implements Filter{
 			throws IOException, ServletException {
 		navigationBean = new NavigationBean();
 		LoginBean loginBean = (LoginBean)((HttpServletRequest)request).getSession().getAttribute("loginBean");
-
-
+		
+		String requestURI  = ((HttpServletRequest) request).getRequestURI();
+			
 		if(loginBean == null || loginBean.isLoggedIn() == false)
 		{
 			((HttpServletResponse) response).sendRedirect(((HttpServletRequest)request).getContextPath() + navigationBean.toLogin());
 		}
-		chain.doFilter(request, response);
+		
+			
+		//Redireciona o usuario para a pagina de login
+		//((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/login.xhtml");
+	
+			chain.doFilter(request, response);	
 	}
 
 	
@@ -50,7 +58,6 @@ public class LoginFilter implements Filter{
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
 
 	}
 
