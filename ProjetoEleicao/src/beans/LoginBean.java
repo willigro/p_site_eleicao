@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import java.util.Enumeration;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 
 import classesBasicas.Administrador;
@@ -28,8 +29,7 @@ public class LoginBean{
 	private boolean loggedIn;	
 	@ManagedProperty(value="#{navigationBean}")
 	private NavigationBean navigationBean;
-
-
+	
 	public String efetuarLogin(){
 		this.facade = new Facade();
 		try{
@@ -48,7 +48,7 @@ public class LoginBean{
 					session.setAttribute("temp", administrador.getId_admin());
 
 					loggedIn = true;
-					return navigationBean.toMainAdministrador();
+					return navigationBean.redirectToMainAdministrador();
 				}else{
 					returnMessage(FacesMessage.SEVERITY_ERROR,"A Senha ou E-amil estao incorretos!","Por favor, escreva seu E-mail e Senha corretamente");		
 				}
@@ -66,6 +66,7 @@ public class LoginBean{
 					if(this.usuario != null){
 					FacesContext facesContext = FacesContext.getCurrentInstance();
 					HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+
 					session.setAttribute("usuarioLogado", usuario);
 					loggedIn = true;							
 					return "consultaCandidatos?faces-redirect=true";

@@ -1,48 +1,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
 
-    <style type="text/css">
-    body {
+	<style type="text/css">
+body {
 	background-image: url(img/lightflag.png);
 	background-size: 100%;
 }
-        form {
-            position: absolute;
-			top: 50%;
-			left: 50%;
-            margin-left: -200px;
-			margin-top: -150px;
-        }
-        button {
-            position: absolute;
-            top: 10px;
-            right: -125px;
-        }
-    </style>
+</style>
 
 </h:head>
 
 <h:body>
-    <h:form id="loginForm">
-        <p:messages autoUpdate="true" showDetail="true" showSummary="true" />
-        <p:panel header="Login">
-            <h:panelGrid columns="2">
-            	<h:outputLabel value="Administrador"/>
-            	<h:selectBooleanCheckbox id="checkbox" value="#{loginBean.type}"/>
+	<ui:include src="menuNav.xhtml"></ui:include>
 
-                
-                <p:inputText id="input_mail" placeholder="Seu e-mail" value= "#{loginBean.username}" />
+	<h:form id="loginForm">
+		<p:dialog header="Faça seu Login" id="login" resizable="false"
+			modal="true" closeOnEscape="false" visible="true" position="center"
+			width="300" closable="false">
+			<p:messages autoUpdate="true" showDetail="true" showSummary="true" />
 
-                
-                <p:password id="input_password" placeholder="Senha" value= "#{loginBean.password}"/>
-
-                <p:commandButton value="Login " action="#{loginBean.efetuarLogin}" />
-            </h:panelGrid>
-        </p:panel>
-    </h:form>
+			<h:panelGrid columns="1">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Sou administrador" />
+					<h:selectBooleanCheckbox id="checkbox" value="#{loginBean.type}" />
+				</h:panelGrid>
+				<p:inputText id="input_mail" size="25" placeholder="Seu e-mail"
+					value="#{loginBean.username}" required="true" />
+				<p:password size="25" id="input_password" placeholder="Senha"
+					value="#{loginBean.password}" required="true" />
+				<p:commandButton size="25" value="Entrar" icon="ui-icon-locked"
+					action="#{loginBean.efetuarLogin}" />
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
 </h:body>
 
 <script type="text/javascript">
