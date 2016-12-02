@@ -25,7 +25,7 @@ public class NavigationBean implements Serializable {
      * @return Login page name.
      */
     public String redirectToLogin() {
-        return "/login.xhtml?faces-redirect=true";
+        return "login?faces-redirect=true";
     }
      
     /**
@@ -188,6 +188,22 @@ public class NavigationBean implements Serializable {
      */
     public String toConsultarDenunciaComentarios(){
     	return "/admin/denouncements/consultarComentarios.xhtml";
+    }
+    
+    /**
+     * Go to consultarCandidatos page.
+     * @return consultarCandidatos page name.
+     */
+    public String toConsultarCandidatos(){
+    	return "consultaCandidatos?faces-redirect=true";
+    }
+    
+    /**
+     * Go to cadastroUsuario page.
+     * @return cadastroUsuario page name.
+     */
+    public String toCadastroUsuario(){
+    	return "cadastroUsuario?faces-redirect=true";
     }
     
 }
