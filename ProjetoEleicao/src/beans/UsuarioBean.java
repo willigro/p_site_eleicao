@@ -103,23 +103,6 @@ public class UsuarioBean {
 		return usuarios;
 	}
 
-	public void onrate(RateEvent rateEvent) {
-		try {
-			Usuario user = new Usuario();
-			user.setId_user(16);
-			Candidato cand = new Candidato();
-			cand.setId_cand(3);
-			this.avaliacao.setCandidato_aval(cand);
-			this.avaliacao.setUsuario_aval(user);
-			this.avaliacao.setProjeto_aval(null);
-			this.fachada.inserirAvaliacaoCandidato(avaliacao);
-		} catch (Exception e) {
-			FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: ", e.getMessage());
-			FacesContext.getCurrentInstance().addMessage(null, mensagem);
-		}
-
-	}
-
 	public void buttonAction(ActionEvent actionEvent) {
 		try {
 			if (this.termosUso == true) {

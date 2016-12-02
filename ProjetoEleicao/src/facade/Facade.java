@@ -260,4 +260,18 @@ public class Facade implements IFachada {
 		this.controllerComentario.removerComent(comentario);
 	}
 
+	@Override
+	public List<Comentario> consultarComentarioFiltradosIdCand(Candidato candidato) throws Exception {
+		if (validaControl(this.controllerComentario)) {
+			return this.controllerComentario.consultarComentarioFiltradosIdCand(candidato);
+		}
+		return null;
+	}
+
+	@Override
+	public void logoutAdministrador() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
