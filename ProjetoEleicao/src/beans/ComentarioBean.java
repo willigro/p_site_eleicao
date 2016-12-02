@@ -26,6 +26,7 @@ import facade.Facade;
 @ViewScoped
 public class ComentarioBean {
 
+	private Comentario comentario;
 	private Candidato candidato;
 	private Facade fachada;
 	private Estado estado;
@@ -42,6 +43,7 @@ public class ComentarioBean {
 	private Comentario comentarioSelecionado;
 
 	public ComentarioBean() {
+		this.comentario = new Comentario();
 		this.usuarioLogado = new Usuario();
 		this.comentarioSelecionado = new Comentario();
 		this.denunciar = new Denuncia();
@@ -73,20 +75,25 @@ public class ComentarioBean {
 		}
 	}
 
-	// Nao sei quem fez esse metodo mas vou talvez nao precise utiliza-lo
-	public void consultarComentsDenunciados() {
+	public void remover() {
 		try {
-			this.comentarios = fachada.visualizarComentsDenuncia();
+			
+			System.out.println("ID = " + this.comentario.getId_coment());
+			this.fachada.removerComent(comentario);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void remover() {
 
 	}
 
 	// getters e setters
+	public Comentario getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(Comentario comentario) {
+		this.comentario = comentario;
+	}
 
 	public Candidato getCandidato() {
 		return candidato;
@@ -209,6 +216,5 @@ public class ComentarioBean {
 		}
 		return lista_denunciados;
 	}
-	
-	
+
 }

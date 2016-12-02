@@ -144,7 +144,6 @@ public class CandidatoBean implements Serializable {
 			mensagemFalhaCadastro(e.getMessage());
 		}
 		return "paginaAdmin";
-
 	}
 
 	/*

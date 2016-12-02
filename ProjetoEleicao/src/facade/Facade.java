@@ -257,4 +257,9 @@ public class Facade implements IFachada {
 		return null;
 	}
 
+	@Override
+	public void removerComent(Comentario comentario) throws Exception {
+		this.controllerComentario.removerComent(comentario);
+	}
+
 }

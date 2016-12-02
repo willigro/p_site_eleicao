@@ -13,4 +13,5 @@ public interface IComentarioDAO {
 	public void denunciarComentario(Comentario comentario) throws Exception;	
 	public Comentario verificarComentario(Comentario comentario) throws Exception;
 	public List<Comentario> consultarComentarioFiltradosIdProjt(Projeto projeto) throws Exception;
+	public void removerComent (Comentario comentario) throws Exception;
 }

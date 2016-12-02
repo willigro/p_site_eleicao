@@ -57,7 +57,6 @@ body {
 				<p:panelGrid columns="2" id="matchGrid" cellpadding="10"
 					styleClass="">
 
-					
 					<h:outputLabel for="foto" value="FOTO:"></h:outputLabel>
 					<p:fileUpload
 						fileUploadListener="#{candidatoBean.fileUpload}"
@@ -66,7 +65,6 @@ body {
 						allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
 					</p:fileUpload>
  					
-
 					<h:outputLabel for="nome" value="NOME"></h:outputLabel>
 					<p:inputText placeholder="Nome" id="nome"
 						value="#{candidatoBean.candidato.nome_cand}" required="true">
