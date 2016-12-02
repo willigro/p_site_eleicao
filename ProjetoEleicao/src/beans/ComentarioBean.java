@@ -66,7 +66,7 @@ public class ComentarioBean {
 		this.denunciar.setComentario(comentarioSelecionado);
 		try {
 			this.fachada.denunciarComentario(denunciar);
-		
+			
 			returnMessage(FacesMessage.SEVERITY_INFO,"", "Comentario denunciado!");
 		
 		} catch (Exception e) {
