@@ -59,36 +59,40 @@ public class ComentarioBean {
 	}
 
 	// Methods
-	
+
 
 	public void denunciarComentario(Comentario comentario) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		this.usuarioLogado = (Usuario) facesContext.getExternalContext().getSessionMap().get("usuarioLogado");			
 
-		
-		if(comentario != null && usuarioLogado != null){
-		
-			this.denunciar.setUsuario(usuarioLogado);
-			this.denunciar.setComentario(comentario);
-			
-			try {
-	
-				this.fachada.denunciarComentario(denunciar);
-				
-				returnMessage(FacesMessage.SEVERITY_INFO,"", "Comentario denunciado!");
-			
-			} catch (Exception e) {
-				returnMessage(FacesMessage.SEVERITY_ERROR,"", e.getMessage());
+
+		if(usuarioLogado != null){
+
+			if(comentario != null){
+
+				this.denunciar.setUsuario(usuarioLogado);
+				this.denunciar.setComentario(comentario);
+
+				try {
+
+					this.fachada.denunciarComentario(denunciar);
+
+					returnMessage(FacesMessage.SEVERITY_INFO,"", "Comentario denunciado!");
+
+				} catch (Exception e) {
+					returnMessage(FacesMessage.SEVERITY_ERROR,"", e.getMessage());
+				}
+			}else{
+				returnMessage(FacesMessage.SEVERITY_ERROR,"Erro 1103", "Nao sera possivel realizar essa operacao");
 			}
-		
 		}else{
-			returnMessage(FacesMessage.SEVERITY_ERROR,"", "Occorreu um erro inesperado");
+			returnMessage(FacesMessage.SEVERITY_ERROR,"", "Faca login para poder denunciar o comentario");
 		}
 	}
 
 	public void remover() {
 		try {
-			
+
 			System.out.println("ID = " + this.comentario.getId_coment());
 			this.fachada.removerComent(comentario);
 		} catch (Exception e) {
@@ -227,7 +231,7 @@ public class ComentarioBean {
 		}
 		return lista_denunciados;
 	}
-	
+
 	private void returnMessage(FacesMessage.Severity facesMessageSeverity,String title, String message){
 		FacesContext.getCurrentInstance().addMessage(
 				null,
