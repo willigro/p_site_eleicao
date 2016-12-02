@@ -7,6 +7,16 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 import classesBasicas.Usuario;
+import controller.exceptions.account.AccountDisabledException;
+import controller.exceptions.email.DatabaseAliveEmailException;
+import controller.exceptions.email.EmptyEmailException;
+import controller.exceptions.email.InvalidEmailException;
+import controller.exceptions.email.LimitCaracterEmailException;
+import controller.exceptions.name.LimitCaracterNameException;
+import controller.exceptions.name.NameEmptyException;
+import controller.exceptions.password.LimitCaracterPasswordlException;
+import controller.exceptions.password.PasswordEmptyException;
+import controller.util.ValidateMail;
 import dao.DAOFactory;
 import dao.classes.UsuarioDAO;
 
@@ -20,47 +30,48 @@ public class ControllerUsuario {
 
 	public void cadastrarUsuario(Usuario usuario) throws Exception {
 		if (usuario.getNome_user().trim().isEmpty()) {
-			throw new Exception("Informe o nome.");
-		} else if (usuario.getNome_user().length() > 50) {
-			throw new Exception("O nome deve conter no maximo 50 caracteres.");
+			throw new NameEmptyException();
+		} else if (usuario.getNome_user().length() > Usuario.getLimitCaracterName()) {
+			throw new LimitCaracterNameException(Usuario.getLimitCaracterName());
 		}
 		if (usuario.getEmail_user().trim().isEmpty()) {
-			throw new Exception("Informe o email.");
-		} else if (usuario.getEmail_user().length() > 30) {
-			throw new Exception("O email deve conter no maximo 30 caracteres.");
+			throw new EmptyEmailException();
+		} else if (usuario.getEmail_user().length() > Usuario.getLimitCaracterEmail()) {
+			throw new LimitCaracterEmailException(Usuario.getLimitCaracterEmail());
 		}
 		if (usuario.getSenha().trim().isEmpty()) {
-			throw new Exception("Informe uma senha.");
-		} else if (usuario.getSenha().length() < 8) {
-			throw new Exception("A senha deve conter no manimo oito caracteres.");
+			throw new PasswordEmptyException();
+		} else if (usuario.getSenha().length() < Usuario.getSystemLimitCaracterPassword()) {
+			throw new LimitCaracterPasswordlException(Usuario.getSystemLimitCaracterPassword());
 		}
 		if(usuarioDAO.retornaEmail(usuario) == false){
-			throw new Exception("O email informado ja consta cadastrado, faca login.");
+			throw new DatabaseAliveEmailException();
 		}
 		usuarioDAO.cadastrarUsuario(usuario);
 	}
+	
 	public Usuario loginUsuario(Usuario usuario) throws Exception{
 		
 		if(usuario == null){
 			throw new Exception("Usuario nulo.");
 		}
 		if(usuario.getEmail_user().trim().isEmpty()){
-			throw new Exception("Informe o email.");
+			throw new EmptyEmailException();
 		}
-		if(usuario.getEmail_user().length() > 30){
-			throw new Exception("O email deve conter no maximo 30 caracteres.");
+		if(usuario.getEmail_user().length() > Usuario.getLimitCaracterEmail()){
+			throw new LimitCaracterEmailException(Usuario.getLimitCaracterEmail());
 		}
-		if(!isValidEmailAddress(usuario.getEmail_user())){
-			throw new Exception("E-mail invalido.");
+		if(!ValidateMail.isValidEmailAddress(usuario.getEmail_user())){
+			throw new InvalidEmailException();
 		}
 		if(usuario.getSenha().trim().isEmpty()){
-			throw new Exception("Informe uma senha.");
+			throw new PasswordEmptyException();
 		}
-		if(usuario.getSenha().length() < 8){
-			throw new Exception("A senha deve conter no manimo oito caracteres.");
+		if(usuario.getSenha().length() < Usuario.getSystemLimitCaracterPassword()){
+			throw new LimitCaracterPasswordlException(Usuario.getSystemLimitCaracterPassword());
 		}
 		if(usuarioDAO.loginUsuario(usuario).isAtivo_user()){
-			throw new Exception("Nao sera possivel realizar login por que sua conta encontra-se desabilitada.");
+			throw new AccountDisabledException();
 		}
 
 		return this.usuarioDAO.loginUsuario(usuario);
@@ -78,10 +89,10 @@ public class ControllerUsuario {
 			throw new Exception("O usuario informado e nulo.");
 		}
 		if(usuario.getNome_user().trim().isEmpty()){
-			throw new Exception("O nome informado nao foi preenchido.");
+			throw new NameEmptyException();
 		}
-		if(usuario.getNome_user().length() > 50){
-			throw new Exception("O nome nao pode conter mais de 50 caracteres.");
+		if(usuario.getNome_user().length() > Usuario.getLimitCaracterName()){
+			throw new  LimitCaracterNameException(Usuario.getLimitCaracterName());
 		}
 		return usuarioDAO.consultarUsuarioPorFiltro(usuario);
 	}
@@ -92,28 +103,28 @@ public class ControllerUsuario {
 			throw new Exception("O usuario por que o usuario informado nao corresponde ao ja existente na base de dados.");
 		}
 		if(usuario.getEmail_user().trim().isEmpty()){
-			throw new Exception("O usuario por que o email nao foi preenchido");
+			throw new EmptyEmailException();
 		}
-		if(consultarStatusUsuarioBanido(usuario).getEmail_user().length() > 30){
-			throw new Exception("O usuario por que o email nao pode conter mais de 30 caracteres.");
+		if(consultarStatusUsuarioBanido(usuario).getEmail_user().length() > Usuario.getLimitCaracterEmail()){
+			throw new LimitCaracterEmailException(Usuario.getLimitCaracterEmail());
 		}
 		if(!consultarStatusUsuarioBanido(usuario).getEmail_user().equals(usuario.getEmail_user())){
 			throw new Exception("O email informado nao corresponde ao ja existente na base de dados.");	
 		}
 		if(usuario.getNome_user().trim().isEmpty()){
-			throw new Exception("O nome informado nao foi preenchido.");
+			throw new NameEmptyException();
 		}
-		if(consultarStatusUsuarioBanido(usuario).getNome_user().length() > 50){
-			throw new Exception("O nome nao pode conter mais de 50 caracteres.");
+		if(consultarStatusUsuarioBanido(usuario).getNome_user().length() > Usuario.getLimitCaracterName()){
+			throw new LimitCaracterNameException(Usuario.getLimitCaracterName());
 		}
 		if(!consultarStatusUsuarioBanido(usuario).getNome_user().equals(usuario.getNome_user())){
 			throw new Exception("O nome informado nao corresponde ao ja existente na base de dados.");
 		}
 		if(usuario.getSenha().trim().isEmpty()){
-			throw new Exception("A senha informada nao foi preenchida.");
+			throw new PasswordEmptyException();
 		}
-		if(consultarStatusUsuarioBanido(usuario).getEmail_user().length() > 30){
-			throw new Exception("A senha nao pode conter mais de 32 caracteres.");
+		if(consultarStatusUsuarioBanido(usuario).getEmail_user().length() > Usuario.getLimitCaracterEmail()){
+			throw new LimitCaracterEmailException(Usuario.getLimitCaracterEmail());
 		}
 		if(!consultarStatusUsuarioBanido(usuario).getSenha().equals(usuario.getSenha())){
 			throw new Exception("A senha informada nao corresponde com a existente na base de dados.");
@@ -129,7 +140,7 @@ public class ControllerUsuario {
 				return true;
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -138,24 +149,9 @@ public class ControllerUsuario {
 	
 	
 	public Usuario consultarStatusUsuarioBanido(Usuario usuario) throws Exception{
-		if(usuario == null){
-			throw new Exception("O usuario informado nao corresponde ao ja existente na base de dados.");
-		}
+//		if(usuario == null){
+//			throw new Exception("O usuario informado nao corresponde ao ja existente na base de dados.");
+//		}
 		return (Usuario) this.usuarioDAO.consultarUsuarioPorId(usuario);
 	}
-	
-	/*
-	 * VALIDAR EMAIL
-	 */
-	public static boolean isValidEmailAddress(String email) {
-		   boolean result = true;
-		   try {
-		      InternetAddress emailAddr = new InternetAddress(email);
-		      emailAddr.validate();
-		   } catch (AddressException ex) {
-		      result = false;
-		   }
-		   return result;
-		}
-
 }
