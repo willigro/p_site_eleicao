@@ -9,6 +9,9 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
+
 import classesBasicas.Candidato;
 import classesBasicas.Cargo;
 import classesBasicas.Cidade;
@@ -120,6 +123,18 @@ public class CandidatoBean implements Serializable {
 		return "telaCandidato.xhtml?faces-redirect=true";
 	}
 
+	public void fileUpload(FileUploadEvent event) {
+		try {
+			// Cria um arquivo UploadFile, para receber o arquivo do evento
+			UploadedFile arq = event.getFile();
+			// Transformar a imagem em bytes para salvar em banco de dados
+			byte[] imagem = event.getFile().getContents();
+			this.candidato.setFoto_cand(imagem);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public String cadastrar() throws Exception {
 		try {
 			fachada.cadastrarCandidato(candidato);
@@ -143,7 +158,7 @@ public class CandidatoBean implements Serializable {
 	 * addMensagem("Editado com Sucesso!"); } catch (Exception e) {
 	 * e.printStackTrace(); } return "paginaEditarCand"; }
 	 */
-	
+
 	public void consultarCandidatoFiltrado() {
 		try {
 			if (cargo.getNome_cargo() != null && !cargo.getNome_cargo().trim().equals(""))
@@ -152,6 +167,11 @@ public class CandidatoBean implements Serializable {
 				this.candidato.setTipo_Cargo_cand(null);
 			System.out.println("consul: " + this.candidato.toString());
 			this.candidatos = fachada.consultarCandidatosFiltrados(this.candidato);
+			
+			if(this.candidatos.get(0).getFoto_cand() != null)
+				System.out.println("imagem aqui");
+			else
+				System.out.println("sem imagem");
 		} catch (Exception e) {
 			e.printStackTrace();
 			mensagemFalhaConsulta(e.getMessage());

@@ -39,7 +39,7 @@ public class Candidato implements Serializable{
 	private String tipo_Cargo_cand;
 
 	// Ignorar até decidir a estrategia
-	private String foto_cand;
+	private byte[] foto_cand;
 
 	@ManyToOne
 	@JoinColumn(name = "id_part")
@@ -134,11 +134,11 @@ public class Candidato implements Serializable{
 		this.estado_cand = estado_cand;
 	}
 
-	public String getFoto_cand() {
+	public byte[] getFoto_cand() {
 		return foto_cand;
 	}
 
-	public void setFoto_cand(String foto_cand) {
+	public void setFoto_cand(byte[] foto_cand) {
 		this.foto_cand = foto_cand;
 	}
 

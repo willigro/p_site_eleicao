@@ -1,5 +1,6 @@
 package beans;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,11 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+
+import com.sun.prism.Image;
 
 import classesBasicas.Administrador;
 import classesBasicas.Candidato;
@@ -36,7 +42,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 	private Comentario comentarioEditar;
 	private List<Comentario> lista_comentario;
 	private Administrador adm;
-
+	
 	public CandidatoSelecionadoBean() {
 		this.projetos = new ArrayList<>();
 		this.oldCand = new Candidato();
@@ -255,5 +261,4 @@ public class CandidatoSelecionadoBean implements Serializable {
 		System.out.println("Sera que setou: " + comentarioEditar.getTexto_coment());
 		this.comentarioEditar = comentarioEditar;
 	}
-
 }
