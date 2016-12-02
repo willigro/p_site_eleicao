@@ -29,6 +29,16 @@ public class AutenticacaoTelaConsultaBean implements Serializable {
 	public AutenticacaoTelaConsultaBean() {
 
 	}
+	
+	public Usuario getSessionUser() throws Exception{
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		this.usuario = (Usuario) facesContext.getExternalContext().getSessionMap().get("usuarioLogado");
+		if(usuario == null){
+			throw new Exception("Usuario não encontrado");
+		} else {
+			return usuario;
+		}		
+	}
 
 	public boolean comentar() {
 		try {

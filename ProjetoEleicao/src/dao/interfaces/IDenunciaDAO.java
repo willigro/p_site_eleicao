@@ -10,5 +10,6 @@ public interface IDenunciaDAO {
 	public void denunciarComentario(Denuncia denuncia) throws Exception;
 	public void removerDenunciaComentario(Denuncia denuncia) throws Exception;
 	public List<Denuncia> consultarDenunciaDoComentario() throws Exception;
+	public boolean consultarSeDenunciouMaisDeDuasVezes(Denuncia denuncia) throws Exception;
 	
 }

@@ -58,7 +58,6 @@ public class CandidatoSelecionadoBean implements Serializable {
 		this.projeto = new Projeto();
 		this.candidato = new Candidato();
 		this.fachada = new Facade();
-		this.projeto = new Projeto();
 		this.usuario = new Usuario();
 		this.comentario = new Comentario();
 		this.comentarioEditarProjeto = new Comentario();
@@ -183,15 +182,30 @@ public class CandidatoSelecionadoBean implements Serializable {
 		}
 		return "paginaEditarCand";
 	}
-
-	public void onrate(RateEvent rateEvent) {
+	
+	public void onrateCandidato(RateEvent rateEvent) {
 		try {
-			Usuario user = new Usuario();
-			user.setId_user(16);
-			this.avaliacao.setCandidato_aval(this.candidato);
-			this.avaliacao.setUsuario_aval(user);
-			this.avaliacao.setProjeto_aval(null);
-			this.fachada.inserirAvaliacaoCandidato(avaliacao);
+			if(this.atcBean.comentar() == true){
+				this.avaliacao.setUsuario_aval(this.atcBean.getUsuario());
+				this.avaliacao.setCandidato_aval(this.candidato);
+				this.avaliacao.setProjeto_aval(null);
+				this.fachada.inserirAvaliacaoCandidato(avaliacao);
+			}
+		} catch (Exception e) {
+			FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: ", e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, mensagem);
+		}
+
+	}
+	
+	public void onrateCandidatoProjeto(RateEvent rateEvent) {
+		try {
+			if(this.atcBean.comentar() == true){
+				this.avaliacao.setUsuario_aval(this.atcBean.getUsuario());
+				this.avaliacao.setCandidato_aval(null);
+				this.avaliacao.setProjeto_aval(this.projeto);
+				this.fachada.inserirAvaliacaoCandidato(avaliacao);
+			}
 		} catch (Exception e) {
 			FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: ", e.getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, mensagem);

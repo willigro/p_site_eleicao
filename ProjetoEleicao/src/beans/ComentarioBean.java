@@ -59,19 +59,18 @@ public class ComentarioBean {
 	}
 
 	// Methods
-	private void addMensagem(String texto) {
-		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
-		FacesContext.getCurrentInstance().addMessage(null, mensagem);
-	}
+	
 
 	public void denunciarComentario() {
 		this.denunciar.setUsuario(usuarioLogado);
 		this.denunciar.setComentario(comentarioSelecionado);
 		try {
 			this.fachada.denunciarComentario(denunciar);
-			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Comentario denunciado!", null);
+			
+			returnMessage(FacesMessage.SEVERITY_INFO,"", "Comentario denunciado!");
+		
 		} catch (Exception e) {
-			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null);
+			returnMessage(FacesMessage.SEVERITY_ERROR,"", e.getMessage());
 		}
 	}
 
@@ -215,6 +214,13 @@ public class ComentarioBean {
 			e.printStackTrace();
 		}
 		return lista_denunciados;
+	}
+	
+	private void returnMessage(FacesMessage.Severity facesMessageSeverity,String title, String message){
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(facesMessageSeverity,title,message));
+
 	}
 
 }
