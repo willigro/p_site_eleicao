@@ -9,6 +9,7 @@ import classesBasicas.Candidato;
 import classesBasicas.Cidade;
 import classesBasicas.Comentario;
 import classesBasicas.Denuncia;
+import classesBasicas.ErroSite;
 import classesBasicas.Estado;
 import classesBasicas.Partido;
 import classesBasicas.Projeto;
@@ -16,6 +17,9 @@ import classesBasicas.Usuario;
 
 public interface IFachada {
 
+	/*
+	 * Responsavel por realizar o login do administrador 
+	 */
 	public Administrador loginAdministrador(Administrador administrador) throws Exception;
 
 	public void logoutAdministrador() throws Exception;
@@ -76,8 +80,18 @@ public interface IFachada {
 
 	public List<Comentario> consultarComentarioFiltradosIdCand(Candidato candidato) throws Exception;
 
+	/*
+	 * Responsavel por denunciar um comentario de um usuario especifico 
+	 */
 	public void denunciarComentario(Denuncia denuncia) throws Exception;
-
+	
+	/*
+	 * Responsavel por consultar erros do sistemas reportado por usuarios 
+	 */
+	public List<ErroSite> consultarErros() throws Exception;
+	
 	public void removerComent(Comentario comentario) throws Exception;
+	
+	
 
 }

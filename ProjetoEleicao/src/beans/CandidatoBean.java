@@ -2,16 +2,15 @@ package beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
-
 import classesBasicas.Candidato;
 import classesBasicas.Cargo;
 import classesBasicas.Cidade;
@@ -35,6 +34,8 @@ public class CandidatoBean implements Serializable {
 	private List<Candidato> candidatos;
 	private List<Estado> lista_estados;
 	private List<Partido> lista_partidos;
+	
+	private NavigationBean navigationBean;
 
 	public CandidatoBean() {
 		this.candidato = new Candidato();
@@ -47,6 +48,7 @@ public class CandidatoBean implements Serializable {
 		this.candidatos = new ArrayList<>();
 		this.lista_estados = new ArrayList<>();
 		this.lista_cidades_filtrados = new ArrayList<>();
+		this.navigationBean = new NavigationBean();
 	}
 
 	// Methods
@@ -105,13 +107,12 @@ public class CandidatoBean implements Serializable {
 
 	public String paginaEditarCand(Candidato candidato) {
 		try {
-			System.out.println("id cand: " + candidato.getId_cand() + " nome: " + candidato.getNome_cand());
 			this.fachada.armazenarVariavel(candidato);
 			System.out.println("pag: " + candidato.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "paginaEditarCand.xhtml";
+		return navigationBean.toEditarCandidato();
 	}
 
 	public String pagCandidato(Candidato candidato) {
@@ -125,9 +126,7 @@ public class CandidatoBean implements Serializable {
 
 	public void fileUpload(FileUploadEvent event) {
 		try {
-			// Cria um arquivo UploadFile, para receber o arquivo do evento
 			UploadedFile arq = event.getFile();
-			// Transformar a imagem em bytes para salvar em banco de dados
 			byte[] imagem = event.getFile().getContents();
 			this.candidato.setFoto_cand(imagem);
 		} catch (Exception e) {
@@ -143,7 +142,8 @@ public class CandidatoBean implements Serializable {
 			e.printStackTrace();
 			mensagemFalhaCadastro(e.getMessage());
 		}
-		return "paginaAdmin";
+		return navigationBean.toConsultarCandidato();
+
 	}
 
 	/*
@@ -151,12 +151,15 @@ public class CandidatoBean implements Serializable {
 	 * novo candidato ID (num e city pega na view) // candidato.setId_cand(113);
 	 * // System.out.println(candidato.getId_cand());
 	 * 
-	 * System.out.println("DEPOIS DO BOTÃO EDITAR: " + candidato.getId_cand());
+	 * System.out.println("DEPOIS DO BOTï¿½O EDITAR: " + candidato.getId_cand());
 	 * 
 	 * fachada.alterarCandidato(this.candidato); //
 	 * addMensagem("Editado com Sucesso!"); } catch (Exception e) {
 	 * e.printStackTrace(); } return "paginaEditarCand"; }
 	 */
+
+	//	return "paginaAdmin";
+	//}
 
 	public void consultarCandidatoFiltrado() {
 		try {
@@ -166,8 +169,8 @@ public class CandidatoBean implements Serializable {
 				this.candidato.setTipo_Cargo_cand(null);
 			System.out.println("consul: " + this.candidato.toString());
 			this.candidatos = fachada.consultarCandidatosFiltrados(this.candidato);
-			
-			if(this.candidatos.get(0).getFoto_cand() != null)
+
+			if (this.candidatos.get(0).getFoto_cand() != null)
 				System.out.println("imagem aqui");
 			else
 				System.out.println("sem imagem");

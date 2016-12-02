@@ -87,7 +87,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 	public String comentarioCandidato() {
 		try {
 			if (atcBean.comentar()) {
-				this.adm.setId_admin(1);				
+				this.adm.setId_admin(1);
 				this.comentario.setUsuario_coment(atcBean.getUsuario());
 				this.comentario.setCandidato_coment(this.candidato);
 				this.comentario.setAdministrador_coment(adm);
@@ -97,7 +97,6 @@ public class CandidatoSelecionadoBean implements Serializable {
 				getLista_comentarioCandidato();
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -126,7 +125,6 @@ public class CandidatoSelecionadoBean implements Serializable {
 		try {
 			this.candidato = (Candidato) fachada.retornarVariavel();
 			this.oldCand = this.candidato;
-			System.out.println(this.candidato.getId_cand());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

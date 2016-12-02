@@ -44,7 +44,7 @@ body {
 		</h:form>
 		<br />
 		<p:commandButton icon="ui-icon-seek-next"
-			value="Comentários Denunciados"
+			value="Comentários"
 			action="#{candidatoBean.pagComentarios()}" />
 		<br />
 		<br />
@@ -58,13 +58,12 @@ body {
 					styleClass="">
 
 					<h:outputLabel for="foto" value="FOTO:"></h:outputLabel>
-					<p:fileUpload
-						fileUploadListener="#{candidatoBean.fileUpload}"
+					<p:fileUpload fileUploadListener="#{candidatoBean.fileUpload}"
 						mode="advanced" dragDropSupport="false" update="messages"
 						sizeLimit="2000000" fileLimit="3"
 						allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
 					</p:fileUpload>
- 					
+
 					<h:outputLabel for="nome" value="NOME"></h:outputLabel>
 					<p:inputText placeholder="Nome" id="nome"
 						value="#{candidatoBean.candidato.nome_cand}" required="true">

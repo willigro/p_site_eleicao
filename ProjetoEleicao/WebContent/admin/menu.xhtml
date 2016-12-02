@@ -9,20 +9,30 @@
 	<h:form id="formMenu">
 		<p:menu>
 			<p:submenu label="Ferramentas">
-				<p:menuitem value="Consultar erros" url="/admin/system/tools/consultarErros.xhtml" update="messages" 
+				<p:menuitem value="Consultar erros" url="#{navigationBean.toConsultarErro()}" update="messages" 
 				ajax="false"/>
 			</p:submenu>
 			<p:submenu label="Usuarios">
-				<p:menuitem value="Consultar usuarios" url="/admin/users/consultarUsuario.xhtml" update="messages"
+				<p:menuitem value="Consultar usuarios" url="#{navigationBean.toConsultrUsuario()}" update="messages"
 					ajax="false" />
-				<p:submenu label="Comentarios">
-					<p:menuitem value="Consultar comentarios" url="/admin/comment/consultarComentarios.xhtml" update="messages"
+					
+			<p:submenu label="Candidatos">
+			<p:menuitem value="Novo" url="#{navigationBean.toCriarCandidato()}" update="messages"
+					ajax="false" />
+					<p:menuitem value="Consultar" url="#{navigationBean.toConsultarCandidato()}" update="messages"
+					ajax="false" />
+			</p:submenu>		
+			<p:submenu label="Comentarios">
+				<p:menuitem value="Novo" url="#" update="messages"
 						ajax="false" />
-					<p:menuitem value="Consultar denuncias" url="/admin/comment/consultarComentarios.xhtml" update="messages"
+					<p:menuitem value="Consultar" url="#" update="messages"
 						ajax="false" />
-
-
-				</p:submenu>
+				
+					<p:submenu  label="Denuncia">
+						<p:menuitem value="Consultar" url="#{navigationBean.toConsultarDenunciaComentarios()}" update="messages" ajax="false" />
+					</p:submenu>
+			</p:submenu>
+				
 
 			</p:submenu>
 
