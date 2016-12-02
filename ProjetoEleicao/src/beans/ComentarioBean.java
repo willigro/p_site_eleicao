@@ -61,16 +61,28 @@ public class ComentarioBean {
 	// Methods
 	
 
-	public void denunciarComentario() {
-		this.denunciar.setUsuario(usuarioLogado);
-		this.denunciar.setComentario(comentarioSelecionado);
-		try {
-			this.fachada.denunciarComentario(denunciar);
-			
-			returnMessage(FacesMessage.SEVERITY_INFO,"", "Comentario denunciado!");
+	public void denunciarComentario(Comentario comentario) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		this.usuarioLogado = (Usuario) facesContext.getExternalContext().getSessionMap().get("usuarioLogado");			
+
 		
-		} catch (Exception e) {
-			returnMessage(FacesMessage.SEVERITY_ERROR,"", e.getMessage());
+		if(comentario != null && usuarioLogado != null){
+		
+			this.denunciar.setUsuario(usuarioLogado);
+			this.denunciar.setComentario(comentario);
+			
+			try {
+	
+				this.fachada.denunciarComentario(denunciar);
+				
+				returnMessage(FacesMessage.SEVERITY_INFO,"", "Comentario denunciado!");
+			
+			} catch (Exception e) {
+				returnMessage(FacesMessage.SEVERITY_ERROR,"", e.getMessage());
+			}
+		
+		}else{
+			returnMessage(FacesMessage.SEVERITY_ERROR,"", "Occorreu um erro inesperado");
 		}
 	}
 

@@ -2,12 +2,15 @@ package dao.classes;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.hibernate.Criteria;
+import org.hibernate.QueryException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.metamodel.domain.NonEntity;
 
 import classesBasicas.Candidato;
 import classesBasicas.Comentario;
@@ -20,6 +23,7 @@ public class DenunciaDAO extends DAOGenerico<Denuncia> implements IDenunciaDAO {
 	@Override
 	public void denunciarComentario(Denuncia denuncia) throws Exception {
 
+			System.out.println("entrou no dao, id coment="+ denuncia.getComentario().getId_coment() +", id usuario= " + denuncia.getComentario().getUsuario_coment());
 		try {
 			super.insert(denuncia);
 		} catch (Exception e) {
@@ -67,15 +71,20 @@ public class DenunciaDAO extends DAOGenerico<Denuncia> implements IDenunciaDAO {
 
 	@Override
 	public boolean consultarSeDenunciouMaisDeDuasVezes(Denuncia denuncia) throws Exception {
-
-		 		Query query = getManager().createQuery("SELECT denuncia FROM Denuncia denuncia WHERE id_coment = :IdComentario AND id_user = :IdUsuario",Denuncia.class);
+	
+				Query query = getManager().createQuery("SELECT denuncia FROM Denuncia denuncia WHERE id_coment = :IdComentario AND id_user = :IdUsuario",Denuncia.class);
 		 		query.setParameter("IdComentario",denuncia.getComentario().getId_coment());
 		 		query.setParameter("IdUsuario", denuncia.getUsuario().getId_user());
 		 		
-		 		Denuncia result = (Denuncia) query.getSingleResult();
-		 		if(result != null){
+		 		
+		 		int result = query.getResultList().size();
+		 
+		 		if(result == 0){
 		 			return false;
+		 		}else if(result == 1){
+		 			return true;
+		 		}else{
+		 			return true;
 		 		}
-	 	return true;
 	}
 }

@@ -85,11 +85,13 @@
 										rendered="#{autenticacaoTelaConsultaBean.renderizarEditarComentario(coment.usuario_coment.id_user)}"
 										update="comentariosProjeto:formEditarComentarioProjeto:txtAreaEditComentProjeto">
 										<f:setPropertyActionListener
+										
 											target="#{candidatoSelecionadoBean.comentarioEditarProjeto}"
 											value="#{coment}" />
 									</p:commandLink>
 									<p:commandLink value="Denunciar"
-										action="#{usuarioBean.searchUser}"></p:commandLink>
+										
+										action="#{comentarioBean.denunciarComentario(coment)}"></p:commandLink>
 								</p:column>
 							</p:dataTable>
 							<p:outputLabel value="Deixe o seu comentário"></p:outputLabel>
