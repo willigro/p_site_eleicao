@@ -41,7 +41,7 @@ public class CandidatoBean implements Serializable {
 	private List<Estado> lista_estados;
 	private List<Partido> lista_partidos;
 	private StreamedContent foto;
-
+	private int iteradorFoto = 0;
 	private NavigationBean navigationBean;
 
 	public CandidatoBean() {
@@ -175,13 +175,7 @@ public class CandidatoBean implements Serializable {
 				this.candidato.setTipo_Cargo_cand(cargo.getNome_cargo());
 			else
 				this.candidato.setTipo_Cargo_cand(null);
-			System.out.println("consul: " + this.candidato.toString());
 			this.candidatos = fachada.consultarCandidatosFiltrados(this.candidato);
-
-			if (this.candidatos.get(0).getFoto_cand() != null)
-				System.out.println("imagem aqui");
-			else
-				System.out.println("sem imagem");
 		} catch (Exception e) {
 			e.printStackTrace();
 			mensagemFalhaConsulta(e.getMessage());
@@ -239,6 +233,7 @@ public class CandidatoBean implements Serializable {
 	}
 
 	public List<Candidato> getCandidatos() {
+		this.iteradorFoto = 0;
 		return candidatos;
 	}
 
@@ -274,8 +269,24 @@ public class CandidatoBean implements Serializable {
 
 	public StreamedContent getFoto() {
 		try {
-			if (this.candidato.getFoto_cand() != null)
-				return new DefaultStreamedContent(new ByteArrayInputStream(this.candidato.getFoto_cand()));
+			Candidato cand = null;
+			System.out.println("tamanho" + candidatos.size());
+			if (this.iteradorFoto < candidatos.size()) {
+				for (; this.iteradorFoto < candidatos.size();) {
+					cand = candidatos.get(this.iteradorFoto);
+					if (cand != null) {
+						System.out.println(cand.getNome_cand() + " " + this.iteradorFoto + " ");
+						break;
+					}
+				}
+				this.iteradorFoto++;
+				if (cand != null && cand.getFoto_cand() != null) {
+					return new DefaultStreamedContent(
+							new ByteArrayInputStream(candidatos.get(this.iteradorFoto).getFoto_cand()));
+				} else
+					System.out.println("foto nula");
+			} else
+				System.out.println("estorou " + this.iteradorFoto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
