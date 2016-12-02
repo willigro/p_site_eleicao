@@ -19,19 +19,9 @@ import classesBasicas.Comentario;
 import classesBasicas.Partido;
 import classesBasicas.Projeto;
 import classesBasicas.Usuario;
+import controller.util.EncryptorMD5;
 
 public class AdministradorDAO extends DAOGenerico<Administrador> implements IAdministradorDAO{
-
-	private String criptografarSenha(String senha) throws Exception {
-		StringBuilder senhaCriptografada = new StringBuilder();
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		byte[] vetorBytes = md.digest(senha.getBytes("UTF8"));
-		for (byte b : vetorBytes) {
-			senhaCriptografada.append(String.format("%02X", 0xFF & b));
-		}
-		return senhaCriptografada.toString();
-	}
-
 	
 	@Override
 	public Administrador loginAdministrador(Administrador administrador) throws Exception {
@@ -39,7 +29,7 @@ public class AdministradorDAO extends DAOGenerico<Administrador> implements IAdm
 																		
 			Query query = super.getManager().createQuery("SELECT a FROM Administrador a WHERE email =:Email AND senha_admin=:Senha_admin", Administrador.class);
 			query.setParameter("Email", administrador.getEmail());
-			query.setParameter("Senha_admin", criptografarSenha(administrador.getSenha_admin()));
+			query.setParameter("Senha_admin", EncryptorMD5.criptografarSenha(administrador.getSenha_admin()));
 			
 			try{
 			admin = (Administrador) query.getSingleResult();
@@ -70,7 +60,7 @@ public class AdministradorDAO extends DAOGenerico<Administrador> implements IAdm
 	
 	
 	public void cadastrarAdministrador(Administrador administrador) throws Exception {
-		administrador.setSenha_admin(criptografarSenha(administrador.getSenha_admin()));
+		administrador.setSenha_admin(EncryptorMD5.criptografarSenha(administrador.getSenha_admin()));
 		super.insert(administrador);
 	}
 	
