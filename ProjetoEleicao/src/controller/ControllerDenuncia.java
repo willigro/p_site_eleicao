@@ -26,11 +26,12 @@ public class ControllerDenuncia {
 		if(denuncia.getUsuario() == null){
 			throw new Exception("Usuario nulo");
 		}		
-		if(!controllerUsuario.verificarUsuarioPorID(denuncia.getUsuario())){
-			throw new Exception("Usuario inexistente na base de dados");
-		}
 		if(denuncia.getComentario() == null){
 			throw new Exception("Comentario nulo");
+		}
+		
+		if(!controllerUsuario.verificarUsuarioPorID(denuncia.getUsuario())){
+			throw new Exception("Usuario inexistente na base de dados");
 		}
 		if(!controllerComentario.consultarComentarioPorId(denuncia.getComentario())){
 			throw new Exception("Comentario inexistente na base de dados");

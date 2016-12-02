@@ -269,24 +269,13 @@ public class CandidatoBean implements Serializable {
 
 	public StreamedContent getFoto() {
 		try {
-			Candidato cand = null;
-			System.out.println("tamanho" + candidatos.size());
-			if (this.iteradorFoto < candidatos.size()) {
-				for (; this.iteradorFoto < candidatos.size();) {
-					cand = candidatos.get(this.iteradorFoto);
-					if (cand != null) {
-						System.out.println(cand.getNome_cand() + " " + this.iteradorFoto + " ");
-						break;
-					}
-				}
-				this.iteradorFoto++;
-				if (cand != null && cand.getFoto_cand() != null) {
+			
+				if (this.candidatos.get(this.iteradorFoto) != null && this.candidatos.get(this.iteradorFoto).getFoto_cand() != null) {
 					return new DefaultStreamedContent(
 							new ByteArrayInputStream(candidatos.get(this.iteradorFoto).getFoto_cand()));
 				} else
 					System.out.println("foto nula");
-			} else
-				System.out.println("estorou " + this.iteradorFoto);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

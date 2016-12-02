@@ -24,7 +24,8 @@
 				<!-- Div Tela -->
 				<div id="candidato" class="ui-g-3 ui-md-3">
 					<!-- Div Candidato -->
-					<p:graphicImage value="#{candidatoSelecionadoBean.foto}" style="width:100%"/>
+					<p:graphicImage value="#{candidatoSelecionadoBean.foto}"
+						style="width:100%" />
 					<p:outputPanel>
 						<h:panelGrid columns="2" cellpadding="3">
 							<p:outputLabel
@@ -44,7 +45,8 @@
 							<h:outputText value="Avaliar:" />
 							<p:rating
 								value="#{candidatoSelecionadoBean.avaliacao.notaAvaliacao}">
-								<p:ajax event="rate" listener="#{candidatoSelecionadoBean.onrateCandidato}" />
+								<p:ajax event="rate"
+									listener="#{candidatoSelecionadoBean.onrateCandidato}" />
 							</p:rating>
 						</h:panelGrid>
 					</p:outputPanel>
@@ -53,7 +55,7 @@
 				<div id="propostas" class="ui-g-6 ui-md-6">
 					<!-- Div propostas do candidato -->
 					<h:form id="formPropostas">
-						<p:accordionPanel 
+						<p:accordionPanel
 							value="#{candidatoSelecionadoBean.lista_projeto}" var="proj">
 							<p:tab title="#{proj.titulo_proj}">
 								<h:panelGrid columns="2" cellpadding="10">
@@ -67,7 +69,8 @@
 								<h:outputText value="Avaliar:" />
 								<p:rating
 									value="#{candidatoSelecionadoBean.avaliacao.notaAvaliacao}">
-									<p:ajax event="rate" listener="#{candidatoSelecionadoBean.onrateProjeto}" />
+									<p:ajax event="rate"
+										listener="#{candidatoSelecionadoBean.onrateProjeto}" />
 								</p:rating>
 							</p:tab>
 						</p:accordionPanel>
@@ -94,8 +97,8 @@
 											target="#{candidatoSelecionadoBean.comentarioEditarProjeto}"
 											value="#{coment}" />
 									</p:commandLink>
-									<p:commandLink value="Denúnciar"
-										action="#{usuarioBean.searchUser}"></p:commandLink>
+									<p:commandLink value="Denunciar"
+										action="#{comentarioBean.denunciarComentario(coment)}"></p:commandLink>
 								</p:column>
 							</p:dataTable>
 							<p:outputLabel value="Deixe o seu comentário"></p:outputLabel>

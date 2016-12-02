@@ -84,9 +84,8 @@ public class LoginBean{
 		session.invalidate();
 		loggedIn = false;
 
-		returnMessage(FacesMessage.SEVERITY_ERROR,"", "Desconectou-se com sucesso!");
-
-		return navigationBean.redirectToLogin();
+		returnMessage(FacesMessage.SEVERITY_INFO,"", "Desconectou-se com sucesso!");
+		return navigationBean.toLogin();
 	}
 	
 	public String getAtributeInCurrentSession(){
