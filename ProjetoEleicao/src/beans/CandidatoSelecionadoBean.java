@@ -89,7 +89,6 @@ public class CandidatoSelecionadoBean implements Serializable {
 			this.comentario.setId_coment(0);
 			this.fachada.inserirComentarioCandidato(this.comentario);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -118,7 +117,6 @@ public class CandidatoSelecionadoBean implements Serializable {
 		try {
 			this.candidato = (Candidato) fachada.retornarVariavel();
 			this.oldCand = this.candidato;
-			System.out.println(this.candidato.getId_cand());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -135,7 +133,6 @@ public class CandidatoSelecionadoBean implements Serializable {
 			}
 			this.projeto.getCanditado_proj().setId_cand(this.candidato.getId_cand());
 			lista_projeto = this.fachada.consultarProjetosFiltradosIdCand(this.projeto);
-			System.out.println(lista_projeto.get(0).getId_proj());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -209,7 +206,6 @@ public class CandidatoSelecionadoBean implements Serializable {
 	}
 
 	public void setCandidato(Candidato candidato) {
-		System.out.println("candS set: " + this.candidato.getId_cand());
 		this.candidato = candidato;
 	}
 
@@ -258,7 +254,6 @@ public class CandidatoSelecionadoBean implements Serializable {
 	}
 
 	public void setComentarioEditar(Comentario comentarioEditar) {
-		System.out.println("Sera que setou: " + comentarioEditar.getTexto_coment());
 		this.comentarioEditar = comentarioEditar;
 	}
 }

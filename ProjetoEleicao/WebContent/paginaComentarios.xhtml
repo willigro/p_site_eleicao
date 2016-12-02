@@ -8,7 +8,7 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Tela de Comentários Denunciados</title>
+	<title>Tela de Comentários</title>
 	<style type="text/css">
 body {
 	background-image: url(img/lightflag.png);
@@ -48,15 +48,14 @@ body {
 		<!-- listagem dos comentários denunciados -->
 		<h:form id="formData">
 			<h1 align="center">
-				<font face="Calibri" color="black">Lista de Comentários
-					Denunciados</font>
+				<font face="Calibri" color="black">Lista de Comentários</font>
 			</h1>
 			<p:dataTable value="#{comentarioBean.comentarios}" var="coments">
-				<p:column headerText="Nome Usuário que Denunciou">
+				<p:column headerText="Nome Usuário">
 					<h:outputText value="#{coments.usuario_coment.nome_user}"></h:outputText>
 				</p:column>
 				<p:column headerText="Nome Candidato do Projeto">
-				<h:outputText value="#{coments.candidato_coment.nome_cand}"></h:outputText>
+					<h:outputText value="#{coments.candidato_coment.nome_cand}"></h:outputText>
 				</p:column>
 				<p:column headerText="Texto Comentádo">
 					<h:outputText value="#{coments.texto_coment}"></h:outputText>
@@ -68,8 +67,8 @@ body {
 				<p:column headerText="Remover Comentário">
 					<p:commandButton icon="ui-icon-trash" value="Remover"
 						action="#{comentarioBean.remover}" update=":formData" ajax="true">
-						<f:setPropertyActionListener
-							target="#{comentarioBean.comentario}" value="#{coments}"></f:setPropertyActionListener>
+						<f:setPropertyActionListener target="#{comentarioBean.comentario}"
+							value="#{coments}"></f:setPropertyActionListener>
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
