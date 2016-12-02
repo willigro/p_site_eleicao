@@ -64,4 +64,18 @@ public class DenunciaDAO extends DAOGenerico<Denuncia> implements IDenunciaDAO {
 		}
 		return result;
 	}
+
+	@Override
+	public boolean consultarSeDenunciouMaisDeDuasVezes(Denuncia denuncia) throws Exception {
+
+		 		Query query = getManager().createQuery("SELECT denuncia FROM Denuncia denuncia WHERE id_coment = :IdComentario AND id_user = :IdUsuario",Denuncia.class);
+		 		query.setParameter("IdComentario",denuncia.getComentario().getId_coment());
+		 		query.setParameter("IdUsuario", denuncia.getUsuario().getId_user());
+		 		
+		 		Denuncia result = (Denuncia) query.getSingleResult();
+		 		if(result != null){
+		 			return false;
+		 		}
+	 	return true;
+	}
 }
