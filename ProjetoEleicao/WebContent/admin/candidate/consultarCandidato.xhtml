@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/admin/index.xhtml">
+
+	<ui:define name="conteudo">
+
+
+
+
+
+
+		<h:form>
+
+			<p:panel style="border:0px;">
+				<h:outputText value="Procurar:  " />
+				<p:inputText placeholder="Nome" id="nome" style="width:300px"
+					value="#{candidatoBean.candidato.nome_cand}" />
+				<p:commandButton value="Pesquisar" icon="ui-icon-search"
+					action="#{candidatoBean.consultarCandidatoFiltrado()}" update="tabela" />
+			</p:panel>
+
+			<!-- listagem dos candidatos pesquisados -->
+			<p:panel style="border:0px;">
+			<p:messages id="messages" autoUpdate="true" showDetail="true" showSummary="true" /> 
+				<p:dataTable id="tabela" value="#{candidatoBean.candidatos}"
+					var="cand" paginator="true" rows="10" rowsPerPageTemplate="10,20,50"
+					emptyMessage="Nenhum registro encontrado.">
+					<p:column>
+						<f:facet name="header">
+							<h:outputText id="columnNome" value="Nome" />
+						</f:facet>
+						<h:outputText value="#{cand.nome_cand}"></h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText id="columnNumero" value="Numero" />
+						</f:facet>
+						<h:outputText value="#{cand.numero_cand}"></h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+							<h:outputText id="columnCargo" value="Cargo" />
+						</f:facet>
+						<h:outputText value="#{cand.tipo_Cargo_cand}"></h:outputText>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText id="columnAcoes" value="Acoes" />
+						</f:facet>
+						<p:commandButton icon="ui-icon-pencil" id="bConsultar"
+							value="Editar" action="#{candidatoBean.paginaEditarCand(cand)}">
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-trash" value="Remover"
+							action="#{candidatoBean.remover}"
+							update="tabela" ajax="true">
+							<f:setPropertyActionListener value="#{cand}"
+								target="#{candidatoBean.candidato}"></f:setPropertyActionListener>
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+
+
+
+</ui:composition>
+</html>

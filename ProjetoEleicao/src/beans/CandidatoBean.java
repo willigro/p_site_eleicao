@@ -32,6 +32,8 @@ public class CandidatoBean implements Serializable {
 	private List<Candidato> candidatos;
 	private List<Estado> lista_estados;
 	private List<Partido> lista_partidos;
+	
+	private NavigationBean navigationBean;
 
 	public CandidatoBean() {
 		this.candidato = new Candidato();
@@ -44,6 +46,7 @@ public class CandidatoBean implements Serializable {
 		this.candidatos = new ArrayList<>();
 		this.lista_estados = new ArrayList<>();
 		this.lista_cidades_filtrados = new ArrayList<>();
+		this.navigationBean = new NavigationBean();
 	}
 
 	// Methods
@@ -108,7 +111,7 @@ public class CandidatoBean implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "paginaEditarCand.xhtml";
+		return navigationBean.toEditarCandidato();
 	}
 
 	public String pagCandidato(Candidato candidato) {
@@ -128,7 +131,7 @@ public class CandidatoBean implements Serializable {
 			e.printStackTrace();
 			mensagemFalhaCadastro(e.getMessage());
 		}
-		return "paginaAdmin";
+		return navigationBean.toConsultarCandidato();
 
 	}
 
@@ -137,7 +140,7 @@ public class CandidatoBean implements Serializable {
 	 * novo candidato ID (num e city pega na view) // candidato.setId_cand(113);
 	 * // System.out.println(candidato.getId_cand());
 	 * 
-	 * System.out.println("DEPOIS DO BOTÃO EDITAR: " + candidato.getId_cand());
+	 * System.out.println("DEPOIS DO BOTï¿½O EDITAR: " + candidato.getId_cand());
 	 * 
 	 * fachada.alterarCandidato(this.candidato); //
 	 * addMensagem("Editado com Sucesso!"); } catch (Exception e) {
