@@ -41,9 +41,10 @@
 								value="#{candidatoSelecionadoBean.candidato.estado_cand.nome_est}"></p:outputLabel>
 							<p:outputLabel
 								value="#{candidatoSelecionadoBean.candidato.cidade_cand.nome_cid}"></p:outputLabel>
-								<h:outputText value="Avaliar:" />
-							<p:rating value="#{candidatoSelecionadoBean.avaliacao.notaAvaliacao}">
-								<p:ajax event="rate" listener="#{candidatoSelecionadoBean.onrate}" />
+							<h:outputText value="Avaliar:" />
+							<p:rating
+								value="#{candidatoSelecionadoBean.avaliacao.notaAvaliacao}">
+								<p:ajax event="rate" listener="#{candidatoSelecionadoBean.onrateCandidato}" />
 							</p:rating>
 						</h:panelGrid>
 					</p:outputPanel>
@@ -63,6 +64,11 @@
 									onclick="PF('dlg1').show();"
 									update="comentariosProjeto:tableComentProjeto">
 								</p:commandButton>
+								<h:outputText value="Avaliar:" />
+								<p:rating
+									value="#{candidatoSelecionadoBean.avaliacao.notaAvaliacao}">
+									<p:ajax event="rate" listener="#{candidatoSelecionadoBean.onrateProjeto}" />
+								</p:rating>
 							</p:tab>
 						</p:accordionPanel>
 					</h:form>
@@ -101,7 +107,7 @@
 								value="#{candidatoSelecionadoBean.comentario.texto_coment}" />
 							<p:commandButton value="Enviar"
 								action="#{candidatoSelecionadoBean.comentarioProsposta}"
-								update="comentariosProjeto:tableComentProjeto">							
+								update="comentariosProjeto:tableComentProjeto">
 							</p:commandButton>
 						</p:dialog>
 						<p:dialog header="Edite sua opinião" widgetVar="dlg2"
@@ -176,8 +182,8 @@
 				<div>
 					<!-- Div login -->
 					<h:form id="loginForm">
-						<p:dialog header="Faça seu Login" id="login"
-							resizable="false" modal="true" position="center" width="300" >
+						<p:dialog header="Faça seu Login" id="login" resizable="false"
+							modal="true" position="center" width="300">
 							<p:messages autoUpdate="true" showDetail="true"
 								showSummary="true" />
 
@@ -199,13 +205,13 @@
 					<!-- Fim Form Editar Comentario -->
 				</div>
 				<!-- Fim Div login -->
-				<h:form>
+				<!--  <h:form>
 					<h3>Deixe seu comentário</h3>
 					<p:inputTextarea rows="5" col="30" counter="display"
 						maxlength="500" counterTemplate="{0} Caracteres Restantes"
 						autoResize="false" />
 					<h:outputText id="display" />
-				</h:form>
+				</h:form> -->
 			</div>
 			<!-- Fim Div Tela -->
 		</div>
