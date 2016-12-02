@@ -15,31 +15,36 @@ import java.util.List;
 @Entity
 @Table(name = "tb_administrador")
 public class Administrador {
+	
+
+	
+	private static final int SYS_LIMIT_CARACTER_PASSWORD = 8; //Para poder criptografar em MD5
+	private static final int DB_LIMIT_CARACTER_EMAIL = 30;
+	private static final int DB_LIMIT_CARACTER_PASSWORD = 32;
+	private static final int DB_LIMIT_CARACTER_NAME = 50;
+	
 	// Attributes
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id_admin;
 
-	@Column(nullable = false, length = 50)
+	@Column(nullable = false, length = DB_LIMIT_CARACTER_NAME)
 	private String nome_admin;
 
-	@Column(nullable = false, length = 32)
+	@Column(nullable = false, length = DB_LIMIT_CARACTER_PASSWORD)
 	private String senha_admin;
 
 	@OneToMany(mappedBy = "administrador_coment")
 	private List<Comentario> lista_Comentario_admin;
 
-	@Column(nullable = false, length = 30)
+	@Column(nullable = false, length = DB_LIMIT_CARACTER_EMAIL)
 	private String email;
 
 	
-	
-	private static final int LIMIT_CARACTER_PASSWORD = 8;
-	
 
-	private static final int LIMIT_CARACTER_EMAIL = 30;
 	
 	// Relacionamentos
+
 
 	// Constructor
 	public Administrador() {
@@ -89,12 +94,15 @@ public class Administrador {
 	}
 	
 	public static int getLimitCaracterPassword() {
-		return LIMIT_CARACTER_PASSWORD;
+		return SYS_LIMIT_CARACTER_PASSWORD;
 	}
 
 	public static int getLimitCaracterEmail() {
-		return LIMIT_CARACTER_EMAIL;
+		return DB_LIMIT_CARACTER_EMAIL;
 	}
 
+	public static int getLimitCaracterName() {
+		return DB_LIMIT_CARACTER_NAME;
+	}
 	// Methods
 }

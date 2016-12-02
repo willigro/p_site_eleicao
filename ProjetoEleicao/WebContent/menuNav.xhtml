@@ -14,12 +14,13 @@
 	<f:view>
 		<h:form>
 			<p:commandLink value="Principal"
-				action="principal?faces-redirect=true"></p:commandLink>
+				action="#{navigationBean.redirectToWelcome}"></p:commandLink>
 			<p:commandLink value="Candidatos"
-				action="consultaCandidatos?faces-redirect=true"></p:commandLink>
-				<p:commandLink value="Cadastrar"
-				action="cadastroUsuario?faces-redirect=true"></p:commandLink>
-			<p:commandLink value="Login" action="login?faces-redirect=true"></p:commandLink>
+				action="#{navigationBean.toConsultarCandidatos}"></p:commandLink>
+			<p:commandLink value="Cadastrar"
+				action="#{navigationBean.toCadastroUsuario}"></p:commandLink>
+			<p:commandLink value="Login"
+				action="#{navigationBean.redirectToLogin}"></p:commandLink>
 		</h:form>
 	</f:view>
 </h:body>
