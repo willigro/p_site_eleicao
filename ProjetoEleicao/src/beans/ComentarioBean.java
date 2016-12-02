@@ -77,8 +77,6 @@ public class ComentarioBean {
 
 	public void remover() {
 		try {
-			
-			System.out.println("ID = " + this.comentario.getId_coment());
 			this.fachada.removerComent(comentario);
 		} catch (Exception e) {
 			e.printStackTrace();

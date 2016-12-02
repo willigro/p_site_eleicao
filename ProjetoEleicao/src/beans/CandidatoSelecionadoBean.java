@@ -156,7 +156,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 	public String editar() throws Exception {
 		try {			
 			fachada.alterarCandidato(candidato, oldCand);
-			mensagemSucessoEdit("Editado com Sucesso!");
+			mensagemSucessoEdit("");
 		} catch (Exception e) {
 			e.printStackTrace();
 			mensagemFalhaEdit(e.getMessage());

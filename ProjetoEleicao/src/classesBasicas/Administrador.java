@@ -15,6 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "tb_administrador")
 public class Administrador {
+	
 	// Attributes
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

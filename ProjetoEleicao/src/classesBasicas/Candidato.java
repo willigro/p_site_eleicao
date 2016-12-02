@@ -33,8 +33,6 @@ public class Candidato implements Serializable{
 	@Column(nullable = false, length = 50)
 	private String nome_cand;
 
-	//private Calendar data_Nasc_cand;
-	
 	@Column(nullable=false)
 	private int numero_cand;
 
@@ -63,6 +61,9 @@ public class Candidato implements Serializable{
 
 	@OneToMany(mappedBy = "canditado_proj")
 	private List<Projeto> lista_Projeto_cand;
+	
+	//private Calendar data_Nasc_cand;
+	
 
 	// Constructor
 	public Candidato() {

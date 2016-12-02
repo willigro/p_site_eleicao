@@ -40,7 +40,6 @@ public class Comentario {
 	@JoinColumn(name = "id_cand")
 	private Candidato candidato_coment;
 	
-
 	@OneToMany(mappedBy = "comentario")
 	private List<Denuncia> denuncias;
 
