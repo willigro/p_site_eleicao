@@ -187,4 +187,13 @@ public class UsuarioBean {
 
 	}
 
+	public Avaliacao getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(Avaliacao avaliacao) {
+		this.avaliacao = avaliacao;
+	}
+	
+
 }

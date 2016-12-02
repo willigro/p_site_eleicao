@@ -29,7 +29,7 @@ public class Projeto implements Serializable{
 	@Column(nullable = false, length = 500)
 	private String descricao_proj;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne//(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_cand")
 	private Candidato canditado_proj;
 

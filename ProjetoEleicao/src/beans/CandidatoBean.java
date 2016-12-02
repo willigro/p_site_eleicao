@@ -2,13 +2,15 @@ package beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 import classesBasicas.Candidato;
 import classesBasicas.Cargo;
 import classesBasicas.Cidade;
@@ -105,7 +107,6 @@ public class CandidatoBean implements Serializable {
 
 	public String paginaEditarCand(Candidato candidato) {
 		try {
-			System.out.println("id cand: " + candidato.getId_cand() + " nome: " + candidato.getNome_cand());
 			this.fachada.armazenarVariavel(candidato);
 			System.out.println("pag: " + candidato.toString());
 		} catch (Exception e) {
@@ -121,6 +122,16 @@ public class CandidatoBean implements Serializable {
 			e.printStackTrace();
 		}
 		return "telaCandidato.xhtml?faces-redirect=true";
+	}
+
+	public void fileUpload(FileUploadEvent event) {
+		try {
+			UploadedFile arq = event.getFile();
+			byte[] imagem = event.getFile().getContents();
+			this.candidato.setFoto_cand(imagem);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String cadastrar() throws Exception {
@@ -146,7 +157,10 @@ public class CandidatoBean implements Serializable {
 	 * addMensagem("Editado com Sucesso!"); } catch (Exception e) {
 	 * e.printStackTrace(); } return "paginaEditarCand"; }
 	 */
-	
+
+	//	return "paginaAdmin";
+	//}
+
 	public void consultarCandidatoFiltrado() {
 		try {
 			if (cargo.getNome_cargo() != null && !cargo.getNome_cargo().trim().equals(""))
@@ -155,6 +169,11 @@ public class CandidatoBean implements Serializable {
 				this.candidato.setTipo_Cargo_cand(null);
 			System.out.println("consul: " + this.candidato.toString());
 			this.candidatos = fachada.consultarCandidatosFiltrados(this.candidato);
+
+			if (this.candidatos.get(0).getFoto_cand() != null)
+				System.out.println("imagem aqui");
+			else
+				System.out.println("sem imagem");
 		} catch (Exception e) {
 			e.printStackTrace();
 			mensagemFalhaConsulta(e.getMessage());

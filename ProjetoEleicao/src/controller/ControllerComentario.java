@@ -46,8 +46,8 @@ public class ControllerComentario {
 		return comentario;
 	}
 
-	public void removerComentario(Comentario comentario) throws Exception {
-		this.removerComentario(comentario);
+	public void removerComent(Comentario comentario) throws Exception {
+		this.iComentarioDAO.removerComent(comentario);
 	}
 
 	public void inserirComentarioProjeto(Comentario comentario) throws Exception {
