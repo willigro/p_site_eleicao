@@ -11,12 +11,7 @@ import classesBasicas.Projeto;
 import classesBasicas.Usuario;
 
 public interface IAdministradorDAO {
-	
-	//public boolean insertAdministrador(Administrador administrador);
-		//public boolean deleteAdministrador(Administrador administrador);
-		//public Administrador updateAdministrador(Administrador administrador);
-		
-		
+
 		
 		public Administrador loginAdministrador(Administrador administrador) throws Exception; //ok
 		public boolean logoutAdministrador(Administrador administrador) throws Exception; //ok
