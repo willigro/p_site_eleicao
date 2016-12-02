@@ -1,5 +1,7 @@
 package beans;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,7 +11,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
+
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import classesBasicas.Candidato;
 import classesBasicas.Cargo;
@@ -34,7 +40,8 @@ public class CandidatoBean implements Serializable {
 	private List<Candidato> candidatos;
 	private List<Estado> lista_estados;
 	private List<Partido> lista_partidos;
-	
+	private StreamedContent foto;
+
 	private NavigationBean navigationBean;
 
 	public CandidatoBean() {
@@ -151,15 +158,16 @@ public class CandidatoBean implements Serializable {
 	 * novo candidato ID (num e city pega na view) // candidato.setId_cand(113);
 	 * // System.out.println(candidato.getId_cand());
 	 * 
-	 * System.out.println("DEPOIS DO BOT�O EDITAR: " + candidato.getId_cand());
+	 * System.out.println("DEPOIS DO BOT�O EDITAR: " +
+	 * candidato.getId_cand());
 	 * 
 	 * fachada.alterarCandidato(this.candidato); //
 	 * addMensagem("Editado com Sucesso!"); } catch (Exception e) {
 	 * e.printStackTrace(); } return "paginaEditarCand"; }
 	 */
 
-	//	return "paginaAdmin";
-	//}
+	// return "paginaAdmin";
+	// }
 
 	public void consultarCandidatoFiltrado() {
 		try {
@@ -262,6 +270,16 @@ public class CandidatoBean implements Serializable {
 
 	public Cargo getCargo() {
 		return cargo;
+	}
+
+	public StreamedContent getFoto() {
+		try {
+			if (this.candidato.getFoto_cand() != null)
+				return new DefaultStreamedContent(new ByteArrayInputStream(this.candidato.getFoto_cand()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public List<Cargo> getLista_cargos() {

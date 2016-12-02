@@ -1,5 +1,6 @@
 package beans;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -134,6 +135,16 @@ public class CandidatoSelecionadoBean implements Serializable {
 		}
 	}
 
+	public StreamedContent getFoto() {
+		try {
+			if (this.candidato.getFoto_cand() != null)
+				return new DefaultStreamedContent(new ByteArrayInputStream(this.candidato.getFoto_cand()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public List<Projeto> getLista_projeto() {
 		try {
 			if (this.candidato != null) {
@@ -172,7 +183,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 		}
 		return "paginaEditarCand";
 	}
-	
+
 	public void onrate(RateEvent rateEvent) {
 		try {
 			Usuario user = new Usuario();
@@ -208,7 +219,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
 	}
 
-	// Getters e Setters	
+	// Getters e Setters
 	public List<Projeto> getProjetos() {
 		return projetos;
 	}

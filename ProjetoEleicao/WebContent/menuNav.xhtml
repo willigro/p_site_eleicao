@@ -9,18 +9,44 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>NavMenu</title>
+	<style type="text/css">
+body {
+	background-image: url(img/lightflag.png);
+	background-size: 100%;
+}
+
+.menubar {
+	background-color: #000;
+}
+
+.grid {
+	position: absolute;
+	top: 40%;
+	left: 40%;
+	margin-top: -10%;
+	margin-left: 0%;
+}
+</style>
 </h:head>
 <h:body>
-	<f:view>
+	<f:view>		
 		<h:form>
-			<p:commandLink value="Principal"
-				action="#{navigationBean.redirectToWelcome}"></p:commandLink>
-			<p:commandLink value="Candidatos"
-				action="#{navigationBean.toConsultarCandidatos}"></p:commandLink>
-			<p:commandLink value="Cadastrar"
-				action="#{navigationBean.toCadastroUsuario}"></p:commandLink>
-			<p:commandLink value="Login"
-				action="#{navigationBean.redirectToLogin}"></p:commandLink>
+			<p:menubar styleClass="menubar">
+				<p:menuitem action="#{navigationBean.redirectToWelcome}">
+					<font face="Calibri" color="White" size="6">Brasil
+						Transparente</font>
+				</p:menuitem>
+				<p:menuitem action="#{navigationBean.toConsultarCandidatos}">
+					<font face="Calibri" color="White" size="6">Candidatos</font>
+				</p:menuitem>
+				<p:menuitem action="#{navigationBean.toCadastroUsuario}">
+					<font face="Calibri" color="White" size="6">Cadastrar</font>
+				</p:menuitem>
+				<f:facet name="options">
+					<p:commandButton value="Login"
+						action="#{navigationBean.redirectToLogin}" />
+				</f:facet>
+			</p:menubar>
 		</h:form>
 	</f:view>
 </h:body>

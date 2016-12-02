@@ -24,7 +24,7 @@
 				<!-- Div Tela -->
 				<div id="candidato" class="ui-g-3 ui-md-3">
 					<!-- Div Candidato -->
-					<p:graphicImage value="./img/quePorraEssa.jpg" style="width:100%" />
+					<p:graphicImage value="#{candidatoSelecionadoBean.foto}" style="width:100%"/>
 					<p:outputPanel>
 						<h:panelGrid columns="2" cellpadding="3">
 							<p:outputLabel
@@ -52,13 +52,13 @@
 				<div id="propostas" class="ui-g-6 ui-md-6">
 					<!-- Div propostas do candidato -->
 					<h:form id="formPropostas">
-						<p:accordionPanel
+						<p:accordionPanel 
 							value="#{candidatoSelecionadoBean.lista_projeto}" var="proj">
 							<p:tab title="#{proj.titulo_proj}">
 								<h:panelGrid columns="2" cellpadding="10">
 									<h:outputText value="#{proj.descricao_proj}" />
 								</h:panelGrid>
-								<p:commandButton value="Comentarios"
+								<p:commandButton value="Comentários"
 									actionListener="#{candidatoSelecionadoBean.popularComentariosProposta(proj)}"
 									onclick="PF('dlg1').show();"
 									update="comentariosProjeto:tableComentProjeto">
@@ -88,7 +88,7 @@
 											target="#{candidatoSelecionadoBean.comentarioEditarProjeto}"
 											value="#{coment}" />
 									</p:commandLink>
-									<p:commandLink value="Denunciar"
+									<p:commandLink value="Denúnciar"
 										action="#{usuarioBean.searchUser}"></p:commandLink>
 								</p:column>
 							</p:dataTable>
@@ -141,7 +141,7 @@
 											target="#{candidatoSelecionadoBean.comentarioEditarProjeto}"
 											value="#{coment}" />
 									</p:commandLink>
-									<p:commandLink value="Denunciar"
+									<p:commandLink value="Denúnciar"
 										action="#{usuarioBean.searchUser}"></p:commandLink>
 								</p:column>
 							</p:dataTable>
