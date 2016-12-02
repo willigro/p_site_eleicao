@@ -39,10 +39,13 @@ public class CandidatoSelecionadoBean implements Serializable {
 	private List<Projeto> lista_projeto;
 	private Usuario usuario;
 	private Comentario comentario;
-	private Comentario comentarioEditar;
-	private List<Comentario> lista_comentario;
+	private Comentario comentarioEditarProjeto;
+	private Comentario comentarioEditarCandidato;
+	private List<Comentario> lista_comentarioProjeto;
+	private List<Comentario> lista_comentarioCandidato;
 	private Administrador adm;
-	
+	private AutenticacaoTelaConsultaBean atcBean;
+
 	public CandidatoSelecionadoBean() {
 		this.projetos = new ArrayList<>();
 		this.oldCand = new Candidato();
@@ -54,22 +57,25 @@ public class CandidatoSelecionadoBean implements Serializable {
 		this.projeto = new Projeto();
 		this.usuario = new Usuario();
 		this.comentario = new Comentario();
-		this.comentarioEditar = new Comentario();
+		this.comentarioEditarProjeto = new Comentario();
+		this.comentarioEditarCandidato = new Comentario();
 		this.adm = new Administrador();
+		this.atcBean = new AutenticacaoTelaConsultaBean();
 	}
 
 	// Methods
 	public String comentarioProsposta() {
 		try {
-			this.adm.setId_admin(1);
-			this.usuario.setId_user(1);
-			this.comentario.setUsuario_coment(this.usuario);
-			this.comentario.setCandidato_coment(this.projeto.getCanditado_proj());
-			this.comentario.setAdministrador_coment(adm);
-			this.comentario.setProjeto_coment(this.projeto);
-			this.comentario.setId_coment(0);
-			this.fachada.inserirComentarioProjeto(this.comentario);
-			popularComentariosProposta(this.projeto);
+			if (atcBean.comentar()) {
+				this.adm.setId_admin(1);
+				this.comentario.setUsuario_coment(atcBean.getUsuario());
+				this.comentario.setCandidato_coment(this.projeto.getCanditado_proj());
+				this.comentario.setAdministrador_coment(adm);
+				this.comentario.setProjeto_coment(this.projeto);
+				this.comentario.setId_coment(0);
+				this.fachada.inserirComentarioProjeto(this.comentario);
+				popularComentariosProposta(this.projeto);
+			}
 		} catch (Exception e) {
 			FacesContext mensagem = FacesContext.getCurrentInstance();
 			mensagem.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: ", e.getMessage()));
@@ -80,14 +86,16 @@ public class CandidatoSelecionadoBean implements Serializable {
 
 	public String comentarioCandidato() {
 		try {
-			this.adm.setId_admin(1);
-			this.usuario.setId_user(1);
-			this.comentario.setUsuario_coment(this.usuario);
-			this.comentario.setCandidato_coment(this.candidato);
-			this.comentario.setAdministrador_coment(adm);
-			this.comentario.setProjeto_coment(null);
-			this.comentario.setId_coment(0);
-			this.fachada.inserirComentarioCandidato(this.comentario);
+			if (atcBean.comentar()) {
+				this.adm.setId_admin(1);				
+				this.comentario.setUsuario_coment(atcBean.getUsuario());
+				this.comentario.setCandidato_coment(this.candidato);
+				this.comentario.setAdministrador_coment(adm);
+				this.comentario.setProjeto_coment(null);
+				this.comentario.setId_coment(0);
+				this.fachada.inserirComentarioCandidato(this.comentario);
+				getLista_comentarioCandidato();
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,7 +105,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 
 	public String editarComentarioProposta() {
 		try {
-			this.fachada.atualizarComentario(this.comentarioEditar);
+			this.fachada.atualizarComentario(this.comentarioEditarProjeto);
 			popularComentariosProposta(this.projeto);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -108,7 +116,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 	public void popularComentariosProposta(Projeto projeto) {
 		try {
 			this.projeto = projeto;
-			lista_comentario = this.fachada.consultarComentarioFiltradosIdProjt(projeto);
+			lista_comentarioProjeto = this.fachada.consultarComentarioFiltradosIdProjt(projeto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -133,10 +141,6 @@ public class CandidatoSelecionadoBean implements Serializable {
 				ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 				context.redirect("consultaCandidato.xhtml");
 			}
-			this.projeto.getCanditado_proj().setId_cand(this.candidato.getId_cand());
-			lista_projeto = this.fachada.consultarProjetosFiltradosIdCand(this.projeto);
-			System.out.println(lista_projeto.get(0).getId_proj());
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -157,7 +161,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 	}
 
 	public String editar() throws Exception {
-		try {			
+		try {
 			fachada.alterarCandidato(candidato, oldCand);
 			mensagemSucessoEdit("Editado com Sucesso!");
 		} catch (Exception e) {
@@ -209,7 +213,6 @@ public class CandidatoSelecionadoBean implements Serializable {
 	}
 
 	public void setCandidato(Candidato candidato) {
-		System.out.println("candS set: " + this.candidato.getId_cand());
 		this.candidato = candidato;
 	}
 
@@ -238,27 +241,32 @@ public class CandidatoSelecionadoBean implements Serializable {
 	}
 
 	public List<Comentario> getLista_comentarioProjeto() {
-		return getLista_comentarioProjeto();
+		return lista_comentarioProjeto;
 	}
 
 	public Comentario getComentarioEditarProjeto() {
-		return getComentarioEditarProjeto();
+		return comentarioEditarProjeto;
 	}
 
 	public void setComentarioEditarProjeto(Comentario comentarioEditar) {
-		this.comentarioEditar = comentarioEditar;
+		this.comentarioEditarProjeto = comentarioEditar;
 	}
 
-	public List<Comentario> getLista_comentario() {
-		return lista_comentario;
-	}
-
-	public Comentario getComentarioEditar() {
-		return comentarioEditar;
+	public Comentario getComentarioEditarCandidato() {
+		return comentarioEditarCandidato;
 	}
 
 	public void setComentarioEditar(Comentario comentarioEditar) {
-		System.out.println("Sera que setou: " + comentarioEditar.getTexto_coment());
-		this.comentarioEditar = comentarioEditar;
+		this.comentarioEditarCandidato = comentarioEditarCandidato;
+	}
+
+	public List<Comentario> getLista_comentarioCandidato() {
+		try {
+			this.lista_comentarioCandidato = this.fachada.consultarComentarioFiltradosIdCand(this.candidato);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return lista_comentarioCandidato;
 	}
 }

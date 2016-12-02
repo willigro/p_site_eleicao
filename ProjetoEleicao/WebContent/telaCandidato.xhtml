@@ -14,6 +14,7 @@
 	<f:view>
 		<ui:include src="menuNav.xhtml"></ui:include>
 		<!-- Include menu -->
+		<p:messages id="messages" showDetail="true" autoUpdate="true" />
 		<f:event listener="#{candidatoSelecionadoBean.catchIdCandidato}"
 			type="preRenderView" />
 		<!-- Renderiza com candidato selecionado -->
@@ -40,7 +41,7 @@
 								value="#{candidatoSelecionadoBean.candidato.estado_cand.nome_est}"></p:outputLabel>
 							<p:outputLabel
 								value="#{candidatoSelecionadoBean.candidato.cidade_cand.nome_cid}"></p:outputLabel>
-								<h:outputText value="Avaliar:" />
+							<h:outputText value="Avaliar:" />
 							<p:rating value="#{usuarioBean.avaliacao.notaAvaliacao}">
 								<p:ajax event="rate" listener="#{usuarioBean.onrate}" />
 								<p:ajax event="cancel" listener="#{usuarioBean.oncancel}" />
@@ -58,9 +59,10 @@
 								<h:panelGrid columns="2" cellpadding="10">
 									<h:outputText value="#{proj.descricao_proj}" />
 								</h:panelGrid>
-								<p:commandButton value="Comentar"
+								<p:commandButton value="Comentarios"
 									actionListener="#{candidatoSelecionadoBean.popularComentariosProposta(proj)}"
-									onclick="PF('dlg1').show();" update=":comentarios:tableComent">
+									onclick="PF('dlg1').show();"
+									update="comentariosProjeto:tableComentProjeto">
 								</p:commandButton>
 							</p:tab>
 						</p:accordionPanel>
@@ -69,11 +71,11 @@
 				<!-- Fim Div propostas do candidato -->
 				<div>
 					<!-- Div comentario das propostas -->
-					<h:form id="comentarios">
-						<p:dialog header="Dê sua opinião" modal="true" widgetVar="dlg1" minHeight="40"
+					<h:form id="comentariosProjeto">
+						<p:dialog header="Dê sua opinião" widgetVar="dlg1" minHeight="40"
 							width="25%">
-							<p:dataTable id="tableComent" var="coment"
-								value="#{candidatoSelecionadoBean.lista_comentario}"
+							<p:dataTable id="tableComentProjeto" var="coment"
+								value="#{candidatoSelecionadoBean.lista_comentarioProjeto}"
 								scrollable="true" scrollHeight="300">
 								<p:column>
 									<p:outputLabel value="#{coment.usuario_coment.nome_user}"></p:outputLabel>
@@ -81,9 +83,10 @@
 									<p:outputLabel value="#{coment.texto_coment}"></p:outputLabel>
 									<br></br>
 									<p:commandLink value="Editar " onclick="PF('dlg2').show();"
-										update=":comentarios:formEditarComentario:txtAreaEditComent">
+										rendered="#{autenticacaoTelaConsultaBean.renderizarEditarComentario(coment.usuario_coment.id_user)}"
+										update="comentariosProjeto:formEditarComentarioProjeto:txtAreaEditComentProjeto">
 										<f:setPropertyActionListener
-											target="#{candidatoSelecionadoBean.comentarioEditar}"
+											target="#{candidatoSelecionadoBean.comentarioEditarProjeto}"
 											value="#{coment}" />
 									</p:commandLink>
 									<p:commandLink value="Denunciar"
@@ -92,37 +95,118 @@
 							</p:dataTable>
 							<p:outputLabel value="Deixe o seu comentário"></p:outputLabel>
 							<br></br>
-							<p:inputTextarea id="comentarioEditar" rows="5" col="50"
+							<p:inputTextarea id="comentarioEditarProjeto" rows="5" col="50"
 								maxlength="500" style="width: 100%" autoResize="false"
 								value="#{candidatoSelecionadoBean.comentario.texto_coment}" />
 							<p:commandButton value="Enviar"
 								action="#{candidatoSelecionadoBean.comentarioProsposta}"
-								update=":comentarios:tableComent"></p:commandButton>
+								update="comentariosProjeto:tableComentProjeto">							
+							</p:commandButton>
 						</p:dialog>
 						<p:dialog header="Edite sua opinião" widgetVar="dlg2"
 							minHeight="40" width="25%">
-							<h:form id="formEditarComentario">
+							<h:form id="formEditarComentarioProjeto">
 								<!-- Form Editar Comentario -->
-								<p:inputTextarea id="txtAreaEditComent"
-									value="#{candidatoSelecionadoBean.comentarioEditar.texto_coment}">
+								<p:inputTextarea id="txtAreaEditComentProjeto"
+									value="#{candidatoSelecionadoBean.comentarioEditarProjeto.texto_coment}">
 								</p:inputTextarea>
 								<p:commandButton value="Editar"
 									action="#{candidatoSelecionadoBean.editarComentarioProposta}"
-									update=":comentarios:tableComent" onclick="PF('dlg2').hide();"></p:commandButton>
+									update="comentariosProjeto:tableComentProjeto"
+									onclick="PF('dlg2').hide();"></p:commandButton>
 							</h:form>
 							<!-- Fim Form Editar Comentario -->
 						</p:dialog>
 					</h:form>
 				</div>
 				<!-- Fim Div comentario das propostas -->
+
+
+				<div class="ui-g-3 ui-md-3">
+					<!-- Div comentario do candidato -->
+					<h:form id="comentariosCandidato">
+						<p:panel header="Dê sua opinião" id="pnlComentarioCandidato"
+							minHeight="40" width="25%">
+							<p:dataTable id="tableComentCandidato" var="coment"
+								value="#{candidatoSelecionadoBean.lista_comentarioCandidato}"
+								scrollable="true" scrollHeight="300">
+								<p:column>
+									<p:outputLabel value="#{coment.usuario_coment.nome_user}"></p:outputLabel>
+									<br></br>
+									<p:outputLabel value="#{coment.texto_coment}"></p:outputLabel>
+									<br></br>
+									<p:commandLink value="Editar " onclick="PF('dlg4').show();"
+										rendered="#{autenticacaoTelaConsultaBean.renderizarEditarComentario(coment.usuario_coment.id_user)}"
+										update=":comentariosCandidato:formEditarComentarioCandidato:txtAreaEditComentCandidato">
+										<f:setPropertyActionListener
+											target="#{candidatoSelecionadoBean.comentarioEditarProjeto}"
+											value="#{coment}" />
+									</p:commandLink>
+									<p:commandLink value="Denunciar"
+										action="#{usuarioBean.searchUser}"></p:commandLink>
+								</p:column>
+							</p:dataTable>
+							<p:outputLabel value="Deixe o seu comentário"></p:outputLabel>
+							<br></br>
+							<p:inputTextarea id="comentarioEditarCandidato" rows="5" col="50"
+								maxlength="500" style="width: 100%" autoResize="false"
+								value="#{candidatoSelecionadoBean.comentario.texto_coment}" />
+							<p:commandButton value="Enviar"
+								action="#{candidatoSelecionadoBean.comentarioCandidato}"
+								update=":comentariosCandidato:tableComentCandidato"></p:commandButton>
+						</p:panel>
+						<p:dialog header="Edite sua opinião" widgetVar="dlg4"
+							minHeight="40" width="25%">
+							<h:form id="formEditarComentarioCandidato">
+								<!-- Form Editar Comentario -->
+								<p:inputTextarea id="txtAreaEditComentCandidato"
+									value="#{candidatoSelecionadoBean.comentarioEditarProjeto.texto_coment}">
+								</p:inputTextarea>
+								<p:commandButton value="Editar"
+									action="#{candidatoSelecionadoBean.editarComentarioProposta}"
+									update=":comentariosCandidato:tableComentCandidato"
+									onclick="PF('dlg4').hide();"></p:commandButton>
+							</h:form>
+							<!-- Fim Form Editar Comentario -->
+						</p:dialog>
+					</h:form>
+				</div>
+				<!-- Fim Div comentario do candidato -->
+				<div>
+					<!-- Div login -->
+					<h:form id="loginForm">
+						<p:dialog header="Faça seu Login" id="login"
+							resizable="false" modal="true" position="center" width="300" >
+							<p:messages autoUpdate="true" showDetail="true"
+								showSummary="true" />
+
+							<h:panelGrid columns="1">
+								<h:panelGrid columns="2">
+									<h:outputLabel value="Sou administrador" />
+									<h:selectBooleanCheckbox id="checkbox"
+										value="#{loginBean.type}" />
+								</h:panelGrid>
+								<p:inputText id="input_mail" size="25" placeholder="Seu e-mail"
+									value="#{loginBean.username}" required="true" />
+								<p:password size="25" id="input_password" placeholder="Senha"
+									value="#{loginBean.password}" required="true" />
+								<p:commandButton size="25" value="Entrar" icon="ui-icon-locked"
+									action="#{loginBean.efetuarLogin}" />
+							</h:panelGrid>
+						</p:dialog>
+					</h:form>
+					<!-- Fim Form Editar Comentario -->
+				</div>
+				<!-- Fim Div login -->
+				<h:form>
+					<h3>Deixe seu comentário</h3>
+					<p:inputTextarea rows="5" col="30" counter="display"
+						maxlength="500" counterTemplate="{0} Caracteres Restantes"
+						autoResize="false" />
+					<h:outputText id="display" />
+				</h:form>
 			</div>
 			<!-- Fim Div Tela -->
-			<h:form>
-				<h3>Deixe seu comentário</h3>
-				<p:inputTextarea rows="5" col="30" counter="display" maxlength="500"
-					counterTemplate="{0} Caracteres Restantes" autoResize="false" />
-				<h:outputText id="display" />
-			</h:form>
 		</div>
 		<!-- Fim Container -->
 	</f:view>
