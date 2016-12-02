@@ -70,7 +70,7 @@ public class ControllerUsuario {
 		if(usuario.getSenha().length() < Usuario.getSystemLimitCaracterPassword()){
 			throw new LimitCaracterPasswordlException(Usuario.getSystemLimitCaracterPassword());
 		}
-		if(usuarioDAO.loginUsuario(usuario).isAtivo_user()){
+		if(usuarioDAO.loginUsuario(usuario).isAtivo_user() == false){
 			throw new AccountDisabledException();
 		}
 
