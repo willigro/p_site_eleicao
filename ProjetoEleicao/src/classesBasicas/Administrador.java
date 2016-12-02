@@ -32,6 +32,13 @@ public class Administrador {
 	@Column(nullable = false, length = 30)
 	private String email;
 
+	
+	
+	private static final int LIMIT_CARACTER_PASSWORD = 8;
+	
+
+	private static final int LIMIT_CARACTER_EMAIL = 30;
+	
 	// Relacionamentos
 
 	// Constructor
@@ -79,6 +86,14 @@ public class Administrador {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public static int getLimitCaracterPassword() {
+		return LIMIT_CARACTER_PASSWORD;
+	}
+
+	public static int getLimitCaracterEmail() {
+		return LIMIT_CARACTER_EMAIL;
 	}
 
 	// Methods
