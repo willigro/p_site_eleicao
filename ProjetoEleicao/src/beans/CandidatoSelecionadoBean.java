@@ -11,12 +11,14 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.event.RateEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import com.sun.prism.Image;
 
 import classesBasicas.Administrador;
+import classesBasicas.Avaliacao;
 import classesBasicas.Candidato;
 import classesBasicas.Cargo;
 import classesBasicas.Cidade;
@@ -42,6 +44,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 	private Comentario comentarioEditar;
 	private List<Comentario> lista_comentario;
 	private Administrador adm;
+	private Avaliacao avaliacao;
 	
 	public CandidatoSelecionadoBean() {
 		this.projetos = new ArrayList<>();
@@ -56,6 +59,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 		this.comentario = new Comentario();
 		this.comentarioEditar = new Comentario();
 		this.adm = new Administrador();
+		this.avaliacao = new Avaliacao();
 	}
 
 	// Methods
@@ -163,6 +167,21 @@ public class CandidatoSelecionadoBean implements Serializable {
 		}
 		return "paginaEditarCand";
 	}
+	
+	public void onrate(RateEvent rateEvent) {
+		try {
+			Usuario user = new Usuario();
+			user.setId_user(16);
+			this.avaliacao.setCandidato_aval(this.candidato);
+			this.avaliacao.setUsuario_aval(user);
+			this.avaliacao.setProjeto_aval(null);
+			this.fachada.inserirAvaliacaoCandidato(avaliacao);
+		} catch (Exception e) {
+			FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: ", e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, mensagem);
+		}
+
+	}
 
 	private void mensagemSucessoEdit(String texto) {
 		FacesContext mensagem = FacesContext.getCurrentInstance();
@@ -184,9 +203,17 @@ public class CandidatoSelecionadoBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, mensagem);
 	}
 
-	// Getters e Setters
+	// Getters e Setters	
 	public List<Projeto> getProjetos() {
 		return projetos;
+	}
+
+	public Avaliacao getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(Avaliacao avaliacao) {
+		this.avaliacao = avaliacao;
 	}
 
 	public void setProjetos(List<Projeto> projetos) {
