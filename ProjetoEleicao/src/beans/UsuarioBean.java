@@ -34,7 +34,6 @@ public class UsuarioBean {
 	private LoginBean loginBean;
 	private boolean termosUso;
 	private Avaliacao avaliacao;
-	
 
 	private String search = ""; // String de pesquisa
 
@@ -103,51 +102,48 @@ public class UsuarioBean {
 		return usuarios;
 	}
 
-	public void onrate(RateEvent rateEvent) {
-		try {
-			Usuario user = new Usuario();
-			user.setId_user(16);
-			Candidato cand = new Candidato();
-			cand.setId_cand(3);
-			this.avaliacao.setCandidato_aval(cand);
-			this.avaliacao.setUsuario_aval(user);
-			this.avaliacao.setProjeto_aval(null);
-			this.fachada.inserirAvaliacaoCandidato(avaliacao);
-		} catch (Exception e) {
-			FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: ", e.getMessage());
-			FacesContext.getCurrentInstance().addMessage(null, mensagem);
-		}
-
-	}
-
 	public void buttonAction(ActionEvent actionEvent) {
 		try {
 			if (this.termosUso == true) {
 				this.usuario.setAtivo_user(true);
-				this.loginBean.username = usuario.getEmail_user();
-				this.loginBean.password = usuario.getSenha();
-				this.loginBean.setType(false);
+				String senha = this.usuario.getSenha();
 				this.fachada.cadastrarUsuario(usuario);
-				//this.loginBean.efetuarLogin();
+				this.usuario.setSenha(senha);
+				FacesContext fc = FacesContext.getCurrentInstance();
+				HttpSession session = (HttpSession) fc.getExternalContext().getSession(true);
+				session.setAttribute("usuariologado", this.fachada.loginUsuario(usuario));
 			} else {
-				FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: ",
+				FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ",
 						"Aceite os termos de uso");
 				FacesContext.getCurrentInstance().addMessage(null, mensagem);
 			}
 		} catch (Exception e) {
-			FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: ", e.getMessage());
+			FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", e.getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, mensagem);
 		}
 	}
 
 	public String cadastrarUsuario() {
 		try {
-			usuario.setAtivo_user(true);
-			this.fachada.cadastrarUsuario(usuario);
+			if (this.termosUso == true) {
+				this.usuario.setAtivo_user(true);
+				String senha = this.usuario.getSenha();
+				this.fachada.cadastrarUsuario(usuario);
+				this.usuario.setSenha(senha);
+				FacesContext fc = FacesContext.getCurrentInstance();
+				HttpSession session = (HttpSession) fc.getExternalContext().getSession(true);
+				session.setAttribute("usuariologado", this.fachada.loginUsuario(usuario));
+				FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso ", "Cadastrad com Sucesso!");
+				FacesContext.getCurrentInstance().addMessage(null, mensagem);
+			} else {
+				FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", "Aceite os termos de uso");
+				FacesContext.getCurrentInstance().addMessage(null, mensagem);
+			}
 		} catch (Exception e) {
-
+			FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", e.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, mensagem);
 		}
-		return "";
+		return null;
 	}
 
 	public void searchUser() {
@@ -175,14 +171,15 @@ public class UsuarioBean {
 			Flash flash = facesContext.getExternalContext().getFlash();
 			flash.setKeepMessages(true);
 			flash.setRedirect(true);
-			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Informacao", "Usuario Salvo com sucesso!"));
+			facesContext.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacao", "Usuario Salvo com sucesso!"));
 		} catch (Exception e) {
-			
+
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			Flash flash = facesContext.getExternalContext().getFlash();
 			flash.setKeepMessages(true);
 			flash.setRedirect(true);
-			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Advertencia", e.getMessage()));
+			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Advertencia", e.getMessage()));
 		}
 
 	}
@@ -194,6 +191,5 @@ public class UsuarioBean {
 	public void setAvaliacao(Avaliacao avaliacao) {
 		this.avaliacao = avaliacao;
 	}
-	
 
 }

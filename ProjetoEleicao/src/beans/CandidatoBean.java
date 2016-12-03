@@ -1,5 +1,7 @@
 package beans;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,7 +11,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
+
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import classesBasicas.Candidato;
 import classesBasicas.Cargo;
@@ -34,6 +40,9 @@ public class CandidatoBean implements Serializable {
 	private List<Candidato> candidatos;
 	private List<Estado> lista_estados;
 	private List<Partido> lista_partidos;
+	private StreamedContent foto;
+	private int iteradorFoto = 0;
+	private NavigationBean navigationBean;
 
 	public CandidatoBean() {
 		this.candidato = new Candidato();
@@ -46,6 +55,7 @@ public class CandidatoBean implements Serializable {
 		this.candidatos = new ArrayList<>();
 		this.lista_estados = new ArrayList<>();
 		this.lista_cidades_filtrados = new ArrayList<>();
+		this.navigationBean = new NavigationBean();
 	}
 
 	// Methods
@@ -109,7 +119,7 @@ public class CandidatoBean implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "paginaEditarCand.xhtml";
+		return navigationBean.toEditarCandidato();
 	}
 
 	public String pagCandidato(Candidato candidato) {
@@ -139,8 +149,25 @@ public class CandidatoBean implements Serializable {
 			e.printStackTrace();
 			mensagemFalhaCadastro(e.getMessage());
 		}
-		return "paginaAdmin";
+		return navigationBean.toConsultarCandidato();
+
 	}
+
+	/*
+	 * public String editar() throws Exception { try { // setando manualmente o
+	 * novo candidato ID (num e city pega na view) // candidato.setId_cand(113);
+	 * // System.out.println(candidato.getId_cand());
+	 * 
+	 * System.out.println("DEPOIS DO BOT�O EDITAR: " +
+	 * candidato.getId_cand());
+	 * 
+	 * fachada.alterarCandidato(this.candidato); //
+	 * addMensagem("Editado com Sucesso!"); } catch (Exception e) {
+	 * e.printStackTrace(); } return "paginaEditarCand"; }
+	 */
+
+	// return "paginaAdmin";
+	// }
 
 	public void consultarCandidatoFiltrado() {
 		try {
@@ -148,13 +175,7 @@ public class CandidatoBean implements Serializable {
 				this.candidato.setTipo_Cargo_cand(cargo.getNome_cargo());
 			else
 				this.candidato.setTipo_Cargo_cand(null);
-			System.out.println("consul: " + this.candidato.toString());
 			this.candidatos = fachada.consultarCandidatosFiltrados(this.candidato);
-
-			if (this.candidatos.get(0).getFoto_cand() != null)
-				System.out.println("imagem aqui");
-			else
-				System.out.println("sem imagem");
 		} catch (Exception e) {
 			e.printStackTrace();
 			mensagemFalhaConsulta(e.getMessage());
@@ -212,6 +233,7 @@ public class CandidatoBean implements Serializable {
 	}
 
 	public List<Candidato> getCandidatos() {
+		this.iteradorFoto = 0;
 		return candidatos;
 	}
 
@@ -243,6 +265,21 @@ public class CandidatoBean implements Serializable {
 
 	public Cargo getCargo() {
 		return cargo;
+	}
+
+	public StreamedContent getFoto() {
+		try {
+			
+				if (this.candidatos.get(this.iteradorFoto) != null && this.candidatos.get(this.iteradorFoto).getFoto_cand() != null) {
+					return new DefaultStreamedContent(
+							new ByteArrayInputStream(candidatos.get(this.iteradorFoto).getFoto_cand()));
+				} else
+					System.out.println("foto nula");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public List<Cargo> getLista_cargos() {

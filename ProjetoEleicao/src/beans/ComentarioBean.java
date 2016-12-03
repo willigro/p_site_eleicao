@@ -59,24 +59,38 @@ public class ComentarioBean {
 	}
 
 	// Methods
-	private void addMensagem(String texto) {
-		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, null);
-		FacesContext.getCurrentInstance().addMessage(null, mensagem);
-	}
 
-	public void denunciarComentario() {
-		this.denunciar.setUsuario(usuarioLogado);
-		this.denunciar.setComentario(comentarioSelecionado);
-		try {
-			this.fachada.denunciarComentario(denunciar);
-			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Comentario denunciado!", null);
-		} catch (Exception e) {
-			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null);
+	public void denunciarComentario(Comentario comentario) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		this.usuarioLogado = (Usuario) facesContext.getExternalContext().getSessionMap().get("usuarioLogado");
+
+		if (usuarioLogado != null) {
+
+			if (comentario != null) {
+
+				this.denunciar.setUsuario(usuarioLogado);
+				this.denunciar.setComentario(comentario);
+
+				try {
+
+					this.fachada.denunciarComentario(denunciar);
+
+					returnMessage(FacesMessage.SEVERITY_INFO, "", "Comentario denunciado!");
+
+				} catch (Exception e) {
+					returnMessage(FacesMessage.SEVERITY_ERROR, "", e.getMessage());
+				}
+			} else {
+				returnMessage(FacesMessage.SEVERITY_ERROR, "Erro 1103", "Nao sera possivel realizar essa operacao");
+			}
+		} else {
+			returnMessage(FacesMessage.SEVERITY_ERROR, "", "Faca login para poder denunciar o comentario");
 		}
 	}
 
 	public void remover() {
 		try {
+			System.out.println("ID = " + this.comentario.getId_coment());
 			this.fachada.removerComent(comentario);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -213,6 +227,11 @@ public class ComentarioBean {
 			e.printStackTrace();
 		}
 		return lista_denunciados;
+	}
+
+	private void returnMessage(FacesMessage.Severity facesMessageSeverity, String title, String message) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(facesMessageSeverity, title, message));
+
 	}
 
 }

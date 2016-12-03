@@ -9,47 +9,13 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Tela de Consulta do Candidato</title>
+	<title>Candidatos</title>
 	<style>
 /
 * body {
 	margin: 0;
 	padding: 0;
 }
-
-.divFiltros {
-	position: absolute;
-	left: 0;
-	z-index: 999;
-	padding: 6px;
-	padding: 6px;
-}
-
-#painelPrincipal {
-	margin-top: 12px;
-}
-/*
-	position: fixed;
-	z-index: 999;
-	left: 5px;
-	top: 5px;
-	padding: 6px;
-}
-
-#menu-vertical {
-	position: fixed;
-	z-index: 999;
-	left: 5px;
-	top: 5px;
-	overflow: hidden;
-	border: 1px dashed #CCC;
-	padding: 6px;
-}
-
-.principal {
-	margin: auto;
-	border: #000000 1px solid;
-}*/
 </style>
 </h:head>
 <h:body>
@@ -59,10 +25,6 @@
 		<f:metadata>
 			<f:event listener="#{candidatoBean.consultarCandidatoFiltrado}"
 				type="preRenderView"></f:event>
-				<f:metadata>
-			<f:event listener="#{autenticacaoTelaConsultaBean.renderizarEditarComentario}"
-				type="preRenderView"></f:event>
-		</f:metadata>
 		</f:metadata>
 		<div class="ui-fluid" id="container">
 			<!-- Container -->
@@ -76,7 +38,7 @@
 							action="#{candidatoBean.consultarCandidatoFiltrado}"
 							update=":formPesquisa"></p:commandButton>
 
-						<p:selectOneMenu id="dropTipo"
+						<p:selectOneMenu id="dropTipo" autoWidth="false"
 							value="#{candidatoBean.cargo.nome_cargo}"
 							style="width:150px; margin-top: 4px;">
 							<f:selectItem itemLabel="Cargo" itemValue=""
@@ -86,14 +48,14 @@
 						</p:selectOneMenu>
 
 						<p:inputText placeholder="Nome"
-							value="#{candidatoBean.candidato.nome_cand}" maxlength="50" />
+							value="#{candidatoBean.candidato.nome_cand}" maxlength="50" style="width:150px"/>
 
 						<p:inputText placeholder="Numero"
 							value="#{candidatoBean.candidato.numero_cand}"
-							style="margin-top: 4px;" />
+							style="margin-top: 4px;width:150px"/>
 
 						<p:selectOneMenu id="dropPartido" style="width:150px"
-							filter="true"
+							autoWidth="false" filter="true"
 							value="#{candidatoBean.candidato.partido_cand.id_part}">
 							<f:selectItem itemLabel="Partido" itemValue="0"
 								noSelectionOption="true" />
@@ -106,6 +68,7 @@
 						candidato.estado_cand.id_est
 						-->
 						<p:selectOneMenu id="dropEstado" style="width:150px" filter="true"
+							autoWidth="false"
 							value="#{candidatoBean.candidato.estado_cand.id_est}">
 							<f:selectItem itemLabel="Estado" itemValue="0"
 								noSelectionOption="true" />
@@ -116,7 +79,7 @@
 								process=":formFiltro:dropEstado" update=":formFiltro:dropCidade"></p:ajax>
 						</p:selectOneMenu>
 
-						<p:selectOneMenu id="dropCidade"
+						<p:selectOneMenu id="dropCidade" autoWidth="false"
 							value="#{candidatoBean.candidato.cidade_cand.id_cid}"
 							style="width:150px">
 							<f:selectItem itemLabel="Cidade" itemValue="0"
@@ -138,12 +101,13 @@
 							<p:panel>
 								<h:panelGrid>
 									<f:facet name="header">
-										<p:graphicImage value="#{cand.foto_cand}" style="width:100%" />
+											style="width:100%" />
 									</f:facet>
 									<h:outputText value="#{cand.tipo_Cargo_cand}"></h:outputText>
 									<h:outputText value="#{cand.numero_cand}"></h:outputText>
 									<h:outputText value="#{cand.partido_cand.sigla_part}"></h:outputText>
-									<p:commandButton id="bConsultar" icon="fa-bell" value="Abrir"
+									<p:commandButton id="bConsultar" icon="ui-icon-search"
+										style="width:80px;height:30px;"
 										action="#{candidatoBean.pagCandidato(cand)}">
 									</p:commandButton>
 								</h:panelGrid>

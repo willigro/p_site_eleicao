@@ -15,15 +15,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tb_usuario")
 public class Usuario {
+	
+	private static final int DB_LIMIT_CHARS_NOME_USER = 50;
+	private static final int DB_LIMIT_CHARS_EMAIL_USER = 30;
+	private static final int SYS_LIMIT_CARACTER_PASSWORD = 8; // Tem que ser 8 caracter por causa da criptografia MD5
+	private static final int DB_LIMIT_CARACTER_EMAIL = 30;
+	private static final int DB_LIMIT_PASSWORD_EMAIL = 32;
+	
 	// Attributes
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id_user;
 	
-	@Column(nullable=false,length=50)
+	@Column(nullable=false,length=DB_LIMIT_CHARS_NOME_USER)
 	private String nome_user;
 	
-	@Column(nullable=false,length=30)
+	@Column(nullable=false,length=DB_LIMIT_CHARS_EMAIL_USER)
 	private String email_user;
 	
 	@OneToMany(mappedBy = "usuario_coment")
@@ -35,11 +42,13 @@ public class Usuario {
 	@Column(nullable=false)
 	private boolean ativo_user;
 	
-	@Column(nullable=false,length=32)
+	@Column(nullable=false,length=DB_LIMIT_PASSWORD_EMAIL)
 	private String senha;
 	
 	@OneToMany(mappedBy = "usuario")
 	private List<Denuncia> denuncias;
+	
+	
 	
 
 	// Constructor
@@ -114,4 +123,17 @@ public class Usuario {
 	public void setDenuncias(List<Denuncia> denuncias) {
 		this.denuncias = denuncias;
 	}
+	
+	public static int getSystemLimitCaracterPassword() {
+		return SYS_LIMIT_CARACTER_PASSWORD;
+	}
+
+	public static int getLimitCaracterEmail() {
+		return DB_LIMIT_CARACTER_EMAIL;
+	}
+	
+	public static int getLimitCaracterName() {
+		return DB_LIMIT_CHARS_NOME_USER;
+	}
+
 }	

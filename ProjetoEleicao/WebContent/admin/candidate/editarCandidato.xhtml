@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/admin/index.xhtml">
+	<ui:define name="conteudo">
+
+
+
+		<p:growl id="msg">
+
+			<h:panelGrid>
+				<f:view>
+					<f:event listener="#{candidatoSelecionadoBean.catchIdCandidato}"
+						type="preRenderView" />
+					<h:form id="formCadastro">
+						<p:messages id="messages" showDetail="true" autoUpdate="true" />
+
+
+						<!-- 
+					<h:outputLabel for="foto" value="FOTO:"></h:outputLabel>
+					<p:fileUpload
+						fileUploadListener="#{candidatoBean.mensagemSucessoUpload}"
+						mode="advanced" dragDropSupport="false" update="messages"
+						sizeLimit="2000000" fileLimit="3"
+						allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
+					</p:fileUpload>
+ 					-->
+						<h:panelGrid columns="1">
+
+							<div class="form-group">
+								<h:outputLabel for="nome" value="NOME"></h:outputLabel>
+								<p:inputText size="100"
+									placeholder="#{candidatoSelecionadoBean.candidato.nome_cand}"
+									id="nome"
+									value="#{candidatoSelecionadoBean.candidato.nome_cand}"
+									required="true">
+									<f:validateLength minimum="3" maximum="50" />
+								</p:inputText>
+							</div>
+							<div class="form-group">
+								<h:outputLabel for="numero" value="NÚMERO"></h:outputLabel>
+								<p:inputText size="20"
+									placeholder="#{candidatoSelecionadoBean.candidato.numero_cand}"
+									id="numero"
+									value="#{candidatoSelecionadoBean.candidato.numero_cand}"
+									required="true">
+									<f:validateLength minimum="2" maximum="5" />
+								</p:inputText>
+							</div>
+
+							<div class="form-group">
+								<h:outputLabel for="tipoCargo" value="TIPO DO CARGO"></h:outputLabel>
+								<p:inputText size="50"
+									placeholder="#{candidatoSelecionadoBean.candidato.tipo_Cargo_cand}"
+									id="tipoCargo"
+									value="#{candidatoSelecionadoBean.candidato.tipo_Cargo_cand}"
+									required="true">
+									<f:validateLength minimum="3" maximum="50" />
+								</p:inputText>
+							</div>
+
+							<br />
+							
+							<h:panelGrid columns="2">
+								<p:commandButton icon="ui-icon-plusthick" value="Editar"
+								action="#{candidatoSelecionadoBean.editar()}"></p:commandButton>
+								<p:commandButton icon="ui-icon-plusthick" value="Voltar"
+									action="#{navigationBean.toConsultarCandidato()}" />
+							</h:panelGrid>
+							
+							<!-- 
+							<h:panelGrid columns="2">
+								<p:commandButton icon="ui-icon-plusthick" value="Cadastrar"
+									action="#{candidatoBean.cadastrar()}" />
+								<p:commandButton icon="ui-icon-plusthick" value="Voltar"
+									action="#{navigationBean.toConsultarCandidato()}" />
+							</h:panelGrid>
+							 -->
+						</h:panelGrid>
+					</h:form>
+				</f:view>
+
+			</h:panelGrid>
+
+		</p:growl>
+
+	</ui:define>
+
+
+
+</ui:composition>

@@ -56,7 +56,7 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 		return c;
 	}
 
-	private void addRestrictionIdCand(Criteria criteria, String propertyName, int id) {
+	private void addRestrictionIdProj(Criteria criteria, String propertyName, int id) {
 		if (id > 0) {
 			criteria.add(Restrictions.eq(propertyName, id));
 		}
@@ -69,7 +69,7 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 		comt.getProjeto_coment().setId_proj(projeto.getId_proj());
 		Example cidadeExample = Example.create(comt).excludeZeroes();
 		Criteria criteria = session.createCriteria(Comentario.class).add(cidadeExample);
-		addRestrictionIdCand(criteria, "projeto_coment.id_proj", projeto.getId_proj());
+		addRestrictionIdProj(criteria, "projeto_coment.id_proj", projeto.getId_proj());
 
 		List<Comentario> lista = criteria.list();
 		if (lista.isEmpty())
@@ -92,5 +92,27 @@ public class ComentarioDAO extends DAOGenerico<Comentario> implements IComentari
 			tx.rollback();
 			e.printStackTrace();
 		}
+	}
+
+	private void addRestrictionIdCand(Criteria criteria, String propertyName, int id) {
+		if (id > 0) {
+			criteria.add(Restrictions.eq(propertyName, id));
+		}
+	}
+	
+	@Override
+	public List<Comentario> consultarComentarioFiltradosIdCand(Candidato candidato) throws Exception {
+		Session session = (Session) getManager().getDelegate();
+		Comentario comt = new Comentario();
+		comt.getProjeto_coment().setId_proj(candidato.getId_cand());
+		Example cidadeExample = Example.create(comt).excludeZeroes();
+		Criteria criteria = session.createCriteria(Comentario.class).add(cidadeExample).add(Restrictions.isNull("projeto_coment.id_proj"));
+		addRestrictionIdCand(criteria, "candidato_coment.id_cand", candidato.getId_cand());
+
+		List<Comentario> lista = criteria.list();
+		if (lista.isEmpty())
+			throw new Exception("Nao foram encontrados registros para esta pesquisa");
+		else
+			return lista;
 	}
 }

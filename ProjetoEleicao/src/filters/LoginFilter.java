@@ -39,6 +39,8 @@ public class LoginFilter implements Filter{
 		if(loginBean == null || loginBean.isLoggedIn() == false)
 		{
 			((HttpServletResponse) response).sendRedirect(((HttpServletRequest)request).getContextPath() + navigationBean.toLogin());
+		}else{
+			
 		}
 		
 			

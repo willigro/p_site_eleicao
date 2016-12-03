@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Cadastro de Usuários</title>
@@ -28,9 +29,10 @@ body {
 </h:head>
 <body>
 	<f:view>
+	<ui:include src="menuNav.xhtml"></ui:include>
 		<h:form>
-			<p:growl id="messages" />
-			<p:menubar styleClass="menubar">
+			<p:growl id="messages" />			
+			<!-- <p:menubar styleClass="menubar">
 				<p:menuitem>
 					<font face="Calibri" color="White" size="6">Brasil Transparente</font>
 				</p:menuitem>
@@ -39,10 +41,13 @@ body {
 						onclick="PF('dlg2').show();" />
 				</f:facet>
 			</p:menubar>
+			 -->
 			<p:dialog header="Login" widgetVar="dlg2" modal="true" height="140">
 				<h:panelGrid columns="1" cellpadding="5">
-					<p:inputText placeholder="Email" value="#{usuarioBean.usuario.email_user}" required="true" />
-					<p:password placeholder="Senha" id="senha1" value="#{usuarioBean.usuario.senha}" />
+					<p:inputText placeholder="Email"
+						value="#{usuarioBean.usuario.email_user}" required="true" />
+					<p:password placeholder="Senha" id="senha1"
+						value="#{usuarioBean.usuario.senha}" />
 					<p:commandButton value="Login"></p:commandButton>
 				</h:panelGrid>
 			</p:dialog>
@@ -50,28 +55,35 @@ body {
 		<h:form>
 			<p:messages id="messages" showDetail="true" autoUpdate="true" />
 			<h1 align="center">
-				<font face="Calibri" color="black">Participe da discussão, crie sua conta!</font>
+				<font face="Calibri" color="black">Participe da discussão,
+					crie sua conta!</font>
 			</h1>
-			<h:panelGrid columns="1" id="matchGrid" cellpadding="10" styleClass="grid">
-				<p:inputText placeholder="Nome" value="#{usuarioBean.usuario.nome_user}" required="true">
+			<h:panelGrid columns="1" id="matchGrid" cellpadding="10"
+				styleClass="grid">
+				<p:inputText placeholder="Nome"
+					value="#{usuarioBean.usuario.nome_user}" required="true">
 					<f:validateLength minimum="3" maximum="50" />
 				</p:inputText>
-				<p:inputText placeholder="Email" value="#{usuarioBean.usuario.email_user}" required="true">
+				<p:inputText placeholder="Email"
+					value="#{usuarioBean.usuario.email_user}" required="true">
 					<f:validateLength maximum="30" />
 				</p:inputText>
-				<p:password placeholder="Senha" id="senha1" value="#{usuarioBean.usuario.senha}" match="senha2"
+				<p:password placeholder="Senha" id="senha1"
+					value="#{usuarioBean.usuario.senha}" match="senha2"
 					label="Digite sua senha" required="true">
 					<f:validateLength minimum="8" />
 				</p:password>
-				<p:password placeholder="Confirme Senha" id="senha2" value="#{usuarioBean.usuario.senha}" label="Confirme sua senha"
+				<p:password placeholder="Confirme Senha" id="senha2"
+					value="#{usuarioBean.usuario.senha}" label="Confirme sua senha"
 					required="true">
 					<f:validateLength minimum="8" />
 				</p:password>
-				<h:panelGrid columns = "2">
-				    <p:selectBooleanCheckbox value="#{usuarioBean.termosUso}" />
-				    <h:outputText value="  Concordo com termos de uso" />
+				<h:panelGrid columns="2">
+					<p:selectBooleanCheckbox value="#{usuarioBean.termosUso}" />
+					<h:outputText value="  Concordo com termos de uso" />
 				</h:panelGrid>
-				<p:commandButton value="Criar minha conta" actionListener="#{usuarioBean.buttonAction}" update="matchGrid" style="width:230px" />
+				<p:commandButton value="Criar minha conta" actionListener="#{usuarioBean.cadastrarUsuario}" update="matchGrid" style="width:230px" />
+
 			</h:panelGrid>
 		</h:form>
 	</f:view>

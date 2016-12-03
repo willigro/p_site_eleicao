@@ -51,10 +51,6 @@ public class Facade implements IFachada {
 		return this.controllerAdministrador.loginAdministrador(adminsitrador);
 	}
 
-	@Override
-	public void logoutAdministrador() throws Exception {
-
-	}
 
 	@Override
 	public void cadastrarCandidato(Candidato candidato) throws Exception {
@@ -228,6 +224,7 @@ public class Facade implements IFachada {
 		return null;
 	}
 
+	@Override
 	public List<ErroSite> consultarErros() throws Exception {
 		if (validaControl(this.controllerErroSite)) {
 			return this.controllerErroSite.consultarErros();
@@ -243,6 +240,7 @@ public class Facade implements IFachada {
 		return null;
 	}
 
+	@Override
 	public void denunciarComentario(Denuncia denuncia) throws Exception {
 		if (validaControl(this.controllerDenuncia)) {
 			controllerDenuncia.denunciarComentario(denuncia);
@@ -260,6 +258,20 @@ public class Facade implements IFachada {
 	@Override
 	public void removerComent(Comentario comentario) throws Exception {
 		this.controllerComentario.removerComent(comentario);
+	}
+
+	@Override
+	public List<Comentario> consultarComentarioFiltradosIdCand(Candidato candidato) throws Exception {
+		if (validaControl(this.controllerComentario)) {
+			return this.controllerComentario.consultarComentarioFiltradosIdCand(candidato);
+		}
+		return null;
+	}
+
+	@Override
+	public void logoutAdministrador() throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

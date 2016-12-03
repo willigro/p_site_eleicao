@@ -5,12 +5,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-
 import java.util.Enumeration;
-
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-
 import classesBasicas.Administrador;
 import classesBasicas.Usuario;
 import facade.Facade;
@@ -88,9 +84,8 @@ public class LoginBean{
 		session.invalidate();
 		loggedIn = false;
 
-		returnMessage(FacesMessage.SEVERITY_ERROR,"", "Desconectou-se com sucesso!");
-
-		return navigationBean.redirectToLogin();
+		returnMessage(FacesMessage.SEVERITY_INFO,"", "Desconectou-se com sucesso!");
+		return navigationBean.toLogin();
 	}
 	
 	public String getAtributeInCurrentSession(){
