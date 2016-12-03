@@ -9,7 +9,7 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Tela de Consulta do Candidato</title>
+	<title>Candidatos</title>
 	<style>
 /
 * body {
@@ -48,11 +48,11 @@
 						</p:selectOneMenu>
 
 						<p:inputText placeholder="Nome"
-							value="#{candidatoBean.candidato.nome_cand}" maxlength="50" />
+							value="#{candidatoBean.candidato.nome_cand}" maxlength="50" style="width:150px"/>
 
 						<p:inputText placeholder="Numero"
 							value="#{candidatoBean.candidato.numero_cand}"
-							style="margin-top: 4px;" />
+							style="margin-top: 4px;width:150px"/>
 
 						<p:selectOneMenu id="dropPartido" style="width:150px"
 							autoWidth="false" filter="true"
@@ -101,7 +101,6 @@
 							<p:panel>
 								<h:panelGrid>
 									<f:facet name="header">
-										<p:graphicImage value="#{candidatoBean.foto}"
 											style="width:100%" />
 									</f:facet>
 									<h:outputText value="#{cand.tipo_Cargo_cand}"></h:outputText>

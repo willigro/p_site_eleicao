@@ -133,7 +133,8 @@ public class UsuarioBean {
 				FacesContext fc = FacesContext.getCurrentInstance();
 				HttpSession session = (HttpSession) fc.getExternalContext().getSession(true);
 				session.setAttribute("usuariologado", this.fachada.loginUsuario(usuario));
-				return "/usr/index.html";
+				FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso ", "Cadastrad com Sucesso!");
+				FacesContext.getCurrentInstance().addMessage(null, mensagem);
 			} else {
 				FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ", "Aceite os termos de uso");
 				FacesContext.getCurrentInstance().addMessage(null, mensagem);

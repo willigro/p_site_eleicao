@@ -13,9 +13,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,7 +28,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tb_candidato")
-public class Candidato implements Serializable{
+public class Candidato implements Serializable {
 	// Attributes
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,15 +37,16 @@ public class Candidato implements Serializable{
 	@Column(nullable = false, length = 50)
 	private String nome_cand;
 
-	//private Calendar data_Nasc_cand;
-	
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private int numero_cand;
 
 	@Column(nullable = false, length = 50)
 	private String tipo_Cargo_cand;
 
 	private byte[] foto_cand;
+
+	@Transient
+	private StreamedContent fotoConvertida;
 
 	@ManyToOne
 	@JoinColumn(name = "id_part")
@@ -64,6 +69,8 @@ public class Candidato implements Serializable{
 	@OneToMany(mappedBy = "canditado_proj")
 	private List<Projeto> lista_Projeto_cand;
 
+	// private Calendar data_Nasc_cand;
+
 	// Constructor
 	public Candidato() {
 		this.partido_cand = new Partido();
@@ -72,14 +79,18 @@ public class Candidato implements Serializable{
 		this.lista_Projeto_cand = new ArrayList<Projeto>();
 		this.cidade_cand = new Cidade();
 		this.estado_cand = new Estado();
-		//this.data_Nasc_cand = Calendar.getInstance();
+		// this.data_Nasc_cand = Calendar.getInstance();
 	}
 
 	// Gets and Sets
 	public void setId_cand(int id_cand) {
 		this.id_cand = id_cand;
 	}
-	
+
+	public StreamedContent getFotoConvertida() {
+		return fotoConvertida = new DefaultStreamedContent(new ByteArrayInputStream(this.foto_cand));
+	}
+
 	public String getNome_cand() {
 		return nome_cand;
 	}
@@ -97,14 +108,11 @@ public class Candidato implements Serializable{
 	}
 
 	/*
-	public Calendar getData_Nasc_cand() {
-		return data_Nasc_cand;
-	}
-
-	public void setData_Nasc_cand(Calendar data_Nasc_cand) {
-		this.data_Nasc_cand = data_Nasc_cand;
-	}
-*/
+	 * public Calendar getData_Nasc_cand() { return data_Nasc_cand; }
+	 * 
+	 * public void setData_Nasc_cand(Calendar data_Nasc_cand) {
+	 * this.data_Nasc_cand = data_Nasc_cand; }
+	 */
 	public int getNumero_cand() {
 		return numero_cand;
 	}
@@ -175,7 +183,11 @@ public class Candidato implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Candidato [id_cand=" + id_cand + ", nome_cand=" + nome_cand //+ ", data_Nasc_cand=" + data_Nasc_cand
+		return "Candidato [id_cand=" + id_cand + ", nome_cand=" + nome_cand // +
+																			// ",
+																			// data_Nasc_cand="
+																			// +
+																			// data_Nasc_cand
 				+ ", numero_cand=" + numero_cand + ", tipo_Cargo_cand=" + tipo_Cargo_cand + ", foto_cand=" + foto_cand
 				+ ", partido_cand=" + partido_cand + ", cidade_cand=" + cidade_cand + ", estado_cand=" + estado_cand
 				+ ", lista_Avaliacao_cand=" + lista_Avaliacao_cand + ", lista_Comentario_cand=" + lista_Comentario_cand
@@ -187,7 +199,8 @@ public class Candidato implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cidade_cand == null) ? 0 : cidade_cand.hashCode());
-		//result = prime * result + ((data_Nasc_cand == null) ? 0 : data_Nasc_cand.hashCode());
+		// result = prime * result + ((data_Nasc_cand == null) ? 0 :
+		// data_Nasc_cand.hashCode());
 		result = prime * result + ((estado_cand == null) ? 0 : estado_cand.hashCode());
 		result = prime * result + ((foto_cand == null) ? 0 : foto_cand.hashCode());
 		result = prime * result + id_cand;
@@ -215,11 +228,11 @@ public class Candidato implements Serializable{
 				return false;
 		} else if (!cidade_cand.equals(other.cidade_cand))
 			return false;
-	//	if (data_Nasc_cand == null) {
-	//		if (other.data_Nasc_cand != null)
-	//			return false;
-	//	} else if (!data_Nasc_cand.equals(other.data_Nasc_cand))
-	//		return false;
+		// if (data_Nasc_cand == null) {
+		// if (other.data_Nasc_cand != null)
+		// return false;
+		// } else if (!data_Nasc_cand.equals(other.data_Nasc_cand))
+		// return false;
 		if (estado_cand == null) {
 			if (other.estado_cand != null)
 				return false;
@@ -265,5 +278,5 @@ public class Candidato implements Serializable{
 		} else if (!tipo_Cargo_cand.equals(other.tipo_Cargo_cand))
 			return false;
 		return true;
-	}	
+	}
 }

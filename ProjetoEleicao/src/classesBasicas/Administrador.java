@@ -16,8 +16,6 @@ import java.util.List;
 @Table(name = "tb_administrador")
 public class Administrador {
 	
-
-	
 	private static final int SYS_LIMIT_CARACTER_PASSWORD = 8; //Para poder criptografar em MD5
 	private static final int DB_LIMIT_CARACTER_EMAIL = 30;
 	private static final int DB_LIMIT_CARACTER_PASSWORD = 32;

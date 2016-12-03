@@ -11,49 +11,34 @@
 
 		<p:growl id="msg">
 			<h:panelGrid>
-				<h:form id="formData">
-					<h1 align="center">
-						<font face="Calibri" color="black">Lista de Comentários Denunciados</font>
-					</h1>
+				<!-- listagem dos comentários denunciados -->
+		<h:form id="formData">
+			<h1 align="center">
+				<font face="Calibri" color="black">Lista de Comentários</font>
+			</h1>
+			<p:dataTable value="#{comentarioBean.comentarios}" var="coments">
+				<p:column headerText="Nome Usuário">
+					<h:outputText value="#{coments.usuario_coment.nome_user}"></h:outputText>
+				</p:column>
+				<p:column headerText="Nome Candidato do Projeto">
+					<h:outputText value="#{coments.candidato_coment.nome_cand}"></h:outputText>
+				</p:column>
+				<p:column headerText="Texto Comentádo">
+					<h:outputText value="#{coments.texto_coment}"></h:outputText>
+				</p:column>
+				<p:column headerText="Projeto Comentádo">
+					<h:outputText value="#{coments.projeto_coment.titulo_proj}"></h:outputText>
+				</p:column>
 
-					<p:dataTable id="dataTable"
-						value="#{comentarioBean.lista_denunciados}" var="denun"
-						paginator="false" editable="true" rows="10"
-						emptyMessage="Nenhum Registro Encontrado.">
-
-
-						<f:facet name="header">
-							<p:outputPanel>
-								<h:outputText value="Procurar:  " />
-								<p:inputText id="globalFilter" onkeyup="dataTable.filter()"
-									style="width:300px"
-									placeholder=" Digite e pressione enter para pesquisar" />
-							</p:outputPanel>
-						</f:facet>
-
-						<p:column headerText="Nome Usuário">
-							<h:outputText value="#{denun.usuario.nome_user}"></h:outputText>
-						</p:column>
-						<p:column headerText="QTD de Denuncias">
-						</p:column>
-						<p:column headerText="Texto Comentádo">
-							<h:outputText value="#{denun.comentario.texto_coment}"></h:outputText>
-						</p:column>
-						<p:column headerText="Projeto Comentádo">
-							<h:outputText
-								value="#{denun.comentario.projeto_coment.titulo_proj}"></h:outputText>
-						</p:column>
-
-						<p:column headerText="Remover Comentário">
-							<p:commandButton icon="ui-icon-trash" value="Remover"
-								action="#{comentarioBean.remover}" update=":formData"
-								ajax="true">
-								<f:setPropertyActionListener
-									target="#{comentarioBean.denunciar}" value="#{denun}"></f:setPropertyActionListener>
-							</p:commandButton>
-						</p:column>
-					</p:dataTable>
-				</h:form>
+				<p:column headerText="Remover Comentário">
+					<p:commandButton icon="ui-icon-trash" value="Remover"
+						action="#{comentarioBean.remover}" update=":formData" ajax="true">
+						<f:setPropertyActionListener target="#{comentarioBean.comentario}"
+							value="#{coments}"></f:setPropertyActionListener>
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
 
 
 

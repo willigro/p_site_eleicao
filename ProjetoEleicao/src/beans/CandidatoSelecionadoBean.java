@@ -49,6 +49,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 	private Administrador adm;
 	private Avaliacao avaliacao;
 	private AutenticacaoTelaConsultaBean atcBean;
+	private NavigationBean navigationBean;
 
 	public CandidatoSelecionadoBean() {
 		this.projetos = new ArrayList<>();
@@ -65,6 +66,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 		this.adm = new Administrador();
 		this.avaliacao = new Avaliacao();
 		this.atcBean = new AutenticacaoTelaConsultaBean();
+		this.navigationBean = new NavigationBean();
 	}
 
 	// Methods
@@ -113,7 +115,7 @@ public class CandidatoSelecionadoBean implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return navigationBean.toConsultarCandidato();
 	}
 
 	public void popularComentariosProposta(Projeto projeto) {
@@ -138,6 +140,8 @@ public class CandidatoSelecionadoBean implements Serializable {
 		try {
 			if (this.candidato.getFoto_cand() != null)
 				return new DefaultStreamedContent(new ByteArrayInputStream(this.candidato.getFoto_cand()));
+			else
+				System.out.println("foto nula");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -175,17 +179,17 @@ public class CandidatoSelecionadoBean implements Serializable {
 	public String editar() throws Exception {
 		try {
 			fachada.alterarCandidato(candidato, oldCand);
-			mensagemSucessoEdit("Editado com Sucesso!");
+			mensagemSucessoEdit("");
 		} catch (Exception e) {
 			e.printStackTrace();
 			mensagemFalhaEdit(e.getMessage());
 		}
 		return "paginaEditarCand";
 	}
-	
+
 	public void onrateCandidato(RateEvent rateEvent) {
 		try {
-			if(this.atcBean.comentar() == true){
+			if (this.atcBean.comentar() == true) {
 				this.avaliacao.setUsuario_aval(this.atcBean.getUsuario());
 				this.avaliacao.setCandidato_aval(this.candidato);
 				this.avaliacao.setProjeto_aval(null);
@@ -197,10 +201,10 @@ public class CandidatoSelecionadoBean implements Serializable {
 		}
 
 	}
-	
+
 	public void onrateCandidatoProjeto(RateEvent rateEvent) {
 		try {
-			if(this.atcBean.comentar() == true){
+			if (this.atcBean.comentar() == true) {
 				this.avaliacao.setUsuario_aval(this.atcBean.getUsuario());
 				this.avaliacao.setCandidato_aval(null);
 				this.avaliacao.setProjeto_aval(this.projeto);
