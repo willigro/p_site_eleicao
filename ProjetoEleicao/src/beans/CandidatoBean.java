@@ -42,6 +42,7 @@ public class CandidatoBean implements Serializable {
 	private List<Partido> lista_partidos;
 	private StreamedContent foto;
 	private int iteradorFoto = 0;
+	private int size = 0;
 	private NavigationBean navigationBean;
 
 	public CandidatoBean() {
@@ -171,11 +172,13 @@ public class CandidatoBean implements Serializable {
 
 	public void consultarCandidatoFiltrado() {
 		try {
+			this.iteradorFoto = 0;
 			if (cargo.getNome_cargo() != null && !cargo.getNome_cargo().trim().equals(""))
 				this.candidato.setTipo_Cargo_cand(cargo.getNome_cargo());
 			else
 				this.candidato.setTipo_Cargo_cand(null);
 			this.candidatos = fachada.consultarCandidatosFiltrados(this.candidato);
+			this.size = this.candidatos.size();
 		} catch (Exception e) {
 			e.printStackTrace();
 			mensagemFalhaConsulta(e.getMessage());
@@ -233,7 +236,6 @@ public class CandidatoBean implements Serializable {
 	}
 
 	public List<Candidato> getCandidatos() {
-		this.iteradorFoto = 0;
 		return candidatos;
 	}
 
@@ -268,17 +270,7 @@ public class CandidatoBean implements Serializable {
 	}
 
 	public StreamedContent getFoto() {
-		try {
-			
-				if (this.candidatos.get(this.iteradorFoto) != null && this.candidatos.get(this.iteradorFoto).getFoto_cand() != null) {
-					return new DefaultStreamedContent(
-							new ByteArrayInputStream(candidatos.get(this.iteradorFoto).getFoto_cand()));
-				} else
-					System.out.println("foto nula");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 		return null;
 	}
 
